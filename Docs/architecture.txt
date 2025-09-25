@@ -1,38 +1,27 @@
 DiarioPersonalV2.0/
 │
-├── core/
-│   ├── entities/
-│   │   ├── activity.py
-│   │   ├── feeling.py
-│   │   ├── dream.py
-│   │   ├── finance.py
-│   │   └── user.py
-│   │
-│   ├── usecases/
-│   │   ├── register_activity.py
-│   │   ├── analyze_sleep.py
-│   │   ├── generate_statistics.py
-│   │   ├── chatbot_responses.py
-│   │   └── finances_summary.py
-│   │
-│   └── services/
-│       ├── encryption_service.py
-│       ├── text_processor.py
-│       └── graph_service.py
+├── Docs/
+│   └── ManualUsuario.pdf
 │
-├── infrastructure/
+├── Domain/
+│   ├── activity.py
+│   ├── feeling.py
+│   ├── dream.py
+│   ├── finance.py
+│   └── user.py
+│
+├── Application/
+│   ├── UseCases/
+│       ├──
+│       └──
+│
+├── Infraestructure/
 │   ├── persistence/
 │   │   ├── file_repository.py
-│   │   └── database_repository.py
-│   │
+│   │   └── encryption_service.py
 │   ├── chatbot/
 │   │   ├── chatbot_engine.py
 │   │   └── intents/
-│   │       ├── greetings.json
-│   │       ├── time_usage.json
-│   │       ├── feelings.json
-│   │       └── drugs.json
-│   │
 │   └── gui/
 │       ├── main_window.py
 │       ├── diary_view.py
@@ -44,22 +33,22 @@ DiarioPersonalV2.0/
 │   ├── settings.py
 │   └── .env
 │
-├── data/
-│   ├── diario/
-│   │   ├── 2023/
-│   │   ├── 2024/
-│   │   └── 2025/
-│   └── output/
-│
 ├── tests/
-│   ├── test_encryption.py
 │   ├── test_chatbot.py
+│   ├── test_encryption.py
 │   ├── test_finances.py
 │   └── test_gui.py
 │
-├── scripts/
-│   ├── decrypt_data.py
-│   └── import_json.py
+├── ASSETS/
+│
+├── DATA/
+│   └── ...
+│
+├── CORE/
+│   ├── MainController.py
+│   ├── text_processor.py
+│   ├── graph_service.py
+│   └── helpers.py
 │
 ├── main.py
-└── README.md
+└── readme.md
