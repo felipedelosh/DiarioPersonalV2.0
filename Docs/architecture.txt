@@ -12,8 +12,8 @@ DiarioPersonalV2.0/
 │
 ├── Application/
 │   ├── UseCases/
-│       ├──
-│       └──
+│   │   ├──
+│   └── /
 │
 ├── Infraestructure/
 │   ├── persistence/
