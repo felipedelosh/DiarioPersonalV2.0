@@ -13,7 +13,7 @@ DiarioPersonalV2.0/
 ├── Application/
 │   ├── UseCases/
 │   │   ├──
-│   └── /
+│   └── abc/
 │
 ├── Infraestructure/
 │   ├── persistence/
