@@ -8,20 +8,37 @@ DiarioPersonalV2.0/
 │   ├── feeling.py
 │   ├── dream.py
 │   ├── finance.py
-│   └── user.py
+│   ├── user.py
+│   └── diary_entry.py 
 │
 ├── Application/
 │   ├── UseCases/
-│   │   ├──
-│   └── abc/
+│   │   ├── ISaveDiaryPage.py
+│   │   └── ...       
+│   │
+│   ├── Services/
+│   │   └── IDiaryService.py 
+│   │
+│   └── Repositories/
+│       └── IDiaryRepository.py
+│   
 │
 ├── Infraestructure/
 │   ├── persistence/
-│   │   ├── file_repository.py
+│   │   ├── FileDiaryRepository.py
+│   │   ├── FileWriter.py
 │   │   └── encryption_service.py
+│   │
+│   ├── services/
+│   │   └── DiaryService.py
+│   │
+│   ├── usecases/
+│   │   └── SaveDiaryPage.py
+│   │
 │   ├── chatbot/
 │   │   ├── chatbot_engine.py
 │   │   └── intents/
+│   │
 │   └── gui/
 │       ├── main_window.py
 │       ├── diary_view.py
@@ -37,7 +54,9 @@ DiarioPersonalV2.0/
 │   ├── test_chatbot.py
 │   ├── test_encryption.py
 │   ├── test_finances.py
-│   └── test_gui.py
+│   ├── test_gui.py
+│   ├── test_diary_service.py
+│   └── test_diary_repository.py
 │
 ├── ASSETS/
 │
