@@ -14,8 +14,8 @@ class MainController:
         # Inyections
         self.dependencies = dependencies
         self.utils = utils
-
+        # Controller
         self.folderController = FolderController(self.path, self.utils["time_util"])
 
     def save_diary_page(self, path: str, content: str):
-        self.dependencies["diary_use_case"].save_page(path, content)
+        return self.dependencies["diary_use_case"].save_page(path, content)

@@ -7,4 +7,8 @@ class FileWriter:
         pass
 
     def saveFile(self, path, content):
-        print(f"Save: {path}, {content}")
+        try:
+            print(f"Save: {path}, {content}")
+            return True
+        except:
+            return False
