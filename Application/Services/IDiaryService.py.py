@@ -1,4 +1,0 @@
-"""
-FelipedelosH
-2025
-"""

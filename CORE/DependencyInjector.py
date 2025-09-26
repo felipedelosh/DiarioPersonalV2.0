@@ -4,17 +4,24 @@ FelipedelosH
 
 Dependency Injector
 """
-from CORE.MainController import MainController
+#Repositories
 from Infraestructure.Repositories.FileDiaryRepository import FileDiaryRepository
+#Services
+from Infraestructure.Services.DiaryService import DiaryService
 
 class DependencyInjector:
     @staticmethod
-    def build_main_controller():
+    def build_dependencies():
 
         # REPOSITORIES
         diary_repo = FileDiaryRepository()
-        controller = MainController(diary_repo)
         # END REPOSITORIES
 
+        # SERVICES
+        diary_service = DiaryService(diary_repo)
+        # END SERVICES
 
-        return controller
+        return {
+            "diary_service": diary_service,
+            #...
+        }
