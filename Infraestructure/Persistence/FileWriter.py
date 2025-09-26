@@ -7,4 +7,4 @@ class FileWriter:
         pass
 
     def saveFile(self, path, content):
-        pass
+        print(f"Save: {path}, {content}")
