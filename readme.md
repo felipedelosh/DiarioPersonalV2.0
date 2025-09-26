@@ -17,6 +17,7 @@ Nota 01: se advierte que lo escrito aquí no tiene censura alguna.
 DiarioPersonalV2.0/
 ├── Docs/
 ├── Domain/
+│   └── Entities/
 ├── Application/
 │   ├── UseCases/
 │   ├── Services/
@@ -24,7 +25,7 @@ DiarioPersonalV2.0/
 ├── Infraestructure/
 │   ├── persistence/
 │   ├── services/
-│   ├── usecases/
+│   ├── UseCases/
 │   ├── chatbot/
 │   └── gui/
 ├── config/
