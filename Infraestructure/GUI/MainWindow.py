@@ -14,24 +14,26 @@ from Infraestructure.GUI.views.SettingsView import SettingsView
 
 class MainWindow:
     def __init__(self, controller):
+        self.root = tk.Tk()
         self.title_app = controller.dependencies["config"].get("title_app")
         self.w = controller.dependencies["config"].get("window_w")
         self.h = controller.dependencies["config"].get("window_h")
-        self.root = tk.Tk()
-        self.root.title(self.title_app)
-        self.root.geometry(f"{self.w}x{self.h}")
-
         self.manager = ScreenManager(self.root, controller)
+        
+        self.registerWindows()
+        self.configureMainWindow()
+        self.manager.show("diary")
 
-        # Registrar pantallas
+    def registerWindows(self):
         self.manager.add("diary", DiaryView)
         self.manager.add("finances", FinancesView)
         self.manager.add("graphs", GraphsView)
         self.manager.add("chatbot", ChatbotView)
         self.manager.add("settings", SettingsView)
 
-        # Mostrar pantalla inicial
-        self.manager.show("diary")
+    def configureMainWindow(self):
+        self.root.title(self.title_app)
+        self.root.geometry(f"{self.w}x{self.h}")
 
     def run(self):
         self.root.mainloop()
