@@ -4,9 +4,18 @@ FelipedelosH
 
 Main Controller
 """
+import sys
+import os
+from CORE.FolderController import FolderController
+
 class MainController:
-    def __init__(self, dependencies: dict):
+    def __init__(self, dependencies: dict, utils: dict):
+        self.path = str(os.path.abspath(os.path.dirname(sys.argv[0])))
+        # Inyections
         self.dependencies = dependencies
+        self.utils = utils
+
+        self.folderController = FolderController(self.path, self.utils["time_util"])
 
     def save_diary_page(self, path: str, content: str):
         self.dependencies["diary_use_case"].save_page(path, content)

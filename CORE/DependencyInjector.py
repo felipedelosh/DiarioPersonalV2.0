@@ -4,12 +4,16 @@ FelipedelosH
 
 Dependency Injector
 """
+
 #Repositories
 from Infraestructure.Repositories.FileDiaryRepository import FileDiaryRepository
 #Services
 from Infraestructure.Services.DiaryService import DiaryService
 #Use Cases
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
+# Utils
+from CORE.UTILS.TimeUtils import TimeUtils
+
 
 class DependencyInjector:
     @staticmethod
@@ -30,4 +34,13 @@ class DependencyInjector:
         return {
             "diary_use_case": diary_use_case,
             #...
+        }
+
+
+    @staticmethod
+    def build_utils():
+        time_util = TimeUtils()
+
+        return {
+            "time_util": time_util
         }
