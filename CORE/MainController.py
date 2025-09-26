@@ -9,4 +9,4 @@ class MainController:
         self.dependencies = dependencies
 
     def save_diary_page(self, path: str, content: str):
-        self.dependencies["diary_service"].save_page(path, content)
+        self.dependencies["diary_use_case"].save_page(path, content)

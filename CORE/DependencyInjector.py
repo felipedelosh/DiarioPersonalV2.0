@@ -8,6 +8,8 @@ Dependency Injector
 from Infraestructure.Repositories.FileDiaryRepository import FileDiaryRepository
 #Services
 from Infraestructure.Services.DiaryService import DiaryService
+#Use Cases
+from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 
 class DependencyInjector:
     @staticmethod
@@ -21,7 +23,11 @@ class DependencyInjector:
         diary_service = DiaryService(diary_repo)
         # END SERVICES
 
+        # USECASES
+        diary_use_case = SaveDiaryPage(diary_service)
+        # END USECASES
+
         return {
-            "diary_service": diary_service,
+            "diary_use_case": diary_use_case,
             #...
         }
