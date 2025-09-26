@@ -1,0 +1,72 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+pip-wheel-metadata/
+*.spec
+
+# =========================
+# ENV
+# =========================
+.env
+.venv
+env/
+venv/
+ENV/
+.conda/
+*.conda
+
+# =========================
+# KEYS
+# =========================
+config/.env
+*.ini
+*.cfg
+*.toml
+
+# =========================
+# TEMP
+# =========================
+*.log
+*.pot
+*.mo
+*.swp
+*~
+*.tmp
+*.bak
+*.orig
+
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
+
+# =========================
+# SYSTEM
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# TEST
+.coverage
+htmlcov/
+.tox/
+pytest_cache/
+.mypy_cache/
+.pytest_cache/
+.pyre/
+.pytype/
