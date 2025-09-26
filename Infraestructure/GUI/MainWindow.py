@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import ttk
 from Infraestructure.GUI.ScreenManager import ScreenManager
 from Infraestructure.GUI.views.DiaryView import DiaryView
+from Infraestructure.GUI.views.CalendarView import CalendarView
 from Infraestructure.GUI.views.FinancesView import FinancesView
 from Infraestructure.GUI.views.GraphsView import GraphsView
 from Infraestructure.GUI.views.ChatbotView import ChatbotView
@@ -33,6 +34,7 @@ class MainWindow:
 
     def registerWindows(self):
         self.manager.add("diary", DiaryView)
+        self.manager.add("calendar", CalendarView)
         self.manager.add("finances", FinancesView)
         self.manager.add("graphs", GraphsView)
         self.manager.add("chatbot", ChatbotView)
