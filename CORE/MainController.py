@@ -17,5 +17,6 @@ class MainController:
         # Controller
         self.folderController = FolderController(self.path, self.utils["time_util"])
 
-    def save_diary_page(self, path: str, content: str):
-        return self.dependencies["diary_use_case"].save_page(path, content)
+    def save_diary_page(self, title: str, content: str):
+        _path = f"{self.path}/DATA/DIARIO/{self.utils['time_util'].getCurrentYYYY()}/{title}.txt"
+        return self.dependencies["diary_use_case"].save_page(_path, content)

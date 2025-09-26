@@ -8,7 +8,9 @@ class FileWriter:
 
     def saveFile(self, path, content):
         try:
-            print(f"Save: {path}, {content}")
+            with open(path, "a", encoding="UTF-8") as f:
+                f.write(content)
+
             return True
         except:
             return False
