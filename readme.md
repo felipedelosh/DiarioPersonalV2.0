@@ -1,12 +1,41 @@
 <h1 align="center"> FelipedelosH </h1>
 <br>
-<h4>Name of project</h4>
+<h4>Diario personal de Andrés felipe Hernández V2.0</h4>
 
 ![Banner](Docs/banner.png)
 <br>
-:construction: Status of project :construction:
+:construction: Proyecto en construcción :construction:
 <br><br>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Este es mi diario personal, aquí están escritos mis más intimos recuerdos, mis sueños (Zzz), conteo de lo que siento cada día, lo que vivo con los demás, mi situación economica, mis miedos y adiciones, mi asistente CHATBOT personal (FEMPUTADORA).
+<br><br>
+Nota 01: se advierte que lo escrito aquí no tiene censura alguna.
+<br>
+
+# Architecture
+
+```
+DiarioPersonalV2.0/
+├── Docs/
+├── Domain/
+├── Application/
+│   ├── UseCases/
+│   ├── Services/
+│   └── Repositories/
+├── Infraestructure/
+│   ├── persistence/
+│   ├── services/
+│   ├── usecases/
+│   ├── chatbot/
+│   └── gui/
+├── config/
+├── tests/
+├── ASSETS/
+├── DATA/
+├── CORE/
+├── main.py
+└── readme.md
+```
+
 
 ## :hammer:Funtions:
 
@@ -21,14 +50,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 Double click
 
-## :hammer_and_wrench:Tech.
+## :hammer_and_wrench:Tecnologías.
 
-- code programing
-- framework
+- :snake: Python
 
-## :warning:Warning.
+## :warning:Advertencia
 
-- limitations.
+- Este proyecto fue escrito en windows y no se han habilitado todas las funciones para linux.
 
 ## Autor
 
