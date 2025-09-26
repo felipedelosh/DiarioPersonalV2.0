@@ -12,7 +12,7 @@ Nota 01: se advierte que lo escrito aquí no tiene censura alguna.
 <br>
 
 # Architecture
-
+![Architecture](Docs/architecture.png)
 ```
 DiarioPersonalV2.0/
 ├── Docs/
