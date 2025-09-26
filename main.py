@@ -18,7 +18,7 @@ class Software:
         self.launch()
 
     def launch(self):
-        app = MainWindow()
+        app = MainWindow(self.controller)
         app.run()
 
 s = Software()

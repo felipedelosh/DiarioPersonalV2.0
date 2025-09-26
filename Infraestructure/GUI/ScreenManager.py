@@ -3,8 +3,9 @@ FelipedelosH
 2025
 """
 class ScreenManager:
-    def __init__(self, root):
+    def __init__(self, root, controller):
         self.root = root
+        self.controller = controller
         self.screens = {}
         self.current_screen = None
 

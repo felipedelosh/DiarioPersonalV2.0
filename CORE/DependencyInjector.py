@@ -12,6 +12,7 @@ from Infraestructure.Services.DiaryService import DiaryService
 #Use Cases
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 # Utils
+from Infraestructure.config.ConfigManager import ConfigManager
 from CORE.UTILS.TimeUtils import TimeUtils
 
 
@@ -33,6 +34,7 @@ class DependencyInjector:
 
         return {
             "diary_use_case": diary_use_case,
+            "config": ConfigManager()
             #...
         }
 

@@ -13,12 +13,15 @@ from Infraestructure.GUI.views.ChatbotView import ChatbotView
 from Infraestructure.GUI.views.SettingsView import SettingsView
 
 class MainWindow:
-    def __init__(self):
+    def __init__(self, controller):
+        self.title_app = controller.dependencies["config"].get("title_app")
+        self.w = controller.dependencies["config"].get("window_w")
+        self.h = controller.dependencies["config"].get("window_h")
         self.root = tk.Tk()
-        self.root.title("Diario Personal V2.0")
-        self.root.geometry("640x480")
+        self.root.title(self.title_app)
+        self.root.geometry(f"{self.w}x{self.h}")
 
-        self.manager = ScreenManager(self.root)
+        self.manager = ScreenManager(self.root, controller)
 
         # Registrar pantallas
         self.manager.add("diary", DiaryView)
