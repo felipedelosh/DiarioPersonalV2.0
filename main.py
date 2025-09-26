@@ -6,7 +6,19 @@ PersonalDiaryV2.0
 """
 from CORE.MainController import MainController
 from CORE.DependencyInjector import DependencyInjector
+from Infraestructure.GUI.MainWindow import MainWindow
 
-controller = MainController(DependencyInjector.build_dependencies(), DependencyInjector.build_utils())
-reqSaveStatus = controller.save_diary_page("titulo", "Hoy avancé mucho en mi diario personal")
-print(f"Status: {reqSaveStatus}")
+class Software:
+    def __init__(self):
+        self.controller = MainController(
+            DependencyInjector.build_dependencies(),
+            DependencyInjector.build_utils()
+        )
+        # RUN APP
+        self.launch()
+
+    def launch(self):
+        app = MainWindow()
+        app.run()
+
+s = Software()
