@@ -70,7 +70,7 @@ class MainWindow:
         self.content["height"] = self.controller.dependencies["config"].get("window_h")
 
     def show_view(self, option):
-        print(option)
+        self.manager.show(option, self._content_x, 0)
 
     def run(self):
         self.root.mainloop()

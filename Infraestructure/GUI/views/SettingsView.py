@@ -6,4 +6,5 @@ from Infraestructure.GUI.Screen import Screen
 
 class SettingsView(Screen):
     def render(self, x, y):
+        self.canvas["bg"]="cyan"
         self.canvas.place(x=x, y=y)
