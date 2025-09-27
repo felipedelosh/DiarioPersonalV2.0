@@ -13,12 +13,16 @@ from Infraestructure.Services.DiaryService import DiaryService
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
+from Infraestructure.config.LanguageManager import LanguageManager
 from CORE.UTILS.TimeUtils import TimeUtils
 
 
 class DependencyInjector:
     @staticmethod
     def build_dependencies():
+        # Config
+        configManager = ConfigManager()
+        languageManager = LanguageManager("ASSETS/LAN", "ES")
 
         # REPOSITORIES
         diary_repo = FileDiaryRepository()
@@ -31,10 +35,11 @@ class DependencyInjector:
         # USECASES
         diary_use_case = SaveDiaryPage(diary_service)
         # END USECASES
-
+        
         return {
             "diary_use_case": diary_use_case,
-            "config": ConfigManager()
+            "config": configManager,
+            "lang": languageManager
             #...
         }
 

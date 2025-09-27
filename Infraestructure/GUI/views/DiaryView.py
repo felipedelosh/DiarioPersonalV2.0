@@ -8,3 +8,5 @@ class DiaryView(Screen):
     def render(self, x, y):
         self.canvas["bg"]="purple"
         self.canvas.place(x=x, y=y)
+        _w = float(self.canvas["width"])
+        _h =float(self.canvas["height"])

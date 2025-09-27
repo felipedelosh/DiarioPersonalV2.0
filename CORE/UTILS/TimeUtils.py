@@ -4,7 +4,6 @@ FelipdelosH
 
 Time Utils
 """
-import datetime
 from datetime import date
 
 class TimeUtils:
@@ -13,3 +12,12 @@ class TimeUtils:
 
     def getCurrentYYYY(self):
         return date.today().year
+    
+    def getCurrentMM(self):
+        return date.today().month
+    
+    def getCurrentDD(self):
+        return date.today().day
+    
+    def getTimeStamp(self):
+        return str(self.getCurrentYYYY()) + " " + str(self.getCurrentMM()) + " " + str(self.getCurrentDD())
