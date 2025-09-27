@@ -41,13 +41,14 @@ class MainWindow:
         self.manager.add("settings", SettingsView)
 
     def configureMainWindow(self):
+        self.root.resizable(False, False)
         self.root.title(self.title_app)
         self.root.geometry(f"{self.w}x{self.h}")
         self._configureSideBar()
         self._configureContent()
 
     def _configureSideBar(self):
-        self.sideBar["width"] = self.controller.dependencies["config"].get("window_w") * 0.3
+        self.sideBar["width"] = self.controller.dependencies["config"].get("window_w") * 0.25
         self.sideBar["height"] = self.controller.dependencies["config"].get("window_h")
         self.sideBar.place(x=0, y=0)
 
@@ -64,7 +65,7 @@ class MainWindow:
 
 
     def _configureContent(self):
-        self._content_x = self.controller.dependencies["config"].get("window_w") * 0.3
+        self._content_x = self.controller.dependencies["config"].get("window_w") * 0.25
         self.content["width"] = self.controller.dependencies["config"].get("window_w") - self._content_x
         self.content["height"] = self.controller.dependencies["config"].get("window_h")
 
