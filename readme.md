@@ -23,11 +23,12 @@ DiarioPersonalV2.0/
 │   ├── Services/
 │   └── Repositories/
 ├── Infraestructure/
-│   ├── persistence/
-│   ├── services/
-│   ├── UseCases/
-│   ├── chatbot/
-│   └── gui/
+│   ├── config/
+│   ├── GUI/
+│   ├── Persistence/
+│   ├── Repositories/
+│   ├── Services/
+│   └── UseCases/
 ├── config/
 ├── tests/
 ├── ASSETS/
