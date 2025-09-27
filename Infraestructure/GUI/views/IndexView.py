@@ -5,5 +5,5 @@ FelipedelosH
 from Infraestructure.GUI.Screen import Screen
 
 class IndexView(Screen):
-    def render(self):
-        self.canvas.place(x=0, y=0)
+    def render(self, x, y):
+        self.canvas.place(x=x, y=y)

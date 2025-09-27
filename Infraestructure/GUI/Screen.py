@@ -6,14 +6,17 @@ import tkinter as tk
 from abc import ABC, abstractmethod
 
 class Screen(ABC):
-    def __init__(self, master, manager):
+    def __init__(self, master, canvas, manager):
         self.master = master
-        self.manager = manager  
-        self.canvas = tk.Canvas(self.master)
+        self.canvas = canvas
+        self.manager = manager
 
     @abstractmethod
-    def render(self):
+    def render(self, x, y):
         pass
 
     def destroy(self):
-        self.canvas.delete("all")
+        try:
+            self.canvas.delete("all")
+        except Exception:
+            pass
