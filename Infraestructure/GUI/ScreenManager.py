@@ -21,6 +21,9 @@ class ScreenManager:
         if not screen_class:
             raise ValueError(f"No existe la pantalla '{name}' registrada.")
 
+        for widget in self.content.winfo_children():
+            widget.destroy()
+
         if self.current_screen is not None:
             try:
                 self.current_screen.destroy()
