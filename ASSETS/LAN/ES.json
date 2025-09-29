@@ -1,3 +1,17 @@
 {
-  "welcome_message": "Bienvenido a tu Diario Personal"
+  "welcome_message": "Bienvenido a tu Diario Personal",
+  "days_names": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+  "month_names": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+  "motivational_message": [
+    "El éxito no llega por suerte, llega por disciplina diaria.",
+    "No busques motivación, busca compromiso.",
+    "El que se rinde una vez, se acostumbra a rendirse siempre.",
+    "Haz lo que tengas que hacer, aunque no tengas ganas.",
+    "Tu peor enemigo no es la vida, es tu mente débil.",
+    "No esperes a que todo esté perfecto, empieza con lo que tienes.",
+    "El respeto se gana trabajando, no hablando.",
+    "El dolor es temporal, pero la disciplina es para siempre.",
+    "Deja de compararte y ponte a trabajar en ti.",
+    "La constancia le gana al talento cuando el talento no trabaja."
+  ]
 }
