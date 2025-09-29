@@ -1,0 +1,27 @@
+ID|Tarea|Descripción|Prioridad|COMPLETADA
+I1|Sistema de Guardado de Páginas|Guardar páginas de diario en archivos con fecha/título.|🟢|NO
+I2|Cargador de Configuración|Cargar configuración desde config.json.|🟢|NO
+I3|Gestor de Idiomas|Soporte de textos en diferentes idiomas (LanguageManager).|🟡|NO
+I4|Inyector de Dependencias Global|Acceso centralizado a repositorios, servicios y utils.|🟢|SI
+I5|Gestor de Carpetas|Crear automáticamente carpetas por año/mes para organizar entradas.|🟢|NO
+D1|Vista de Diario|Permitir escribir, editar y guardar páginas.|🟢|NO
+D2|Vista de Sueños|Registrar sueños con fecha y etiquetas.|🟡|NO
+D3|Vista de Amigos|Lista de amigos, registrar notas relacionadas.|🟡|NO
+D4|Vista de Notas|Crear notas rápidas no relacionadas con el diario.|🟢|NO
+D5|Vista de Sentimientos|Registro rápido de emociones (ej: feliz, triste, ansioso).|🟢|NO
+D6|Vista de Drogas|Registrar consumo, tipo y cantidad.|🟡|NO
+C1|Vista de Calendario|Mostrar calendario con días destacados.|🟢|NO
+C2|Registrar Día de Hoy|Crear entrada rápida asociada al día actual.|🟢|NO
+C3|Vista de Horario|Crear un horario con actividades recurrentes.|🟡|NO
+E1|Vista de Cuentas T|Registrar cuentas bancarias y movimientos.|🟡|NO
+E2|Vista de Ahorros|Registrar metas y ahorro acumulado.|🟡|NO
+E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
+E4|Vista de Buscar|Búsqueda global en entradas, notas y finanzas.|🟢|NO
+G1|Gráfica de Cuentas T|Mostrar evolución de cuentas bancarias.|🟡|NO
+G2|Gráfica de Sentimientos|Mostrar emociones a lo largo del tiempo.|🟡|NO
+G3|Gráfica de Drogas|Mostrar total vs días de consumo.|🔴|NO
+G4|Gráfica de Inversión de Tiempo|Mostrar en qué actividades se gasta el tiempo.|🟡|NO
+G5|Gráfica Tiempo de Vida|Mostrar visualización de edad/vida.|🔴|NO
+F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
+S1|Vista de Perfil|Configuración de usuario (nombre, foto, preferencias).|🟢|NO
+S2|Vista de Ayuda|Mostrar guía rápida del sistema.|🟡|NO
