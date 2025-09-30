@@ -1,5 +1,6 @@
 {
-  "welcome_message": "Bienvenido a tu Diario Personal",
+  "welcome_title_message": "Bienvenido a el Diario Del LOKO v2.0",
+  "diary_title_message": "Bienvenido a tu Diario Personal",
   "days_names": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
   "month_names": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
   "motivational_message": [
@@ -13,5 +14,13 @@
     "El dolor es temporal, pero la disciplina es para siempre.",
     "Deja de compararte y ponte a trabajar en ti.",
     "La constancia le gana al talento cuando el talento no trabaja."
+  ],
+  "diary_options":[
+    "Diario",
+    "Sueños",
+    "Amigos",
+    "Notas",
+    "Registro de Sentimientos",
+    "Drogas"
   ]
 }
