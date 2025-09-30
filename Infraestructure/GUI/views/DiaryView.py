@@ -23,7 +23,7 @@ class DiaryView(Screen):
         if _total_butons > 0:
             _total_btns_w = 0
             for i in _options:
-                btn = tk.Button(self.canvas, text=i)
+                btn = tk.Button(self.canvas, text=i, command=lambda opt=i: self.drawBtnInterface(_options, opt))
                 _total_btns_w = _total_btns_w + btn.winfo_reqwidth()
                 self.btns.append(btn)
 
@@ -31,6 +31,19 @@ class DiaryView(Screen):
             _spacing = _space_free / (_total_butons + 1)
             current_x = _spacing
             for btn in self.btns:
-                btn.place(x=current_x, y=_h * 0.2)
+                btn.place(x=current_x, y=_h * 0.18)
                 current_x += btn.winfo_reqwidth() + _spacing
 
+    def drawBtnInterface(self, _options, opt):
+        if opt == _options[0]:
+            print("Diario")
+        if opt == _options[1]:
+            print("Sueños")
+        if opt == _options[2]:
+            print("Amigos")
+        if opt == _options[3]:
+            print("Notas")
+        if opt == _options[4]:
+            print("Registro de Sentimientos")
+        if opt == _options[5]:
+            print("Drogas")
