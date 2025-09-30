@@ -10,3 +10,5 @@ class GraphsView(Screen):
         self.canvas.place(x=x, y=y)
         _w = float(self.canvas["width"])
         _h =float(self.canvas["height"])
+
+        lang = self.manager.controller.dependencies["lang"]
