@@ -14,8 +14,8 @@ class IndexView(Screen):
 
         lang = self.manager.controller.dependencies["lang"]
         time_util = self.manager.controller.utils["time_util"]
-        lblTile = tk.Label(self.canvas, text=lang.getText("welcome_message"))
-        lblTile.place(x=_w*0.4, y=_h*0.05)
+        lblTitle = tk.Label(self.canvas, text=lang.getText("welcome_message"))
+        lblTitle.place(x=_w*0.4, y=_h*0.05)
         _currentDayName = lang.getText("days_names")[time_util.getNumberOfCurrentDD()]
         _currentMonthName = lang.getText("month_names")[time_util.getCurrentMM()-1]
         _txtDateToday = f"{_currentDayName}, {time_util.getCurrentDD()} - {_currentMonthName} - {time_util.getCurrentYYYY()}".upper()

@@ -12,3 +12,6 @@ class DiaryView(Screen):
         _h =float(self.canvas["height"])
 
         lang = self.manager.controller.dependencies["lang"]
+
+    def renderButons(self):
+        pass
