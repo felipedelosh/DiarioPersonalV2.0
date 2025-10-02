@@ -13,17 +13,18 @@ class PopupView(Screen):
         self.title = title
         self.window = None
 
-    def render(self, x=100, y=100):
+    def render(self, x, y):
         self.window = tk.Toplevel(self.master)
         self.window.title(self.title)
-        self.window.geometry("300x150+%d+%d" % (x, y))
+        self.window.geometry(f"{x}x{y}")
         self.window.resizable(False, False)
 
-        lblMessage = tk.Label(self.window, text=self.message, fg="red", font=("Arial", 12))
-        lblMessage.pack(pady=20)
+        Message = tk.Text(self.window, width=55, height=13)
+        Message.insert(tk.END, self.message)
+        Message.place(x=25, y=20)
 
         btnOk = tk.Button(self.window, text="OK", command=self.window.destroy)
-        btnOk.pack(pady=10)
+        btnOk.place(x=222, y=260)
 
     def destroy(self):
         if self.window:

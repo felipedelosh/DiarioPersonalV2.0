@@ -97,12 +97,10 @@ class DiaryView(Screen):
         text = txtText.get("1.0", tk.END)
         
         if title == self.lang.getText("diary_page_insert_title"):
-            popup = PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"))
-            popup.render()
+            PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
 
         if not self.stringProcesor.validateTXT(title):
-            popup = PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"))
-            popup.render()
+            PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
 
     def loadPageDiary(self):
         pass
