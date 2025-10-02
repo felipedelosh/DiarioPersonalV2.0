@@ -12,6 +12,7 @@ class DiaryView(Screen):
         self.canvas.place(x=x, y=y)
         self._w = float(self.canvas["width"])
         self._h =float(self.canvas["height"])
+        self.is_secret = False
         self.lang = self.manager.controller.dependencies["lang"]
         self.stringProcesor = self.manager.controller.utils["string_procesor"]
         self.btns = []
@@ -67,15 +68,19 @@ class DiaryView(Screen):
         txtText = tk.Text(self.canvas, height = 20, width = 70)
         self._tempCurrentElementsOptions.append(txtText)
         txtText.place(x=self._w*0.07, y=self._h*0.38)
+        btnSecret = tk.Button(self.canvas, text="🔓")
+        btnSecret.config(command=lambda b=btnSecret: self.toggleScret(b))
+        self._tempCurrentElementsOptions.append(btnSecret)
+        btnSecret.place(x=self._w*0.6, y=self._h*0.3)
         btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.savePageDiary(txtEntryTitle, txtText))
         self._tempCurrentElementsOptions.append(btnSave)
-        btnSave.place(x=self._w*0.6, y=self._h*0.3)
+        btnSave.place(x=self._w*0.65, y=self._h*0.3)
         btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"))
         self._tempCurrentElementsOptions.append(btnLoad)
-        btnLoad.place(x=self._w*0.7, y=self._h*0.3)
+        btnLoad.place(x=self._w*0.75, y=self._h*0.3)
         btnSearch = tk.Button(self.canvas, text=self.lang.getText("text_button_search"))
         self._tempCurrentElementsOptions.append(btnSearch)
-        btnSearch.place(x=self._w*0.8, y=self._h*0.3)
+        btnSearch.place(x=self._w*0.85, y=self._h*0.3)
 
     def _clear_placeholder_diary_page_title(self, entry):
         if entry.get() == self.lang.getText("diary_page_insert_title"):
@@ -85,6 +90,14 @@ class DiaryView(Screen):
         if not entry.get():
             entry.insert(0, self.lang.getText("diary_page_insert_title"))
             entry.config(fg="gray")
+
+    def toggleScret(self, btnSecret):
+        self.is_secret = not self.is_secret
+
+        if self.is_secret:
+            btnSecret["text"] = "🔒"
+        else:
+            btnSecret["text"] = "🔓"
 
     def deleteOption(self):
         for widget in self._tempCurrentElementsOptions:
