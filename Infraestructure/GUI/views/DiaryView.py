@@ -120,9 +120,13 @@ class DiaryView(Screen):
 
         _path = self.manager.controller.pathController.getPathByCODE("DIARY") 
         _path = _path + f"{self.manager.controller.utils["time_util"].getTimeStamp()} - {title}.txt"
-        print(_path)
+        text = text + "\n\n" + self.manager.controller.utils["time_util"].getTimeSignature() + "\n\n"
         _status = self.manager.controller.dependencies["diary_use_case"].save_page(_path, text)
-        print(_status)
+
+        if _status:
+            PopupView(self.master, self.manager, self.lang.getText("ok_diary_page_save"), "SAVE").render(500, 300)
+        else:
+            PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
 
     def loadPageDiary(self):
         pass

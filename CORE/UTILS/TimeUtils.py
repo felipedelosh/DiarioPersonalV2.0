@@ -4,6 +4,7 @@ FelipdelosH
 
 Time Utils
 """
+import time
 from datetime import date
 
 class TimeUtils:
@@ -24,3 +25,6 @@ class TimeUtils:
     
     def getTimeStamp(self):
         return str(self.getCurrentYYYY()) + " " + str(self.getCurrentMM()) + " " + str(self.getCurrentDD())
+    
+    def getTimeSignature(self):
+        return str(time.ctime())
