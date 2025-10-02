@@ -41,7 +41,8 @@ class FolderController:
             "DATA\\USOS",
             "DATA\\DRUGS",
             f"DATA\\DRUGS\\{self.timeUtil.getCurrentYYYY()}",
-            "DATA\\WORK"
+            "DATA\\WORK",
+            "DATA\\TEMP"
         ]
 
         for itterFolder in folders:
