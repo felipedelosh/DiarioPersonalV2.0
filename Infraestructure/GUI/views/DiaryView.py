@@ -9,14 +9,15 @@ class DiaryView(Screen):
     def render(self, x, y):
         self.canvas["bg"]="purple"
         self.canvas.place(x=x, y=y)
-        _w = float(self.canvas["width"])
-        _h =float(self.canvas["height"])
-        lang = self.manager.controller.dependencies["lang"]
+        self._w = float(self.canvas["width"])
+        self._h =float(self.canvas["height"])
+        self.lang = self.manager.controller.dependencies["lang"]
         self.btns = []
-        _options = lang.getText("diary_options")
-        lblTitle = tk.Label(self.canvas, text=lang.getText("diary_title_message"))
-        lblTitle.place(x=_w*0.4, y=_h*0.05)
-        self.renderButons(_options, _w, _h)
+        self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
+        _options = self.lang.getText("diary_options")
+        lblTitle = tk.Label(self.canvas, text=self.lang.getText("diary_title_message"))
+        lblTitle.place(x=self._w*0.4, y=self._h*0.05)
+        self.renderButons(_options, self._w, self._h)
 
     def renderButons(self, _options, _w, _h):
         _total_butons = len(_options)
@@ -36,14 +37,55 @@ class DiaryView(Screen):
 
     def drawBtnInterface(self, _options, opt):
         if opt == _options[0]:
-            print("Diario")
+            self.deleteOption()
+            self.drawDiaryOption()
         if opt == _options[1]:
+            self.deleteOption()
             print("Sueños")
         if opt == _options[2]:
+            self.deleteOption()
             print("Amigos")
         if opt == _options[3]:
+            self.deleteOption()
             print("Notas")
         if opt == _options[4]:
+            self.deleteOption()
             print("Registro de Sentimientos")
         if opt == _options[5]:
+            self.deleteOption()
             print("Drogas")
+
+    def drawDiaryOption(self):
+        txtEntryTitle = tk.Entry(self.canvas, fg="gray")
+        self._tempCurrentElementsOptions.append(txtEntryTitle)
+        txtEntryTitle.insert(0, self.lang.getText("diary_page_insert_title"))
+        txtEntryTitle.bind("<FocusIn>", lambda e, entry=txtEntryTitle: self._clear_placeholder_diary_page_title(entry))
+        txtEntryTitle.bind("<FocusOut>", lambda e, entry=txtEntryTitle: self._add_placeholder_diary_page_title(entry))
+        txtEntryTitle.place(x=self._w*0.07, y=self._h*0.3, width=self._w*0.5, height=25)
+        btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"))
+        self._tempCurrentElementsOptions.append(btnSave)
+        btnSave.place(x=self._w*0.6, y=self._h*0.3)
+        btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"))
+        self._tempCurrentElementsOptions.append(btnLoad)
+        btnLoad.place(x=self._w*0.7, y=self._h*0.3)
+        btnSearch = tk.Button(self.canvas, text=self.lang.getText("text_button_search"))
+        self._tempCurrentElementsOptions.append(btnSearch)
+        btnSearch.place(x=self._w*0.8, y=self._h*0.3)
+        txtText = tk.Text(self.canvas, height = 20, width = 70)
+        self._tempCurrentElementsOptions.append(txtText)
+        txtText.place(x=self._w*0.07, y=self._h*0.38)
+
+    def _clear_placeholder_diary_page_title(self, entry):
+        if entry.get() == self.lang.getText("diary_page_insert_title"):
+            entry.delete(0, tk.END)
+            entry.config(fg="black")
+    def _add_placeholder_diary_page_title(self, entry):
+        if not entry.get():
+            entry.insert(0, self.lang.getText("diary_page_insert_title"))
+            entry.config(fg="gray")
+
+    def deleteOption(self):
+        for widget in self._tempCurrentElementsOptions:
+            widget.destroy()
+        self._tempCurrentElementsOptions.clear()
+

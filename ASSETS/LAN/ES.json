@@ -22,5 +22,9 @@
     "Notas",
     "Registro de Sentimientos",
     "Drogas"
-  ]
+  ],
+  "diary_page_insert_title": "Inserte el título...",
+  "text_button_save": "Guardar",
+  "text_button_load": "Cargar",
+  "text_button_search": "Buscar"
 }
