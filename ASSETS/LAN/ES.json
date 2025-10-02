@@ -24,6 +24,7 @@
     "Drogas"
   ],
   "diary_page_insert_title": "Inserte el título...",
+  "error_diary_page_insert_title": "Error. Se necesita insertar un título para la página del diario.",
   "text_button_save": "Guardar",
   "text_button_load": "Cargar",
   "text_button_search": "Buscar"
