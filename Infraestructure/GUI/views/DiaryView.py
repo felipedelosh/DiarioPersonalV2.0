@@ -115,6 +115,13 @@ class DiaryView(Screen):
         if not self.stringProcesor.validateTXT(title):
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
 
+        if not self.stringProcesor.validateTXT(text):
+            PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
+
+        _status = self.manager.controller.dependencies["diary_use_case"].save_page(title, text)
+
+        print(_status)
+
     def loadPageDiary(self):
         pass
 

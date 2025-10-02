@@ -9,5 +9,5 @@ class SaveDiaryPage(ISaveDiaryPage):
     def __init__(self, diary_service: IDiaryService):
         self.diary_service = diary_service
 
-    def save_page(self, path: str, content: str) -> bool:
-        return self.diary_service.save_page(path, content)
+    def save_page(self, title: str, content: str) -> bool:
+        return self.diary_service.save_page(title, content)
