@@ -4,6 +4,7 @@ FelipedelosH
 """
 import tkinter as tk
 from Infraestructure.GUI.Screen import Screen
+from Infraestructure.GUI.views.PopupView import PopupView
 
 class DiaryView(Screen):
     def render(self, x, y):
@@ -12,6 +13,7 @@ class DiaryView(Screen):
         self._w = float(self.canvas["width"])
         self._h =float(self.canvas["height"])
         self.lang = self.manager.controller.dependencies["lang"]
+        self.stringProcesor = self.manager.controller.utils["string_procesor"]
         self.btns = []
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         _options = self.lang.getText("diary_options")
@@ -62,7 +64,10 @@ class DiaryView(Screen):
         txtEntryTitle.bind("<FocusIn>", lambda e, entry=txtEntryTitle: self._clear_placeholder_diary_page_title(entry))
         txtEntryTitle.bind("<FocusOut>", lambda e, entry=txtEntryTitle: self._add_placeholder_diary_page_title(entry))
         txtEntryTitle.place(x=self._w*0.07, y=self._h*0.3, width=self._w*0.5, height=25)
-        btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"))
+        txtText = tk.Text(self.canvas, height = 20, width = 70)
+        self._tempCurrentElementsOptions.append(txtText)
+        txtText.place(x=self._w*0.07, y=self._h*0.38)
+        btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.savePageDiary(txtEntryTitle, txtText))
         self._tempCurrentElementsOptions.append(btnSave)
         btnSave.place(x=self._w*0.6, y=self._h*0.3)
         btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"))
@@ -71,9 +76,6 @@ class DiaryView(Screen):
         btnSearch = tk.Button(self.canvas, text=self.lang.getText("text_button_search"))
         self._tempCurrentElementsOptions.append(btnSearch)
         btnSearch.place(x=self._w*0.8, y=self._h*0.3)
-        txtText = tk.Text(self.canvas, height = 20, width = 70)
-        self._tempCurrentElementsOptions.append(txtText)
-        txtText.place(x=self._w*0.07, y=self._h*0.38)
 
     def _clear_placeholder_diary_page_title(self, entry):
         if entry.get() == self.lang.getText("diary_page_insert_title"):
@@ -89,3 +91,17 @@ class DiaryView(Screen):
             widget.destroy()
         self._tempCurrentElementsOptions.clear()
 
+    #METHODS
+    def savePageDiary(self, txtEntryTitle, txtText):
+        title = txtEntryTitle.get()
+        text = txtText.get("1.0", tk.END)
+        
+        if title == self.lang.getText("diary_page_insert_title"):
+            popup = PopupView(self.master, self.manager, "Error: Inserte Título")
+            popup.render()
+
+    def loadPageDiary(self):
+        pass
+
+    def openDiaryPagesReader(self):
+        pass

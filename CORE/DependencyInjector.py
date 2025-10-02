@@ -15,6 +15,7 @@ from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
 from CORE.UTILS.TimeUtils import TimeUtils
+from CORE.UTILS.StringProcesor import StringProcesor
 
 
 class DependencyInjector:
@@ -47,7 +48,9 @@ class DependencyInjector:
     @staticmethod
     def build_utils():
         time_util = TimeUtils()
+        string_procesor = StringProcesor()
 
         return {
-            "time_util": time_util
+            "time_util": time_util,
+            "string_procesor": string_procesor
         }
