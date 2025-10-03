@@ -21,28 +21,11 @@ class Enigma:
 
             self.alphabet = _keys.split("\n")[0].split("=")[-1]
             secret = _keys.split("\n")[1].split("=")[-1]
-            self.setRotations(secret)
-
-            _total_chars = len(self.alphabet)
-            for i in range(_total_chars):
-                # Rotor A: original i -> i + rotA
-                idx_a_in  = i
-                idx_a_out = (i + self.rotations[0]) % _total_chars
-                self.rotorA.append(f"{self.alphabet[idx_a_in]}:{self.alphabet[idx_a_out]}")
-
-                # Rotor B: (i + rotA) -> (i + rotB)
-                idx_b_in  = (i + self.rotations[0]) % _total_chars
-                idx_b_out = (i + self.rotations[1]) % _total_chars
-                self.rotorB.append(f"{self.alphabet[idx_b_in]}:{self.alphabet[idx_b_out]}")
-
-                # Rotor C: (i + rotB) -> (i + rotC)
-                idx_c_in  = (i + self.rotations[1]) % _total_chars
-                idx_c_out = (i + self.rotations[2]) % _total_chars
-                self.rotorC.append(f"{self.alphabet[idx_c_in]}:{self.alphabet[idx_c_out]}")
+            self.buildRotors(secret)
         except:
             print("Error fatal... NO KEY detected.")
 
-    def setRotations(self, secret):
+    def buildRotors(self, secret):
         _total_chars = len(self.alphabet)
         s = str(secret).lower()
         vals = []
@@ -66,6 +49,25 @@ class Enigma:
             rotations_c = sum([v for i, v in enumerate(vals) if i % 5 == 0])
             rotations_c = rotations_c%_total_chars
             self.rotations[2] = rotations_c
+
+        self.rotorA = []
+        self.rotorB = []
+        self.rotorC = []
+        for i in range(_total_chars):
+            # Rotor A: original i -> i + rotA
+            idx_a_in  = i
+            idx_a_out = (i + self.rotations[0]) % _total_chars
+            self.rotorA.append(f"{self.alphabet[idx_a_in]}:{self.alphabet[idx_a_out]}")
+
+            # Rotor B: (i + rotA) -> (i + rotB)
+            idx_b_in  = (i + self.rotations[0]) % _total_chars
+            idx_b_out = (i + self.rotations[1]) % _total_chars
+            self.rotorB.append(f"{self.alphabet[idx_b_in]}:{self.alphabet[idx_b_out]}")
+
+            # Rotor C: (i + rotB) -> (i + rotC)
+            idx_c_in  = (i + self.rotations[1]) % _total_chars
+            idx_c_out = (i + self.rotations[2]) % _total_chars
+            self.rotorC.append(f"{self.alphabet[idx_c_in]}:{self.alphabet[idx_c_out]}")
 
     def processEncryptText(self, text):
         txt = ""
