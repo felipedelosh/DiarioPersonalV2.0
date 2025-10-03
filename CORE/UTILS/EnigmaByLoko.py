@@ -21,11 +21,11 @@ class Enigma:
 
             self.alphabet = _keys.split("\n")[0].split("=")[-1]
             secret = _keys.split("\n")[1].split("=")[-1]
-            self.buildRotors(secret)
+            self._buildRotorsWithSecret(secret)
         except:
             print("Error fatal... NO KEY detected.")
 
-    def buildRotors(self, secret):
+    def _buildRotorsWithSecret(self, secret):
         _total_chars = len(self.alphabet)
         s = str(secret).lower()
         vals = []
@@ -50,9 +50,13 @@ class Enigma:
             rotations_c = rotations_c%_total_chars
             self.rotations[2] = rotations_c
 
+        self._buildRotorsWithPositions()
+
+    def _buildRotorsWithPositions(self):
         self.rotorA = []
         self.rotorB = []
         self.rotorC = []
+        _total_chars = len(self.alphabet)
         for i in range(_total_chars):
             # RotorA
             idx_a_in  = i
@@ -168,3 +172,16 @@ class Enigma:
         temp = str(temp).split(":")[0]
 
         return temp
+
+    def _actionActuatorBar(self):
+        self.rotations[0] = self.rotations[0] + 1
+        if self.rotations[0] >= len(self.alphabet):
+            self.rotations[0] = 0
+            self.rotations[1] = self.rotations[1] + 1
+
+        if self.rotations[1] >= len(self.alphabet):
+            self.rotations[1] = 0
+            self.rotations[2] = self.rotations[2] + 1
+
+        if self.rotations[2] >= len(self.alphabet):
+            self.rotations[2] = 0
