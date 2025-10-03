@@ -8,6 +8,7 @@ class Enigma:
     def __init__(self, base_path="config/.env"):
         self.alphabet = ""
         self.rotations = [0, 0, 0]
+        self.actuatorBar = [0, 0, 0]
         self.rotorA = []
         self.rotorB = []
         self.rotorC = []
@@ -60,22 +61,24 @@ class Enigma:
         for i in range(_total_chars):
             # RotorA
             idx_a_in  = i
-            idx_a_out = (i + self.rotations[0]) % _total_chars
+            idx_a_out = (i + self.rotations[0] + self.actuatorBar[0]) % _total_chars
             self.rotorA.append(f"{self.alphabet[idx_a_in]}:{self.alphabet[idx_a_out]}")
 
             # RotorB
-            idx_b_in  = (i + self.rotations[0]) % _total_chars
-            idx_b_out = (i + self.rotations[1]) % _total_chars
+            idx_b_in  = (i + self.rotations[0] + self.actuatorBar[0]) % _total_chars
+            idx_b_out = (i + self.rotations[1] + self.actuatorBar[1]) % _total_chars
             self.rotorB.append(f"{self.alphabet[idx_b_in]}:{self.alphabet[idx_b_out]}")
 
             # RotorC
-            idx_c_in  = (i + self.rotations[1]) % _total_chars
-            idx_c_out = (i + self.rotations[2]) % _total_chars
+            idx_c_in  = (i + self.rotations[1] + self.actuatorBar[1]) % _total_chars
+            idx_c_out = (i + self.rotations[2] + self.actuatorBar[2]) % _total_chars
             self.rotorC.append(f"{self.alphabet[idx_c_in]}:{self.alphabet[idx_c_out]}")
 
     def processEncryptText(self, text):
         txt = ""
+        self.actuatorBar = [0, 0, 0]
         for i in text:
+            self._buildRotorsWithPositions()
             chr = str(i)
             isUpper = str(chr).isupper()
 
@@ -90,7 +93,8 @@ class Enigma:
                 txt = txt + str(self._processEncryptChr(chr)).upper()
             else:
                 txt = txt + str(self._processEncryptChr(chr))
-
+            self._actionActuatorBar()
+ 
         return txt 
     
     def _processEncryptChr(self, chr):
@@ -125,7 +129,9 @@ class Enigma:
 
     def processDecryptText(self, text):
         txt = ""
+        self.actuatorBar = [0, 0, 0]
         for i in text:
+            self._buildRotorsWithPositions()
             chr = str(i)
             isUpper = str(chr).isupper()
 
@@ -140,6 +146,7 @@ class Enigma:
                 txt = txt + str(self._processDecryptChr(chr)).upper()
             else:
                 txt = txt + str(self._processDecryptChr(chr))
+            self._actionActuatorBar()
 
         return txt 
 
@@ -174,14 +181,14 @@ class Enigma:
         return temp
 
     def _actionActuatorBar(self):
-        self.rotations[0] = self.rotations[0] + 1
-        if self.rotations[0] >= len(self.alphabet):
-            self.rotations[0] = 0
-            self.rotations[1] = self.rotations[1] + 1
+        self.actuatorBar[2] = self.actuatorBar[2] + 1
+        if self.actuatorBar[2] >= len(self.alphabet):
+            self.actuatorBar[2] = 0
+            self.actuatorBar[1] = self.actuatorBar[1] + 1
 
-        if self.rotations[1] >= len(self.alphabet):
-            self.rotations[1] = 0
-            self.rotations[2] = self.rotations[2] + 1
+        if self.actuatorBar[1] >= len(self.alphabet):
+            self.actuatorBar[1] = 0
+            self.actuatorBar[0] = self.actuatorBar[0] + 1
 
-        if self.rotations[2] >= len(self.alphabet):
-            self.rotations[2] = 0
+        if self.actuatorBar[0] >= len(self.alphabet):
+            self.actuatorBar[0] = 0
