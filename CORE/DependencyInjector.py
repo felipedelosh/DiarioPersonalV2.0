@@ -15,6 +15,7 @@ from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
 from CORE.UTILS.TimeUtils import TimeUtils
+from CORE.UTILS.EnigmaByLoko import Enigma
 from CORE.UTILS.StringProcesor import StringProcesor
 
 
@@ -48,9 +49,11 @@ class DependencyInjector:
     @staticmethod
     def build_utils():
         time_util = TimeUtils()
+        enigma = Enigma()
         string_procesor = StringProcesor()
 
         return {
             "time_util": time_util,
+            "enigma": enigma,
             "string_procesor": string_procesor
         }
