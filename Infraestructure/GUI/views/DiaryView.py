@@ -122,6 +122,7 @@ class DiaryView(Screen):
         _path = _path + f"{self.manager.controller.utils["time_util"].getTimeStamp()} - {title}.txt"
         text = text + "\n\n" + self.manager.controller.utils["time_util"].getTimeSignature() + "\n\n"
         if self.is_secret:
+            _path = _path.rsplit(".txt", 1)[0] + ".secret.txt"
             _excrypted = self.manager.controller.utils["enigma"].processEncryptText(text)
             text = _excrypted
         _status = self.manager.controller.dependencies["diary_use_case"].save_page(_path, text)
