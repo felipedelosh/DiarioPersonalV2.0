@@ -118,7 +118,7 @@ class DiaryView(Screen):
         if not self.stringProcesor.validateTXT(text):
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
 
-        _path = self.manager.controller.pathController.getPathByCODE("DIARY") 
+        _path = self.manager.controller.pathController.getPathByCODE("DIARY_CURRENT_YYYY")
         _path = _path + f"{self.manager.controller.utils["time_util"].getTimeStamp()} - {title}.txt"
         text = text + "\n\n" + self.manager.controller.utils["time_util"].getTimeSignature() + "\n\n"
         _status = self.manager.controller.dependencies["diary_use_case"].save_page(_path, text)
