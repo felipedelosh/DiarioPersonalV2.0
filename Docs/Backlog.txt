@@ -1,9 +1,9 @@
 ID|Tarea|Descripción|Prioridad|COMPLETADA
-I1|Sistema de Guardado de Páginas|Guardar páginas de diario en archivos con fecha/título.|🟢|NO
-I2|Cargador de Configuración|Cargar configuración desde config.json.|🟢|NO
-I3|Gestor de Idiomas|Soporte de textos en diferentes idiomas (LanguageManager).|🟡|NO
+I1|Sistema de Guardado de Páginas|Guardar páginas de diario en archivos con fecha/título.|🟢|SI
+I2|Cargador de Configuración|Cargar configuración desde config.json.|🟢|SI
+I3|Gestor de Idiomas|Soporte de textos en diferentes idiomas (LanguageManager).|🟡|SI
 I4|Inyector de Dependencias Global|Acceso centralizado a repositorios, servicios y utils.|🟢|SI
-I5|Gestor de Carpetas|Crear automáticamente carpetas por año/mes para organizar entradas.|🟢|NO
+I5|Gestor de Carpetas|Crear automáticamente carpetas por año/mes para organizar entradas.|🟢|SI
 D1|Vista de Diario|Permitir escribir, editar y guardar páginas.|🟢|NO
 D2|Vista de Sueños|Registrar sueños con fecha y etiquetas.|🟡|NO
 D3|Vista de Amigos|Lista de amigos, registrar notas relacionadas.|🟡|NO
