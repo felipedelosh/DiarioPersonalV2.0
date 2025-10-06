@@ -125,6 +125,7 @@ class DiaryView(Screen):
 
         if _status:
             PopupView(self.master, self.manager, self.lang.getText("ok_diary_page_save"), "SAVE").render(500, 300)
+            self._clearEntrysAfterSavePageDiary(txtEntryTitle, txtText)
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
 
@@ -133,3 +134,7 @@ class DiaryView(Screen):
 
     def openDiaryPagesReader(self):
         pass
+
+    def _clearEntrysAfterSavePageDiary(self, txtEntryTitle, txtText):
+        txtEntryTitle.delete(0, tk.END)
+        txtText.delete("1.0", tk.END)
