@@ -20,6 +20,12 @@ class TimeUtils:
     def getCurrentDD(self):
         return date.today().day
     
+    def getCurrentHHMMSS(self):
+        _time = str(time.ctime()).split(" ")
+        _time = _time[-2]
+
+        return _time
+    
     def getNumberOfCurrentDD(self):
         return date.today().weekday()
     

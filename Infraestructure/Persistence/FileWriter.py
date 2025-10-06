@@ -14,3 +14,22 @@ class FileWriter:
             return True
         except:
             return False
+        
+    def saveUsage(self, path, timeData):
+        try:
+            data = ""
+            try:
+                with open(path, 'r', encoding="UTF-8") as f:
+                    data = f.read()
+            except:
+                pass
+
+            with open(path, 'w', encoding="UTF-8") as f:
+                if data == "":
+                    f.write(timeData)
+                else:
+                    f.write(data+"\n"+timeData)
+
+            return True
+        except:
+            return False

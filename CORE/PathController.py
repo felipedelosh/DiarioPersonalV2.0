@@ -12,3 +12,5 @@ class PathController:
     def getPathByCODE(self, code):
         if code == "DIARY_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DIARIO\\{self.timeUtil.getCurrentYYYY()}\\"
+        elif code == "USAGES":
+            return f"{self.path}\\DATA\\USOS\\"

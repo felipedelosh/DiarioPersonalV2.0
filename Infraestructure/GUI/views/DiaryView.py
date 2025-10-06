@@ -15,6 +15,7 @@ class DiaryView(Screen):
         self.is_secret = False
         self.lang = self.manager.controller.dependencies["lang"]
         self.stringProcesor = self.manager.controller.utils["string_procesor"]
+        self.usageService = self.manager.controller.dependencies["usage_service"]
         self.btns = []
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         _options = self.lang.getText("diary_options")
@@ -129,6 +130,10 @@ class DiaryView(Screen):
 
         if _status:
             PopupView(self.master, self.manager, self.lang.getText("ok_diary_page_save"), "SAVE").render(500, 300)
+            _path = self.manager.controller.pathController.getPathByCODE("USAGES")
+            _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-diary.txt"
+            _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+            self.usageService.save_usage(_path, _data)
             self._clearEntrysAfterSavePageDiary(txtEntryTitle, txtText)
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)

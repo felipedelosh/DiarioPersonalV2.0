@@ -7,8 +7,10 @@ Dependency Injector
 
 #Repositories
 from Infraestructure.Repositories.FileDiaryRepository import FileDiaryRepository
+from Infraestructure.Repositories.FileUsageRepository import FileUsageRepository
 #Services
 from Infraestructure.Services.DiaryService import DiaryService
+from Infraestructure.Services.UsageService import UsageService
 #Use Cases
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 # Utils
@@ -28,10 +30,12 @@ class DependencyInjector:
 
         # REPOSITORIES
         diary_repo = FileDiaryRepository()
+        usage_repo = FileUsageRepository()
         # END REPOSITORIES
 
         # SERVICES
         diary_service = DiaryService(diary_repo)
+        usage_servide = UsageService(usage_repo)
         # END SERVICES
 
         # USECASES
@@ -39,6 +43,7 @@ class DependencyInjector:
         # END USECASES
         
         return {
+            "usage_service": usage_servide,
             "diary_use_case": diary_use_case,
             "config": configManager,
             "lang": languageManager
