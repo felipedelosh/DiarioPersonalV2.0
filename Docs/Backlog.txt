@@ -1,5 +1,6 @@
 ID|Tarea|Descripción|Prioridad|COMPLETADA
 I1|Sistema de Guardado de Páginas|Guardar páginas de diario en archivos con fecha/título.|🟢|SI
+I1.1|Editar el UseCase para guardar página EXECUTE|Actualmente el caso de uso dice: save_page cambiarlo por execute|🟢|NO
 I2|Cargador de Configuración|Cargar configuración desde config.json.|🟢|SI
 I3|Gestor de Idiomas|Soporte de textos en diferentes idiomas (LanguageManager).|🟡|SI
 I4|Inyector de Dependencias Global|Acceso centralizado a repositorios, servicios y utils.|🟢|SI
