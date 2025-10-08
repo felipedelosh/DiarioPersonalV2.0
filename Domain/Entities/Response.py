@@ -5,15 +5,15 @@ FelipedelosH
 Standard respose for REQUEST
 """
 class Response:
-    def __init__(self, success: bool, data: dict | None = None, status_code: int = 200):
+    def __init__(self, success: bool, data: dict | None = None, status = 0):
         self.success = success
         self.data = data
-        self.status_code = status_code
+        self.status = status
 
     @staticmethod
-    def response(success: bool, data: dict | None = None, status_code: int = 200):
+    def response(success: bool, data: dict | None = None, status = 0):
         return {
             "success": success,
-            "statusCode": status_code,
+            "statusCode": status,
             "data": data
         }

@@ -76,7 +76,7 @@ class DiaryView(Screen):
         btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.savePageDiary(txtEntryTitle, txtText))
         self._tempCurrentElementsOptions.append(btnSave)
         btnSave.place(x=self._w*0.65, y=self._h*0.3)
-        btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self.loadPageDiary(txtEntryTitle))
+        btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self.loadPageDiary(txtEntryTitle, txtText))
         self._tempCurrentElementsOptions.append(btnLoad)
         btnLoad.place(x=self._w*0.75, y=self._h*0.3)
         btnSearch = tk.Button(self.canvas, text=self.lang.getText("text_button_search"))
@@ -137,12 +137,12 @@ class DiaryView(Screen):
             _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-diary.txt"
             _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
             self.usageService.save_usage(_path, _data)
-            self._clearEntrysAfterSavePageDiary(txtEntryTitle, txtText)
+            self._clearEntrysPageDiary(txtEntryTitle, txtText)
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
             return
 
-    def loadPageDiary(self, txtEntryTitle):
+    def loadPageDiary(self, txtEntryTitle, txtText):
         title = txtEntryTitle.get()
         
         if title == self.lang.getText("diary_page_insert_title"):
@@ -154,12 +154,28 @@ class DiaryView(Screen):
             return
         
         _path = self.manager.controller.pathController.getPathByCODE("DIARY_CURRENT_YYYY")
+        _data = self.manager.controller.dependencies["diary_use_case_load_page"].execute(_path, title)
 
-        #_data = self.manager.controller.dependencies["diary_use_case"].save_page(_path, text)
+        if _data["success"]:
+            title = _data["data"]["title"]
+            title = str(title).split(" - ", 1)[1]
+            content = _data["data"]["content"]
+            if ".secret" in title:
+                title = title.rsplit(".secret", 1)[0]
+                content = self.manager.controller.utils["enigma"].processDecryptText(content)
+            title = title.rsplit(".txt", 1)[0]
+
+            self._clearEntrysPageDiary(txtEntryTitle, txtText)
+            self._insertTextInEntrys(txtEntryTitle, title, txtText, content)
+
 
     def openDiaryPagesReader(self):
         pass
 
-    def _clearEntrysAfterSavePageDiary(self, txtEntryTitle, txtText):
+    def _clearEntrysPageDiary(self, txtEntryTitle, txtText):
         txtEntryTitle.delete(0, tk.END)
         txtText.delete("1.0", tk.END)
+
+    def _insertTextInEntrys(self, txtEntryTitle, title, txtText, content):
+        txtEntryTitle.insert(tk.END, title)
+        txtText.insert("1.0", content)

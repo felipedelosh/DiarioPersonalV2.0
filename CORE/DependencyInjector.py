@@ -13,6 +13,7 @@ from Infraestructure.Services.DiaryService import DiaryService
 from Infraestructure.Services.UsageService import UsageService
 #Use Cases
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
+from Infraestructure.UseCases.loadDiaryPage import LoadDiaryPage
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -40,11 +41,13 @@ class DependencyInjector:
 
         # USECASES
         diary_use_case_save_page = SaveDiaryPage(diary_service)
+        diary_use_case_load_page = LoadDiaryPage(diary_service)
         # END USECASES
         
         return {
             "usage_service": usage_servide,
             "diary_use_case_save_page": diary_use_case_save_page,
+            "diary_use_case_load_page": diary_use_case_load_page,
             "config": configManager,
             "lang": languageManager
             #...
