@@ -54,11 +54,12 @@ class DiaryView(Screen):
             print("Notas")
         if opt == _options[4]:
             self.deleteOption()
-            print("Registro de Sentimientos")
+            self.drawFeelOption()
         if opt == _options[5]:
             self.deleteOption()
             print("Drogas")
 
+    # DIARY
     def drawDiaryOption(self):
         txtEntryTitle = tk.Entry(self.canvas, fg="gray")
         self._tempCurrentElementsOptions.append(txtEntryTitle)
@@ -179,3 +180,12 @@ class DiaryView(Screen):
     def _insertTextInEntrys(self, txtEntryTitle, title, txtText, content):
         txtEntryTitle.insert(tk.END, title)
         txtText.insert("1.0", content)
+    # DIARY
+
+    def drawFeelOption(self):
+        lblTitleFeelings = tk.Label(self.canvas, text=self.lang.getText("title_feelings"))
+        self._tempCurrentElementsOptions.append(lblTitleFeelings)
+        lblTitleFeelings.place(x=self._w*0.4, y=self._h*0.3)
+        lblHelpFeelings = tk.Label(self.canvas, text=self.lang.getText("help_feelings"))
+        self._tempCurrentElementsOptions.append(lblHelpFeelings)
+        lblHelpFeelings.place(x=self._w*0.38, y=self._h*0.36)

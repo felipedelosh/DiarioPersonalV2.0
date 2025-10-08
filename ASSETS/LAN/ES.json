@@ -29,5 +29,7 @@
   "error_diary_page_save": "No fue posible guardar la información.",
   "text_button_save": "Guardar",
   "text_button_load": "Cargar",
-  "text_button_search": "Buscar"
+  "text_button_search": "Buscar",
+  "title_feelings": "Registro diario de sentimientos",
+  "help_feelings": "Ingresa aquí como te sentiste hoy: "
 }
