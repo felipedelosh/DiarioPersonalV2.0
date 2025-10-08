@@ -112,12 +112,15 @@ class DiaryView(Screen):
         
         if title == self.lang.getText("diary_page_insert_title"):
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
+            return
 
         if not self.stringProcesor.validateTXT(title):
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
+            return
 
         if not self.stringProcesor.validateTXT(text):
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
+            return
 
         _path = self.manager.controller.pathController.getPathByCODE("DIARY_CURRENT_YYYY")
         _path = _path + f"{self.manager.controller.utils["time_util"].getTimeStamp()} - {title}.txt"
@@ -137,6 +140,7 @@ class DiaryView(Screen):
             self._clearEntrysAfterSavePageDiary(txtEntryTitle, txtText)
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
+            return
 
     def loadPageDiary(self):
         pass
