@@ -39,12 +39,12 @@ class DependencyInjector:
         # END SERVICES
 
         # USECASES
-        diary_use_case = SaveDiaryPage(diary_service)
+        diary_use_case_save_page = SaveDiaryPage(diary_service)
         # END USECASES
         
         return {
             "usage_service": usage_servide,
-            "diary_use_case": diary_use_case,
+            "diary_use_case_save_page": diary_use_case_save_page,
             "config": configManager,
             "lang": languageManager
             #...

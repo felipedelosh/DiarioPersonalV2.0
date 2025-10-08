@@ -76,7 +76,7 @@ class DiaryView(Screen):
         btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.savePageDiary(txtEntryTitle, txtText))
         self._tempCurrentElementsOptions.append(btnSave)
         btnSave.place(x=self._w*0.65, y=self._h*0.3)
-        btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"))
+        btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self.loadPageDiary(txtEntryTitle))
         self._tempCurrentElementsOptions.append(btnLoad)
         btnLoad.place(x=self._w*0.75, y=self._h*0.3)
         btnSearch = tk.Button(self.canvas, text=self.lang.getText("text_button_search"))
@@ -129,7 +129,7 @@ class DiaryView(Screen):
             _path = _path.rsplit(".txt", 1)[0] + ".secret.txt"
             _excrypted = self.manager.controller.utils["enigma"].processEncryptText(text)
             text = _excrypted
-        _status = self.manager.controller.dependencies["diary_use_case"].save_page(_path, text)
+        _status = self.manager.controller.dependencies["diary_use_case_save_page"].save_page(_path, text)
 
         if _status:
             PopupView(self.master, self.manager, self.lang.getText("ok_diary_page_save"), "SAVE").render(500, 300)
@@ -142,8 +142,20 @@ class DiaryView(Screen):
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
             return
 
-    def loadPageDiary(self):
-        pass
+    def loadPageDiary(self, txtEntryTitle):
+        title = txtEntryTitle.get()
+        
+        if title == self.lang.getText("diary_page_insert_title"):
+            PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
+            return
+        
+        if not self.stringProcesor.validateTXT(title):
+            PopupView(self.master, self.manager, self.lang.getText("error_diary_page_insert_title"), "ERROR").render(500, 300)
+            return
+        
+        _path = self.manager.controller.pathController.getPathByCODE("DIARY_CURRENT_YYYY")
+
+        #_data = self.manager.controller.dependencies["diary_use_case"].save_page(_path, text)
 
     def openDiaryPagesReader(self):
         pass
