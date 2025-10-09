@@ -32,6 +32,9 @@
   "text_button_search": "Buscar",
   "title_feelings": "Registro diario de sentimientos",
   "help_feelings": "Ingresa aquí como te sentiste hoy: ",
+  "ok_feelings_not_feel": "Se ha guardado su sentimiento correctamente.",
+  "error_feelings_not_feel": "Para poder registrar un sentimiento tiene que seleccionarlo.",
+  "error_feelings_fatal": "Hubo un error fatal al tratar de guardar el sentimiento.",
   "list_feelings":[
     "alcoholizado",
     "tristeza",

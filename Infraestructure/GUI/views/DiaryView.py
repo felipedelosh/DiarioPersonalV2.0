@@ -199,5 +199,21 @@ class DiaryView(Screen):
         btnSaveFeeling.place(x=self._w*0.48, y=self._h*0.5)
 
     def saveFeeling(self, cmbxFeelings):
-        print(cmbxFeelings.get())
+        feeling = cmbxFeelings.get()
+        if str(feeling).strip() != "":
+            _path = self.manager.controller.pathController.getPathByCODE("FEELING_CURRENT_YYYY")
+            _path = f"{_path}\\{self.manager.controller.utils["time_util"].getTimeStamp()}.txt"
+            _status = self.manager.controller.dependencies["feeling_use_case_save"].execute(_path, feeling)
+
+            if _status:
+                PopupView(self.master, self.manager, self.lang.getText("ok_feelings_not_feel"), "OK").render(500, 300)
+                _path = self.manager.controller.pathController.getPathByCODE("USAGES")
+                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-feelings.txt"
+                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                self.usageService.save_usage(_path, _data)
+            else:
+                PopupView(self.master, self.manager, self.lang.getText("error_feelings_fatal"), "ERROR FATAL").render(500, 300)
+        else:
+            PopupView(self.master, self.manager, self.lang.getText("error_feelings_not_feel"), "ERROR").render(500, 300)
+            return
 
