@@ -9,14 +9,17 @@ Dependency Injector
 from Infraestructure.Repositories.FileDiaryRepository import FileDiaryRepository
 from Infraestructure.Repositories.FileUsageRepository import FileUsageRepository
 from Infraestructure.Repositories.FeelingRepository import FeelingRepository
+from Infraestructure.Repositories.DreamRepository import FileDreamRepository
 #Services
 from Infraestructure.Services.DiaryService import DiaryService
 from Infraestructure.Services.UsageService import UsageService
 from Infraestructure.Services.FeelingService import FeelingService
+from Infraestructure.Services.DreamService import DiaryService
 #Use Cases
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 from Infraestructure.UseCases.loadDiaryPage import LoadDiaryPage
 from Infraestructure.UseCases.SaveFeeling import SaveFeeling
+from Infraestructure.UseCases.SaveDreamPage import SaveDreamPage
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -36,24 +39,28 @@ class DependencyInjector:
         diary_repo = FileDiaryRepository()
         usage_repo = FileUsageRepository()
         feeling_repo = FeelingRepository()
+        dream_repo = FileDreamRepository()
         # END REPOSITORIES
 
         # SERVICES
         diary_service = DiaryService(diary_repo)
         usage_servide = UsageService(usage_repo)
         feeling_service = FeelingService(feeling_repo)
+        dream_service = DiaryService(dream_repo)
         # END SERVICES
 
         # USECASES
         diary_use_case_save_page = SaveDiaryPage(diary_service)
         diary_use_case_load_page = LoadDiaryPage(diary_service)
         feeling_use_case_save = SaveFeeling(feeling_service)
+        dream_use_case_save_dream = SaveDreamPage(dream_service)
         # END USECASES
         
         return {
             "usage_service": usage_servide,
             "diary_use_case_save_page": diary_use_case_save_page,
             "diary_use_case_load_page": diary_use_case_load_page,
+            "dream_use_case_save_dream": dream_use_case_save_dream,
             "feeling_use_case_save": feeling_use_case_save,
             "config": configManager,
             "lang": languageManager

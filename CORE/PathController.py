@@ -12,6 +12,8 @@ class PathController:
     def getPathByCODE(self, code):
         if code == "DIARY_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DIARIO\\{self.timeUtil.getCurrentYYYY()}\\"
+        if code == "DREAM_CURRENT_YYYY":
+            return f"{self.path}\\DATA\\DREAMS\\{self.timeUtil.getCurrentYYYY()}\\"
         elif code == "FEELING_CURRENT_YYYY":
             return f"{self.path}\\DATA\\SENTIMIENTOS\\{self.timeUtil.getCurrentYYYY()}\\"
         elif code == "USAGES":
