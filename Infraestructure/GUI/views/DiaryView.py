@@ -3,6 +3,7 @@ FelipedelosH
 2025
 """
 import tkinter as tk
+from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
 from Infraestructure.GUI.views.PopupView import PopupView
 
@@ -189,3 +190,14 @@ class DiaryView(Screen):
         lblHelpFeelings = tk.Label(self.canvas, text=self.lang.getText("help_feelings"))
         self._tempCurrentElementsOptions.append(lblHelpFeelings)
         lblHelpFeelings.place(x=self._w*0.38, y=self._h*0.36)
+        cmbxFeelings = ttk.Combobox(self.canvas, state='readonly')
+        self._tempCurrentElementsOptions.append(cmbxFeelings)
+        cmbxFeelings['values'] = self.lang.getText("list_feelings")
+        cmbxFeelings.place(x=self._w*0.418, y=self._h*0.42)
+        btnSaveFeeling = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveFeeling(cmbxFeelings))
+        self._tempCurrentElementsOptions.append(btnSaveFeeling)
+        btnSaveFeeling.place(x=self._w*0.48, y=self._h*0.5)
+
+    def saveFeeling(self, cmbxFeelings):
+        print(cmbxFeelings.get())
+
