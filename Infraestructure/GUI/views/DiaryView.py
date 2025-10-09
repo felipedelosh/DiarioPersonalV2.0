@@ -183,6 +183,7 @@ class DiaryView(Screen):
         txtText.insert("1.0", content)
     # DIARY
 
+    # FEELINGS
     def drawFeelOption(self):
         lblTitleFeelings = tk.Label(self.canvas, text=self.lang.getText("title_feelings"))
         self._tempCurrentElementsOptions.append(lblTitleFeelings)
@@ -216,4 +217,4 @@ class DiaryView(Screen):
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_feelings_not_feel"), "ERROR").render(500, 300)
             return
-
+    # FEELINGS
