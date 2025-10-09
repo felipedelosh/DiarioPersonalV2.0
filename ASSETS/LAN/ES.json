@@ -62,5 +62,7 @@
     "drogado",
     "trabado",
     "satisfecho"
-  ]
+  ],
+  "error_dream_page_insert_title": "Error. Se necesita insertar un título para la página del sueño.",
+  "error_dream_page_insert_text": "Error. Se necesita insertar un texto para la página del sueño."
 }

@@ -46,7 +46,7 @@ class DiaryView(Screen):
             self.drawDiaryOption()
         if opt == _options[1]:
             self.deleteOption()
-            print("Sueños")
+            self.drawDreamsOption()
         if opt == _options[2]:
             self.deleteOption()
             print("Amigos")
@@ -182,6 +182,47 @@ class DiaryView(Screen):
         txtEntryTitle.insert(tk.END, title)
         txtText.insert("1.0", content)
     # DIARY
+
+    # DREAMS
+    def drawDreamsOption(self):
+        txtEntryTitle = tk.Entry(self.canvas, fg="gray")
+        self._tempCurrentElementsOptions.append(txtEntryTitle)
+        txtEntryTitle.insert(0, self.lang.getText("diary_page_insert_title"))
+        txtEntryTitle.bind("<FocusIn>", lambda e, entry=txtEntryTitle: self._clear_placeholder_diary_page_title(entry))
+        txtEntryTitle.bind("<FocusOut>", lambda e, entry=txtEntryTitle: self._add_placeholder_diary_page_title(entry))
+        txtEntryTitle.place(x=self._w*0.07, y=self._h*0.3, width=self._w*0.5, height=25)
+        txtText = tk.Text(self.canvas, height = 20, width = 70)
+        self._tempCurrentElementsOptions.append(txtText)
+        txtText.place(x=self._w*0.07, y=self._h*0.38)
+        btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveDreamPage(txtEntryTitle, txtText))
+        self._tempCurrentElementsOptions.append(btnSave)
+        btnSave.place(x=self._w*0.63, y=self._h*0.3)
+        btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self.loadPageDiary(txtEntryTitle, txtText))
+        self._tempCurrentElementsOptions.append(btnLoad)
+        btnLoad.place(x=self._w*0.73, y=self._h*0.3)
+        btnSearch = tk.Button(self.canvas, text=self.lang.getText("text_button_search"))
+        self._tempCurrentElementsOptions.append(btnSearch)
+        btnSearch.place(x=self._w*0.83, y=self._h*0.3)
+
+    def saveDreamPage(self, txtEntryTitle, txtText):
+        title = txtEntryTitle.get()
+        text = txtText.get("1.0", tk.END)
+        
+        if title == self.lang.getText("diary_page_insert_title"):
+            PopupView(self.master, self.manager, self.lang.getText("error_dream_page_insert_title"), "ERROR").render(500, 300)
+            return
+
+        if not self.stringProcesor.validateTXT(title):
+            PopupView(self.master, self.manager, self.lang.getText("error_dream_page_insert_title"), "ERROR").render(500, 300)
+            return
+
+        if not self.stringProcesor.validateTXT(text):
+            PopupView(self.master, self.manager, self.lang.getText("error_dream_page_insert_text"), "ERROR").render(500, 300)
+            return
+        
+        print(title)
+        print(text)
+    # DREAMS
 
     # FEELINGS
     def drawFeelOption(self):
