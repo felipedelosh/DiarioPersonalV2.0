@@ -50,11 +50,16 @@ DiarioPersonalV2.0/
 
 ## :play_or_pause_button:How to execute a project
 
-Double click
+```
+python main.py
+```
 
 ## :hammer_and_wrench:Tecnologías.
 
-- :snake: Python
+- Python
+- .txt
+- .csv
+- .json
 
 ## :warning:Advertencia
 
