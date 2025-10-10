@@ -197,7 +197,7 @@ class DiaryView(Screen):
         btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveDreamPage(txtEntryTitle, txtText))
         self._tempCurrentElementsOptions.append(btnSave)
         btnSave.place(x=self._w*0.63, y=self._h*0.3)
-        btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self.loadPageDiary(txtEntryTitle, txtText))
+        btnLoad = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self.loadDreamPage(txtEntryTitle, txtText))
         self._tempCurrentElementsOptions.append(btnLoad)
         btnLoad.place(x=self._w*0.73, y=self._h*0.3)
         btnSearch = tk.Button(self.canvas, text=self.lang.getText("text_button_search"))
@@ -235,6 +235,29 @@ class DiaryView(Screen):
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
             return
+        
+    def loadDreamPage(self, txtEntryTitle, txtText):
+        title = txtEntryTitle.get()
+        
+        if title == self.lang.getText("diary_page_insert_title"):
+            PopupView(self.master, self.manager, self.lang.getText("error_dream_page_insert_title"), "ERROR").render(500, 300)
+            return
+        
+        if not self.stringProcesor.validateTXT(title):
+            PopupView(self.master, self.manager, self.lang.getText("error_dream_page_insert_title"), "ERROR").render(500, 300)
+            return
+        
+        _path = self.manager.controller.pathController.getPathByCODE("DREAM_CURRENT_YYYY")
+        _data = self.manager.controller.dependencies["dream_use_case_load_dream"].execute(_path, title)
+
+        if _data["success"]:
+            title = _data["data"]["title"]
+            title = str(title).split(" - ", 1)[1]
+            content = _data["data"]["content"]
+            title = title.rsplit(".txt", 1)[0]
+
+            self._clearEntrysPageDiary(txtEntryTitle, txtText)
+            self._insertTextInEntrys(txtEntryTitle, title, txtText, content)
     # DREAMS
 
     # FEELINGS

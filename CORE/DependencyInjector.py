@@ -20,6 +20,7 @@ from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 from Infraestructure.UseCases.loadDiaryPage import LoadDiaryPage
 from Infraestructure.UseCases.SaveFeeling import SaveFeeling
 from Infraestructure.UseCases.SaveDreamPage import SaveDreamPage
+from Infraestructure.UseCases.LoadDreamPage import LoadDreamPage
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -54,6 +55,7 @@ class DependencyInjector:
         diary_use_case_load_page = LoadDiaryPage(diary_service)
         feeling_use_case_save = SaveFeeling(feeling_service)
         dream_use_case_save_dream = SaveDreamPage(dream_service)
+        dream_use_case_load_dream = LoadDreamPage(dream_service)
         # END USECASES
         
         return {
@@ -61,6 +63,7 @@ class DependencyInjector:
             "diary_use_case_save_page": diary_use_case_save_page,
             "diary_use_case_load_page": diary_use_case_load_page,
             "dream_use_case_save_dream": dream_use_case_save_dream,
+            "dream_use_case_load_dream": dream_use_case_load_dream,
             "feeling_use_case_save": feeling_use_case_save,
             "config": configManager,
             "lang": languageManager
