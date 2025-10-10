@@ -131,7 +131,7 @@ class DiaryView(Screen):
             _path = _path.rsplit(".txt", 1)[0] + ".secret.txt"
             _excrypted = self.manager.controller.utils["enigma"].processEncryptText(text)
             text = _excrypted
-        _status = self.manager.controller.dependencies["diary_use_case_save_page"].save_page(_path, text)
+        _status = self.manager.controller.dependencies["diary_use_case_save_page"].execute(_path, text)
 
         if _status:
             PopupView(self.master, self.manager, self.lang.getText("ok_diary_page_save"), "SAVE").render(500, 300)

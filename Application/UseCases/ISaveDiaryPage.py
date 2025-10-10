@@ -6,5 +6,5 @@ from abc import ABC, abstractmethod
 
 class ISaveDiaryPage(ABC):
     @abstractmethod
-    def save_page(self, path: str, content: str) -> bool:
+    def execute(self, path: str, content: str) -> bool:
         pass
