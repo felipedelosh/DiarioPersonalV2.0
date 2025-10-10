@@ -4,6 +4,8 @@
   "days_names": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
   "month_names": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
   "motivational_message": [
+    "Modo guerra.",
+    "El único que tienes que convencer es a el cabrón del espejo.",
     "El éxito no llega por suerte, llega por disciplina diaria.",
     "No busques motivación, busca compromiso.",
     "El que se rinde una vez, se acostumbra a rendirse siempre.",
@@ -13,7 +15,11 @@
     "El respeto se gana trabajando, no hablando.",
     "El dolor es temporal, pero la disciplina es para siempre.",
     "Deja de compararte y ponte a trabajar en ti.",
-    "La constancia le gana al talento cuando el talento no trabaja."
+    "La constancia le gana al talento cuando el talento no trabaja.",
+    "Que la sed no te haga beber del vaso equivocado",
+    "Aceptar el error y asumirlo, responsabilizarse de la mala decisión y entender que es parte de la vida.",
+    "Trabaja en ti por ti y para ti.",
+    "Tu eres el premio."
   ],
   "diary_options":[
     "Diario",
