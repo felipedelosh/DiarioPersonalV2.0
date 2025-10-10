@@ -5,7 +5,7 @@ FelipedelosH
 from Application.Services.IDreamService import IDreamService
 from Application.Repositories.IDreamRepository import IDreamRepository
 
-class DiaryService(IDreamService):
+class DreamService(IDreamService):
     def __init__(self, dream_repository: IDreamRepository):
         self.dream_repository = dream_repository
 

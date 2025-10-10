@@ -14,7 +14,7 @@ from Infraestructure.Repositories.DreamRepository import FileDreamRepository
 from Infraestructure.Services.DiaryService import DiaryService
 from Infraestructure.Services.UsageService import UsageService
 from Infraestructure.Services.FeelingService import FeelingService
-from Infraestructure.Services.DreamService import DiaryService
+from Infraestructure.Services.DreamService import DreamService
 #Use Cases
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 from Infraestructure.UseCases.loadDiaryPage import LoadDiaryPage
@@ -46,7 +46,7 @@ class DependencyInjector:
         diary_service = DiaryService(diary_repo)
         usage_servide = UsageService(usage_repo)
         feeling_service = FeelingService(feeling_repo)
-        dream_service = DiaryService(dream_repo)
+        dream_service = DreamService(dream_repo)
         # END SERVICES
 
         # USECASES
