@@ -58,7 +58,7 @@ class DiaryView(Screen):
             self.drawFeelOption()
         if opt == _options[5]:
             self.deleteOption()
-            print("Drogas")
+            self.drawDrugsOption()
 
     # DIARY
     def drawDiaryOption(self):
@@ -295,3 +295,8 @@ class DiaryView(Screen):
             PopupView(self.master, self.manager, self.lang.getText("error_feelings_not_feel"), "ERROR").render(500, 300)
             return
     # FEELINGS
+
+    # DRUGS
+    def drawDrugsOption(self):
+        pass
+    # DRUGS
