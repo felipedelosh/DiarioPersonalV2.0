@@ -70,5 +70,29 @@
     "satisfecho"
   ],
   "error_dream_page_insert_title": "Error. Se necesita insertar un título para la página del sueño.",
-  "error_dream_page_insert_text": "Error. Se necesita insertar un texto para la página del sueño."
+  "error_dream_page_insert_text": "Error. Se necesita insertar un texto para la página del sueño.",
+  "drugs_use_title":"Uso de Drogas",
+  "drugs_use_help_text": [
+    "Las drogas alteran tu mente y te hacen perder el control de tus decisiones.",
+    "El consumo prolongado destruye lentamente tu cuerpo y tu entorno emocional.",
+    "Las drogas te ofrecen una falsa felicidad que después se convierte en vacío.",
+    "Cada vez que consumes, renuncias a una parte de tu libertad y tu futuro.",
+    "Las drogas no solucionan los problemas, solo los esconden mientras te destruyen."
+  ],
+  "drugs_use_insert":"Cual fue la ultima sustancia que usaste: ",
+  "drugs_use_trigger_insert":"Cual fue el detonante: ",
+  "drugs_use_feel": "Que te hizo sentir esa sustancia: ",
+  "list_drugs":[
+    "azúcar",
+    "marihuana",
+    "FAP",
+    "cocaina",
+    "tusi",
+    "pornografia",
+    "hongos",
+    "LSD",
+    "Alcohol",
+    "cigarillo",
+    "pastillas"
+  ]
 }

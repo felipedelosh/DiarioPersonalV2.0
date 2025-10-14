@@ -3,6 +3,7 @@ FelipedelosH
 2025
 """
 import tkinter as tk
+import random
 from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
 from Infraestructure.GUI.views.PopupView import PopupView
@@ -298,5 +299,40 @@ class DiaryView(Screen):
 
     # DRUGS
     def drawDrugsOption(self):
-        pass
+        lblTitleDrugs = tk.Label(self.canvas, text=self.lang.getText("drugs_use_title"))
+        self._tempCurrentElementsOptions.append(lblTitleDrugs)
+        lblTitleDrugs.place(x=self._w*0.07, y=self._h*0.3)
+        _drugs_message = random.choice(self.lang.getText("drugs_use_help_text"))
+        lblHelpDrugs = tk.Label(self.canvas, text=_drugs_message)
+        self._tempCurrentElementsOptions.append(lblHelpDrugs)
+        lblHelpDrugs.place(x=self._w*0.07, y=self._h*0.36)
+        lblDrugsUseInsert = tk.Label(self.canvas, text=self.lang.getText("drugs_use_insert"))
+        self._tempCurrentElementsOptions.append(lblDrugsUseInsert)
+        lblDrugsUseInsert.place(x=self._w*0.07, y=self._h*0.44)
+        cmbxDrugs = ttk.Combobox(self.canvas, state='readonly')
+        self._tempCurrentElementsOptions.append(cmbxDrugs)
+        cmbxDrugs['values'] = self.lang.getText("list_drugs")
+        cmbxDrugs.place(x=self._w*0.42, y=self._h*0.44)
+        lblDrugsUsetriggerInsert = tk.Label(self.canvas, text=self.lang.getText("drugs_use_trigger_insert"))
+        self._tempCurrentElementsOptions.append(lblDrugsUsetriggerInsert)
+        lblDrugsUsetriggerInsert.place(x=self._w*0.07, y=self._h*0.5)
+        txtDrugsUsetrigger = tk.Text(self.canvas, height = 2, width = 70, wrap="word")
+        self._tempCurrentElementsOptions.append(txtDrugsUsetrigger)
+        txtDrugsUsetrigger.place(x=self._w*0.07, y=self._h*0.55)
+        lblDrugsUseFeel = tk.Label(self.canvas, text=self.lang.getText("drugs_use_feel"))
+        self._tempCurrentElementsOptions.append(lblDrugsUseFeel)
+        lblDrugsUseFeel.place(x=self._w*0.07, y=self._h*0.65)
+        txtDrugsUseFeel = tk.Text(self.canvas, height = 2, width = 70, wrap="word")
+        self._tempCurrentElementsOptions.append(txtDrugsUseFeel)
+        txtDrugsUseFeel.place(x=self._w*0.07, y=self._h*0.7)
+        btnSaveDrug = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveDrugUse(cmbxDrugs, txtDrugsUsetrigger, txtDrugsUseFeel))
+        self._tempCurrentElementsOptions.append(btnSaveDrug)
+        btnSaveDrug.place(x=self._w*0.48, y=self._h*0.85)
+
+    def saveDrugUse(self, cmbxDrugs, txtDrugsUsetrigger, txtDrugsUseFeel):
+        _drug = cmbxDrugs.get()
+        _trigger = txtDrugsUsetrigger.get("1.0", tk.END)
+        _feel = txtDrugsUseFeel.get("1.0", tk.END)
+
+        print(_drug, _trigger, _feel)
     # DRUGS
