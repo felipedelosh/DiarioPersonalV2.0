@@ -10,17 +10,20 @@ from Infraestructure.Repositories.FileDiaryRepository import FileDiaryRepository
 from Infraestructure.Repositories.FileUsageRepository import FileUsageRepository
 from Infraestructure.Repositories.FeelingRepository import FeelingRepository
 from Infraestructure.Repositories.DreamRepository import FileDreamRepository
+from Infraestructure.Repositories.DrugRepository import DrugRepository
 #Services
 from Infraestructure.Services.DiaryService import DiaryService
 from Infraestructure.Services.UsageService import UsageService
 from Infraestructure.Services.FeelingService import FeelingService
 from Infraestructure.Services.DreamService import DreamService
+from Infraestructure.Services.DrugService import DrugService
 #Use Cases
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 from Infraestructure.UseCases.loadDiaryPage import LoadDiaryPage
 from Infraestructure.UseCases.SaveFeeling import SaveFeeling
 from Infraestructure.UseCases.SaveDreamPage import SaveDreamPage
 from Infraestructure.UseCases.LoadDreamPage import LoadDreamPage
+from Infraestructure.UseCases.SaveDrugUsage import SaveDrugUsage
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -41,6 +44,7 @@ class DependencyInjector:
         usage_repo = FileUsageRepository()
         feeling_repo = FeelingRepository()
         dream_repo = FileDreamRepository()
+        drug_repo = DrugRepository()
         # END REPOSITORIES
 
         # SERVICES
@@ -48,6 +52,7 @@ class DependencyInjector:
         usage_servide = UsageService(usage_repo)
         feeling_service = FeelingService(feeling_repo)
         dream_service = DreamService(dream_repo)
+        drug_service = DrugService(drug_repo)
         # END SERVICES
 
         # USECASES
@@ -56,6 +61,7 @@ class DependencyInjector:
         feeling_use_case_save = SaveFeeling(feeling_service)
         dream_use_case_save_dream = SaveDreamPage(dream_service)
         dream_use_case_load_dream = LoadDreamPage(dream_service)
+        drug_use_case_save_usage = SaveDrugUsage(drug_service)
         # END USECASES
         
         return {
@@ -65,6 +71,7 @@ class DependencyInjector:
             "dream_use_case_save_dream": dream_use_case_save_dream,
             "dream_use_case_load_dream": dream_use_case_load_dream,
             "feeling_use_case_save": feeling_use_case_save,
+            "drug_use_case_save_usage": drug_use_case_save_usage,
             "config": configManager,
             "lang": languageManager
             #...

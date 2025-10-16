@@ -334,5 +334,29 @@ class DiaryView(Screen):
         _trigger = txtDrugsUsetrigger.get("1.0", tk.END)
         _feel = txtDrugsUseFeel.get("1.0", tk.END)
 
-        print(_drug, _trigger, _feel)
+        if str(_drug).strip() != "":
+            if not self.stringProcesor.validateTXT(_trigger):
+                PopupView(self.master, self.manager, self.lang.getText("error_drugs_usage_insert_trigger"), "ERROR").render(500, 300)
+                return
+            
+            if not self.stringProcesor.validateTXT(_feel):
+                PopupView(self.master, self.manager, self.lang.getText("error_drugs_usage_insert_feel"), "ERROR").render(500, 300)
+                return
+            
+            content = _trigger + "\n\n\n" + _feel + "\n" + self.manager.controller.utils["time_util"].getCurrentHHMMSS() + "\n"
+            _path = self.manager.controller.pathController.getPathByCODE("DRUGS_CURRENT_YYYY")
+            _path = f"{_path}\\{_drug} - {self.manager.controller.utils["time_util"].getTimeStamp()}.txt"
+            _status = self.manager.controller.dependencies["drug_use_case_save_usage"].execute(_path, content)
+
+            if _status:
+                PopupView(self.master, self.manager, self.lang.getText("ok_drug_save"), "OK").render(500, 300)
+                _path = self.manager.controller.pathController.getPathByCODE("USAGES")
+                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-drugs.txt"
+                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                self.usageService.save_usage(_path, _data)
+            else:
+                PopupView(self.master, self.manager, self.lang.getText("error_drugs_fatal"), "ERROR FATAL").render(500, 300)
+        else:
+            PopupView(self.master, self.manager, self.lang.getText("error_drugs_not_drug"), "ERROR").render(500, 300)
+            return
     # DRUGS

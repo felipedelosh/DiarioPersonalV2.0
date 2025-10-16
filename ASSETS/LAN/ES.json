@@ -82,6 +82,11 @@
   "drugs_use_insert":"Cual fue la ultima sustancia que usaste: ",
   "drugs_use_trigger_insert":"Cual fue el detonante: ",
   "drugs_use_feel": "Que te hizo sentir esa sustancia: ",
+  "ok_drug_save": "Se ha alamacenado el uso de sustancia correctamente.",
+  "error_drugs_not_drug": "Para poder almacenar el uso de drogas necesita insertarla.",
+  "error_drugs_fatal": "Hubo un error fatal al tratar de guardar el uso de sustancias.",
+  "error_drugs_usage_insert_trigger": "Para poder Guadar el uso de sustancias se necesita ingresar el detonante.",
+  "error_drugs_usage_insert_feel": "Para poder guardar el uso de una sustancia se necesita ingresar que efecto te hizo sentir.",
   "list_drugs":[
     "azúcar",
     "marihuana",
