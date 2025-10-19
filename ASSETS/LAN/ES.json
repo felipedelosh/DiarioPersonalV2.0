@@ -99,5 +99,13 @@
     "Alcohol",
     "cigarillo",
     "pastillas"
+  ],
+  "economy_options":[
+    "Cuentas T",
+    "Trabajo",
+    "Ahorros",
+    "Deudas y Compromisos",
+    "Resumenes",
+    "Buscar"
   ]
 }
