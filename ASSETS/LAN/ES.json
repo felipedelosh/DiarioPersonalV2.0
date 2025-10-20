@@ -100,6 +100,11 @@
     "cigarillo",
     "pastillas"
   ],
+  "economy_title": "Bienvenido a tu registro economico.",
+  "economy_concept": "Concepto: ",
+  "economy_debit": "+ Debito: ",
+  "economy_credit": "- Credito: ",
+  "econimy_day": "Día:",
   "economy_options":[
     "Cuentas T",
     "Trabajo",
