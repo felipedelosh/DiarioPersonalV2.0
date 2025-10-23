@@ -80,15 +80,36 @@ class FinancesView(Screen):
         lblCredit = tk.Label(self.canvas, text=self.lang.getText("economy_credit"))
         self._tempCurrentElementsOptions.append(lblCredit)
         lblCredit.place(x=self._w * 0.8, y=self._h * 0.27)
-        lblday = tk.Label(self.canvas, text=self.lang.getText("econimy_day"))
+        lblday = tk.Label(self.canvas, text=self.lang.getText("economy_day"))
         self._tempCurrentElementsOptions.append(lblday)
         lblday.place(x=self._w * 0.1, y=self._h * 0.9)
-        # WIP
-
-
-        cmbxNrDays = ttk.Combobox(self.canvas, state='readonly')
+        _currentDD = self.manager.controller.utils["time_util"].getCurrentDD()
+        _currentMM = self.manager.controller.utils["time_util"].getCurrentMM()
+        cmbxNrDays = ttk.Combobox(self.canvas, state='readonly', width=4)
         self._tempCurrentElementsOptions.append(cmbxNrDays)
+        cmbxNrDays['values'] = [x for x in range(1, self.manager.controller.utils["time_util"].getNumberOfDaysInXMM(_currentMM - 1) + 1)]
+        cmbxNrDays.current(_currentDD)
+        cmbxNrDays.place(x=self._w * 0.15, y=self._h * 0.9)
+        lblMonth = tk.Label(self.canvas, text=self.lang.getText("economy_month"))
+        self._tempCurrentElementsOptions.append(lblMonth)
+        lblMonth.place(x=self._w * 0.25, y=self._h * 0.9)
+        cmbxNrMonth = ttk.Combobox(self.canvas, state='readonly', width=4)
+        self._tempCurrentElementsOptions.append(cmbxNrMonth)
+        cmbxNrMonth['values'] = [x for x in range(1, _currentMM + 1)]
+        cmbxNrMonth.current(_currentMM - 1)
+        cmbxNrMonth.place(x=self._w * 0.3, y=self._h * 0.9)
 
+        btnSaveTAccount = tk.Button(self.canvas, text=self.lang.getText("text_button_save"))
+        self._tempCurrentElementsOptions.append(btnSaveTAccount)
+        btnSaveTAccount.place(x=self._w * 0.66, y=self._h * 0.89)
+
+        btnLoadTAccount = tk.Button(self.canvas, text=self.lang.getText("text_button_load"))
+        self._tempCurrentElementsOptions.append(btnLoadTAccount)
+        btnLoadTAccount.place(x=self._w * 0.76, y=self._h * 0.89)
+        
+        btnSerachTAccount = tk.Button(self.canvas, text=self.lang.getText("text_button_load"))
+        self._tempCurrentElementsOptions.append(btnSerachTAccount)
+        btnSerachTAccount.place(x=self._w * 0.86, y=self._h * 0.89)
 
         for i in range(_itemsDiplayed):
             lblIndex = tk.Label(self.canvas, text=str(i+1) + " :")
@@ -107,7 +128,4 @@ class FinancesView(Screen):
             self._tempCurrentElementsOptions.append(txtCredit)
             _credits.append(txtCredit)
             _credits[i].place(x=self._w * 0.75, y=_y)
-
-
     # T ACCOUNTS
-

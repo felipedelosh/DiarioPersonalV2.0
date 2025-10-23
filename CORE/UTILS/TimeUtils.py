@@ -9,13 +9,16 @@ from datetime import date
 
 class TimeUtils:
     def __init__(self):
-        pass
+        self.durationMMinDays = [31,28,31,30,31,30,31,31,30,31,30,31]
 
     def getCurrentYYYY(self):
         return date.today().year
     
     def getCurrentMM(self):
         return date.today().month
+    
+    def getNumberOfDaysInXMM(self, mm):
+        return self.durationMMinDays[mm]
     
     def getCurrentDD(self):
         return date.today().day
