@@ -5,6 +5,7 @@ FelipedelosH
 import tkinter as tk
 from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
+from Infraestructure.GUI.views.PopupView import PopupView
 
 class FinancesView(Screen):
     def render(self, x, y):
@@ -99,7 +100,7 @@ class FinancesView(Screen):
         cmbxNrMonth.current(_currentMM - 1)
         cmbxNrMonth.place(x=self._w * 0.3, y=self._h * 0.9)
 
-        btnSaveTAccount = tk.Button(self.canvas, text=self.lang.getText("text_button_save"))
+        btnSaveTAccount = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveTAccounts(_itemsDiplayed, _concepts, _debits, _credits))
         self._tempCurrentElementsOptions.append(btnSaveTAccount)
         btnSaveTAccount.place(x=self._w * 0.66, y=self._h * 0.89)
 
@@ -128,4 +129,95 @@ class FinancesView(Screen):
             self._tempCurrentElementsOptions.append(txtCredit)
             _credits.append(txtCredit)
             _credits[i].place(x=self._w * 0.75, y=_y)
+
+    def saveTAccounts(self, itemsDiplayed, concepts, debits, credits):
+        _errorCounter = 0
+        _isSomeData = False
+        _tAccountData = ""
+        for i in range(itemsDiplayed):
+            _itterConcep = concepts[i].get()
+            _itterDebit = debits[i].get()
+            _itterCredit = credits[i].get()
+
+            if not self._isTAccountsReportValid(_itterConcep, _itterDebit, _itterCredit):
+                _errorCounter = _errorCounter + 1
+                concepts[i]["bg"] = "red"
+                debits[i]["bg"] = "red"
+                credits[i]["bg"] = "red"
+            else:
+                concepts[i]["bg"] = "white"
+                debits[i]["bg"] = "white"
+                credits[i]["bg"] = "white"
+
+                if str(_itterConcep).strip() == "":
+                    continue
+
+                if str(_itterDebit).strip() == "":
+                    _itterDebit = 0
+
+                if str(_itterCredit).strip() == "":
+                    _itterCredit = 0
+
+                _isSomeData = True
+                _tAccountData = _tAccountData + f"{_itterConcep};{_itterDebit};{_itterCredit}\n"           
+
+        if _errorCounter > 0:
+            PopupView(self.master, self.manager, self.lang.getText("error_economy_report_save"), "ERROR").render(500, 300)
+            return
+        
+        if not _isSomeData:
+            PopupView(self.master, self.manager, self.lang.getText("error_economy_report_save_no_info"), "ERROR").render(500, 300)
+            return
+        
+        # SAVE TAccount
+        if _isSomeData:
+            _path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS_CURRENT_YYYY")
+            _currentMonth = self.manager.controller.utils["time_util"].getCurrentMM()
+            _currentMonth = self.lang.getText("month_names")[_currentMonth - 1]
+            _currentDay = self.manager.controller.utils["time_util"].getCurrentDD()
+            _path = f"{_path}{_currentMonth} {_currentDay}.csv"
+
+            data = _tAccountData[:-1] # Delete last break line.
+
+            _status = self.manager.controller.dependencies["economy_use_case_save_taccount"].execute(_path, data)
+
+            if _status:
+                PopupView(self.master, self.manager, self.lang.getText("ok_economy_save_report"), "SAVE").render(500, 300)
+                _path = self.manager.controller.pathController.getPathByCODE("USAGES")
+                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-economy.txt"
+                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                self.usageService.save_usage(_path, _data)
+                
+                # Clear VIEW
+                
+            else:
+                PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
+                return
+
+
+    def _isTAccountsReportValid(self, concept, debit, credit):
+        try:
+            if str(concept).strip() == "" and str(debit).strip() == "" and str(credit).strip() == "":
+                return True
+            
+            if str(concept).strip() != "" and str(debit).strip() == "" and str(credit).strip() == "":
+                return False
+            
+            if str(debit).strip() != "" and str(credit).strip() != "":
+                return False
+        
+            if str(concept).strip() == "" and (str(debit).strip() != "" or str(credit).strip() != ""):
+                return False
+            
+            if str(debit).strip() != "":
+                if int(debit) < 0:
+                    return False
+            
+            if str(credit).strip() != "":
+                if int(credit) < 0:
+                    return False
+            
+            return True
+        except:
+            return False
     # T ACCOUNTS

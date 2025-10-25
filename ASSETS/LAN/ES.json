@@ -106,6 +106,9 @@
   "economy_credit": "- Credito: ",
   "economy_day": "Día:",
   "economy_month": "Mes:",
+  "ok_economy_save_report":"Reporte economico guardado con exito.",
+  "error_economy_report_save": "No fue posible guardar el reporte economico por que cotiene erres.",
+  "error_economy_report_save_no_info": "No hay información para guardar en el reporte economico.",
   "economy_options":[
     "Cuentas T",
     "Trabajo",

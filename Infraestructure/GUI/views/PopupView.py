@@ -19,7 +19,7 @@ class PopupView(Screen):
         self.window.geometry(f"{x}x{y}")
         self.window.resizable(False, False)
 
-        Message = tk.Text(self.window, width=55, height=13)
+        Message = tk.Text(self.window, width=55, height=13, wrap="word")
         Message.insert(tk.END, self.message)
         Message.place(x=25, y=20)
 
