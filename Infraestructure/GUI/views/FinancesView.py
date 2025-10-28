@@ -17,6 +17,7 @@ class FinancesView(Screen):
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         self.lang = self.manager.controller.dependencies["lang"]
         self.usageService = self.manager.controller.dependencies["usage_service"]
+        self.stringProcesor = self.manager.controller.utils["string_procesor"]
         lblTitle = tk.Label(self.canvas, text=self.lang.getText("economy_title"))
         lblTitle.place(x=self._w*0.38, y=self._h*0.05)
         _options = self.lang.getText("economy_options")
@@ -50,7 +51,7 @@ class FinancesView(Screen):
             print("Ahorros")
         if opt == _options[3]:
             self.deleteOption()
-            print("Deudas y Compromisos")
+            self.drawDebitsOption()
         if opt == _options[4]:
             self.deleteOption()
             print("Resumenes")
@@ -221,3 +222,106 @@ class FinancesView(Screen):
         except:
             return False
     # T ACCOUNTS
+
+    # DEBITS
+    def drawDebitsOption(self):
+        debitArrayItems = []
+        btnNewDebit = tk.Button(self.canvas, text=self.lang.getText("debit_btn_new_debit"), command=lambda: self.drawNewDebit(debitArrayItems))
+        self._tempCurrentElementsOptions.append(btnNewDebit)
+        btnNewDebit.place(x=self._w * 0.36, y=self._h * 0.3)
+
+        btnHistoryDebit = tk.Button(self.canvas, text=self.lang.getText("debit_history"), command=lambda: self.drawDebitHistory(debitArrayItems))
+        self._tempCurrentElementsOptions.append(btnHistoryDebit)
+        btnHistoryDebit.place(x=self._w * 0.5, y=self._h * 0.3)
+
+
+    def drawNewDebit(self, debitArrayItems):
+        self.deleteDisplayedDrawOption(debitArrayItems)
+
+        lblDebitTile = tk.Label(self.canvas, text=self.lang.getText("debit_main_title"))
+        debitArrayItems.append(lblDebitTile)
+        lblDebitTile.place(x=self._w * 0.06, y=self._h * 0.42)
+        lblAmounth = tk.Label(self.canvas, text=self.lang.getText("debit_amount"))
+        debitArrayItems.append(lblAmounth)
+        lblAmounth.place(x=self._w * 0.06, y=self._h * 0.47)
+        txtAmounth = tk.Entry(self.canvas, width=15)
+        debitArrayItems.append(txtAmounth)
+        txtAmounth.place(x=self._w * 0.14, y=self._h * 0.473)
+        lblDebitInterest = tk.Label(self.canvas, text=self.lang.getText("debit_interest"))
+        debitArrayItems.append(lblDebitInterest)
+        lblDebitInterest.place(x=self._w * 0.33, y=self._h * 0.47)
+        txtDebitInterest = tk.Entry(self.canvas, width=6)
+        debitArrayItems.append(txtDebitInterest)
+        txtDebitInterest.place(x=self._w * 0.46, y=self._h * 0.473)
+        lblDeadLine = tk.Label(self.canvas, text=self.lang.getText("debit_deathline"))
+        debitArrayItems.append(lblDeadLine)
+        lblDeadLine.place(x=self._w * 0.58, y=self._h * 0.47)
+        txtDeadLine  = tk.Entry(self.canvas, width=18)
+        debitArrayItems.append(txtDeadLine)
+        txtDeadLine.place(x=self._w * 0.77, y=self._h * 0.473) 
+        lblDebitDescription = tk.Label(self.canvas, text=self.lang.getText("debit_description"))
+        debitArrayItems.append(lblDebitDescription)
+        lblDebitDescription.place(x=self._w * 0.06, y=self._h * 0.54)
+        txtDebitDescription = tk.Text(self.canvas, width=73, height=3, wrap="word")
+        debitArrayItems.append(txtDebitDescription)
+        txtDebitDescription.place(x=self._w * 0.06, y=self._h * 0.59)
+
+        btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveDebit(txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription))
+        self._tempCurrentElementsOptions.append(btnSave)
+        btnSave.place(x=self._w * 0.44, y=self._h * 0.69)
+
+    def drawDebitHistory(self, debitArrayItems):
+        self.deleteDisplayedDrawOption(debitArrayItems)
+
+    def deleteDisplayedDrawOption(self, debitArrayItems):
+        for widget in debitArrayItems:
+            widget.destroy()
+        debitArrayItems.clear()
+
+    def saveDebit(self, txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription):
+        _amounth = txtAmounth.get()
+        _debitInterest = txtDebitInterest.get()
+        _deadLine = txtDeadLine.get()
+        _description = txtDebitDescription.get("1.0", tk.END)
+
+        if self.validateDebitFields(_amounth, _debitInterest, _deadLine, _description):
+            _path = self.manager.controller.pathController.getPathByCODE("ECONOMY_DEBIT_CURRENT_YYYY")
+            _timeStamp = str(self.manager.controller.utils["time_util"].getTimeStamp())
+            _currentTime = str(self.manager.controller.utils["time_util"].getCurrentHHMMSS()).replace(":", " ")
+            _path = F"{_path}{_timeStamp} {_currentTime}.csv"
+
+            _description = str(_description).replace("\n", " ")
+            _debit_states = self.lang.getText("debit_states")
+            data = f"{_amounth}|{_debitInterest}|{_deadLine}|{_description}|{_debit_states[0]}"
+
+            _status = self.manager.controller.dependencies["debit_use_case_save_report"].execute(_path, data)
+
+            if _status:
+                PopupView(self.master, self.manager, self.lang.getText("ok_economy_save_report"), "SAVE").render(500, 300)
+                _path = self.manager.controller.pathController.getPathByCODE("USAGES")
+                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-debit.txt"
+                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                self.usageService.save_usage(_path, _data)
+            else:
+                PopupView(self.master, self.manager, self.lang.getText("error_debit_save_app"), "ERROR").render(500, 300)
+        else:
+            PopupView(self.master, self.manager, self.lang.getText("error_debit_save"), "ERROR").render(500, 300)
+
+    def validateDebitFields(self, txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription):
+        try:
+            if int(txtAmounth) <= 0:
+                return False
+            
+            if int(txtDebitInterest) < 0 or int(txtDebitInterest) > 100:
+                return False
+            
+            if not self.stringProcesor.validateTXT(txtDebitDescription):
+                return False
+            
+            if not self.stringProcesor.validateTXT(txtDeadLine):
+                return False
+
+            return True
+        except:
+            return False
+    # DEBITS

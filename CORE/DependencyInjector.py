@@ -12,6 +12,7 @@ from Infraestructure.Repositories.FeelingRepository import FeelingRepository
 from Infraestructure.Repositories.DreamRepository import FileDreamRepository
 from Infraestructure.Repositories.DrugRepository import DrugRepository
 from Infraestructure.Repositories.EconomyRepository import FileEconomyRepository
+from Infraestructure.Repositories.FileDebitRepository import FileDebitRepository
 #Services
 from Infraestructure.Services.DiaryService import DiaryService
 from Infraestructure.Services.UsageService import UsageService
@@ -19,6 +20,7 @@ from Infraestructure.Services.FeelingService import FeelingService
 from Infraestructure.Services.DreamService import DreamService
 from Infraestructure.Services.DrugService import DrugService
 from Infraestructure.Services.EconomyService import EconomyService
+from Infraestructure.Services.DebitService import DebitService
 #Use Cases
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 from Infraestructure.UseCases.loadDiaryPage import LoadDiaryPage
@@ -27,6 +29,7 @@ from Infraestructure.UseCases.SaveDreamPage import SaveDreamPage
 from Infraestructure.UseCases.LoadDreamPage import LoadDreamPage
 from Infraestructure.UseCases.SaveDrugUsage import SaveDrugUsage
 from Infraestructure.UseCases.SaveEconomyTAccountReport import SaveEconomyTAccountReport
+from Infraestructure.UseCases.SaveDebitReport import SaveDebitReport
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -49,6 +52,7 @@ class DependencyInjector:
         dream_repo = FileDreamRepository()
         drug_repo = DrugRepository()
         economy_repo = FileEconomyRepository()
+        debit_repo = FileDebitRepository()
         # END REPOSITORIES
 
         # SERVICES
@@ -58,6 +62,7 @@ class DependencyInjector:
         dream_service = DreamService(dream_repo)
         drug_service = DrugService(drug_repo)
         economy_service = EconomyService(economy_repo)
+        debit_service = DebitService(debit_repo)
         # END SERVICES
 
         # USECASES
@@ -68,6 +73,7 @@ class DependencyInjector:
         dream_use_case_load_dream = LoadDreamPage(dream_service)
         drug_use_case_save_usage = SaveDrugUsage(drug_service)
         economy_use_case_save_taccount = SaveEconomyTAccountReport(economy_service)
+        debit_use_case_save_report = SaveDebitReport(debit_service)
         # END USECASES
         
         return {
@@ -79,6 +85,7 @@ class DependencyInjector:
             "feeling_use_case_save": feeling_use_case_save,
             "drug_use_case_save_usage": drug_use_case_save_usage,
             "economy_use_case_save_taccount": economy_use_case_save_taccount,
+            "debit_use_case_save_report": debit_use_case_save_report,
             "config": configManager,
             "lang": languageManager
             #...

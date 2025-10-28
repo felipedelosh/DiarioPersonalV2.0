@@ -116,5 +116,18 @@
     "Deudas y Compromisos",
     "Resumenes",
     "Buscar"
+  ],
+  "debit_main_title":"Registar una nueva deuda: ",
+  "debit_btn_new_debit": "Nueva Deuda",
+  "debit_history": "Historial",
+  "debit_amount":"Monto: ",
+  "debit_interest": "Intereses (%): ",
+  "debit_deathline": "Fecha limite de pago:",
+  "debit_description": "Motivo de la deuda: ",
+  "error_debit_save": "No fue posible guardar la deuda por que contiene errores.",
+  "error_debit_save_app": "Hubo un error al tratar de guardar el reporte económco.",
+  "debit_states": [
+    "pendiente",
+    "pagada"
   ]
 }

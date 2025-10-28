@@ -20,5 +20,7 @@ class PathController:
             return f"{self.path}\\DATA\\DRUGS\\{self.timeUtil.getCurrentYYYY()}\\"
         elif code == "ECONOMY_TACCOUNTS_CURRENT_YYYY":
             return f"{self.path}\\DATA\\ECONOMIA\\{self.timeUtil.getCurrentYYYY()}\\"
+        elif code == "ECONOMY_DEBIT_CURRENT_YYYY":
+            return f"{self.path}\\DATA\\ECONOMIA\\DEBITOS\\{self.timeUtil.getCurrentYYYY()}\\"
         elif code == "USAGES":
             return f"{self.path}\\DATA\\USOS\\"

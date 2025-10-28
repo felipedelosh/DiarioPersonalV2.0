@@ -31,6 +31,8 @@ class FolderController:
             "DATA\\ECONOMIA",
             f"DATA\\ECONOMIA\\{self.timeUtil.getCurrentYYYY()}",
             "DATA\\ECONOMIA\\CAJA",
+            "DATA\\ECONOMIA\\DEBITOS",
+            f"DATA\\ECONOMIA\\DEBITOS\\{self.timeUtil.getCurrentYYYY()}",
             "DATA\\DISTRIBUCIONTIEMPO",
             "DATA\\DISTRIBUCIONTIEMPO\\TIEMPODIARIO",
             f"DATA\\DISTRIBUCIONTIEMPO\\TIEMPODIARIO\\{self.timeUtil.getCurrentYYYY()}",
