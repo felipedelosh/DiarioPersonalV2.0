@@ -90,7 +90,7 @@ class FinancesView(Screen):
         cmbxNrDays = ttk.Combobox(self.canvas, state='readonly', width=4)
         self._tempCurrentElementsOptions.append(cmbxNrDays)
         cmbxNrDays['values'] = [x for x in range(1, self.manager.controller.utils["time_util"].getNumberOfDaysInXMM(_currentMM - 1) + 1)]
-        cmbxNrDays.current(_currentDD)
+        cmbxNrDays.current(_currentDD-1)
         cmbxNrDays.place(x=self._w * 0.15, y=self._h * 0.9)
         lblMonth = tk.Label(self.canvas, text=self.lang.getText("economy_month"))
         self._tempCurrentElementsOptions.append(lblMonth)
