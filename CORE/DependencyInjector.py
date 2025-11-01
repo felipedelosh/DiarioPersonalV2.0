@@ -30,6 +30,7 @@ from Infraestructure.UseCases.LoadDreamPage import LoadDreamPage
 from Infraestructure.UseCases.SaveDrugUsage import SaveDrugUsage
 from Infraestructure.UseCases.SaveEconomyTAccountReport import SaveEconomyTAccountReport
 from Infraestructure.UseCases.SaveDebitReport import SaveDebitReport
+from Infraestructure.UseCases.loadAllDebitsPeerYear import LoadAllDebitsPeerYear
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -74,6 +75,7 @@ class DependencyInjector:
         drug_use_case_save_usage = SaveDrugUsage(drug_service)
         economy_use_case_save_taccount = SaveEconomyTAccountReport(economy_service)
         debit_use_case_save_report = SaveDebitReport(debit_service)
+        debit_use_case_load_all_debits_peer_year = LoadAllDebitsPeerYear(debit_service)
         # END USECASES
         
         return {
@@ -86,6 +88,7 @@ class DependencyInjector:
             "drug_use_case_save_usage": drug_use_case_save_usage,
             "economy_use_case_save_taccount": economy_use_case_save_taccount,
             "debit_use_case_save_report": debit_use_case_save_report,
+            "debit_use_case_load_all_debits_peer_year": debit_use_case_load_all_debits_peer_year,
             "config": configManager,
             "lang": languageManager
             #...

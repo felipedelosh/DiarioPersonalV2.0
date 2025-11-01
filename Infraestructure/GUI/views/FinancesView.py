@@ -228,11 +228,15 @@ class FinancesView(Screen):
         debitArrayItems = []
         btnNewDebit = tk.Button(self.canvas, text=self.lang.getText("debit_btn_new_debit"), command=lambda: self.drawNewDebit(debitArrayItems))
         self._tempCurrentElementsOptions.append(btnNewDebit)
-        btnNewDebit.place(x=self._w * 0.36, y=self._h * 0.3)
+        btnNewDebit.place(x=self._w * 0.26, y=self._h * 0.3)
 
-        btnHistoryDebit = tk.Button(self.canvas, text=self.lang.getText("debit_history"), command=lambda: self.drawDebitHistory(debitArrayItems))
+        btnDebitPayment = tk.Button(self.canvas, text=self.lang.getText("debit_btn_debit_payment"), command=lambda: self.drawDebitPayments(debitArrayItems))
+        self._tempCurrentElementsOptions.append(btnDebitPayment)
+        btnDebitPayment.place(x=self._w * 0.42, y=self._h * 0.3)
+
+        btnHistoryDebit = tk.Button(self.canvas, text=self.lang.getText("debit_btn_debit_history"), command=lambda: self.drawDebitHistory(debitArrayItems))
         self._tempCurrentElementsOptions.append(btnHistoryDebit)
-        btnHistoryDebit.place(x=self._w * 0.5, y=self._h * 0.3)
+        btnHistoryDebit.place(x=self._w * 0.6, y=self._h * 0.3)
 
 
     def drawNewDebit(self, debitArrayItems):
@@ -268,7 +272,46 @@ class FinancesView(Screen):
 
         btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveDebit(txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription))
         self._tempCurrentElementsOptions.append(btnSave)
+        debitArrayItems.append(btnSave)
         btnSave.place(x=self._w * 0.44, y=self._h * 0.69)
+
+    def drawDebitPayments(self, debitArrayItems):
+        self.deleteDisplayedDrawOption(debitArrayItems)
+
+        lblSelectYYY = tk.Label(self.canvas, text=self.lang.getText("debit_payments_select_yyyy"))
+        debitArrayItems.append(lblSelectYYY)
+        lblSelectYYY.place(x=self._w * 0.25, y=self._h * 0.4)
+        cmbxDebitYYYY = ttk.Combobox(self.canvas, state='readonly', width=6)
+        debitArrayItems.append(cmbxDebitYYYY)
+        cmbxDebitYYYY['values'] = ["2025"] # WIP >> NEED USE CASE TO GET USE DEBIT YEARS
+        cmbxDebitYYYY.current(0)
+        cmbxDebitYYYY.place(x=self._w * 0.49, y=self._h * 0.4)
+        btnViewDebitsByYYYY = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self._drawDebitPaymentsDrawDebits(cmbxDebitYYYY, debitArrayItems))
+        debitArrayItems.append(btnViewDebitsByYYYY)
+        btnViewDebitsByYYYY.place(x=self._w * 0.6, y=self._h * 0.395)
+
+    def _drawDebitPaymentsDrawDebits(self, cmbxDebitYYYY, debitArrayItems):
+        # WIP
+        _YYYY = cmbxDebitYYYY.get()
+
+        if not _YYYY:
+            return
+        
+        _path = self.manager.controller.pathController.getPathByCODE("ECONOMY_DEBIT")
+        _debitData = self.manager.controller.dependencies["debit_use_case_load_all_debits_peer_year"].execute(_path, _YYYY)
+
+        if not _debitData["success"]:
+            return
+        
+        _counter = 1
+        for i in _debitData["data"]:
+            lblCounterDebit = tk.Label(self.canvas, text=str(_counter))
+            debitArrayItems.append(lblCounterDebit)
+            
+            print(_debitData["data"][i])
+
+        
+
 
     def drawDebitHistory(self, debitArrayItems):
         self.deleteDisplayedDrawOption(debitArrayItems)
@@ -312,7 +355,7 @@ class FinancesView(Screen):
             if int(txtAmounth) <= 0:
                 return False
             
-            if int(txtDebitInterest) < 0 or int(txtDebitInterest) > 100:
+            if float(txtDebitInterest) < 0 or float(txtDebitInterest) > 100:
                 return False
             
             if not self.stringProcesor.validateTXT(txtDebitDescription):
