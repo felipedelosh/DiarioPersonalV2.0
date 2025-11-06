@@ -306,31 +306,33 @@ class FinancesView(Screen):
         
         _counter = 1
         H = self._h * 0.47
-        dh = H / 7
+        X = self._w * 0.2
+        dh = (H / 7) * 0.8
+        dx = X / 4
 
         lblBannerConter = tk.Label(self.canvas, text=self.lang.getText("text_number"))
         self._tempDebitArrayItems.append(lblBannerConter)
-        lblBannerConter.place(x=self._w * 0.05, y=H)
+        lblBannerConter.place(x=self._w * 0.12, y=H)
 
         lblBannerAmounth = tk.Label(self.canvas, text=self.lang.getText("text_amount"))
         self._tempDebitArrayItems.append(lblBannerAmounth)
-        lblBannerAmounth.place(x=self._w * 0.12, y=H)
+        lblBannerAmounth.place(x=self._w * 0.17, y=H)
 
         lblBannerInterest = tk.Label(self.canvas, text=self.lang.getText("text_interest"))
         self._tempDebitArrayItems.append(lblBannerInterest)
-        lblBannerInterest.place(x=self._w * 0.25, y=H)
+        lblBannerInterest.place(x=self._w * 0.27, y=H)
 
         lblDeathLine = tk.Label(self.canvas, text=self.lang.getText("text_date_limit"))
         self._tempDebitArrayItems.append(lblDeathLine)
-        lblDeathLine.place(x=self._w * 0.36, y=H)
+        lblDeathLine.place(x=self._w * 0.38, y=H)
 
         lblState = tk.Label(self.canvas, text=self.lang.getText("text_status"))
         self._tempDebitArrayItems.append(lblState)
-        lblState.place(x=self._w * 0.49, y=H)
+        lblState.place(x=self._w * 0.53, y=H)
 
         lblActions = tk.Label(self.canvas, text=self.lang.getText("text_actions"))
         self._tempDebitArrayItems.append(lblActions)
-        lblActions.place(x=self._w * 0.62, y=H)
+        lblActions.place(x=self._w * 0.69, y=H)
 
         _debit_actions = self.lang.getText("debit_actions")
 
@@ -343,26 +345,34 @@ class FinancesView(Screen):
 
             lblCounterDebit = tk.Label(self.canvas, text=str(_counter))
             self._tempDebitArrayItems.append(lblCounterDebit)
-            lblCounterDebit.place(x=self._w * 0.05, y= H + (_counter * dh))
+            lblCounterDebit.place(x=self._w * 0.12, y= H + (_counter * dh))
 
             lblAmounthDebit = tk.Label(self.canvas, text=f"${_amounth}")
             self._tempDebitArrayItems.append(lblAmounthDebit)
-            lblAmounthDebit.place(x=self._w * 0.12, y= H + (_counter * dh))
+            lblAmounthDebit.place(x=self._w * 0.17, y= H + (_counter * dh))
 
             lblInterestdebit = tk.Label(self.canvas, text=f"{_interest} %")
             self._tempDebitArrayItems.append(lblInterestdebit)
-            lblInterestdebit.place(x=self._w * 0.25, y= H + (_counter * dh))
+            lblInterestdebit.place(x=self._w * 0.27, y= H + (_counter * dh))
 
             lblDeathLine = tk.Label(self.canvas, text=_deathline)
             self._tempDebitArrayItems.append(lblDeathLine)
-            lblDeathLine.place(x=self._w * 0.36, y= H + (_counter * dh))
+            lblDeathLine.place(x=self._w * 0.38, y= H + (_counter * dh))
 
             lblStatus = tk.Label(self.canvas, text=_status)
             self._tempDebitArrayItems.append(lblStatus)
-            lblStatus.place(x=self._w * 0.49, y= H + (_counter * dh))
-
+            lblStatus.place(x=self._w * 0.53, y= H + (_counter * dh))
+            
+            # WIP: DEBIT ACTIONS
+            _counterDX = 0
             for a in _debit_actions:
-                pass
+                _itterDataButtons = str(a).split(":")
+                _action_code = _itterDataButtons[0]
+                _ico = _itterDataButtons[1]
+                btnAction = tk.Button(self.canvas, text=_ico, command=lambda action=_action_code, counter=_counter: self.on_debit_action(_debitData["data"], action, counter))
+                self._tempDebitArrayItems.append(btnAction)
+                btnAction.place(x=self._w * 0.69 + (dx * _counterDX), y= H + (_counter * dh) - 2)
+                _counterDX = _counterDX + 1
 
             _counter = _counter + 1
 
@@ -403,6 +413,18 @@ class FinancesView(Screen):
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_debit_save"), "ERROR").render(500, 300)
 
+    def on_debit_action(self, debit_data, action, counter):
+        print(debit_data, action, counter)
+
+    def viewDebit(self):
+        print("view")
+
+    def paymentDebit(self):
+        print("payment")
+
+    def payDebit(self):
+        print("pay")
+
     def validateDebitFields(self, txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription):
         try:
             if int(txtAmounth) <= 0:
@@ -420,4 +442,5 @@ class FinancesView(Screen):
             return True
         except:
             return False
+        
     # DEBITS

@@ -139,8 +139,8 @@
     "pagada"
   ],
   "debit_actions": [
-    "👁",
-    "💸",
-    "✅"
+    "view:👁",
+    "payment:💸",
+    "pay:✅"
   ]
 }
