@@ -15,6 +15,7 @@ class FinancesView(Screen):
         self._h =float(self.canvas["height"])
         self.btns = []
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
+        self._tempDebitArrayItems = []
         self.lang = self.manager.controller.dependencies["lang"]
         self.usageService = self.manager.controller.dependencies["usage_service"]
         self.stringProcesor = self.manager.controller.utils["string_procesor"]
@@ -60,6 +61,7 @@ class FinancesView(Screen):
             print("Buscar")
 
     def deleteOption(self):
+        self.deleteDisplayedDrawOption()
         for widget in self._tempCurrentElementsOptions:
             widget.destroy()
         self._tempCurrentElementsOptions.clear()
@@ -225,72 +227,72 @@ class FinancesView(Screen):
 
     # DEBITS
     def drawDebitsOption(self):
-        debitArrayItems = []
-        btnNewDebit = tk.Button(self.canvas, text=self.lang.getText("debit_btn_new_debit"), command=lambda: self.drawNewDebit(debitArrayItems))
+        self._tempDebitArrayItems = []
+        btnNewDebit = tk.Button(self.canvas, text=self.lang.getText("debit_btn_new_debit"), command=lambda: self.drawNewDebit())
         self._tempCurrentElementsOptions.append(btnNewDebit)
         btnNewDebit.place(x=self._w * 0.26, y=self._h * 0.3)
 
-        btnDebitPayment = tk.Button(self.canvas, text=self.lang.getText("debit_btn_debit_payment"), command=lambda: self.drawDebitPayments(debitArrayItems))
+        btnDebitPayment = tk.Button(self.canvas, text=self.lang.getText("debit_btn_debit_payment"), command=lambda: self.drawDebitPayments())
         self._tempCurrentElementsOptions.append(btnDebitPayment)
         btnDebitPayment.place(x=self._w * 0.42, y=self._h * 0.3)
 
-        btnHistoryDebit = tk.Button(self.canvas, text=self.lang.getText("debit_btn_debit_history"), command=lambda: self.drawDebitHistory(debitArrayItems))
+        btnHistoryDebit = tk.Button(self.canvas, text=self.lang.getText("debit_btn_debit_history"), command=lambda: self.drawDebitHistory())
         self._tempCurrentElementsOptions.append(btnHistoryDebit)
         btnHistoryDebit.place(x=self._w * 0.6, y=self._h * 0.3)
 
 
-    def drawNewDebit(self, debitArrayItems):
-        self.deleteDisplayedDrawOption(debitArrayItems)
+    def drawNewDebit(self):
+        self.deleteDisplayedDrawOption()
 
         lblDebitTile = tk.Label(self.canvas, text=self.lang.getText("debit_main_title"))
-        debitArrayItems.append(lblDebitTile)
+        self._tempDebitArrayItems.append(lblDebitTile)
         lblDebitTile.place(x=self._w * 0.06, y=self._h * 0.42)
         lblAmounth = tk.Label(self.canvas, text=self.lang.getText("debit_amount"))
-        debitArrayItems.append(lblAmounth)
+        self._tempDebitArrayItems.append(lblAmounth)
         lblAmounth.place(x=self._w * 0.06, y=self._h * 0.47)
         txtAmounth = tk.Entry(self.canvas, width=15)
-        debitArrayItems.append(txtAmounth)
+        self._tempDebitArrayItems.append(txtAmounth)
         txtAmounth.place(x=self._w * 0.14, y=self._h * 0.473)
         lblDebitInterest = tk.Label(self.canvas, text=self.lang.getText("debit_interest"))
-        debitArrayItems.append(lblDebitInterest)
+        self._tempDebitArrayItems.append(lblDebitInterest)
         lblDebitInterest.place(x=self._w * 0.33, y=self._h * 0.47)
         txtDebitInterest = tk.Entry(self.canvas, width=6)
-        debitArrayItems.append(txtDebitInterest)
+        self._tempDebitArrayItems.append(txtDebitInterest)
         txtDebitInterest.place(x=self._w * 0.46, y=self._h * 0.473)
         lblDeadLine = tk.Label(self.canvas, text=self.lang.getText("debit_deathline"))
-        debitArrayItems.append(lblDeadLine)
+        self._tempDebitArrayItems.append(lblDeadLine)
         lblDeadLine.place(x=self._w * 0.58, y=self._h * 0.47)
         txtDeadLine  = tk.Entry(self.canvas, width=18)
-        debitArrayItems.append(txtDeadLine)
+        self._tempDebitArrayItems.append(txtDeadLine)
         txtDeadLine.place(x=self._w * 0.77, y=self._h * 0.473) 
         lblDebitDescription = tk.Label(self.canvas, text=self.lang.getText("debit_description"))
-        debitArrayItems.append(lblDebitDescription)
+        self._tempDebitArrayItems.append(lblDebitDescription)
         lblDebitDescription.place(x=self._w * 0.06, y=self._h * 0.54)
         txtDebitDescription = tk.Text(self.canvas, width=73, height=3, wrap="word")
-        debitArrayItems.append(txtDebitDescription)
+        self._tempDebitArrayItems.append(txtDebitDescription)
         txtDebitDescription.place(x=self._w * 0.06, y=self._h * 0.59)
 
         btnSave = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveDebit(txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription))
         self._tempCurrentElementsOptions.append(btnSave)
-        debitArrayItems.append(btnSave)
+        self._tempDebitArrayItems.append(btnSave)
         btnSave.place(x=self._w * 0.44, y=self._h * 0.69)
 
-    def drawDebitPayments(self, debitArrayItems):
-        self.deleteDisplayedDrawOption(debitArrayItems)
+    def drawDebitPayments(self):
+        self.deleteDisplayedDrawOption()
 
         lblSelectYYY = tk.Label(self.canvas, text=self.lang.getText("debit_payments_select_yyyy"))
-        debitArrayItems.append(lblSelectYYY)
+        self._tempDebitArrayItems.append(lblSelectYYY)
         lblSelectYYY.place(x=self._w * 0.25, y=self._h * 0.4)
         cmbxDebitYYYY = ttk.Combobox(self.canvas, state='readonly', width=6)
-        debitArrayItems.append(cmbxDebitYYYY)
+        self._tempDebitArrayItems.append(cmbxDebitYYYY)
         cmbxDebitYYYY['values'] = ["2025"] # WIP >> NEED USE CASE TO GET USE DEBIT YEARS
         cmbxDebitYYYY.current(0)
         cmbxDebitYYYY.place(x=self._w * 0.49, y=self._h * 0.4)
-        btnViewDebitsByYYYY = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self._drawDebitPaymentsDrawDebits(cmbxDebitYYYY, debitArrayItems))
-        debitArrayItems.append(btnViewDebitsByYYYY)
+        btnViewDebitsByYYYY = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self._drawDebitPaymentsDrawDebits(cmbxDebitYYYY))
+        self._tempDebitArrayItems.append(btnViewDebitsByYYYY)
         btnViewDebitsByYYYY.place(x=self._w * 0.6, y=self._h * 0.395)
 
-    def _drawDebitPaymentsDrawDebits(self, cmbxDebitYYYY, debitArrayItems):
+    def _drawDebitPaymentsDrawDebits(self, cmbxDebitYYYY):
         # WIP
         _YYYY = cmbxDebitYYYY.get()
 
@@ -306,20 +308,20 @@ class FinancesView(Screen):
         _counter = 1
         for i in _debitData["data"]:
             lblCounterDebit = tk.Label(self.canvas, text=str(_counter))
-            debitArrayItems.append(lblCounterDebit)
+            self._tempDebitArrayItems.append(lblCounterDebit)
             
             print(_debitData["data"][i])
 
         
 
 
-    def drawDebitHistory(self, debitArrayItems):
-        self.deleteDisplayedDrawOption(debitArrayItems)
+    def drawDebitHistory(self):
+        self.deleteDisplayedDrawOption()
 
-    def deleteDisplayedDrawOption(self, debitArrayItems):
-        for widget in debitArrayItems:
+    def deleteDisplayedDrawOption(self):
+        for widget in self._tempDebitArrayItems:
             widget.destroy()
-        debitArrayItems.clear()
+        self._tempDebitArrayItems.clear()
 
     def saveDebit(self, txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription):
         _amounth = txtAmounth.get()
