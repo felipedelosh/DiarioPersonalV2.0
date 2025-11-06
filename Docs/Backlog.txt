@@ -20,4 +20,5 @@ F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
 S1|Vista de Perfil|Configuración de usuario (nombre, foto, preferencias).|🟢|NO
 S2|Vista de Ayuda|Mostrar guía rápida del sistema.|🟡|NO
 H1|Debitos|Todo debido al guardarse tiene que tener un identificador UUII|🔴|NO
-H2|Acciones Debitos|Todos las acciones del historial de deudas deben habilitarse|🔴|NO
+H2|Acciones Debitos|Todos las acciones del abono de deudas deben habilitarse|🔴|NO
+H3|Acciones Debitos|Paginar y aplicar paginación|🟡|NO
