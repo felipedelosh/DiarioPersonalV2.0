@@ -33,9 +33,15 @@
   "error_diary_page_insert_title": "Error. Se necesita insertar un título para la página del diario.",
   "ok_diary_page_save": "Se ha guardado con exito.",
   "error_diary_page_save": "No fue posible guardar la información.",
+  "text_actions": "Acciones",
   "text_button_save": "Guardar",
   "text_button_load": "Cargar",
   "text_button_search": "Buscar",
+  "text_number": "Nr.",
+  "text_amount": "Monto",
+  "text_interest": "Interés (%)",
+  "text_date_limit": "Fecha Límite",
+  "text_status": "Estado",
   "title_feelings": "Registro diario de sentimientos",
   "help_feelings": "Ingresa aquí como te sentiste hoy: ",
   "ok_feelings_not_feel": "Se ha guardado su sentimiento correctamente.",
@@ -131,5 +137,10 @@
   "debit_states": [
     "pendiente",
     "pagada"
+  ],
+  "debit_actions": [
+    "👁",
+    "💸",
+    "✅"
   ]
 }
