@@ -338,10 +338,10 @@ class FinancesView(Screen):
 
         for i in _debitData["data"]:
             itterData = str(_debitData["data"][i]).split("|")
-            _amounth = itterData[0]
-            _interest = itterData[1]
-            _deathline = itterData[2]
-            _status = itterData[4]
+            _amounth = itterData[1]
+            _interest = itterData[2]
+            _deathline = itterData[3]
+            _status = itterData[5]
 
             lblCounterDebit = tk.Label(self.canvas, text=str(_counter))
             self._tempDebitArrayItems.append(lblCounterDebit)
