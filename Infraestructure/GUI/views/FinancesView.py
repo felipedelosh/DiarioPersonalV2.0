@@ -424,10 +424,34 @@ class FinancesView(Screen):
             self.paymentDebit(debit_data, UUID)
         elif action == _debit_actions[2]:
             self.payDebit(debit_data, UUID)
-
     def viewDebit(self, debit_data, UUID):
-        print(debit_data)
-        print(UUID)
+        filename, value = (lambda data, uuid: next(((k, v) for k, v in data.items() if v.startswith(uuid)), (None, None)))(debit_data, UUID)
+        
+        if filename and value:
+            _template = self.lang.getText("debit_view_template")
+            _data = str(value).split("|")
+            _UUID = _data[0]
+            _debit_value = _data[1]
+            _debit_interest = _data[2]
+
+            _debit_total = _debit_value
+            if float(_debit_interest) > 0:
+                _debit_total = float(_debit_total) * (1 + (float(_debit_interest)/100))
+                _debit_total = round(_debit_total, 2)
+                _debit_total = str(_debit_total)
+
+            _debit_deadline = _data[3]
+            _debit_description = _data[4]
+            _debit_status = _data[5]
+
+            _template = str(_template).replace("<UUID>", _UUID)
+            _template = str(_template).replace("<DEBIT-TOTAL>", _debit_total)
+            _template = str(_template).replace("<DEBIT-AMOUNT>", _debit_value)
+            _template = str(_template).replace("<DEBIT-DESCRIPTION>", _debit_description)
+            _template = str(_template).replace("<DEBIT-INTEREST>", _debit_interest)
+            _template = str(_template).replace("<DEBIT-LIMIT>", _debit_deadline)
+
+            PopupView(self.master, self.manager, _template, f"DEBIT: {_debit_status}").render(500, 300)
 
     def paymentDebit(self, debit_data, UUID):
         print("payment")
