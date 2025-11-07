@@ -338,6 +338,7 @@ class FinancesView(Screen):
 
         for i in _debitData["data"]:
             itterData = str(_debitData["data"][i]).split("|")
+            UUID = itterData[0]
             _amounth = itterData[1]
             _interest = itterData[2]
             _deathline = itterData[3]
@@ -369,7 +370,7 @@ class FinancesView(Screen):
                 _itterDataButtons = str(a).split(":")
                 _action_code = _itterDataButtons[0]
                 _ico = _itterDataButtons[1]
-                btnAction = tk.Button(self.canvas, text=_ico, command=lambda action=_action_code, counter=_counter: self.on_debit_action(_debitData["data"], action, counter))
+                btnAction = tk.Button(self.canvas, text=_ico, command=lambda action=_action_code, UUID=UUID: self.on_debit_action(_debitData["data"], action, UUID))
                 self._tempDebitArrayItems.append(btnAction)
                 btnAction.place(x=self._w * 0.69 + (dx * _counterDX), y= H + (_counter * dh) - 2)
                 _counterDX = _counterDX + 1
@@ -413,17 +414,28 @@ class FinancesView(Screen):
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_debit_save"), "ERROR").render(500, 300)
 
-    def on_debit_action(self, debit_data, action, counter):
-        print(debit_data, action, counter)
+    def on_debit_action(self, debit_data, action, UUID):
+        _debit_actions = self.lang.getText("debit_actions")
+        _debit_actions = [str(x).split(":")[0] for x in _debit_actions]
 
-    def viewDebit(self):
-        print("view")
+        if action == _debit_actions[0]:
+            self.viewDebit(debit_data, UUID)
+        elif action == _debit_actions[1]:
+            self.paymentDebit(debit_data, UUID)
+        elif action == _debit_actions[2]:
+            self.payDebit(debit_data, UUID)
 
-    def paymentDebit(self):
+    def viewDebit(self, debit_data, UUID):
+        print(debit_data)
+        print(UUID)
+
+    def paymentDebit(self, debit_data, UUID):
         print("payment")
+        print(UUID)
 
-    def payDebit(self):
+    def payDebit(self, debit_data, UUID):
         print("pay")
+        print(UUID)
 
     def validateDebitFields(self, txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription):
         try:
