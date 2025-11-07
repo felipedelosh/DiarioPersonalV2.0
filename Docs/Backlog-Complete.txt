@@ -6,3 +6,6 @@ I3|Gestor de Idiomas|Soporte de textos en diferentes idiomas (LanguageManager).|
 I4|Inyector de Dependencias Global|Acceso centralizado a repositorios, servicios y utils.|🟢|SI
 I5|Gestor de Carpetas|Crear automáticamente carpetas por año/mes para organizar entradas.|🟢|SI
 D5|Vista de Sentimientos|Registro rápido de emociones (ej: feliz, triste, ansioso).|🟢|SI
+E1|Vista de Cuentas T|Registrar cuentas bancarias y movimientos.|🟡|SI
+D1|Vista de Diario|Permitir escribir, editar y guardar páginas.|🟢|SI
+H1|Debitos|Todo debito al guardarse tiene que tener un identificador UUII|🔴|SI

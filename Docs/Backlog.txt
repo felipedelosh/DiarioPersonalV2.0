@@ -1,5 +1,4 @@
 ID|Tarea|Descripción|Prioridad|COMPLETADA
-D1|Vista de Diario|Permitir escribir, editar y guardar páginas.|🟢|NO
 D2|Vista de Sueños|Registrar sueños con fecha y etiquetas.|🟡|NO
 D3|Vista de Amigos|Lista de amigos, registrar notas relacionadas.|🟡|NO
 D4|Vista de Notas|Crear notas rápidas no relacionadas con el diario.|🟢|NO
@@ -7,7 +6,6 @@ D6|Vista de Drogas|Registrar consumo, tipo y cantidad.|🟡|NO
 C1|Vista de Calendario|Mostrar calendario con días destacados.|🟢|NO
 C2|Registrar Día de Hoy|Crear entrada rápida asociada al día actual.|🟢|NO
 C3|Vista de Horario|Crear un horario con actividades recurrentes.|🟡|NO
-E1|Vista de Cuentas T|Registrar cuentas bancarias y movimientos.|🟡|NO
 E2|Vista de Ahorros|Registrar metas y ahorro acumulado.|🟡|NO
 E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
 E4|Vista de Buscar|Búsqueda global en entradas, notas y finanzas.|🟢|NO
@@ -19,6 +17,5 @@ G5|Gráfica Tiempo de Vida|Mostrar visualización de edad/vida.|🔴|NO
 F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
 S1|Vista de Perfil|Configuración de usuario (nombre, foto, preferencias).|🟢|NO
 S2|Vista de Ayuda|Mostrar guía rápida del sistema.|🟡|NO
-H1|Debitos|Todo debido al guardarse tiene que tener un identificador UUII|🔴|NO
 H2|Acciones Debitos|Todos las acciones del abono de deudas deben habilitarse|🔴|NO
 H3|Acciones Debitos|Paginar y aplicar paginación|🟡|NO
