@@ -41,8 +41,12 @@ DiarioPersonalV2.0/
 
 ## :hammer:Funtions:
 
-- `Function 1`: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet.<br>
-- `Function 2`: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet.<br>
+- `Function 0`: Secure data via .env<br>
+- `Function 1.0`: Save and Load Diary Pages with Enigma Encryp.<br>
+- `Function 1.1`: Save and Load Dream Pages.<br>
+- `Function 1.4`: Save feelings (emotions) peer day.<br>
+- `Function 1.4`: Save drugs usa peer day.<br>
+- `Function 2`: Save and Load monetary envents<br>
 - `Function 3`: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet.<br>
 - `Function 3a`: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet.<br>
 - `Function 4`: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet.<br>
