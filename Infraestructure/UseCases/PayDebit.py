@@ -31,6 +31,10 @@ class PayDebit(IPayDebit):
                     _data = str(itterDebit).split("|")
                     
                     _balance = _data[1]
+
+            # its PAY?
+            if _balance <= 0:
+                return False
             
             _newMainDebit = ""
             _mainDebit = str(_mainDebit).split("|")
