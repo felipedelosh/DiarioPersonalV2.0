@@ -26,3 +26,8 @@ class PathController:
             return f"{self.path}\\DATA\\ECONOMIA\\DEBITOS\\"
         elif code == "USAGES":
             return f"{self.path}\\DATA\\USOS\\"
+        
+    def getPathByCodeAndYYYY(self, code, YYYY):
+        if code == "ECONOMY_DEBIT":
+            return f"{self.getPathByCODE(code)}{YYYY}\\"
+        # ...

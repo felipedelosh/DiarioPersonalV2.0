@@ -42,6 +42,7 @@
   "text_interest": "Interés (%)",
   "text_date_limit": "Fecha Límite",
   "text_status": "Estado",
+  "text_user_cancelled": "Operación cancelada por el usuario",
   "title_feelings": "Registro diario de sentimientos",
   "help_feelings": "Ingresa aquí como te sentiste hoy: ",
   "ok_feelings_not_feel": "Se ha guardado su sentimiento correctamente.",
@@ -132,6 +133,7 @@
   "debit_interest": "Intereses (%): ",
   "debit_deathline": "Fecha limite de pago:",
   "debit_description": "Motivo de la deuda: ",
+  "debit_comment_pay": "pago de deuda",
   "error_debit_save": "No fue posible guardar la deuda por que contiene errores.",
   "error_debit_save_app": "Hubo un error al tratar de guardar el reporte económco.",
   "debit_states": [

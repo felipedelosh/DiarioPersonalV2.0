@@ -15,6 +15,9 @@ class FileDebitRepository(IDebitRepository):
     def save_debit_report(self, path: str, content: str) -> bool:
         return self.file_writer.saveFile(path, content)
     
+    def save_pay_debit_report(self, path: str, content: str) -> bool:
+        return self.file_writer.overWritefile(path, content)
+    
     def get_all_debit_path_report_by_year(self, path: str, YYYY: str) -> Response:
         _path = f"{path}{YYYY}"
         return self.file_reader.getAllFilesInPathByExt(_path, ".csv")

@@ -475,9 +475,25 @@ class FinancesView(Screen):
             user_choice = confirm_view.render(400, 200)
 
             if user_choice:
-                print("SI")
+                _YYYY = str(filename).split(" ")[0]
+                _path = self.manager.controller.pathController.getPathByCodeAndYYYY("ECONOMY_DEBIT", _YYYY)
+                _path = f"{_path}{filename}"
+                _YYYYMMDD = self.manager.controller.utils["time_util"].getTimeStamp()
+                _YYYYMMDD = str(_YYYYMMDD).replace(" ", "/")
+                _statusComment = self.lang.getText("debit_comment_pay")
+                _payState = self.lang.getText("debit_states")[1]
+                _status = self.manager.controller.dependencies["debit_use_case_pay_debit"].execute(_path, value, _YYYYMMDD, _statusComment, _payState)
+
+                if _status:
+                    PopupView(self.master, self.manager, self.lang.getText("ok_economy_save_report"), "UPDATE").render(500, 300)
+                    _path = self.manager.controller.pathController.getPathByCODE("USAGES")
+                    _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-debit.txt"
+                    _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                    self.usageService.save_usage(_path, _data)
+                else:
+                    PopupView(self.master, self.manager, self.lang.getText("error_debit_save_app"), "ERROR").render(500, 300)
             else:
-                print("NO...")
+                PopupView(self.master, self.manager, self.lang.getText("text_user_cancelled"), "Cancel").render(500, 300)
 
     def validateDebitFields(self, txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription):
         try:

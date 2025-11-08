@@ -15,6 +15,15 @@ class FileWriter:
         except:
             return False
         
+    def overWritefile(self, path, content):
+        try:
+            with open(path, "w", encoding="UTF-8") as f:
+                f.write(content)
+
+            return True
+        except:
+            return False
+        
     def saveUsage(self, path, timeData):
         try:
             data = ""
