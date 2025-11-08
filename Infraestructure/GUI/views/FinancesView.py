@@ -346,6 +346,10 @@ class FinancesView(Screen):
             _deathline = itterData[3]
             _status = itterData[5]
 
+            # ONLY RENDER PENDING DEBITS
+            if _status != self.lang.getText("debit_states")[0]:
+                continue
+
             lblCounterDebit = tk.Label(self.canvas, text=str(_counter))
             self._tempDebitArrayItems.append(lblCounterDebit)
             lblCounterDebit.place(x=self._w * 0.12, y= H + (_counter * dh))
