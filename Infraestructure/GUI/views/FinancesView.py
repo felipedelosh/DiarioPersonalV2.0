@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
 from Infraestructure.GUI.views.PopupView import PopupView
+from Infraestructure.GUI.views.PopupConfirmView import PopupConfirmView
 
 class FinancesView(Screen):
     def render(self, x, y):
@@ -458,8 +459,25 @@ class FinancesView(Screen):
         print(UUID)
 
     def payDebit(self, debit_data, UUID):
-        print("pay")
-        print(UUID)
+        filename, value = (lambda data, uuid: next(((k, v) for k, v in data.items() if v.startswith(uuid)), (None, None)))(debit_data, UUID)
+
+        if filename and value:
+            _template = self.lang.getText("debit_pay_template")
+            _data = str(value).split("|")
+            _UUID = _data[0]
+            _debit_value = _data[1]
+            _debit_status = _data[5]
+
+            _template = str(_template).replace("<UUID>", _UUID)
+            _template = str(_template).replace("<DEBIT-TOTAL>", _debit_value)
+
+            confirm_view = PopupConfirmView(self.master, self.manager, _template, f"DEBIT: {_debit_status}")
+            user_choice = confirm_view.render(400, 200)
+
+            if user_choice:
+                print("SI")
+            else:
+                print("NO...")
 
     def validateDebitFields(self, txtAmounth, txtDebitInterest, txtDeadLine, txtDebitDescription):
         try:

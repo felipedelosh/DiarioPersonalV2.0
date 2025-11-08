@@ -143,5 +143,6 @@
     "payment:💸",
     "pay:✅"
   ],
-  "debit_view_template" : "El Reporte <UUID> Por un Valor de $ <DEBIT-TOTAL>:\n\nEl prestamo de <DEBIT-AMOUNT> se realizo por motivo de:\n<DEBIT-DESCRIPTION>\n\ncon un porcentaje de interes de <DEBIT-INTEREST>%\nY debe de cancelarse antes de: <DEBIT-LIMIT>"
+  "debit_view_template" : "El Reporte <UUID> Por un Valor de $ <DEBIT-TOTAL>:\n\nEl prestamo de <DEBIT-AMOUNT> se realizo por motivo de:\n<DEBIT-DESCRIPTION>\n\ncon un porcentaje de interes de <DEBIT-INTEREST>%\nY debe de cancelarse antes de: <DEBIT-LIMIT>",
+  "debit_pay_template" : "ID: <UUID>\nEstá seguro que desea marcar como pagada la Deuda $<DEBIT-TOTAL>?"
 }
