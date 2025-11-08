@@ -338,7 +338,8 @@ class FinancesView(Screen):
         _debit_actions = self.lang.getText("debit_actions")
 
         for i in _debitData["data"]:
-            itterData = str(_debitData["data"][i]).split("|")
+            _data = str(_debitData["data"][i]).split("\n")[0]
+            itterData = str(_data).split("|")
             UUID = itterData[0]
             _amounth = itterData[1]
             _interest = itterData[2]
