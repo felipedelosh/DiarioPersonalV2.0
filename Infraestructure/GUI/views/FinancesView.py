@@ -383,8 +383,14 @@ class FinancesView(Screen):
 
             _counter = _counter + 1
 
+    # DEBITS HISTORY
     def drawDebitHistory(self):
         self.deleteDisplayedDrawOption()
+
+        _path = self.manager.controller.pathController.getPathByCODE("ECONOMY_DEBIT")
+        _data = self.manager.controller.dependencies["debit_use_case_get_all_debits_registered"].execute(_path)
+
+    # DEBITS HISTORY
 
     def deleteDisplayedDrawOption(self):
         for widget in self._tempDebitArrayItems:

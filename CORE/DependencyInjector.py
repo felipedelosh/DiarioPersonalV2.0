@@ -21,6 +21,7 @@ from Infraestructure.Services.DreamService import DreamService
 from Infraestructure.Services.DrugService import DrugService
 from Infraestructure.Services.EconomyService import EconomyService
 from Infraestructure.Services.DebitService import DebitService
+from Infraestructure.Services.FolderService import FolderService
 #Use Cases
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 from Infraestructure.UseCases.loadDiaryPage import LoadDiaryPage
@@ -32,6 +33,8 @@ from Infraestructure.UseCases.SaveEconomyTAccountReport import SaveEconomyTAccou
 from Infraestructure.UseCases.SaveDebitReport import SaveDebitReport
 from Infraestructure.UseCases.loadAllDebitsPeerYear import LoadAllDebitsPeerYear
 from Infraestructure.UseCases.PayDebit import PayDebit
+from Infraestructure.UseCases.GetAllFoldersInPath import GetAllFoldersInPath
+from Infraestructure.UseCases.LoadAllDebitsYearsRegistered import LoadAllDebitsYearsRegistered
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -65,9 +68,11 @@ class DependencyInjector:
         drug_service = DrugService(drug_repo)
         economy_service = EconomyService(economy_repo)
         debit_service = DebitService(debit_repo)
+        folder_service = FolderService()
         # END SERVICES
 
         # USECASES
+        folders_use_case_get_all = GetAllFoldersInPath(folder_service)
         diary_use_case_save_page = SaveDiaryPage(diary_service)
         diary_use_case_load_page = LoadDiaryPage(diary_service)
         feeling_use_case_save = SaveFeeling(feeling_service)
@@ -78,10 +83,12 @@ class DependencyInjector:
         debit_use_case_save_report = SaveDebitReport(debit_service)
         debit_use_case_load_all_debits_peer_year = LoadAllDebitsPeerYear(debit_service)
         debit_use_case_pay_debit = PayDebit(debit_service)
+        debit_use_case_get_all_debits_registered = LoadAllDebitsYearsRegistered(folders_use_case_get_all, debit_use_case_load_all_debits_peer_year)
         # END USECASES
         
         return {
             "usage_service": usage_servide,
+            "folders_use_case_get_all": folders_use_case_get_all,
             "diary_use_case_save_page": diary_use_case_save_page,
             "diary_use_case_load_page": diary_use_case_load_page,
             "dream_use_case_save_dream": dream_use_case_save_dream,
@@ -92,6 +99,7 @@ class DependencyInjector:
             "debit_use_case_save_report": debit_use_case_save_report,
             "debit_use_case_load_all_debits_peer_year": debit_use_case_load_all_debits_peer_year,
             "debit_use_case_pay_debit": debit_use_case_pay_debit,
+            "debit_use_case_get_all_debits_registered": debit_use_case_get_all_debits_registered,
             "config": configManager,
             "lang": languageManager
             #...
