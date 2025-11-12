@@ -40,7 +40,9 @@
   "text_number": "Nr.",
   "text_amount": "Monto",
   "text_interest": "Interés (%)",
+  "text_date": "Fecha",
   "text_date_limit": "Fecha Límite",
+  "text_description": "Descripción",
   "text_status": "Estado",
   "text_user_cancelled": "Operación cancelada por el usuario",
   "title_feelings": "Registro diario de sentimientos",
@@ -146,5 +148,6 @@
     "pay:✅"
   ],
   "debit_view_template" : "El Reporte <UUID> Por un Valor de $ <DEBIT-TOTAL>:\n\nEl prestamo de <DEBIT-AMOUNT> se realizo por motivo de:\n<DEBIT-DESCRIPTION>\n\ncon un porcentaje de interes de <DEBIT-INTEREST>%\nY debe de cancelarse antes de: <DEBIT-LIMIT>",
-  "debit_pay_template" : "ID: <UUID>\nEstá seguro que desea marcar como pagada la Deuda $<DEBIT-TOTAL>?"
+  "debit_pay_template" : "ID: <UUID>\nEstá seguro que desea marcar como pagada la Deuda $<DEBIT-TOTAL>?",
+  "debit_history_main_banner": "Historial de Deudas"
 }
