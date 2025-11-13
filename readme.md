@@ -16,12 +16,12 @@ Nota 01: se advierte que lo escrito aquí no tiene censura alguna.
 ```
 DiarioPersonalV2.0/
 ├── Docs/
-├── Domain/
-│   └── Entities/
 ├── Application/
 │   ├── UseCases/
 │   ├── Services/
 │   └── Repositories/
+├── Domain/
+│   └── Entities/
 ├── Infraestructure/
 │   ├── config/
 │   ├── GUI/
