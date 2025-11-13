@@ -390,7 +390,7 @@ class FinancesView(Screen):
         _path = self.manager.controller.pathController.getPathByCODE("ECONOMY_DEBIT")
         _data = self.manager.controller.dependencies["debit_use_case_get_all_debits_registered"].execute(_path)
 
-        if _data["success"]:
+        if _data["success"] and _data["data"]:
             _counter = 1
             H = self._h * 0.43
             dh = (H / 7) * 0.8
@@ -485,8 +485,7 @@ class FinancesView(Screen):
 
                 _counter = _counter + 1   
         else:
-            # WIP...
-            pass
+            PopupView(self.master, self.manager, self.lang.getText("text_not_find"), "WARNING").render(500, 300)
     # DEBITS HISTORY
 
     def deleteDisplayedDrawOption(self):
