@@ -45,6 +45,7 @@
   "text_description": "Descripción",
   "text_status": "Estado",
   "text_not_find": "No se encontró información.",
+  "text_find_error": "No fue posible cargar la información",
   "text_user_cancelled": "Operación cancelada por el usuario",
   "title_feelings": "Registro diario de sentimientos",
   "help_feelings": "Ingresa aquí como te sentiste hoy: ",

@@ -108,7 +108,7 @@ class FinancesView(Screen):
         self._tempCurrentElementsOptions.append(btnSaveTAccount)
         btnSaveTAccount.place(x=self._w * 0.66, y=self._h * 0.89)
 
-        btnLoadTAccount = tk.Button(self.canvas, text=self.lang.getText("text_button_load"))
+        btnLoadTAccount = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self.getTAccountsByDate(cmbxNrDays, cmbxNrMonth,_itemsDiplayed, _concepts, _debits, _credits))
         self._tempCurrentElementsOptions.append(btnLoadTAccount)
         btnLoadTAccount.place(x=self._w * 0.76, y=self._h * 0.89)
         
@@ -224,6 +224,48 @@ class FinancesView(Screen):
             return True
         except:
             return False
+        
+    def getTAccountsByDate(self, cmbxNrDays, cmbxNrMonth, _itemsDiplayed, _concepts, _debits, _credits):
+        _DD = cmbxNrDays.get()
+        _MM = int(cmbxNrMonth.get())
+        
+        if _DD and _MM:
+            _MM_NAME = self.lang.getText("month_names")[_MM - 1]
+            path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS_CURRENT_YYYY")
+            _find_target = f"{_MM_NAME} {_DD}.csv"
+            _find_target = f"{path}{_find_target}"
+            
+            _data = self.manager.controller.dependencies["economy_use_case_get_taccount"].execute(_find_target)
+
+            if _data["success"] and _data["data"]:
+                key = next(iter(_data["data"]))
+                value = _data["data"][key]
+
+                for i in range(_itemsDiplayed):
+                    _concepts[i].delete(0, tk.END)
+                    _debits[i].delete(0, tk.END)
+                    _credits[i].delete(0, tk.END)
+
+                _counter = 0
+                for itterTAccount in str(value).split("\n"):
+                    _ittTAcc = str(itterTAccount).split(";")
+
+                    _ittTAccConcep = _ittTAcc[0]
+                    _concepts[_counter].delete(0, tk.END)
+                    _concepts[_counter].insert(0, _ittTAccConcep)
+                    _ittTAccCredit = _ittTAcc[1]
+                    _debits[_counter].delete(0, tk.END)
+                    _debits[_counter].insert(0, _ittTAccCredit)
+                    _ittTAccDebit = _ittTAcc[2]
+                    _credits[_counter].delete(0, tk.END)
+                    _credits[_counter].insert(0, _ittTAccDebit)
+
+                    _counter = _counter + 1
+            else:
+                PopupView(self.master, self.manager, self.lang.getText("text_find_error"), "ERROR").render(500, 300)
+
+        else:
+            PopupView(self.master, self.manager, self.lang.getText("text_find_error"), "ERROR").render(500, 300)
     # T ACCOUNTS
 
     # DEBITS

@@ -14,3 +14,6 @@ class FileEconomyRepository(IEconomyRepository):
 
     def save_economy_taccount_report(self, path: str, content: str) -> bool:
         return self.file_writer.saveFile(path, content)
+    
+    def get_economy_taccount_report(self, path: str) -> Response:
+        return self.file_reader.getFileDataFromPath(path)

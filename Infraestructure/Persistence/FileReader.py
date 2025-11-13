@@ -9,6 +9,22 @@ class FileReader:
     def __init__(self):
         pass
 
+    def getFileDataFromPath(self, path):
+        """
+        return response {'path': data}
+        """
+        try:
+            data = self.getTxtDataOfFile(path)
+
+            if not data:
+                return Response.response(False, {}, -1)
+
+            data = {path:data}
+
+            return Response.response(True, data, 1)
+        except:
+            return Response.response(False, {}, -1)
+
     def getFileDataFromKeyword(self, path, keyword):
         """
         Return the first concidence with keyword name of file

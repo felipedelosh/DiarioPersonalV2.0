@@ -35,6 +35,7 @@ from Infraestructure.UseCases.loadAllDebitsPeerYear import LoadAllDebitsPeerYear
 from Infraestructure.UseCases.PayDebit import PayDebit
 from Infraestructure.UseCases.GetAllFoldersInPath import GetAllFoldersInPath
 from Infraestructure.UseCases.LoadAllDebitsYearsRegistered import LoadAllDebitsYearsRegistered
+from Infraestructure.UseCases.GetEconoyTAccountReport import GetEconoyTAccountReport
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -80,6 +81,7 @@ class DependencyInjector:
         dream_use_case_load_dream = LoadDreamPage(dream_service)
         drug_use_case_save_usage = SaveDrugUsage(drug_service)
         economy_use_case_save_taccount = SaveEconomyTAccountReport(economy_service)
+        economy_use_case_get_taccount = GetEconoyTAccountReport(economy_service)
         debit_use_case_save_report = SaveDebitReport(debit_service)
         debit_use_case_load_all_debits_peer_year = LoadAllDebitsPeerYear(debit_service)
         debit_use_case_pay_debit = PayDebit(debit_service)
@@ -96,6 +98,7 @@ class DependencyInjector:
             "feeling_use_case_save": feeling_use_case_save,
             "drug_use_case_save_usage": drug_use_case_save_usage,
             "economy_use_case_save_taccount": economy_use_case_save_taccount,
+            "economy_use_case_get_taccount": economy_use_case_get_taccount,
             "debit_use_case_save_report": debit_use_case_save_report,
             "debit_use_case_load_all_debits_peer_year": debit_use_case_load_all_debits_peer_year,
             "debit_use_case_pay_debit": debit_use_case_pay_debit,
