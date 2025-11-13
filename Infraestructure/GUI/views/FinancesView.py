@@ -402,27 +402,27 @@ class FinancesView(Screen):
 
             lblDebitHistNr = tk.Label(self.canvas, text=self.lang.getText("text_number"))
             self._tempDebitArrayItems.append(lblDebitHistNr)
-            lblDebitHistNr.place(x=self._w * 0.06, y=H)
+            lblDebitHistNr.place(x=self._w * 0.03, y=H)
 
             lblDebitAmount = tk.Label(self.canvas, text=self.lang.getText("text_amount"))
             self._tempDebitArrayItems.append(lblDebitAmount)
-            lblDebitAmount.place(x=self._w * 0.11, y=H)
+            lblDebitAmount.place(x=self._w * 0.07, y=H)
 
             lblDebitInterest = tk.Label(self.canvas, text=self.lang.getText("text_interest"))
             self._tempDebitArrayItems.append(lblDebitInterest)
-            lblDebitInterest.place(x=self._w * 0.22, y=H)
+            lblDebitInterest.place(x=self._w * 0.18, y=H)
 
             lblDebitHistoryDate = tk.Label(self.canvas, text=self.lang.getText("text_date"))
             self._tempDebitArrayItems.append(lblDebitHistoryDate)
-            lblDebitHistoryDate.place(x=self._w * 0.32, y=H)
+            lblDebitHistoryDate.place(x=self._w * 0.28, y=H)
 
             lblDebitDeadLine = tk.Label(self.canvas, text=self.lang.getText("text_date_limit"))
             self._tempDebitArrayItems.append(lblDebitDeadLine)
-            lblDebitDeadLine.place(x=self._w * 0.42, y=H)
+            lblDebitDeadLine.place(x=self._w * 0.38, y=H)
 
             lblDebitDescription = tk.Label(self.canvas, text=self.lang.getText("text_description"))
             self._tempDebitArrayItems.append(lblDebitDescription)
-            lblDebitDescription.place(x=self._w * 0.54, y=H)
+            lblDebitDescription.place(x=self._w * 0.5, y=H)
 
             lblDebitStatus = tk.Label(self.canvas, text=self.lang.getText("text_status"))
             self._tempDebitArrayItems.append(lblDebitStatus)
@@ -431,7 +431,7 @@ class FinancesView(Screen):
             for itterDebit in _data["data"]:
                 itterLblDebitHistNr = tk.Label(self.canvas, text=str(_counter))
                 self._tempDebitArrayItems.append(itterLblDebitHistNr)
-                itterLblDebitHistNr.place(x=self._w * 0.06, y=H + (dh * _counter))
+                itterLblDebitHistNr.place(x=self._w * 0.03, y=H + (dh * _counter))
 
                 _tempMainData = str(_data["data"][itterDebit]).split("\n")
 
@@ -445,7 +445,7 @@ class FinancesView(Screen):
                     _deadDate = _tempData[3]
 
                     _description = _tempData[4]
-                    _max_length = 37
+                    _max_length = 42
                     if len(_description) > _max_length:
                         _description = _description[:_max_length - 3] + "..."
 
@@ -453,23 +453,23 @@ class FinancesView(Screen):
 
                     itterLblDebitAmount = tk.Label(self.canvas, text=f"$ {_amount}")
                     self._tempDebitArrayItems.append(itterLblDebitAmount)
-                    itterLblDebitAmount.place(x=self._w * 0.11, y=H + (dh * _counter))
+                    itterLblDebitAmount.place(x=self._w * 0.07, y=H + (dh * _counter))
 
                     itterLblDebitInterest = tk.Label(self.canvas, text=f"{_interest}%")
                     self._tempDebitArrayItems.append(itterLblDebitInterest)
-                    itterLblDebitInterest.place(x=self._w * 0.22, y=H + (dh * _counter))
+                    itterLblDebitInterest.place(x=self._w * 0.18, y=H + (dh * _counter))
 
                     itterLblDebitHistoryDate = tk.Label(self.canvas, text=_date)
                     self._tempDebitArrayItems.append(itterLblDebitHistoryDate)
-                    itterLblDebitHistoryDate.place(x=self._w * 0.32, y=H + (dh * _counter))
+                    itterLblDebitHistoryDate.place(x=self._w * 0.28, y=H + (dh * _counter))
 
                     itterLblDebitDeadLine = tk.Label(self.canvas, text=_deadDate)
                     self._tempDebitArrayItems.append(itterLblDebitDeadLine)
-                    itterLblDebitDeadLine.place(x=self._w * 0.42, y=H + (dh * _counter))
+                    itterLblDebitDeadLine.place(x=self._w * 0.38, y=H + (dh * _counter))
 
                     itterLblDebitDescription = tk.Label(self.canvas, text=_description)
                     self._tempDebitArrayItems.append(itterLblDebitDescription)
-                    itterLblDebitDescription.place(x=self._w * 0.54, y=H + (dh * _counter))
+                    itterLblDebitDescription.place(x=self._w * 0.5, y=H + (dh * _counter))
 
                     itterLblDebitStatus = tk.Label(self.canvas, text=_status)
                     self._tempDebitArrayItems.append(itterLblDebitStatus)
