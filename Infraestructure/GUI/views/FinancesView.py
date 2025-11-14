@@ -306,7 +306,10 @@ class FinancesView(Screen):
         lblDeadLine = tk.Label(self.canvas, text=self.lang.getText("debit_deathline"))
         self._tempDebitArrayItems.append(lblDeadLine)
         lblDeadLine.place(x=self._w * 0.58, y=self._h * 0.47)
-        txtDeadLine  = tk.Entry(self.canvas, width=18)
+        txtDeadLine  = tk.Entry(self.canvas, width=18, fg="gray")
+        txtDeadLine.insert(0, self.lang.getText("text_format_date"))
+        txtDeadLine.bind("<FocusIn>", lambda e, entry=txtDeadLine: self._clear_placeholder_economy_search_moviments_date(entry))
+        txtDeadLine.bind("<FocusOut>", lambda e, entry=txtDeadLine: self._add_placeholder_economy_search_moviments_date(entry))
         self._tempDebitArrayItems.append(txtDeadLine)
         txtDeadLine.place(x=self._w * 0.77, y=self._h * 0.473) 
         lblDebitDescription = tk.Label(self.canvas, text=self.lang.getText("debit_description"))
@@ -701,7 +704,7 @@ class FinancesView(Screen):
         self._tempCurrentElementsOptions.append(txtDateEnd)
         txtDateEnd.place(x=self._w*0.78, y=self._h*0.32)
 
-        txtSearchResult = tk.Text(self.canvas, width=74, height=18)
+        txtSearchResult = tk.Text(self.canvas, width=74, height=18, wrap="word")
         self._tempCurrentElementsOptions.append(txtSearchResult)
         txtSearchResult.place(x=self._w*0.06, y=self._h*0.44)
 
