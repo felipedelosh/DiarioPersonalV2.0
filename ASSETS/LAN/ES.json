@@ -47,6 +47,9 @@
   "text_not_find": "No se encontró información.",
   "text_find_error": "No fue posible cargar la información",
   "text_user_cancelled": "Operación cancelada por el usuario",
+  "text_init_date": "Fecha Inicio",
+  "text_final_date": "Fecha Final",
+  "text_format_date": "YYYY/MM/DD",
   "title_feelings": "Registro diario de sentimientos",
   "help_feelings": "Ingresa aquí como te sentiste hoy: ",
   "ok_feelings_not_feel": "Se ha guardado su sentimiento correctamente.",
@@ -151,5 +154,7 @@
   ],
   "debit_view_template" : "El Reporte <UUID> Por un Valor de $ <DEBIT-TOTAL>:\n\nEl prestamo de <DEBIT-AMOUNT> se realizo por motivo de:\n<DEBIT-DESCRIPTION>\n\ncon un porcentaje de interes de <DEBIT-INTEREST>%\nY debe de cancelarse antes de: <DEBIT-LIMIT>",
   "debit_pay_template" : "ID: <UUID>\nEstá seguro que desea marcar como pagada la Deuda $<DEBIT-TOTAL>?",
-  "debit_history_main_banner": "Historial de Deudas"
+  "debit_history_main_banner": "Historial de Deudas",
+  "search_economy_main_title": "Buscar Movimientos Economicos",
+  "search_economy_help_text_entry_concept": "Insertar concepto o Descripción"
 }

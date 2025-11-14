@@ -59,7 +59,8 @@ class FinancesView(Screen):
             print("Resumenes")
         if opt == _options[5]:
             self.deleteOption()
-            print("Buscar")
+            self.deleteOption()
+            self.drawSearchOption()
 
     def deleteOption(self):
         self.deleteDisplayedDrawOption()
@@ -663,3 +664,74 @@ class FinancesView(Screen):
             return False
         
     # DEBITS
+
+    # Search
+    def drawSearchOption(self):
+        _itemsDiplayed = 10
+        lblSearchEconomyMoviments = tk.Label(self.canvas, text=self.lang.getText("search_economy_main_title"))
+        self._tempCurrentElementsOptions.append(lblSearchEconomyMoviments)
+        lblSearchEconomyMoviments.place(x=self._w*0.36, y=self._h*0.25)
+
+        txtConcepToSearch = tk.Entry(self.canvas, width=35 ,fg="gray")
+        txtConcepToSearch.insert(0, self.lang.getText("search_economy_help_text_entry_concept"))
+        txtConcepToSearch.bind("<FocusIn>", lambda e, entry=txtConcepToSearch: self._clear_placeholder_economy_search_moviments_concept(entry))
+        txtConcepToSearch.bind("<FocusOut>", lambda e, entry=txtConcepToSearch: self._add_placeholder_economy_search_moviments_concept(entry))
+        self._tempCurrentElementsOptions.append(txtConcepToSearch)
+        txtConcepToSearch.place(x=self._w*0.06, y=self._h*0.32)
+
+        lblDateInit = tk.Label(self.canvas, text=self.lang.getText("text_init_date"))
+        self._tempCurrentElementsOptions.append(lblDateInit)
+        lblDateInit.place(x=self._w*0.4, y=self._h*0.32)
+
+        txtDateInit = tk.Entry(self.canvas, width=14, fg="gray")
+        txtDateInit.insert(0, self.lang.getText("text_format_date"))
+        txtDateInit.bind("<FocusIn>", lambda e, entry=txtDateInit: self._clear_placeholder_economy_search_moviments_date(entry))
+        txtDateInit.bind("<FocusOut>", lambda e, entry=txtDateInit: self._add_placeholder_economy_search_moviments_date(entry))
+        self._tempCurrentElementsOptions.append(txtDateInit)
+        txtDateInit.place(x=self._w*0.52, y=self._h*0.32)
+
+        lblDateEnd = tk.Label(self.canvas, text=self.lang.getText("text_final_date"))
+        self._tempCurrentElementsOptions.append(lblDateEnd)
+        lblDateEnd.place(x=self._w*0.66, y=self._h*0.32)
+
+        txtDateEnd = tk.Entry(self.canvas, width=14, fg="gray")
+        txtDateEnd.insert(0, self.lang.getText("text_format_date"))
+        txtDateEnd.bind("<FocusIn>", lambda e, entry=txtDateEnd: self._clear_placeholder_economy_search_moviments_date(entry))
+        txtDateEnd.bind("<FocusOut>", lambda e, entry=txtDateEnd: self._add_placeholder_economy_search_moviments_date(entry))
+        self._tempCurrentElementsOptions.append(txtDateEnd)
+        txtDateEnd.place(x=self._w*0.78, y=self._h*0.32)
+
+        txtSearchResult = tk.Text(self.canvas, width=74, height=18)
+        self._tempCurrentElementsOptions.append(txtSearchResult)
+        txtSearchResult.place(x=self._w*0.06, y=self._h*0.44)
+
+        btnSearch = tk.Button(self.canvas, text=self.lang.getText("text_button_search"), width=20, command=lambda :self.searchEconomyMoviments(_itemsDiplayed, txtConcepToSearch, txtDateInit, txtDateEnd, txtSearchResult))
+        self._tempCurrentElementsOptions.append(btnSearch)
+        btnSearch.place(x=self._w*0.38, y=self._h*0.38)
+
+    def _clear_placeholder_economy_search_moviments_concept(self, entry):
+        if entry.get() == self.lang.getText("search_economy_help_text_entry_concept"):
+            entry.delete(0, tk.END)
+            entry.config(fg="black")
+    def _add_placeholder_economy_search_moviments_concept(self, entry):
+        if not entry.get():
+            entry.insert(0, self.lang.getText("search_economy_help_text_entry_concept"))
+            entry.config(fg="gray")
+
+    def _clear_placeholder_economy_search_moviments_date(self, entry):
+        if entry.get() == self.lang.getText("text_format_date"):
+            entry.delete(0, tk.END)
+            entry.config(fg="black")
+    def _add_placeholder_economy_search_moviments_date(self, entry):
+        if not entry.get():
+            entry.insert(0, self.lang.getText("text_format_date"))
+            entry.config(fg="gray")
+
+
+    def searchEconomyMoviments(self, itemsDiplayed, txtConcepToSearch, txtDateInit, txtDateEnd, txtSearchResult):
+        _concept = txtConcepToSearch.get()
+        _dateInit = txtDateInit.get()
+        _dateEnd = txtDateEnd.get()
+
+        print(itemsDiplayed, _concept, _dateInit, _dateEnd, txtSearchResult)
+    # Search
