@@ -1,8 +1,6 @@
 ID|Tarea|Descripción|Prioridad|COMPLETADA
-D2|Vista de Sueños|Registrar sueños con fecha y etiquetas.|🟡|NO
 D3|Vista de Amigos|Lista de amigos, registrar notas relacionadas.|🟡|NO
 D4|Vista de Notas|Crear notas rápidas no relacionadas con el diario.|🟢|NO
-D6|Vista de Drogas|Registrar consumo, tipo y cantidad.|🟡|NO
 C1|Vista de Calendario|Mostrar calendario con días destacados.|🟢|NO
 C2|Registrar Día de Hoy|Crear entrada rápida asociada al día actual.|🟢|NO
 C3|Vista de Horario|Crear un horario con actividades recurrentes.|🟡|NO
