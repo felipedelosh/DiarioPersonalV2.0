@@ -736,5 +736,28 @@ class FinancesView(Screen):
         _dateInit = txtDateInit.get()
         _dateEnd = txtDateEnd.get()
 
-        print(itemsDiplayed, _concept, _dateInit, _dateEnd, txtSearchResult)
+        base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY")
+        keyword = ""
+        initDate = ""
+        finalDate = ""
+        
+        if self.stringProcesor.validateTXT(_concept) and _concept != self.lang.getText("search_economy_help_text_entry_concept"):
+            keyword = _concept
+
+        if self.stringProcesor.validateTXT(_dateInit) and _dateInit != self.lang.getText("text_format_date"):
+            initDate = _dateInit
+
+        if self.stringProcesor.validateTXT(_dateEnd) and _dateEnd != self.lang.getText("text_format_date"):
+            finalDate = _dateEnd
+
+        _data = self.manager.controller.dependencies["economy_use_case_get_all_info"].execute(base_path, keyword, initDate, finalDate)
+
+        if _data["success"] and _data["qty"] > 0:
+            txtSearchResult.delete("1.0", "end")
+            
+            txt = ""
+            for itterDataEconomy in _data["data"]:
+                txt = txt + _data["data"][itterDataEconomy] + "\n"
+            
+            txtSearchResult.insert("1.0", txt)
     # Search
