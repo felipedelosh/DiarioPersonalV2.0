@@ -75,9 +75,9 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
                 data[keyWord] = info
 
                 return True
-
+            
+            # DATE|CONCEPT|CASH|TYPE|STATUS
             if "TACCOUNTS" in path:
-                # WIP: Save all With FOR i
                 _controlAdd = 0
                 keyWord = f"TACCOUNT-{keyEconomyMovement}"
                 for itterTAcc in str(EconomyMovement[keyEconomyMovement]).split("\n"):

@@ -757,6 +757,27 @@ class FinancesView(Screen):
             
             txt = ""
             for itterDataEconomy in _data["data"]:
+                _dataSplitted = str(_data["data"][itterDataEconomy]).split("|")
+
+                _type = _dataSplitted[3]
+
+                if _type == "TACCOUNT":
+                    _DATE_TACCOUNT = _dataSplitted[0]
+                    _dateTAccountSplitted = str(_DATE_TACCOUNT).split("/")
+                    YYYY = _dateTAccountSplitted[0]
+                    MM = _dateTAccountSplitted[1]
+                    DD = _dateTAccountSplitted[2]
+
+                    _MM_NUMBER = 1
+                    for itterMName in self.lang.getText("month_names"):
+                        if MM == itterMName:
+                            break
+                        _MM_NUMBER = _MM_NUMBER + 1
+
+                    if _MM_NUMBER != 1:
+                        MM = _MM_NUMBER
+                        _data["data"][itterDataEconomy] = str(_data["data"][itterDataEconomy]).replace(_DATE_TACCOUNT, f"{YYYY}/{MM}/{DD}")
+
                 txt = txt + _data["data"][itterDataEconomy] + "\n"
             
             txtSearchResult.insert("1.0", txt)
