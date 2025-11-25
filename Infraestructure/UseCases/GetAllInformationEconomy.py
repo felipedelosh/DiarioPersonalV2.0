@@ -33,7 +33,7 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
                             continue
 
                         for itterEconomyData in _economyInfoPeerYear["data"]:
-                            process = self.processEconomyInformation(_base_path_economy, YYYY, _data, itterEconomyData, _economyInfoPeerYear["data"])
+                            process = self.processEconomyInformation(_base_path_economy, YYYY, _data, itterEconomyData, _economyInfoPeerYear["data"], keyword)
 
                             if process:
                                 _qty = _qty + 1
@@ -42,7 +42,7 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
         except:
             return Response.response(False, {}, -1)
         
-    def processEconomyInformation(self, path, YYYY, data, keyEconomyMovement, EconomyMovement):
+    def processEconomyInformation(self, path, YYYY, data, keyEconomyMovement, EconomyMovement, keyword):
         try:
             # DATE|CONCEPT|CASH|TYPE|STATUS
             if "DEBITOS" in path:
@@ -60,6 +60,11 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
                 DD = date[2]
                 date = f"{YYYY}/{MM}/{DD}"
                 concept = _dataSplited[4]
+
+                if keyword != "":
+                    if not str(keyword).lower() in str(concept).lower():
+                        return False
+
                 _max_length = 40
                 if len(concept) > _max_length:
                     concept = concept[:_max_length - 3] + "..."
@@ -73,6 +78,7 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
 
             if "TACCOUNTS" in path:
                 # WIP: Save all With FOR i
+                _controlAdd = 0
                 keyWord = f"TACCOUNT-{keyEconomyMovement}"
                 for itterTAcc in str(EconomyMovement[keyEconomyMovement]).split("\n"):
                     _dataSplited = str(itterTAcc).split(";")
@@ -82,6 +88,11 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
                     date = f"{YYYY}/{MM}/{DD}"
 
                     concept = _dataSplited[0]
+
+                    if keyword != "":
+                        if not str(keyword).lower() in str(concept).lower():
+                            continue
+
                     _max_length = 40
                     if len(concept) > _max_length:
                         concept = concept[:_max_length - 3] + "..."
@@ -97,8 +108,9 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
 
                     info = f"{date}|{concept}|{cash}|TACCOUNT|{status}"
                     data[keyWord] = info
+                    _controlAdd = 1
 
-                return True
+                return _controlAdd != 0
 
             return False
         except:
