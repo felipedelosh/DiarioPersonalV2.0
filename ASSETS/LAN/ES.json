@@ -37,6 +37,7 @@
   "text_button_save": "Guardar",
   "text_button_load": "Cargar",
   "text_button_search": "Buscar",
+  "text_ok_to_save": "Guardado con éxito.",
   "text_number": "Nr.",
   "text_amount": "Monto",
   "text_interest": "Interés (%)",
@@ -160,6 +161,8 @@
   "schelude_title": "Bienvenido a tu calendario.",
   "title_schelude": "Registro de Actividades 24Hrs",
   "help_schelude": "Registra aquí que activida haces a cierta hora del día.",
+  "error_schelude_missing_fields": "No es posible guardar la información debido a que hay campos faltantes.",
+  "error_schedule_save_error": "No fue posible guardar el reporte de tiempo 24H debido a un error.",
   "schelude_options": [
     "Calendario",
     "Registro 24H",

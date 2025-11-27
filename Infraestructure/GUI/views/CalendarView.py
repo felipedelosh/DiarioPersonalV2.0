@@ -5,6 +5,7 @@ FelipedelosH
 import tkinter as tk
 from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
+from Infraestructure.GUI.views.PopupView import PopupView
 
 class CalendarView(Screen):
     def render(self, x, y):
@@ -14,6 +15,7 @@ class CalendarView(Screen):
         self._h =float(self.canvas["height"])
         self.btns = []
         self.lang = self.manager.controller.dependencies["lang"]
+        self.usageService = self.manager.controller.dependencies["usage_service"]
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         lblTitle = tk.Label(self.canvas, text=self.lang.getText("schelude_title"))
         lblTitle.place(x=self._w*0.38, y=self._h*0.05)
@@ -92,11 +94,34 @@ class CalendarView(Screen):
 
     def _save24HReport(self, reg24hArr):
         _counter = 0
+        _errs = 0
+
+        _dataToSave = ""
         for itterHH in reg24hArr:
             _HH = self.manager.controller.utils["time_util"].getStrHHByCounter(6, _counter)
             _act = itterHH.get()
-            print(_HH, _act)
+
+            if str(_act).strip() == "":
+                _errs = _errs + 1
+                continue
+
+            _dataToSave = _dataToSave + f"{_HH}:{_act}" + "\n"
 
             _counter = _counter + 1
-        print("===============")
+
+        if not _errs:
+            _path = self.manager.controller.pathController.getPathByCODE("SCHELUDED_24_H_CURRENT_YYYY")
+            _filename = f"{self.manager.controller.utils["time_util"].getTimeStamp()}.txt"
+
+            _reqSave24H = self.manager.controller.dependencies["schedule_use_case_save_24h_report"].execute(f"{_path}{_filename}", _dataToSave)
+            if _reqSave24H:
+                PopupView(self.master, self.manager, self.lang.getText("text_ok_to_save"), "SAVE").render(500, 300)
+                _path = self.manager.controller.pathController.getPathByCODE("USAGES")
+                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-24h.txt"
+                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                self.usageService.save_usage(_path, _data)
+            else:
+                PopupView(self.master, self.manager, self.lang.getText("error_schedule_save_error"), "ERROR").render(500, 300)
+        else:
+            PopupView(self.master, self.manager, self.lang.getText("error_schelude_missing_fields"), "ERROR").render(500, 300)
     #24H
