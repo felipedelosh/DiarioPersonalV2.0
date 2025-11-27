@@ -14,6 +14,7 @@ G3|Gráfica de Drogas|Mostrar total vs días de consumo.|🔴|NO
 G4|Gráfica de Inversión de Tiempo|Mostrar en qué actividades se gasta el tiempo.|🟡|NO
 G5|Gráfica Tiempo de Vida|Mostrar visualización de edad/vida.|🔴|NO
 F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
+I1|Guardar usos en UseCase|Por todo el lado del código hay quemado usageService.save_usage crear un caso de uso donde solo entre path y data|🔴|NO
 S1|Vista de Perfil|Configuración de usuario (nombre, foto, preferencias).|🟢|NO
 S2|Vista de Ayuda|Mostrar guía rápida del sistema.|🟡|NO
 H2|Acciones Debitos|Todos las acciones del abono de deudas deben habilitarse|🔴|NO
