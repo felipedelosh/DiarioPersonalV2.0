@@ -1,7 +1,7 @@
 """
 FelipedelosH
 2025
-This is the main controller to load setting of config\config.json
+This is the main controller to load setting of config/config.json
 """
 import json
 import os
