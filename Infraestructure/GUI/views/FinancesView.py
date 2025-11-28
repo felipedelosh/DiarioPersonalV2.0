@@ -495,16 +495,21 @@ class FinancesView(Screen):
                     _amount = _tempData[1]
                 else:
                     _totalAmount = 0
-
+                    _isFirstRegister = True
                     for itterTempMainData in _tempMainData:
                         _regTempData = str(itterTempMainData).split("|")
                         try:
+                            if _isFirstRegister and float(_interest) > 0:
+                                _totalAmount = float(_regTempData[1]) * (1 + (float(_interest)/100))
+                                _isFirstRegister = False
+                                continue
+
                             _totalAmount = _totalAmount + float(_regTempData[1])
                         except:
                             pass
 
                     _amount = _totalAmount
-                    
+
                 _amount = round(float(_amount), 2)
                 itterLblDebitAmount = tk.Label(self.canvas, text=f"$ {_amount}")
                 self._tempDebitArrayItems.append(itterLblDebitAmount)
