@@ -504,7 +504,8 @@ class FinancesView(Screen):
                             pass
 
                     _amount = _totalAmount
-
+                    
+                _amount = round(float(_amount), 2)
                 itterLblDebitAmount = tk.Label(self.canvas, text=f"$ {_amount}")
                 self._tempDebitArrayItems.append(itterLblDebitAmount)
                 itterLblDebitAmount.place(x=self._w * 0.07, y=H + (dh * _counter))
