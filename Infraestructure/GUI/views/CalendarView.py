@@ -120,8 +120,12 @@ class CalendarView(Screen):
                 _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-24h.txt"
                 _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
                 self.usageService.save_usage(_path, _data)
+                self._clear24HAfterOkSave(reg24hArr)
             else:
                 PopupView(self.master, self.manager, self.lang.getText("error_schedule_save_error"), "ERROR").render(500, 300)
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_schelude_missing_fields"), "ERROR").render(500, 300)
+    def _clear24HAfterOkSave(self, _24HrsRegisterArr):
+        for itterHH in _24HrsRegisterArr:
+            itterHH.set("")
     #24H
