@@ -4,7 +4,6 @@ D4|Vista de Notas|Crear notas rápidas no relacionadas con el diario.|🟢|NO
 C1|Vista de Calendario|Mostrar calendario con días destacados.|🟢|NO
 C2|Registrar Día de Hoy|Crear entrada rápida asociada al día actual.|🟢|NO
 C3|Vista de Horario|Crear un horario con actividades recurrentes.|🟡|NO
-C4|Limpiar la vista 24h|Cuando se guarde un reporte 24h se debe de limpiar en caso de que sea guardado con éxito.|🟢|NO
 E2|Vista de Ahorros|Registrar metas y ahorro acumulado.|🟡|NO
 E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
 E4|Vista de Buscar|Búsqueda global en entradas, notas y finanzas.|🟢|NO
