@@ -142,6 +142,7 @@
   "debit_deathline": "Fecha limite de pago:",
   "debit_description": "Motivo de la deuda: ",
   "debit_comment_pay": "pago de deuda",
+  "ok_debit_payment":"Se ha registrado la deuda como pagada.",
   "error_debit_save": "No fue posible guardar la deuda por que contiene errores.",
   "error_debit_save_app": "Hubo un error al tratar de guardar el reporte económco.",
   "debit_states": [
