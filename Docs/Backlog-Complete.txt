@@ -1,4 +1,5 @@
 ID|Tarea|Descripción|Prioridad|COMPLETADA
+C2|Registrar Día de Hoy|Crear entrada rápida asociada al día actual.|🟢|SI
 C4|Limpiar la vista 24h|Cuando se guarde un reporte 24h se debe de limpiar en caso de que sea guardado con éxito.|🟢|SI
 D2|Vista de Sueños|Registrar sueños con fecha y etiquetas.|🟡|SI
 D6|Vista de Drogas|Registrar consumo, tipo y cantidad.|🟡|SI
