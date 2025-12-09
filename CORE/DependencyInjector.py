@@ -40,6 +40,7 @@ from Infraestructure.UseCases.LoadAllDebitsYearsRegistered import LoadAllDebitsY
 from Infraestructure.UseCases.GetEconoyTAccountReport import GetEconoyTAccountReport
 from Infraestructure.UseCases.GetAllInformationEconomy import GetAllInformationEconomy
 from Infraestructure.UseCases.SaveSchedule24HReport import SaveSchedule24HReport
+from Infraestructure.UseCases.SaveUsage import SaveUsage
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -94,6 +95,7 @@ class DependencyInjector:
         debit_use_case_pay_debit = PayDebit(debit_service)
         debit_use_case_get_all_debits_registered = LoadAllDebitsYearsRegistered(folders_use_case_get_all, debit_use_case_load_all_debits_peer_year)
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
+        usage_use_case_save = SaveUsage()
         # END USECASES
         
         return {
@@ -113,6 +115,7 @@ class DependencyInjector:
             "debit_use_case_pay_debit": debit_use_case_pay_debit,
             "debit_use_case_get_all_debits_registered": debit_use_case_get_all_debits_registered,
             "schedule_use_case_save_24h_report": schedule_use_case_save_24h_report,
+            "usage_use_case_save": usage_use_case_save,
             "config": configManager,
             "lang": languageManager
             #...
