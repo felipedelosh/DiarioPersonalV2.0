@@ -250,19 +250,22 @@ class FinancesView(Screen):
 
                 _counter = 0
                 for itterTAccount in str(value).split("\n"):
-                    _ittTAcc = str(itterTAccount).split(";")
+                    try:
+                        _ittTAcc = str(itterTAccount).split(";")
 
-                    _ittTAccConcep = _ittTAcc[0]
-                    _concepts[_counter].delete(0, tk.END)
-                    _concepts[_counter].insert(0, _ittTAccConcep)
-                    _ittTAccCredit = _ittTAcc[1]
-                    _debits[_counter].delete(0, tk.END)
-                    _debits[_counter].insert(0, _ittTAccCredit)
-                    _ittTAccDebit = _ittTAcc[2]
-                    _credits[_counter].delete(0, tk.END)
-                    _credits[_counter].insert(0, _ittTAccDebit)
+                        _ittTAccConcep = _ittTAcc[0]
+                        _concepts[_counter].delete(0, tk.END)
+                        _concepts[_counter].insert(0, _ittTAccConcep)
+                        _ittTAccCredit = _ittTAcc[1]
+                        _debits[_counter].delete(0, tk.END)
+                        _debits[_counter].insert(0, _ittTAccCredit)
+                        _ittTAccDebit = _ittTAcc[2]
+                        _credits[_counter].delete(0, tk.END)
+                        _credits[_counter].insert(0, _ittTAccDebit)
 
-                    _counter = _counter + 1
+                        _counter = _counter + 1
+                    except:
+                        pass
             else:
                 PopupView(self.master, self.manager, self.lang.getText("text_find_error"), "ERROR").render(500, 300)
 
