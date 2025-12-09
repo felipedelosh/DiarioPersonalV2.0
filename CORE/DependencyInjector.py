@@ -95,11 +95,10 @@ class DependencyInjector:
         debit_use_case_pay_debit = PayDebit(debit_service)
         debit_use_case_get_all_debits_registered = LoadAllDebitsYearsRegistered(folders_use_case_get_all, debit_use_case_load_all_debits_peer_year)
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
-        usage_use_case_save = SaveUsage()
+        usage_use_case_save = SaveUsage(usage_servide)
         # END USECASES
         
         return {
-            "usage_service": usage_servide,
             "folders_use_case_get_all": folders_use_case_get_all,
             "diary_use_case_save_page": diary_use_case_save_page,
             "diary_use_case_load_page": diary_use_case_load_page,

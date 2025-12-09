@@ -17,7 +17,6 @@ class DiaryView(Screen):
         self.is_secret = False
         self.lang = self.manager.controller.dependencies["lang"]
         self.stringProcesor = self.manager.controller.utils["string_procesor"]
-        self.usageService = self.manager.controller.dependencies["usage_service"]
         self.btns = []
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         _options = self.lang.getText("diary_options")
@@ -137,9 +136,11 @@ class DiaryView(Screen):
         if _status:
             PopupView(self.master, self.manager, self.lang.getText("ok_diary_page_save"), "SAVE").render(500, 300)
             _path = self.manager.controller.pathController.getPathByCODE("USAGES")
-            _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-diary.txt"
-            _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
-            self.usageService.save_usage(_path, _data)
+            YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+            typeUsage = "diary"
+            timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+            
+            self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
             self._clearEntrysPageDiary(txtEntryTitle, txtText)
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
@@ -229,9 +230,11 @@ class DiaryView(Screen):
         if _status:
             PopupView(self.master, self.manager, self.lang.getText("ok_diary_page_save"), "SAVE").render(500, 300)
             _path = self.manager.controller.pathController.getPathByCODE("USAGES")
-            _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-dreams.txt"
-            _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
-            self.usageService.save_usage(_path, _data)
+            YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+            typeUsage = "dreams"
+            timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+            
+            self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
             self._clearEntrysPageDiary(txtEntryTitle, txtText)
         else:
             PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
@@ -287,9 +290,11 @@ class DiaryView(Screen):
             if _status:
                 PopupView(self.master, self.manager, self.lang.getText("ok_feelings_not_feel"), "OK").render(500, 300)
                 _path = self.manager.controller.pathController.getPathByCODE("USAGES")
-                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-feelings.txt"
-                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
-                self.usageService.save_usage(_path, _data)
+                YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+                typeUsage = "feelings"
+                timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                
+                self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
             else:
                 PopupView(self.master, self.manager, self.lang.getText("error_feelings_fatal"), "ERROR FATAL").render(500, 300)
         else:
@@ -351,9 +356,11 @@ class DiaryView(Screen):
             if _status:
                 PopupView(self.master, self.manager, self.lang.getText("ok_drug_save"), "OK").render(500, 300)
                 _path = self.manager.controller.pathController.getPathByCODE("USAGES")
-                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-drugs.txt"
-                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
-                self.usageService.save_usage(_path, _data)
+                YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+                typeUsage = "drugs"
+                timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                
+                self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
             else:
                 PopupView(self.master, self.manager, self.lang.getText("error_drugs_fatal"), "ERROR FATAL").render(500, 300)
         else:

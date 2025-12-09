@@ -18,7 +18,6 @@ class FinancesView(Screen):
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         self._tempDebitArrayItems = []
         self.lang = self.manager.controller.dependencies["lang"]
-        self.usageService = self.manager.controller.dependencies["usage_service"]
         self.stringProcesor = self.manager.controller.utils["string_procesor"]
         lblTitle = tk.Label(self.canvas, text=self.lang.getText("economy_title"))
         lblTitle.place(x=self._w*0.38, y=self._h*0.05)
@@ -189,9 +188,11 @@ class FinancesView(Screen):
             if _status:
                 PopupView(self.master, self.manager, self.lang.getText("ok_economy_save_report"), "SAVE").render(500, 300)
                 _path = self.manager.controller.pathController.getPathByCODE("USAGES")
-                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-economy.txt"
-                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
-                self.usageService.save_usage(_path, _data)
+                YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+                typeUsage = "economy"
+                timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                
+                self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
                 
                 # Clear VIEW
                 
@@ -566,9 +567,11 @@ class FinancesView(Screen):
             if _status:
                 PopupView(self.master, self.manager, self.lang.getText("ok_economy_save_report"), "SAVE").render(500, 300)
                 _path = self.manager.controller.pathController.getPathByCODE("USAGES")
-                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-debit.txt"
-                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
-                self.usageService.save_usage(_path, _data)
+                YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+                typeUsage = "debit"
+                timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                
+                self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
             else:
                 PopupView(self.master, self.manager, self.lang.getText("error_debit_save_app"), "ERROR").render(500, 300)
         else:
@@ -646,9 +649,11 @@ class FinancesView(Screen):
                 if _status:
                     PopupView(self.master, self.manager, self.lang.getText("ok_debit_payment"), "UPDATE").render(500, 300)
                     _path = self.manager.controller.pathController.getPathByCODE("USAGES")
-                    _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-debit.txt"
-                    _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
-                    self.usageService.save_usage(_path, _data)
+                    YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+                    typeUsage = "debit"
+                    timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                    
+                    self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
                 else:
                     PopupView(self.master, self.manager, self.lang.getText("error_debit_save_app"), "ERROR").render(500, 300)
             else:
