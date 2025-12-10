@@ -15,7 +15,6 @@ class CalendarView(Screen):
         self._h =float(self.canvas["height"])
         self.btns = []
         self.lang = self.manager.controller.dependencies["lang"]
-        self.usageService = self.manager.controller.dependencies["usage_service"]
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         lblTitle = tk.Label(self.canvas, text=self.lang.getText("schelude_title"))
         lblTitle.place(x=self._w*0.38, y=self._h*0.05)
@@ -117,9 +116,11 @@ class CalendarView(Screen):
             if _reqSave24H:
                 PopupView(self.master, self.manager, self.lang.getText("text_ok_to_save"), "SAVE").render(500, 300)
                 _path = self.manager.controller.pathController.getPathByCODE("USAGES")
-                _path = f"{_path}\\{self.manager.controller.utils["time_util"].getCurrentYYYY()}-24h.txt"
-                _data = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
-                self.usageService.save_usage(_path, _data)
+                YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+                typeUsage = "24h"
+                timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                
+                self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
                 self._clear24HAfterOkSave(reg24hArr)
             else:
                 PopupView(self.master, self.manager, self.lang.getText("error_schedule_save_error"), "ERROR").render(500, 300)
