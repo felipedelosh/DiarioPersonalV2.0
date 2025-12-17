@@ -13,5 +13,8 @@ class EconomyService(IEconomyService):
     def save_economy_taccount_report(self, path: str, content: str) -> bool:
         return self.economy_repository.save_economy_taccount_report(path, content)
 
+    def update_economy_taccount_report(self, path: str, content: str) -> bool:
+        return self.economy_repository.update_economy_taccount_report(path, content)
+
     def get_economy_taccount_report(self, path: str) -> Response:
         return self.economy_repository.get_economy_taccount_report(path)

@@ -11,5 +11,9 @@ class IEconomyService(ABC):
         pass
 
     @abstractmethod
+    def update_economy_taccount_report(self, path: str, content: str) -> bool:
+        pass
+
+    @abstractmethod
     def get_economy_taccount_report(self, path: str) -> Response:
         pass

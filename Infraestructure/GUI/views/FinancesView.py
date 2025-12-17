@@ -104,7 +104,7 @@ class FinancesView(Screen):
         cmbxNrMonth.current(_currentMM - 1)
         cmbxNrMonth.place(x=self._w * 0.3, y=self._h * 0.9)
 
-        btnSaveTAccount = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveTAccounts(_itemsDiplayed, _concepts, _debits, _credits))
+        btnSaveTAccount = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda: self.saveTAccounts(_itemsDiplayed, cmbxNrMonth, cmbxNrDays, _concepts, _debits, _credits))
         self._tempCurrentElementsOptions.append(btnSaveTAccount)
         btnSaveTAccount.place(x=self._w * 0.66, y=self._h * 0.89)
 
@@ -134,7 +134,7 @@ class FinancesView(Screen):
             _credits.append(txtCredit)
             _credits[i].place(x=self._w * 0.75, y=_y)
 
-    def saveTAccounts(self, itemsDiplayed, concepts, debits, credits):
+    def saveTAccounts(self, itemsDiplayed, cmbxNrMonth, cmbxNrDays, concepts, debits, credits):
         _errorCounter = 0
         _isSomeData = False
         _tAccountData = ""
@@ -176,11 +176,10 @@ class FinancesView(Screen):
         # SAVE TAccount
         if _isSomeData:
             _path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS_CURRENT_YYYY")
-            _currentMonth = self.manager.controller.utils["time_util"].getCurrentMM()
+            _currentMonth = int(cmbxNrMonth.get())
+            _currentDay = cmbxNrDays.get()
             _currentMonth = self.lang.getText("month_names")[_currentMonth - 1]
-            _currentDay = self.manager.controller.utils["time_util"].getCurrentDD()
             _path = f"{_path}{_currentMonth} {_currentDay}.csv"
-
             data = _tAccountData[:-1] # Delete last break line.
 
             _status = self.manager.controller.dependencies["economy_use_case_save_taccount"].execute(_path, data)
