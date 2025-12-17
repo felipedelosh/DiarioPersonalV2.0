@@ -190,15 +190,18 @@ class FinancesView(Screen):
                 YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
                 typeUsage = "economy"
                 timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
-                
                 self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
-                
-                # Clear VIEW
-                
+
+                self._clearTACountsDataAfterSave(itemsDiplayed, concepts, debits, credits)
             else:
                 PopupView(self.master, self.manager, self.lang.getText("error_diary_page_save"), "ERROR").render(500, 300)
                 return
-
+    
+    def _clearTACountsDataAfterSave(self, itemsDiplayed, concepts, debits, credits):
+        for i in range(itemsDiplayed):
+            concepts[i].delete(0, tk.END)
+            debits[i].delete(0, tk.END)
+            credits[i].delete(0, tk.END)
 
     def _isTAccountsReportValid(self, concept, debit, credit):
         try:
