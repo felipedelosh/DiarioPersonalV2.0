@@ -6,7 +6,6 @@ C3|Vista de Horario|Crear un horario con actividades recurrentes.|🟡|NO
 E2|Vista de Ahorros|Registrar metas y ahorro acumulado.|🟡|NO
 E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
 E4|Vista de Buscar|Búsqueda global en entradas, notas y finanzas.|🟢|NO
-E5|Cuentas T|El reporte de cuentas T debe guardarse en el día y mes seleccionado.|🟢|NO
 E6|Actualizar vista cuando las deudas son pagadas|Cuando se registre el pago de una deuda se debe de refrescar la vista.|🟢|NO
 E8|Limpar la vista de cuentas T al guardar|Cuando se guarda un reporte de cuentas T se debe de limpar la vista si se guardo con éxito.|🟢|NO
 G1|Gráfica de Cuentas T|Mostrar evolución de cuentas bancarias.|🟡|NO

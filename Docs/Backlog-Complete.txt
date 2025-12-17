@@ -12,6 +12,7 @@ I5|Gestor de Carpetas|Crear automáticamente carpetas por año/mes para organiza
 I6|Guardar usos en UseCase|Por todo el lado del código hay quemado usageService.save_usage crear un caso de uso donde solo entre path y data|🔴|SI
 D5|Vista de Sentimientos|Registro rápido de emociones (ej: feliz, triste, ansioso).|🟢|SI
 E1|Vista de Cuentas T|Registrar cuentas bancarias y movimientos.|🟡|SI
+E5|Cuentas T|El reporte de cuentas T debe guardarse en el día y mes seleccionado.|🟢|SI
 E7|Texto cuando se paga una deuda|Cuando una deuda es pagada/cancelada se debe de mostrar un texto que diga la deuda está pagada.|🟢|SI
 D1|Vista de Diario|Permitir escribir, editar y guardar páginas.|🟢|SI
 H1|Debitos|Todo debito al guardarse tiene que tener un identificador UUII|🔴|SI
