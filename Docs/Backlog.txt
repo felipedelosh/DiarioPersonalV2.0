@@ -3,6 +3,7 @@ D3|Vista de Amigos|Lista de amigos, registrar notas relacionadas.|🟡|NO
 D4|Vista de Notas|Crear notas rápidas no relacionadas con el diario.|🟢|NO
 C1|Vista de Calendario|Mostrar calendario con días destacados.|🟢|NO
 C3|Vista de Horario|Crear un horario con actividades recurrentes.|🟡|NO
+EB1|[BUG] - Buscador Economia|Cuando un registro contable es en el mes de enero no aparece el número|🟢|NO
 E2|Vista de Ahorros|Registrar metas y ahorro acumulado.|🟡|NO
 E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
 E4|Vista de Buscar|Búsqueda global en entradas, notas y finanzas.|🟢|NO
