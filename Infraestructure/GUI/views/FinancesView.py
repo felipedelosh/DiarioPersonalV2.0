@@ -784,15 +784,13 @@ class FinancesView(Screen):
                     MM = _dateTAccountSplitted[1]
                     DD = _dateTAccountSplitted[2]
 
-                    _MM_NUMBER = 1
+                    _MM_NUMBER = 0
                     for itterMName in self.lang.getText("month_names"):
                         if MM == itterMName:
                             break
                         _MM_NUMBER = _MM_NUMBER + 1
-
-                    if _MM_NUMBER != 1:
-                        MM = _MM_NUMBER
-                        _data["data"][itterDataEconomy] = str(_data["data"][itterDataEconomy]).replace(_DATE_TACCOUNT, f"{YYYY}/{MM}/{DD}")
+                        
+                    _data["data"][itterDataEconomy] = str(_data["data"][itterDataEconomy]).replace(_DATE_TACCOUNT, f"{YYYY}/{_MM_NUMBER + 1}/{DD}")
 
                 txt = txt + _data["data"][itterDataEconomy] + "\n"
             
