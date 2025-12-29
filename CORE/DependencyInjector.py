@@ -35,6 +35,7 @@ from Infraestructure.UseCases.SaveEconomyTAccountReport import SaveEconomyTAccou
 from Infraestructure.UseCases.SaveDebitReport import SaveDebitReport
 from Infraestructure.UseCases.loadAllDebitsPeerYear import LoadAllDebitsPeerYear
 from Infraestructure.UseCases.PayDebit import PayDebit
+from Infraestructure.UseCases.MakeDebtPayment import MakeDebtPayment
 from Infraestructure.UseCases.GetAllFoldersInPath import GetAllFoldersInPath
 from Infraestructure.UseCases.LoadAllDebitsYearsRegistered import LoadAllDebitsYearsRegistered
 from Infraestructure.UseCases.GetEconoyTAccountReport import GetEconoyTAccountReport
@@ -93,6 +94,7 @@ class DependencyInjector:
         debit_use_case_save_report = SaveDebitReport(debit_service)
         debit_use_case_load_all_debits_peer_year = LoadAllDebitsPeerYear(debit_service)
         debit_use_case_pay_debit = PayDebit(debit_service)
+        debit_use_case_make_debit_payment = MakeDebtPayment(debit_service)
         debit_use_case_get_all_debits_registered = LoadAllDebitsYearsRegistered(folders_use_case_get_all, debit_use_case_load_all_debits_peer_year)
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
         usage_use_case_save = SaveUsage(usage_servide)
@@ -112,6 +114,7 @@ class DependencyInjector:
             "debit_use_case_save_report": debit_use_case_save_report,
             "debit_use_case_load_all_debits_peer_year": debit_use_case_load_all_debits_peer_year,
             "debit_use_case_pay_debit": debit_use_case_pay_debit,
+            "debit_use_case_make_debit_payment": debit_use_case_make_debit_payment,
             "debit_use_case_get_all_debits_registered": debit_use_case_get_all_debits_registered,
             "schedule_use_case_save_24h_report": schedule_use_case_save_24h_report,
             "usage_use_case_save": usage_use_case_save,

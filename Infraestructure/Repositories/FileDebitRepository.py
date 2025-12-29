@@ -21,3 +21,6 @@ class FileDebitRepository(IDebitRepository):
     def get_all_debit_path_report_by_year(self, path: str, YYYY: str) -> Response:
         _path = f"{path}{YYYY}"
         return self.file_reader.getAllFilesInPathByExt(_path, ".csv")
+    
+    def register_debit_payment(self, path: str, content: str) -> bool:
+        return self.file_writer.overWritefile(path, content)

@@ -17,3 +17,7 @@ class IDebitService(ABC):
     @abstractmethod
     def get_all_debit_path_report_by_year(self, path: str, YYYY: str) -> Response:
         pass
+
+    @abstractmethod
+    def register_debit_payment(self, path: str, content: str) -> bool:
+        pass

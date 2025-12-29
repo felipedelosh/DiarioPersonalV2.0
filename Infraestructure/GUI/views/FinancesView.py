@@ -7,6 +7,7 @@ from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
 from Infraestructure.GUI.views.PopupView import PopupView
 from Infraestructure.GUI.views.PopupConfirmView import PopupConfirmView
+from Infraestructure.GUI.views.PopupInputView import PopupInputView
 
 class FinancesView(Screen):
     def render(self, x, y):
@@ -622,8 +623,41 @@ class FinancesView(Screen):
             PopupView(self.master, self.manager, _template, f"DEBIT: {_debit_status}").render(500, 300)
 
     def paymentDebit(self, debit_data, UUID):
-        print("payment")
-        print(UUID)
+        filename, value = (lambda data, uuid: next(((k, v) for k, v in data.items() if v.startswith(uuid)), (None, None)))(debit_data, UUID)
+        
+        if filename and value:
+            _data = str(value).split("|")
+            _debit_value = _data[1]
+            _title = self.lang.getText("debit_payment_title")
+            _message = self.lang.getText("debit_payment_message")
+
+            _message = str(_message).replace("<UUID>", UUID)
+            _message = str(_message).replace("<DEBIT-TOTAL>", _debit_value)
+
+            payment_view = PopupInputView(self.master, self.manager, _message, _title, "number").render(380, 220)
+            if payment_view is None:
+                return
+            
+            _YYYY = str(filename).split(" ")[0]
+            _path = self.manager.controller.pathController.getPathByCodeAndYYYY("ECONOMY_DEBIT", _YYYY)
+            _path = f"{_path}{filename}"
+            _YYYYMMDD = self.manager.controller.utils["time_util"].getTimeStamp()
+            _YYYYMMDD = str(_YYYYMMDD).replace(" ", "/")
+            _statusComment = self.lang.getText("debit_comment_payment")
+            amount = float(payment_view)
+            
+            _status = self.manager.controller.dependencies["debit_use_case_make_debit_payment"].execute(_path, value, amount, _YYYYMMDD, _statusComment)
+
+            if _status:
+                PopupView(self.master, self.manager, self.lang.getText("debit_payment_ok_new_register"), "UPDATE").render(500, 300)
+                _path = self.manager.controller.pathController.getPathByCODE("USAGES")
+                YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+                typeUsage = "debit"
+                timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                
+                self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
+            else:
+                PopupView(self.master, self.manager, self.lang.getText("error_debit_save_app"), "ERROR").render(500, 300)
 
     def payDebit(self, debit_data, UUID):
         filename, value = (lambda data, uuid: next(((k, v) for k, v in data.items() if v.startswith(uuid)), (None, None)))(debit_data, UUID)
