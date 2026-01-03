@@ -1,0 +1,48 @@
+6am:dormir
+7am:dormir
+8am:dormir
+9am:dormir
+10am:redes sociales
+11am:redes sociales
+12am:dormir
+1pm:alimentación
+2pm:video juegos
+3pm:video juegos
+4pm:video juegos
+5pm:vida social
+6pm:vida social
+7pm:vida social
+8pm:vida social
+9pm:vida social
+10pm:vida social
+11pm:vida social
+12pm:vida social
+1am:vida social
+2am:vida social
+3am:dormir
+4am:dormir
+5am:dormir
+6am:dormir
+7am:dormir
+8am:redes sociales
+9am:reunión
+10am:redes sociales
+11am:reunión
+12am:reunión
+1pm:alimentación
+2pm:dormir
+3pm:dormir
+4pm:dormir
+5pm:programar
+6pm:programar
+7pm:alimentación
+8pm:programar
+9pm:programar
+10pm:programar
+11pm:FAPTIME
+12pm:video juegos
+1am:video juegos
+2am:dormir
+3am:dormir
+4am:dormir
+5am:dormir
