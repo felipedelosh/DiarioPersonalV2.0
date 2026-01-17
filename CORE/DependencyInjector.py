@@ -42,6 +42,9 @@ from Infraestructure.UseCases.GetEconoyTAccountReport import GetEconoyTAccountRe
 from Infraestructure.UseCases.GetAllInformationEconomy import GetAllInformationEconomy
 from Infraestructure.UseCases.SaveSchedule24HReport import SaveSchedule24HReport
 from Infraestructure.UseCases.SaveUsage import SaveUsage
+from Infraestructure.UseCases.ChatWithFemputadora import ChatWithFemputadora
+# Femputadora
+from CORE.FEMPUTADORA.Femputadora import Femputadora
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -99,6 +102,9 @@ class DependencyInjector:
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
         usage_use_case_save = SaveUsage(usage_servide)
         # END USECASES
+
+        femputadora = Femputadora()
+        chat_femputadora_use_case = ChatWithFemputadora(femputadora)
         
         return {
             "folders_use_case_get_all": folders_use_case_get_all,
@@ -118,6 +124,7 @@ class DependencyInjector:
             "debit_use_case_get_all_debits_registered": debit_use_case_get_all_debits_registered,
             "schedule_use_case_save_24h_report": schedule_use_case_save_24h_report,
             "usage_use_case_save": usage_use_case_save,
+            "chat_femputadora_use_case": chat_femputadora_use_case,
             "config": configManager,
             "lang": languageManager
             #...
