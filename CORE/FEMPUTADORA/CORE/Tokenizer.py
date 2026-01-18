@@ -26,7 +26,8 @@ class Tokenizer:
                         txtArr.append(itterStrangerChar)
                         _w = str(_w).replace(itterStrangerChar, "")
 
-                txtArr.append(_w)
+                if str(_w).strip() != "":
+                    txtArr.append(_w)
         except:
             pass
 
