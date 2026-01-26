@@ -1,5 +1,10 @@
 {
     "title_app":"Diario Del LOko v2.2.0",
     "window_w":900,
-    "window_h":600
+    "window_h":600,
+    "fempuadora_mode": [
+        "question",
+        "chat",
+        "graphics"
+    ]
 }

@@ -14,17 +14,36 @@ class ChatbotView(Screen):
         self.lang = self.manager.controller.dependencies["lang"]
         self.stringProcesor = self.manager.controller.utils["string_procesor"]
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
+        self._display_mode = ""
 
         self.renderFemputadoraView()
 
     def renderFemputadoraView(self):
+        _state = self.manager.controller.dependencies["config"].get("fempuadora_mode")
+
+        if self._display_mode == _state[0]:
+            self.deleteOption()
+            print("chat")
+        elif self._display_mode == _state[1]:
+            self.deleteOption()
+            print("graphics")
+        else:
+            self.deleteOption()
+            self.draw_femputadora_question_mode()
+    def deleteOption(self):
+        for widget in self._tempCurrentElementsOptions:
+            widget.destroy()
+        self._tempCurrentElementsOptions.clear()
+
+
+    def draw_femputadora_question_mode(self):
         txtEntry = tk.Entry(self.canvas, fg="gray")
         txtEntry.insert(0, self.lang.getText("femputadora_txt_input"))
         txtEntry.bind("<FocusIn>", lambda e, entry=txtEntry: self._clear_placeholder_entry_text(entry))
         txtEntry.bind("<FocusOut>", lambda e, entry=txtEntry: self._add_placeholder_entry_text(entry))
         txtEntry.bind("<Return>", lambda e, entry=txtEntry: self._on_enter_pressed(entry))
         self._tempCurrentElementsOptions.append(txtEntry)
-        txtEntry.place(x=self._w*0.07, y=self._h*0.3, width=self._w*0.5, height=25)
+        txtEntry.place(x=self._w * 0.26, y=self._h * 0.5, width=self._w * 0.5, height=25)
 
     def _clear_placeholder_entry_text(self, entry):
         if entry.get() == self.lang.getText("femputadora_txt_input"):
@@ -43,7 +62,14 @@ class ChatbotView(Screen):
 
         _data = self.manager.controller.dependencies["chat_femputadora_use_case"].execute(text)
 
+        print("Modo de femputadora:")
+        _state = self.manager.controller.dependencies["config"].get("fempuadora_mode")
+        print(f"Controller: {_state}")
         print("Usuario escribió:", text)
         print("==================")
         print("Respuesta: ", _data)
+        print("Cambia el estado de femputadora:")
+        self._display_mode = _state[1]
+        print("Cambia el estado de femputadora:")
         entry.delete(0, tk.END)
+        self.renderFemputadoraView()
