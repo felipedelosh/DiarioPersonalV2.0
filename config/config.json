@@ -1,5 +1,6 @@
 {
     "title_app":"Diario Del LOko v2.2.0",
+    "env": "DEV",
     "window_w":900,
     "window_h":600,
     "fempuadora_mode": [

@@ -14,6 +14,9 @@ class ChatbotView(Screen):
         self.lang = self.manager.controller.dependencies["lang"]
         self.stringProcesor = self.manager.controller.utils["string_procesor"]
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
+        # VARS
+        self._chat_history = [] 
+        self._txt_chat = ""
         self._display_mode = ""
 
         self.renderFemputadoraView()
@@ -68,6 +71,8 @@ class ChatbotView(Screen):
         self._tempCurrentElementsOptions.append(txtEntry)
         txtEntry.place(x=self._w * 0.06, y=self._h * 0.85, width=self._w * 0.88, height=23)
 
+        self._render_chat(txtChat)
+
     def draw_femputadora_graphics_mode(self):
         pass
 
@@ -81,22 +86,32 @@ class ChatbotView(Screen):
             entry.config(fg="gray")
 
     def _on_enter_pressed(self, entry):
+        _mode = self.manager.controller.dependencies["config"].get("env")
         text = entry.get().strip()
 
         if not text or text == self.lang.getText("femputadora_txt_input"):
             return
 
         _data = self.manager.controller.dependencies["chat_femputadora_use_case"].execute(text)
+        _femputadora_data = _data["data"]
+        _new_chat = f"{'User'}:\n{text}\n\n"
 
-        print("Modo de femputadora:")
+        
+
+        if _mode == "DEV":
+            _new_chat = _new_chat + f"{'Femputadora'}:\n"
+
+            for i in _femputadora_data:
+                _new_chat = _new_chat + f"\n{i}:\n{_femputadora_data[i]}"
+        else:
+            pass
+
+        self._txt_chat = self._txt_chat + _new_chat
         _state = self.manager.controller.dependencies["config"].get("fempuadora_mode")
-        print(f"Controller: {_state}")
-        print("Usuario escribió:", text)
-        print("==================")
-        print("Respuesta: ", _data)
-        print("Cambia el estado de femputadora:")
         self._display_mode = _state[1]
-        print("Cambia el estado de femputadora:")
-        print(self._display_mode)
         entry.delete(0, tk.END)
         self.renderFemputadoraView()
+
+    def _render_chat(self, txtEntry):
+        txtEntry.delete("1.0", tk.END)
+        txtEntry.insert(tk.END, self._txt_chat)

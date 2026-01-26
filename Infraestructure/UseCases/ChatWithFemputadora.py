@@ -12,4 +12,4 @@ class ChatWithFemputadora(IChatWithFemputadora):
 
     def execute(self, txt) -> Response:
         response = self.femputadora.getResponse(txt)
-        return Response.response(True, {"text" : response}, 1)
+        return Response.response(True, response, 1)

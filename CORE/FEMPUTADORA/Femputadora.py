@@ -16,13 +16,11 @@ class Femputadora:
         # STEP 01: GET TOKENS
         tokens = self.Tokenizer.tokenize(text)
 
-        print("TOKEN ARR: ")
-        print(tokens)
-
+        # STEP 02: Vectorize
         vector = self.Vectorizer.vectorize(tokens)
 
-        print("Vector: ")
-        print(vector)
-
-        return "Powered in Future By FelipedelosH"
+        return {
+            "tokens": tokens,
+            "vector": vector
+        }
     
