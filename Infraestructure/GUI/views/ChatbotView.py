@@ -24,10 +24,13 @@ class ChatbotView(Screen):
 
         if self._display_mode == _state[0]:
             self.deleteOption()
-            print("chat")
+            self.draw_femputadora_question_mode()
         elif self._display_mode == _state[1]:
             self.deleteOption()
-            print("graphics")
+            self.draw_femputadora_chat_mode()
+        elif self._display_mode == _state[2]:
+            self.deleteOption()
+            self.draw_femputadora_graphics_mode()
         else:
             self.deleteOption()
             self.draw_femputadora_question_mode()
@@ -53,7 +56,17 @@ class ChatbotView(Screen):
         txtEntry.place(x=self._w * 0.26, y=self._h * 0.5, width=self._w * 0.5, height=25)
 
     def draw_femputadora_chat_mode(self):
-        pass
+        txtChat = tk.Text(self.canvas, width=74, height=25, wrap="word")
+        self._tempCurrentElementsOptions.append(txtChat)
+        txtChat.place(x=self._w*0.06, y=self._h*0.12)
+
+        txtEntry = tk.Entry(self.canvas, fg="gray")
+        txtEntry.insert(0, self.lang.getText("femputadora_txt_input"))
+        txtEntry.bind("<FocusIn>", lambda e, entry=txtEntry: self._clear_placeholder_entry_text(entry))
+        txtEntry.bind("<FocusOut>", lambda e, entry=txtEntry: self._add_placeholder_entry_text(entry))
+        txtEntry.bind("<Return>", lambda e, entry=txtEntry: self._on_enter_pressed(entry))
+        self._tempCurrentElementsOptions.append(txtEntry)
+        txtEntry.place(x=self._w * 0.06, y=self._h * 0.85, width=self._w * 0.88, height=23)
 
     def draw_femputadora_graphics_mode(self):
         pass
@@ -84,5 +97,6 @@ class ChatbotView(Screen):
         print("Cambia el estado de femputadora:")
         self._display_mode = _state[1]
         print("Cambia el estado de femputadora:")
+        print(self._display_mode)
         entry.delete(0, tk.END)
         self.renderFemputadoraView()
