@@ -19,6 +19,7 @@ class ChatbotView(Screen):
         self.renderFemputadoraView()
 
     def renderFemputadoraView(self):
+        self.draw_femputadora_face()
         _state = self.manager.controller.dependencies["config"].get("fempuadora_mode")
 
         if self._display_mode == _state[0]:
@@ -35,8 +36,14 @@ class ChatbotView(Screen):
             widget.destroy()
         self._tempCurrentElementsOptions.clear()
 
+    def draw_femputadora_face(self):
+        pass
 
     def draw_femputadora_question_mode(self):
+        lblWelcomeMessage = tk.Label(self.canvas ,text = self.lang.getText("femputadora_help"), bg="black",fg="red")
+        self._tempCurrentElementsOptions.append(lblWelcomeMessage)
+        lblWelcomeMessage.place(x=self._w * 0.42, y=self._h * 0.42)
+
         txtEntry = tk.Entry(self.canvas, fg="gray")
         txtEntry.insert(0, self.lang.getText("femputadora_txt_input"))
         txtEntry.bind("<FocusIn>", lambda e, entry=txtEntry: self._clear_placeholder_entry_text(entry))
@@ -44,6 +51,12 @@ class ChatbotView(Screen):
         txtEntry.bind("<Return>", lambda e, entry=txtEntry: self._on_enter_pressed(entry))
         self._tempCurrentElementsOptions.append(txtEntry)
         txtEntry.place(x=self._w * 0.26, y=self._h * 0.5, width=self._w * 0.5, height=25)
+
+    def draw_femputadora_chat_mode(self):
+        pass
+
+    def draw_femputadora_graphics_mode(self):
+        pass
 
     def _clear_placeholder_entry_text(self, entry):
         if entry.get() == self.lang.getText("femputadora_txt_input"):
