@@ -34,6 +34,7 @@ DiarioPersonalV2.0/
 ├── ASSETS/
 ├── DATA/
 ├── CORE/
+│   └── Femputadora
 ├── main.py
 └── readme.md
 ```
