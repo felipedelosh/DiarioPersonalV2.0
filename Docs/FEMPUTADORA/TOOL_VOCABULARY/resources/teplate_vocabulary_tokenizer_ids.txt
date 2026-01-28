@@ -1,0 +1,6 @@
+<SEMANTIC_FIELDS_DOCUMENTATION>
+
+vocabulary = {
+    <SEMANTIC_FIELD>
+    <VALUES>
+}

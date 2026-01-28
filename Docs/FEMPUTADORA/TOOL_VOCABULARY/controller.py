@@ -9,6 +9,7 @@ from os import scandir
 class Controller:
     def __init__(self) -> None:
         self.path = os.getcwd()
+        self.template = ""
         self.config = self.loadConfig()
 
     def loadConfig(self):
