@@ -15,5 +15,6 @@ E1|Vista de Cuentas T|Registrar cuentas bancarias y movimientos.|🟡|SI
 E5|Cuentas T|El reporte de cuentas T debe guardarse en el día y mes seleccionado.|🟢|SI
 E7|Texto cuando se paga una deuda|Cuando una deuda es pagada/cancelada se debe de mostrar un texto que diga la deuda está pagada.|🟢|SI
 E8|Limpar la vista de cuentas T al guardar|Cuando se guarda un reporte de cuentas T se debe de limpar la vista si se guardo con éxito.|🟢|SI
+EB1|[BUG] - Buscador Economia|Cuando un registro contable es en el mes de enero no aparece el número|🟢|SI
 D1|Vista de Diario|Permitir escribir, editar y guardar páginas.|🟢|SI
 H1|Debitos|Todo debito al guardarse tiene que tener un identificador UUII|🔴|SI
