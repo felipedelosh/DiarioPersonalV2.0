@@ -27,9 +27,10 @@ class Software:
         self.btnAddSemanticDimension = Button(self.canvas, bg="green", text="ADD new D")
 
         self.lblTitleSemanticDimension = Label(self.canvas, text="Nombre de dimesión semantica: ")
-        self.txtTitleSemanticDimension = Entry(self.canvas)
+        self.txtTitleSemanticDimension = Entry(self.canvas, width=30)
 
         self.lblTitleIteratorsContextual = Label(self.canvas, text="Ingrese los iteradores contextuales: ")
+        self.txtTitleIteratorsContextual = Entry(self.canvas, width=80)
 
         self.vizualizedAndRun()
 
@@ -57,6 +58,7 @@ class Software:
         self.txtTitleSemanticDimension.place(x=self._w * 0.22, y=self._h * 0.722)
 
         self.lblTitleIteratorsContextual.place(x=self._w * 0.01, y=self._h * 0.78)
+        self.txtTitleIteratorsContextual.place(x=self._w * 0.22, y=self._h * 0.782)
 
 
         self.lblFooterProgram.place(x=self._w * 0.44, y=self._h * 0.96)
