@@ -497,25 +497,19 @@ class FinancesView(Screen):
                 if len(_description) > _max_length:
                     _description = _description[:_max_length - 3] + "..."
                 _status = _tempData[5]
-
-                if len(_tempMainData) == 1:
-                    _amount = _tempData[1]
-                else:
-                    _totalAmount = 0
-                    _isFirstRegister = True
-                    for itterTempMainData in _tempMainData:
-                        _regTempData = str(itterTempMainData).split("|")
+                _amount = float(_tempData[1])
+                                
+                if len(_tempMainData) > 1:
+                    for itterValueCash in _tempMainData[1::]:
+                        _tempCash = str(itterValueCash).split("|")[1]
                         try:
-                            if _isFirstRegister and float(_interest) > 0:
-                                _totalAmount = float(_regTempData[1]) * (1 + (float(_interest)/100))
-                                _isFirstRegister = False
-                                continue
-
-                            _totalAmount = _totalAmount + float(_regTempData[1])
+                            _tempCash = float(_tempCash)
+                            _amount = _amount + _tempCash
                         except:
-                            pass
+                            continue
 
-                    _amount = _totalAmount
+                if _amount <= 0:
+                    _amount = 0
 
                 _amount = round(float(_amount), 2)
                 itterLblDebitAmount = tk.Label(self.canvas, text=f"$ {_amount}")
