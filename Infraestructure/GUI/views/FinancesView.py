@@ -339,7 +339,7 @@ class FinancesView(Screen):
         lblSelectYYY.place(x=self._w * 0.25, y=self._h * 0.4)
         cmbxDebitYYYY = ttk.Combobox(self.canvas, state='readonly', width=6)
         self._tempDebitArrayItems.append(cmbxDebitYYYY)
-        cmbxDebitYYYY['values'] = ["2025"] # WIP >> NEED USE CASE TO GET USE DEBIT YEARS
+        cmbxDebitYYYY['values'] = ["2025", "2026"] # WIP >> NEED USE CASE TO GET USE DEBIT YEARS
         cmbxDebitYYYY.current(0)
         cmbxDebitYYYY.place(x=self._w * 0.49, y=self._h * 0.4)
         btnViewDebitsByYYYY = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self._drawDebitPaymentsHistoryOfDebits(cmbxDebitYYYY))
