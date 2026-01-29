@@ -37,7 +37,7 @@ class MakeDebtPayment(IMakeDebtPayment):
             for i in _debitInfoArr:
                 _new_content = _new_content + f"{i}" + "\n"
 
-            _new_content = _new_content + f"{_UUID}|{amount}|{_interest}|{date}|{comment}|{_status}"
+            _new_content = _new_content + f"{_UUID}|{amount * -1}|{_interest}|{date}|{comment}|{_status}"
             
             return self.debit_service.register_debit_payment(path, _new_content)
         except:
