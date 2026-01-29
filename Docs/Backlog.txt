@@ -7,7 +7,6 @@ E2|Vista de Ahorros|Registrar metas y ahorro acumulado.|🟡|NO
 E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
 E4|Vista de Buscar|Búsqueda global en entradas, notas y finanzas.|🟢|NO
 E6|Actualizar vista cuando las deudas son pagadas|Cuando se registre el pago de una deuda se debe de refrescar la vista.|🟢|NO
-EB2|Al guardar el abono a la deuda no está pasando en negativo|En los registros no está descontando... el valor entra como positivo.|🔴|NO
 G1|Gráfica de Cuentas T|Mostrar evolución de cuentas bancarias.|🟡|NO
 G2|Gráfica de Sentimientos|Mostrar emociones a lo largo del tiempo.|🟡|NO
 G3|Gráfica de Drogas|Mostrar total vs días de consumo.|🔴|NO
