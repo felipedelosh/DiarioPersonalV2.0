@@ -391,13 +391,32 @@ class FinancesView(Screen):
         _debit_actions = self.lang.getText("debit_actions")
 
         for i in _debitData["data"]:
-            _data = str(_debitData["data"][i]).split("\n")[0]
-            itterData = str(_data).split("|")
-            UUID = itterData[0]
-            _amounth = itterData[1]
-            _interest = itterData[2]
-            _deathline = itterData[3]
-            _status = itterData[5]
+            _data = str(_debitData["data"][i]).split("\n")
+
+
+            if len(_data) == 2:
+                _data = _data[0]
+                itterData = str(_data).split("|")
+                UUID = itterData[0]
+                _amounth = itterData[1]
+                _interest = itterData[2]
+                _deathline = itterData[3]
+                _status = itterData[5]
+            elif len(_data) > 2:
+                UUID = str(_data[0]).split("|")[0]
+                _amounth = str(_data[0]).split("|")[1]
+                _amounth = float(_amounth)
+                
+                for itterDebitInfo in _data[1::]:
+                    itterData = str(itterDebitInfo).split("|")
+                    cash = itterData[1]
+                    _amounth = _amounth + float(cash)
+                    
+                _interest = str(_data[0]).split("|")[2]
+                _deathline = str(_data[0]).split("|")[3]
+                _status = str(_data[0]).split("|")[5]
+            else:
+                continue
 
             # ONLY RENDER PENDING DEBITS
             if _status != self.lang.getText("debit_states")[0]:
@@ -423,7 +442,6 @@ class FinancesView(Screen):
             self._tempDebitArrayItems.append(lblStatus)
             lblStatus.place(x=self._w * 0.53, y= H + (_counter * dh))
             
-            # WIP: DEBIT ACTIONS
             _counterDX = 0
             for a in _debit_actions:
                 _itterDataButtons = str(a).split(":")
