@@ -24,13 +24,16 @@ class Software:
         self.cmbxVocabularyFiles["values"] = ["NEW"]
 
         self.lblSemanticFieldsTitle = Label(self.canvas, text="Dimensión semantica:")
-        self.btnAddSemanticDimension = Button(self.canvas, bg="green", text="ADD new D")
+        self.btnAddSemanticDimension = Button(self.canvas, bg="green", text="ADD new D", command=self.showDimensionSemanticInFooter)
 
         self.lblTitleSemanticDimension = Label(self.canvas, text="Nombre de dimesión semantica: ")
         self.txtTitleSemanticDimension = Entry(self.canvas, width=30)
-
         self.lblTitleIteratorsContextual = Label(self.canvas, text="Ingrese los iteradores contextuales: ")
         self.txtTitleIteratorsContextual = Entry(self.canvas, width=80)
+        self.lblSemanticDimensionDescription = Label(self.canvas, text="Ingresa la descripción:")
+        self.txtSemanticDimensionDescription = Entry(self.canvas, width=80)
+
+        self.btnSaveSemanticDimension = Button(self.canvas, text="GUARDAR", command=self.setSemanticDimsension)
 
         self.vizualizedAndRun()
 
@@ -47,30 +50,70 @@ class Software:
         self.cmbxVocabularyFiles.place(x=self._w * 0.08, y=self._h * 0.1)
 
         self.canvas.create_line(0, self._h * 0.15, self._w, self._h * 0.15)
+        self.canvas.create_line(self._w * 0.28, self._h * 0.15, self._w * 0.28, self._h * 0.7)
+        self.canvas.create_line(0, self._h * 0.7, self._w, self._h * 0.7)
 
         self.lblSemanticFieldsTitle.place(x=self._w * 0.01, y=self._h * 0.18)
         self.btnAddSemanticDimension.place(x=self._w * 0.17, y=self._h * 0.17)
-        self.canvas.create_line(self._w * 0.28, self._h * 0.15, self._w * 0.28, self._h * 0.7)
-
-        self.canvas.create_line(0, self._h * 0.7, self._w, self._h * 0.7)
-
-        self.lblTitleSemanticDimension.place(x=self._w * 0.01, y=self._h * 0.72)
-        self.txtTitleSemanticDimension.place(x=self._w * 0.22, y=self._h * 0.722)
-
-        self.lblTitleIteratorsContextual.place(x=self._w * 0.01, y=self._h * 0.78)
-        self.txtTitleIteratorsContextual.place(x=self._w * 0.22, y=self._h * 0.782)
+        
 
 
         self.lblFooterProgram.place(x=self._w * 0.44, y=self._h * 0.96)
         self.screem.mainloop()
 
-    def createDimensionSemantic(self):
+    def saveAll(self):
         pass
 
-    def visualizeDimensionSemanticInFooter(self, dimesion):
-        pass
+    def setSemanticDimsension(self):
+        _title = self.txtTitleSemanticDimension.get()
+        _contexiterators = self.txtTitleIteratorsContextual.get()
+        _textSDimenDescript = self.txtSemanticDimensionDescription.get()
+
+        if self._isEmptyText(_title):
+            self.txtTitleSemanticDimension["bg"] = "red"
+            return
+        else:
+            self.txtTitleSemanticDimension["bg"] = "white"
+
+        if self._isEmptyText(_contexiterators):
+            self.txtTitleIteratorsContextual["bg"] = "red"
+            return
+        else:
+            self.txtTitleIteratorsContextual["bg"] = "white"
+
+        if self._isEmptyText(_textSDimenDescript):
+            self.txtSemanticDimensionDescription["bg"] = "red"
+            return
+        else:
+            self.txtSemanticDimensionDescription["bg"] = "white"
+
+        print(_title)
+        print(_contexiterators)
+        print(_textSDimenDescript)
+
+        self.hideDimensionSemanticInFooter()
 
 
+    def showDimensionSemanticInFooter(self):
+        self.lblTitleSemanticDimension.place(x=self._w * 0.01, y=self._h * 0.72)
+        self.txtTitleSemanticDimension.place(x=self._w * 0.22, y=self._h * 0.722)
+        self.lblTitleIteratorsContextual.place(x=self._w * 0.01, y=self._h * 0.78)
+        self.txtTitleIteratorsContextual.place(x=self._w * 0.22, y=self._h * 0.782)
+        self.lblSemanticDimensionDescription.place(x=self._w * 0.01, y=self._h * 0.84)
+        self.txtSemanticDimensionDescription.place(x=self._w * 0.22, y=self._h * 0.842)
+        self.btnSaveSemanticDimension.place(x=self._w * 0.9, y=self._h * 0.75)
+    
+    def hideDimensionSemanticInFooter(self):
+        self.lblTitleSemanticDimension.place_forget()
+        self.txtTitleSemanticDimension.place_forget()
+        self.lblTitleIteratorsContextual.place_forget()
+        self.txtTitleIteratorsContextual.place_forget()
+        self.lblSemanticDimensionDescription.place_forget()
+        self.txtSemanticDimensionDescription.place_forget()
+        self.btnSaveSemanticDimension.place_forget()
+
+    def _isEmptyText(self, txt):
+        return str(txt).strip() == ""
 
 
 s = Software()

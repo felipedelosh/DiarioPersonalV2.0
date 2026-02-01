@@ -5,6 +5,7 @@ FelipedelosH
 import json
 import os
 from os import scandir
+from src.models.SemanticDimension import SemanticDimensión
 
 class Controller:
     def __init__(self) -> None:
