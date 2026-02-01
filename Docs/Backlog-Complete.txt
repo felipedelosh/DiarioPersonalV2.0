@@ -15,7 +15,8 @@ E1|Vista de Cuentas T|Registrar cuentas bancarias y movimientos.|🟡|SI
 E5|Cuentas T|El reporte de cuentas T debe guardarse en el día y mes seleccionado.|🟢|SI
 E7|Texto cuando se paga una deuda|Cuando una deuda es pagada/cancelada se debe de mostrar un texto que diga la deuda está pagada.|🟢|SI
 E8|Limpar la vista de cuentas T al guardar|Cuando se guarda un reporte de cuentas T se debe de limpar la vista si se guardo con éxito.|🟢|SI
-E9|Deudas pagadas parcialmente suman y no restan en el historial|Cuando se está en el buscador las deudas pagadas parcialmente Se suma toda la deuda en lugar de mostrar lo que resta.|🟡|NO
+E9|Deudas pagadas parcialmente suman y no restan en el historial|Cuando se está en el buscador las deudas pagadas parcialmente Se suma toda la deuda en lugar de mostrar lo que resta.|🟡|SI
+E10|El monto que se vizualiza en deudas no debe ser el total sino lo que resta|Cuando se vizualiza la deuda en el historial de deudas el monto que aparece es el total y no lo que resta de la deuda|🟡|SI
 EB1|[BUG] - Buscador Economia|Cuando un registro contable es en el mes de enero no aparece el número|🟢|SI
 EB2|[BUG] - Al guardar el abono a la deuda no está pasando en negativo|En los registros no está descontando... el valor entra como positivo.|🔴|SI
 D1|Vista de Diario|Permitir escribir, editar y guardar páginas.|🟢|SI
