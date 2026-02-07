@@ -2,6 +2,7 @@
 FelipedelosH
 2026
 """
+import uuid
 import json
 import os
 from os import scandir
@@ -12,6 +13,9 @@ class Controller:
         self.path = os.getcwd()
         self.template = ""
         self.config = self.loadConfig()
+
+        # VARS
+        self.semanticDimensionsArr = []
 
     def loadConfig(self):
         try:
@@ -47,3 +51,16 @@ class Controller:
             return filesNames
         except:
             return None
+        
+    def setSemanticDimsension(self, title, contexIterators, textSDimenDescript):
+        _id = str(uuid.uuid4())
+        iterators_arr = [x.strip() for x in contexIterators.split(",") if x.strip()]
+
+        self.semanticDimensionsArr.append(
+            SemanticDimensión(
+                _id,
+                title,
+                iterators_arr,
+                textSDimenDescript
+            )
+        )
