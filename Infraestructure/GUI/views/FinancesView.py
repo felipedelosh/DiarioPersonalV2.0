@@ -339,12 +339,16 @@ class FinancesView(Screen):
         lblSelectYYY.place(x=self._w * 0.25, y=self._h * 0.4)
         cmbxDebitYYYY = ttk.Combobox(self.canvas, state='readonly', width=6)
         self._tempDebitArrayItems.append(cmbxDebitYYYY)
-        cmbxDebitYYYY['values'] = ["2025", "2026"] # WIP >> NEED USE CASE TO GET USE DEBIT YEARS
-        cmbxDebitYYYY.current(0)
-        cmbxDebitYYYY.place(x=self._w * 0.49, y=self._h * 0.4)
-        btnViewDebitsByYYYY = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self._drawDebitPaymentsHistoryOfDebits(cmbxDebitYYYY))
-        self._tempDebitArrayItems.append(btnViewDebitsByYYYY)
-        btnViewDebitsByYYYY.place(x=self._w * 0.6, y=self._h * 0.395)
+        _path = self.manager.controller.pathController.getPathByCODE("ECONOMY_DEBIT")
+        _get_yyyy_data = self.manager.controller.dependencies["debit_use_case_get_all_years_of_debits"].execute(_path)
+        
+        if _get_yyyy_data["success"] and _get_yyyy_data["qty"] > 0:
+            cmbxDebitYYYY['values'] = _get_yyyy_data["data"]
+            cmbxDebitYYYY.current(0)
+            cmbxDebitYYYY.place(x=self._w * 0.49, y=self._h * 0.4)
+            btnViewDebitsByYYYY = tk.Button(self.canvas, text=self.lang.getText("text_button_load"), command=lambda: self._drawDebitPaymentsHistoryOfDebits(cmbxDebitYYYY))
+            self._tempDebitArrayItems.append(btnViewDebitsByYYYY)
+            btnViewDebitsByYYYY.place(x=self._w * 0.6, y=self._h * 0.395)
 
     def _drawDebitPaymentsHistoryOfDebits(self, cmbxDebitYYYY):
         _YYYY = cmbxDebitYYYY.get()
