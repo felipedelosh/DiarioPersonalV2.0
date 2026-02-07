@@ -848,6 +848,21 @@ class FinancesView(Screen):
                         
                     _data["data"][itterDataEconomy] = str(_data["data"][itterDataEconomy]).replace(_DATE_TACCOUNT, f"{YYYY}/{_MM_NUMBER}/{DD}")
 
+                elif _type == "DEBIT":
+                    _date = _dataSplitted[0]
+                    _dateArr = str(_date).split("/")
+                    YYYY = _dateArr[0]
+                    MM = _dateArr[1]
+                    if len(str(MM)) == 1:
+                        MM = f"0{MM}"
+                    DD = _dateArr[2]
+                    if len(str(DD)) == 1:
+                        DD = f"0{DD}"
+                    prettyDate = f"{YYYY}/{MM}/{DD}"
+                    
+                    _data["data"][itterDataEconomy] = f"{prettyDate}|{_dataSplitted[1]}|{_dataSplitted[2]}|{_dataSplitted[3]}|{_dataSplitted[4]}"
+
+                # Modify register before :)
                 txt = txt + _data["data"][itterDataEconomy] + "\n"
             
             txtSearchResult.insert("1.0", txt)
