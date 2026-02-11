@@ -397,8 +397,7 @@ class FinancesView(Screen):
         for i in _debitData["data"]:
             _data = str(_debitData["data"][i]).split("\n")
 
-
-            if len(_data) == 2:
+            if len(_data) == 2 or len(_data) == 1:
                 _data = _data[0]
                 itterData = str(_data).split("|")
                 UUID = itterData[0]
