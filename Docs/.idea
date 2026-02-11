@@ -3,10 +3,15 @@ Ideas de Graficas:
 * Cuentas T
 	- Gráficos de Pastel total Ingresos/Egresos.
 	- Gráfico de barra Ingresos/Egresos.
-	- Comparativa con gráficos de barras de horas de sueño vs ingreso económico ([Dinero&HorasSueño] vs Tiempo).	
+	- Comparativa con gráficos de barras de horas de sueño vs ingreso económico ([Dinero&HorasSueño] vs Tiempo).
+	- Grafico por categoria (Comida, Vida Social... Deuda.)
 * Sentimientos:
 	- Gráfico de barras.
 * Drogas:
 	- Gráfico de barras.
+	- Consumo vs horas de sueño.
 * Tiempo 24H:
 	- Diseño personalizado Radar Radial centralizado.
+	- Balance existencia... actividades productivas vs no productivas.
+
+Nota: Intentar realizar comparación de tendencias... YYYY vs YYYY por actividad.
