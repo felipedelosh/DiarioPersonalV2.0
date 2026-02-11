@@ -15,3 +15,27 @@ Ideas de Graficas:
 	- Balance existencia... actividades productivas vs no productivas.
 
 Nota: Intentar realizar comparación de tendencias... YYYY vs YYYY por actividad.
+
+Graphs
+│
+├── Economía
+│   ├── Distribución
+│   ├── Evolución
+│   ├── Categorías
+│   └── Correlaciones
+│
+├── Tiempo
+│   ├── Radar anual
+│   ├── Balance productivo
+│   └── Comparativa anual
+│
+├── Conducta
+│   ├── Drogas
+│   ├── Drogas vs sueño
+│   └── Drogas vs emoción
+│
+└── Emoción
+    ├── Frecuencia
+    ├── Intensidad
+    └── Tendencias
+
