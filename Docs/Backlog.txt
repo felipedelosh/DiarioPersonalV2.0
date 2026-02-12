@@ -7,12 +7,24 @@ E2|Vista de Ahorros|Registrar metas y ahorro acumulado.|🟡|NO
 E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
 E4|Vista de Buscar|Búsqueda global en entradas, notas y finanzas.|🟢|NO
 E6|Actualizar vista cuando las deudas son pagadas|Cuando se registre el pago de una deuda se debe de refrescar la vista.|🟢|NO
-G1|Gráfica de Cuentas T|Mostrar evolución de cuentas bancarias.|🟡|NO
-G2|Gráfica de Sentimientos|Mostrar emociones a lo largo del tiempo.|🟡|NO
-G3|Gráfica de Drogas|Mostrar total vs días de consumo.|🔴|NO
-G4|Gráfica de Inversión de Tiempo|Mostrar en qué actividades se gasta el tiempo.|🟡|NO
-G5|Gráfica Tiempo de Vida|Mostrar visualización de edad/vida.|🔴|NO
+G1|Vista de Gráficas|Se necesita una vista principal para vizualizador de gráficas (MAIN)|🟡|NO
 F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
+G1.1|Pie Ingresos/Egresos|Mostrar proporción total del período seleccionado.|🟡|NO
+G1.2|Barras Evolución Financiera|Mostrar ingresos y egresos por mes o día.|🟡|NO
+G1.3|Gasto por Categoría|Mostrar distribución de egresos por categoría.|🟡|NO
+G1.4|Comparativa YYYY vs YYYY Finanzas|Comparar evolución financiera entre años.|🟡|NO
+G1.5|Sueño vs Ingreso|Correlacionar horas de sueño con ingresos económicos.|🟡|NO
+G2.1|Frecuencia de Emociones|Barras por emoción en período seleccionado.|🟡|NO
+G2.2|Intensidad Promedio|Promedio mensual de intensidad emocional.|🟡|NO
+G2.3|Tendencia Emocional|Evolución temporal de estados emocionales.|🟡|NO
+G2.4|Comparativa YYYY vs YYYY Emoción|Comparación anual de estabilidad emocional.|🟡|NO
+G3.1|Frecuencia Consumo|Barras por tipo de sustancia.|🔴|NO
+G3.2|Consumo vs Sueño|Correlación consumo y horas dormidas.|🔴|NO
+G3.3|Comparativa YYYY vs YYYY Consumo|Comparación anual de consumo.|🔴|NO
+G4.1|Radar Radial 24H|Visualización anual de distribución de actividades.|🟡|NO
+G4.2|Balance Productivo vs No Productivo|Mostrar proporción anual de actividades clasificadas.|🟡|NO
+G4.3|Comparativa YYYY vs YYYY Tiempo|Comparar distribución de tiempo entre años.|🟡|NO
+G4.4|Gráfica Tiempo de Vida|Mostrar visualización de edad/vida.|🔴|NO
 S1|Vista de Perfil|Configuración de usuario (nombre, foto, preferencias).|🟢|NO
 S2|Vista de Ayuda|Mostrar guía rápida del sistema.|🟡|NO
 H2|Acciones Debitos|Todos las acciones del abono de deudas deben habilitarse|🔴|NO
