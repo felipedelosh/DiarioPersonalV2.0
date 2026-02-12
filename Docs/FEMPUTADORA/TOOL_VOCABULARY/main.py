@@ -36,6 +36,8 @@ class Software:
         self.btnSaveSemanticDimension = Button(self.canvas, text="GUARDAR", command=self.setSemanticDimsension)
 
 
+        self.btnSaveWork = Button(self.canvas, text="SAVE WORK", bg="green", command=self.saveWork)
+
         # VARS
         self._tempSemanticDimensionsOptions = []
 
@@ -63,8 +65,8 @@ class Software:
         self.lblFooterProgram.place(x=self._w * 0.44, y=self._h * 0.96)
         self.screem.mainloop()
 
-    def saveAll(self):
-        pass
+    def saveWork(self):
+        self.controller.saveWork()
 
     def setSemanticDimsension(self):
         _title = self.txtTitleSemanticDimension.get()
@@ -91,17 +93,9 @@ class Software:
 
         self.controller.setSemanticDimsension(_title, _contexIterators, _textSDimenDescript)
         self.showSemanticDimensions()
+        self.clearTextOfDimensionSemantic()
         self.hideDimensionSemanticInFooter()
-
-
-    def showDimensionSemanticInFooter(self):
-        self.lblTitleSemanticDimension.place(x=self._w * 0.01, y=self._h * 0.72)
-        self.txtTitleSemanticDimension.place(x=self._w * 0.22, y=self._h * 0.722)
-        self.lblTitleIteratorsContextual.place(x=self._w * 0.01, y=self._h * 0.78)
-        self.txtTitleIteratorsContextual.place(x=self._w * 0.22, y=self._h * 0.782)
-        self.lblSemanticDimensionDescription.place(x=self._w * 0.01, y=self._h * 0.84)
-        self.txtSemanticDimensionDescription.place(x=self._w * 0.22, y=self._h * 0.842)
-        self.btnSaveSemanticDimension.place(x=self._w * 0.9, y=self._h * 0.75)
+        self.showBtnSaveWork()
 
     def showSemanticDimensions(self):
         for w in self._tempSemanticDimensionsOptions:
@@ -115,11 +109,24 @@ class Software:
         y = _y_start
         for dim in self.controller.semanticDimensionsArr:
             title = dim.name
-            btn = Button(self.canvas, text=title, width=26, anchor="w")
+            btn = Button(self.canvas, text=title, width=26, anchor="w", command=lambda t=title: self.onClickSemanticDimension(t))
             self._tempSemanticDimensionsOptions.append(btn)
             btn.place(x=_x, y=y)
             y += _row_h
+
+    def showBtnSaveWork(self):
+        if len(self.controller.semanticDimensionsArr) > 0:
+            self.btnSaveWork.place(x=self._w * 0.9, y=self._h * 0.05)
     
+    def showDimensionSemanticInFooter(self):
+        self.lblTitleSemanticDimension.place(x=self._w * 0.01, y=self._h * 0.72)
+        self.txtTitleSemanticDimension.place(x=self._w * 0.22, y=self._h * 0.722)
+        self.lblTitleIteratorsContextual.place(x=self._w * 0.01, y=self._h * 0.78)
+        self.txtTitleIteratorsContextual.place(x=self._w * 0.22, y=self._h * 0.782)
+        self.lblSemanticDimensionDescription.place(x=self._w * 0.01, y=self._h * 0.84)
+        self.txtSemanticDimensionDescription.place(x=self._w * 0.22, y=self._h * 0.842)
+        self.btnSaveSemanticDimension.place(x=self._w * 0.9, y=self._h * 0.75)
+
     def hideDimensionSemanticInFooter(self):
         self.lblTitleSemanticDimension.place_forget()
         self.txtTitleSemanticDimension.place_forget()
@@ -128,6 +135,15 @@ class Software:
         self.lblSemanticDimensionDescription.place_forget()
         self.txtSemanticDimensionDescription.place_forget()
         self.btnSaveSemanticDimension.place_forget()
+
+    def onClickSemanticDimension(self, title):
+        print(title)
+
+    def clearTextOfDimensionSemantic(self):
+        self.txtTitleSemanticDimension.delete(0, END)
+        self.txtTitleIteratorsContextual.delete(0, END)
+        self.txtSemanticDimensionDescription.delete(0, END)
+
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""

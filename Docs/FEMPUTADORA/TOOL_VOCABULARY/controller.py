@@ -1,6 +1,8 @@
 """
 FelipedelosH
 2026
+
+RULES -> ALL SAVE IN UPPER CASE
 """
 import uuid
 import json
@@ -64,3 +66,6 @@ class Controller:
                 textSDimenDescript
             )
         )
+
+    def saveWork(self):
+        print(f"Vamos a guardar: {self.semanticDimensionsArr}")
