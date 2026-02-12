@@ -56,16 +56,26 @@ class Controller:
         
     def setSemanticDimsension(self, title, contexIterators, textSDimenDescript):
         _id = str(uuid.uuid4())
-        iterators_arr = [x.strip() for x in contexIterators.split(",") if x.strip()]
+        iterators_arr = [str(x).strip().upper() for x in contexIterators.split(",") if x.strip()]
 
         self.semanticDimensionsArr.append(
             SemanticDimensión(
                 _id,
-                title,
+                str(title).upper(),
                 iterators_arr,
                 textSDimenDescript
             )
         )
+
+    def getSemanticDimsensionByTitle(self, title):
+        _data = None
+        try:
+            for i in self.semanticDimensionsArr:
+                if i.name == str(title).upper():
+                    return i
+        except:
+            pass
+        return _data
 
     def saveWork(self):
         print(f"Vamos a guardar: {self.semanticDimensionsArr}")

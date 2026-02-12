@@ -137,13 +137,24 @@ class Software:
         self.btnSaveSemanticDimension.place_forget()
 
     def onClickSemanticDimension(self, title):
-        print(title)
+        data = self.controller.getSemanticDimsensionByTitle(title)
+        if data:
+            self.setTextOfDimensionSemantic(data)
+            self.showDimensionSemanticInFooter()
 
     def clearTextOfDimensionSemantic(self):
         self.txtTitleSemanticDimension.delete(0, END)
         self.txtTitleIteratorsContextual.delete(0, END)
         self.txtSemanticDimensionDescription.delete(0, END)
 
+    def setTextOfDimensionSemantic(self, semanticDimension):
+        self.clearTextOfDimensionSemantic()
+
+        _iterators = ", ".join(semanticDimension.contextualIteratorsArr)
+
+        self.txtTitleSemanticDimension.insert(0, semanticDimension.name)
+        self.txtTitleIteratorsContextual.insert(0, _iterators)
+        self.txtSemanticDimensionDescription.insert(0, semanticDimension.description)
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""
