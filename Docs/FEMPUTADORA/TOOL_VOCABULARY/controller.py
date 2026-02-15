@@ -58,14 +58,25 @@ class Controller:
         _id = str(uuid.uuid4())
         iterators_arr = [str(x).strip().upper() for x in contexIterators.split(",") if x.strip()]
 
-        self.semanticDimensionsArr.append(
-            SemanticDimensión(
-                _id,
-                str(title).upper(),
-                iterators_arr,
-                textSDimenDescript
+        if not self.exitsSemanticDimension(title):
+            self.semanticDimensionsArr.append(
+                SemanticDimensión(
+                    _id,
+                    str(title).upper(),
+                    iterators_arr,
+                    textSDimenDescript
+                )
             )
-        )
+
+    def exitsSemanticDimension(self, title):
+        if not self.semanticDimensionsArr:
+            return False
+
+        for i in self.semanticDimensionsArr:
+            if str(i.name) == title:
+                return True
+
+        return False
 
     def getSemanticDimsensionByTitle(self, title):
         _data = None
