@@ -66,7 +66,9 @@ class Software:
         self.screem.mainloop()
 
     def saveWork(self):
-        self.controller.saveWork()
+        title = self.cmbxVocabularyFiles.get()
+        if not self._isEmptyText(title):
+            self.controller.saveWork(title)
 
     def setSemanticDimsension(self):
         _title = self.txtTitleSemanticDimension.get()

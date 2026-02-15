@@ -1,6 +1,5 @@
 <SEMANTIC_FIELDS_DOCUMENTATION>
 
 vocabulary = {
-    <SEMANTIC_FIELD>
-    <VALUES>
+    <ALL_VOCABULAY>
 }

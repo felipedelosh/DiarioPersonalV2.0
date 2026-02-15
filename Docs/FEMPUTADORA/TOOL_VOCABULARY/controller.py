@@ -28,15 +28,6 @@ class Controller:
             return config
         except:
             return None
-
-
-    def getTextInFile(self, path):
-        info = None
-        try:
-            f = open(path, 'r', encoding="utf-8")
-            return f.read()
-        except:
-            return info
         
     def getAllFilesInFolderFilteredByExt(self, ext, path):
         """
@@ -88,5 +79,38 @@ class Controller:
             pass
         return _data
 
-    def saveWork(self):
-        print(f"Vamos a guardar: {self.semanticDimensionsArr}")
+    def saveWork(self, title):
+        _filename = self.config["output_file_tile"]
+        _path = f"{self.path}/resources/teplate_vocabulary_tokenizer_ids.txt"
+        _template = self.getTextInFile(_path)
+        
+        doc = ""
+        ALL_VOCABULAY = ""
+        VALUES = []
+        for i in self.semanticDimensionsArr:
+            # Documentation
+            doc = doc + f"# {str(i.name).upper()} {str(i.contextualIteratorsArr)}"
+
+            itterCon = ""
+            for itterContextual in i.contextualIteratorsArr:
+                itterCon = itterCon + f"\"{itterContextual}\": <ZERO-ARR>,\n"
+
+            _value_data = f"#{str(i.name).upper()}\n{itterCon}"
+            VALUES.append(_value_data)
+
+        print(doc)
+        for i in VALUES:
+            ALL_VOCABULAY = ALL_VOCABULAY + f"{i}"
+
+        print(ALL_VOCABULAY)
+
+    def _getZeroArr(self, qty):
+        return "[" + "0"*qty + "]"
+
+    def getTextInFile(self, path):
+        info = None
+        try:
+            f = open(path, 'r', encoding="utf-8")
+            return f.read()
+        except:
+            return info
