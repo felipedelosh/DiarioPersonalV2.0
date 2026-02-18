@@ -18,6 +18,7 @@ class Controller:
 
         # VARS
         self.semanticDimensionsArr = []
+        self.finalPythonDataVocabularizer = ""
 
     def loadConfig(self):
         try:
@@ -108,7 +109,8 @@ class Controller:
         _template = _template.replace("<SEMANTIC_FIELDS_DOCUMENTATION>", doc)
         _template = _template.replace("<ALL_VOCABULAY>", ALL_VOCABULAY)
 
-        print(_template)
+        self.finalPythonDataVocabularizer = _template
+        self._saveFiles()
 
     def _getZeroArr(self, qty):
         _zeroData = ", 0"*qty
@@ -123,3 +125,13 @@ class Controller:
             return f.read()
         except:
             return info
+        
+    def _saveFiles(self):
+        try:
+            _path = f"{self.path}/OUTPUT/vocabulary_tokenizer_ids.py"
+            with open(_path,"w", encoding="UTF-8") as f:
+                f.write(self.finalPythonDataVocabularizer)
+
+            print("SAVE PYTHON VOCABULARY")
+        except:
+            pass
