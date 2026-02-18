@@ -85,27 +85,36 @@ class Controller:
         _template = self.getTextInFile(_path)
         
         doc = ""
+        _zeroCounter = 0
         ALL_VOCABULAY = ""
         VALUES = []
         for i in self.semanticDimensionsArr:
             # Documentation
-            doc = doc + f"# {str(i.name).upper()} {str(i.contextualIteratorsArr)}"
+            doc = doc + f"# {str(i.name).upper()} >> {str(i.contextualIteratorsArr)}\n# {i.description}\n"
+            _zeroCounter = _zeroCounter + len(i.contextualIteratorsArr)
 
             itterCon = ""
             for itterContextual in i.contextualIteratorsArr:
-                itterCon = itterCon + f"\"{itterContextual}\": <ZERO-ARR>,\n"
+                itterCon = itterCon + f"\t\"{itterContextual}\": <ZERO-ARR>,\n"
 
             _value_data = f"#{str(i.name).upper()}\n{itterCon}"
             VALUES.append(_value_data)
-
-        print(doc)
+            
         for i in VALUES:
-            ALL_VOCABULAY = ALL_VOCABULAY + f"{i}"
+            ALL_VOCABULAY = ALL_VOCABULAY + f"{str(i).replace("<ZERO-ARR>", self._getZeroArr(_zeroCounter))}\n"
 
-        print(ALL_VOCABULAY)
+
+        ALL_VOCABULAY = ALL_VOCABULAY[:-2]
+        _template = _template.replace("<SEMANTIC_FIELDS_DOCUMENTATION>", doc)
+        _template = _template.replace("<ALL_VOCABULAY>", ALL_VOCABULAY)
+
+        print(_template)
 
     def _getZeroArr(self, qty):
-        return "[" + "0"*qty + "]"
+        _zeroData = ", 0"*qty
+        _zeroData = _zeroData[2::]
+
+        return "[" + _zeroData + "]"
 
     def getTextInFile(self, path):
         info = None
