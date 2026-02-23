@@ -48,6 +48,7 @@
   "text_status": "Estado",
   "text_not_find": "No se encontró información.",
   "text_find_error": "No fue posible cargar la información",
+  "text_find_error_taccounts_search": "No se encontró información de las TACCOUNTS",
   "text_user_cancelled": "Operación cancelada por el usuario",
   "text_init_date": "Fecha Inicio",
   "text_final_date": "Fecha Final",

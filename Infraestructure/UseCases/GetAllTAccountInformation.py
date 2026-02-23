@@ -33,8 +33,12 @@ class GetAllTAccountInformation(IGetAllTAccountInformation):
 
                     if not _taacount_data["success"]:
                         continue
+                        
+                    data_dict = _taacount_data.get("data", {})
+                    k, v = next(iter(data_dict.items()))
+
+                    _final_data[k] = v
                     
-                    _final_data[_file_path] = _taacount_data["data"]
                     _counter_final_data = _counter_final_data + 1
 
             return Response.response(True, _final_data, _counter_final_data)

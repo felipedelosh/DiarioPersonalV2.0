@@ -103,7 +103,9 @@ class GraphsView(Screen):
             _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
             _data = self.manager.controller.dependencies["economy_use_case_get_all_taccounts"].execute(_base_path)
 
-            print(_data)
+            if not _data["success"]:
+                PopupView(self.master, self.manager, self.lang.getText("text_find_error_taccounts_search"), "ERROR").render(500, 300)
+                return None
         
         graphier = self.manager.controller.utils["graphics_renderder"]
         graphier.render(self.auxiliarCanvas, _data, graphicsType, None)
