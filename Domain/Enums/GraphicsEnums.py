@@ -15,3 +15,6 @@ class GraphType(Enum):
     BAR_DEBITS_ALL = auto()
     CARTESIAN_ZZZ_VS_MONEY = auto()
     # ...
+
+    def __str__(self):
+        return self.name
