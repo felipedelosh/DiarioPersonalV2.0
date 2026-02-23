@@ -37,6 +37,7 @@
   "text_button_save": "Guardar",
   "text_button_load": "Cargar",
   "text_button_search": "Buscar",
+  "text_button_graphic": "Graficar",
   "text_ok_to_save": "Guardado con éxito.",
   "text_number": "Nr.",
   "text_amount": "Monto",
@@ -221,5 +222,13 @@
     "Sentimientos",
     "Drogas",
     "Tiempo"
+  ],
+  "graphics_economy_help_filter_by_category": "Que tipo de grafico desea mostrar:",
+  "graphics_economy_categories": [
+    "Total PASTEL Ingresos/Egresos",
+    "Total BARRAS Ingresos/Egresos",
+    "Periodo Ingresos/Egresos",
+    "Comparativa Sueño vs Ingresos",
+    "Filtrado Por categoria"
   ]
 }

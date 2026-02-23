@@ -3,7 +3,9 @@ FelipedelosH
 2025
 """
 import tkinter as tk
+from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
+from Infraestructure.GUI.views.PopupView import PopupView
 
 
 class GraphsView(Screen):
@@ -13,6 +15,9 @@ class GraphsView(Screen):
         self._w = float(self.canvas["width"])
         self._h =float(self.canvas["height"])
         self.lang = self.manager.controller.dependencies["lang"]
+        # PAINTED CANVAS
+        self.paintedCanvas = tk.Canvas(self.canvas, bg="black")
+        # END PAINTED CANVAS
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         self.btns = []
         _options = self.lang.getText("graphics_options")
@@ -51,7 +56,29 @@ class GraphsView(Screen):
             
     # Economy
     def drawEconomyGraphicsOptions(self):
-        print("Economía")
+        lblHelpFilterByEconomyGraphics = tk.Label(self.canvas, text=self.lang.getText("graphics_economy_help_filter_by_category"))
+        self._tempCurrentElementsOptions.append(lblHelpFilterByEconomyGraphics)
+        lblHelpFilterByEconomyGraphics.place(x=self._w * 0.05, y=self._h * 0.2)
+        cmbxEconomyOptionsGraphicsFilter = ttk.Combobox(self.canvas, state='readonly', width=30)
+        cmbxEconomyOptionsGraphicsFilter["values"] = self.lang.getText("graphics_economy_categories")
+        self._tempCurrentElementsOptions.append(cmbxEconomyOptionsGraphicsFilter)
+        cmbxEconomyOptionsGraphicsFilter.place(x=self._w * 0.35, y=self._h * 0.2)
+
+        btnPaint = tk.Button(self.canvas, bg="green", text=self.lang.getText("text_button_graphic"), command=lambda: self.paintEconomy(cmbxEconomyOptionsGraphicsFilter.get()))
+        self._tempCurrentElementsOptions.append(btnPaint)
+        btnPaint.place(x=self._w * 0.45, y=self._h * 0.32)
+
+    def paintEconomy(self, option):
+        if option == self.lang.getText("graphics_economy_categories")[0]:
+            print("Todos en pastel")
+        if option == self.lang.getText("graphics_economy_categories")[1]:
+            print("Todos en barra")
+        if option == self.lang.getText("graphics_economy_categories")[2]:
+            print("Periodo")
+        if option == self.lang.getText("graphics_economy_categories")[3]:
+            print("Zzz vs Money")
+        if option == self.lang.getText("graphics_economy_categories")[4]:
+            print("Categoria")
     # Economy
 
     # Feelings
