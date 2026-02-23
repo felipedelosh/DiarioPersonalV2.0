@@ -14,10 +14,12 @@ class GraphsView(Screen):
         self.canvas["bg"]="snow"
         self.canvas.place(x=x, y=y)
         self._w = float(self.canvas["width"])
-        self._h =float(self.canvas["height"])
+        self._h = float(self.canvas["height"])
         self.lang = self.manager.controller.dependencies["lang"]
         # PAINTED CANVAS
-        self.auxiliarCanvas = tk.Canvas(self.canvas, bg="yellow")
+        self.auxiliarCanvas = tk.Canvas(self.canvas, bg="snow", highlightthickness=1, highlightbackground="black")
+        self.auxiliarCanvas["width"] = self._w * 0.9
+        self.auxiliarCanvas["height"] = self._h * 0.55
         # END PAINTED CANVAS
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         self.btns = []
@@ -106,12 +108,17 @@ class GraphsView(Screen):
             if not _data["success"]:
                 PopupView(self.master, self.manager, self.lang.getText("text_find_error_taccounts_search"), "ERROR").render(500, 300)
                 return None
-        
+
+        self.auxiliarCanvas.delete("all")
         graphier = self.manager.controller.utils["graphics_renderder"]
+        self.auxiliarCanvas.place(x=self._w * 0.05, y=self._h * 0.40)
         graphier.render(self.auxiliarCanvas, _data, graphicsType, None)
-        self.auxiliarCanvas.place(x=self._w * 0.05, y=self._h * 0.40, width=self._w * 0.90, height=self._h * 0.55)
 
     def deleteOption(self):
         for widget in self._tempCurrentElementsOptions:
             widget.destroy()
         self._tempCurrentElementsOptions.clear()
+
+        if hasattr(self, "auxiliarCanvas") and self.auxiliarCanvas:
+            self.auxiliarCanvas.delete("all")
+            self.auxiliarCanvas.place_forget()
