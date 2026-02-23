@@ -98,9 +98,13 @@ class GraphsView(Screen):
     # Time
 
     def paintedCanvas(self, graphicsType: GraphType):
-        # GET DATA
-        
         _data = None
+        if graphicsType == str(GraphType.BAR_TACCOUNTS_ALL):
+            _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
+            _data = self.manager.controller.dependencies["economy_use_case_get_all_taccounts"].execute(_base_path)
+
+            print(_data)
+        
         graphier = self.manager.controller.utils["graphics_renderder"]
         graphier.render(self.auxiliarCanvas, _data, graphicsType, None)
         self.auxiliarCanvas.place(x=self._w * 0.05, y=self._h * 0.40, width=self._w * 0.90, height=self._h * 0.55)

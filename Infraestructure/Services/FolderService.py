@@ -29,3 +29,17 @@ class FolderService(IFolderService):
             return Response.response(True, _output, _counter)
         except:
             return Response.response(False, {}, 0)
+        
+    def get_all_files_in_path_by_ext(self, path: str, ext: str) -> Response:
+        try:
+            file_names = []
+            with scandir(path) as entries:
+                for entry in entries:
+                    if entry.is_file():
+                        name = entry.name
+                        if not ext or name.lower().endswith(ext):
+                            file_names.append(name)
+
+            return Response.response(True, file_names, len(file_names))
+        except Exception:
+            return Response.response(False, [], 0)

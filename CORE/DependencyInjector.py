@@ -44,6 +44,7 @@ from Infraestructure.UseCases.SaveSchedule24HReport import SaveSchedule24HReport
 from Infraestructure.UseCases.SaveUsage import SaveUsage
 from Infraestructure.UseCases.ChatWithFemputadora import ChatWithFemputadora
 from Infraestructure.UseCases.GetAllYearsOfEconomyDebits import GetAllYearsOfEconomyDebits
+from Infraestructure.UseCases.GetAllTAccountInformation import GetAllTAccountInformation
 # Femputadora
 from CORE.FEMPUTADORA.Femputadora import Femputadora
 # Graphics
@@ -97,6 +98,7 @@ class DependencyInjector:
         economy_use_case_get_taccount = GetEconoyTAccountReport(economy_service)
         economy_use_case_save_taccount = SaveEconomyTAccountReport(economy_service, economy_use_case_get_taccount)
         economy_use_case_get_all_info = GetAllInformationEconomy(folder_service, debit_service)
+        economy_use_case_get_all_taccounts = GetAllTAccountInformation(folder_service, economy_service)
         debit_use_case_save_report = SaveDebitReport(debit_service)
         debit_use_case_load_all_debits_peer_year = LoadAllDebitsPeerYear(debit_service)
         debit_use_case_pay_debit = PayDebit(debit_service)
@@ -121,6 +123,7 @@ class DependencyInjector:
             "economy_use_case_save_taccount": economy_use_case_save_taccount,
             "economy_use_case_get_taccount": economy_use_case_get_taccount,
             "economy_use_case_get_all_info": economy_use_case_get_all_info,
+            "economy_use_case_get_all_taccounts": economy_use_case_get_all_taccounts,
             "debit_use_case_save_report": debit_use_case_save_report,
             "debit_use_case_load_all_debits_peer_year": debit_use_case_load_all_debits_peer_year,
             "debit_use_case_pay_debit": debit_use_case_pay_debit,
