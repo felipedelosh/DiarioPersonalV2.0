@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
 from Infraestructure.GUI.views.PopupView import PopupView
+from Domain.Enums.GraphicsEnums import GraphType
 
 
 class GraphsView(Screen):
@@ -70,15 +71,15 @@ class GraphsView(Screen):
 
     def paintEconomy(self, option):
         if option == self.lang.getText("graphics_economy_categories")[0]:
-            self.paintedCanvas("PIE_TACCOUNTS")
+            self.paintedCanvas(f"{GraphType.PIE_TACCOUNTS_ALL}")
         if option == self.lang.getText("graphics_economy_categories")[1]:
-            self.paintedCanvas("BAR_TACCOUNTS")
+            self.paintedCanvas(f"{GraphType.BAR_TACCOUNTS_ALL}")
         if option == self.lang.getText("graphics_economy_categories")[2]:
-            self.paintedCanvas("BAR_FILTERED_TIME")
+            self.paintedCanvas(f"{GraphType.BAR_TACCOUNTS_FILTERED_BY_TIME}")
         if option == self.lang.getText("graphics_economy_categories")[3]:
-            self.paintedCanvas("ZZZ_CATESIAN")
+            self.paintedCanvas(f"{GraphType.CARTESIAN_ZZZ_VS_MONEY}")
         if option == self.lang.getText("graphics_economy_categories")[4]:
-            self.paintedCanvas("BAR_FILTERED_CATEGORY")
+            self.paintedCanvas(f"{GraphType.BAR_TACCOUNTS_FILTERED_BY_CATEGORY}")
     # Economy
 
     # Feelings
@@ -96,7 +97,9 @@ class GraphsView(Screen):
         print("Tiempo")
     # Time
 
-    def paintedCanvas(self, graphicsType):
+    def paintedCanvas(self, graphicsType: GraphType):
+        # GET DATA
+        
         _data = None
         graphier = self.manager.controller.utils["graphics_renderder"]
         graphier.render(self.auxiliarCanvas, _data, graphicsType, None)
