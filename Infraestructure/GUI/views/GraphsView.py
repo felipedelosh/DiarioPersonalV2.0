@@ -16,7 +16,7 @@ class GraphsView(Screen):
         self._h =float(self.canvas["height"])
         self.lang = self.manager.controller.dependencies["lang"]
         # PAINTED CANVAS
-        self.paintedCanvas = tk.Canvas(self.canvas, bg="black")
+        self.auxiliarCanvas = tk.Canvas(self.canvas, bg="yellow")
         # END PAINTED CANVAS
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         self.btns = []
@@ -70,7 +70,7 @@ class GraphsView(Screen):
 
     def paintEconomy(self, option):
         if option == self.lang.getText("graphics_economy_categories")[0]:
-            print("Todos en pastel")
+            self.paintedCanvas(option)
         if option == self.lang.getText("graphics_economy_categories")[1]:
             print("Todos en barra")
         if option == self.lang.getText("graphics_economy_categories")[2]:
@@ -95,6 +95,12 @@ class GraphsView(Screen):
     def drawTimeGraphicsOptions(self):
         print("Tiempo")
     # Time
+
+    def paintedCanvas(self, graphicsType):
+        _data = None
+        graphier = self.manager.controller.utils["graphics_renderder"]
+        graphier.render(self.auxiliarCanvas, _data, graphicsType, None)
+        self.auxiliarCanvas.place(x=self._w * 0.05, y=self._h * 0.40, width=self._w * 0.90, height=self._h * 0.55)
 
     def deleteOption(self):
         for widget in self._tempCurrentElementsOptions:

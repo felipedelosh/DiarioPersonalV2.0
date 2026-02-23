@@ -46,6 +46,8 @@ from Infraestructure.UseCases.ChatWithFemputadora import ChatWithFemputadora
 from Infraestructure.UseCases.GetAllYearsOfEconomyDebits import GetAllYearsOfEconomyDebits
 # Femputadora
 from CORE.FEMPUTADORA.Femputadora import Femputadora
+# Graphics
+from Infraestructure.Services.GraphRenderer import GraphRenderer
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -139,9 +141,11 @@ class DependencyInjector:
         time_util = TimeUtils()
         enigma = Enigma()
         string_procesor = StringProcesor()
+        graphics_renderder = GraphRenderer()
 
         return {
             "time_util": time_util,
             "enigma": enigma,
-            "string_procesor": string_procesor
+            "string_procesor": string_procesor,
+            "graphics_renderder": graphics_renderder
         }
