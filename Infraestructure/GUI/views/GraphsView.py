@@ -70,15 +70,15 @@ class GraphsView(Screen):
 
     def paintEconomy(self, option):
         if option == self.lang.getText("graphics_economy_categories")[0]:
-            self.paintedCanvas(option)
+            self.paintedCanvas("PIE_TACCOUNTS")
         if option == self.lang.getText("graphics_economy_categories")[1]:
-            print("Todos en barra")
+            self.paintedCanvas("BAR_TACCOUNTS")
         if option == self.lang.getText("graphics_economy_categories")[2]:
-            print("Periodo")
+            self.paintedCanvas("BAR_FILTERED_TIME")
         if option == self.lang.getText("graphics_economy_categories")[3]:
-            print("Zzz vs Money")
+            self.paintedCanvas("ZZZ_CATESIAN")
         if option == self.lang.getText("graphics_economy_categories")[4]:
-            print("Categoria")
+            self.paintedCanvas("BAR_FILTERED_CATEGORY")
     # Economy
 
     # Feelings
