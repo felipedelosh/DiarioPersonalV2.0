@@ -214,5 +214,12 @@
     "vida social"
   ],
   "femputadora_help": "¿En que puedo ayudarlo?",
-  "femputadora_txt_input": "Preguntame lo que quieras"
+  "femputadora_txt_input": "Preguntame lo que quieras",
+  "graphics_title_message": "Bienvenido a tus Graficas",
+  "graphics_options":[
+    "Economía",
+    "Sentimientos",
+    "Drogas",
+    "Tiempo"
+  ]
 }
