@@ -1,0 +1,43 @@
+[
+  {
+    "id": "e5ae4a78-b5a7-443e-aad5-14ee053a6a67",
+    "name": "SUBJECT",
+    "contextualIteratorsArr": [
+      "yo",
+      "tú",
+      "él",
+      "ella",
+      "eso",
+      "nosotros",
+      "ustedes",
+      "ellos",
+      "alguien",
+      "nadie",
+      "todos"
+    ],
+    "description": "Son los posibles sujetos de la oración"
+  },
+  {
+    "id": "17917f9d-cc0f-4a66-af95-022b91bdbb79",
+    "name": "CATEGORY",
+    "contextualIteratorsArr": [
+      "diario",
+      "sueño",
+      "nota",
+      "droga",
+      "amigo",
+      "sentimiento",
+      "tiempo",
+      "calendario",
+      "horiario",
+      "finanza",
+      "ahorro",
+      "deuda",
+      "salud",
+      "trabajo",
+      "estudio",
+      "familia"
+    ],
+    "description": "clasifica en los aspectos más importantes del diario"
+  }
+]

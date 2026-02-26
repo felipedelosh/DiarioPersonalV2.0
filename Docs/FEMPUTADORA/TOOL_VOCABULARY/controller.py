@@ -138,7 +138,19 @@ class Controller:
             _path = f"{self.path}/OUTPUT/vocabulary_tokenizer_ids.py"
             with open(_path,"w", encoding="UTF-8") as f:
                 f.write(self.finalPythonDataVocabularizer)
-
             print("SAVE PYTHON VOCABULARY")
+
+            _path = f"{self.path}/INPUT/temp.json"
+            data = []
+            for d in self.semanticDimensionsArr:
+                data.append({
+                    "id": d.id,
+                    "name": d.name,
+                    "contextualIteratorsArr": d.contextualIteratorsArr,
+                    "description": d.description
+                })
+            with open(_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            print("Save WORK")
         except:
             pass
