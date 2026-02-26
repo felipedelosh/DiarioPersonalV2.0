@@ -48,7 +48,7 @@ class Controller:
         
     def setSemanticDimsension(self, title, contexIterators, textSDimenDescript):
         _id = str(uuid.uuid4())
-        iterators_arr = [str(x).strip().upper() for x in contexIterators.split(",") if x.strip()]
+        iterators_arr = [str(x).strip().lower() for x in contexIterators.split(",") if x.strip()]
 
         if not self.exitsSemanticDimension(title):
             self.semanticDimensionsArr.append(
@@ -87,23 +87,30 @@ class Controller:
         
         doc = ""
         _zeroCounter = 0
+        _ZeroCounterArr = []
         ALL_VOCABULAY = ""
         VALUES = []
         for i in self.semanticDimensionsArr:
             # Documentation
-            doc = doc + f"# {str(i.name).upper()} >> {str(i.contextualIteratorsArr)}\n# {i.description}\n"
+            iters_str = ", ".join(i.contextualIteratorsArr)
+            doc = doc + f"# {str(i.name).upper()} >> [{iters_str}]\n# {i.description}\n"
             _zeroCounter = _zeroCounter + len(i.contextualIteratorsArr)
-
+            _ZeroCounterArr.append(len(i.contextualIteratorsArr))
+ 
             itterCon = ""
             for itterContextual in i.contextualIteratorsArr:
                 itterCon = itterCon + f"\t\"{itterContextual}\": <ZERO-ARR>,\n"
 
             _value_data = f"#{str(i.name).upper()}\n{itterCon}"
             VALUES.append(_value_data)
-            
-        for i in VALUES:
-            ALL_VOCABULAY = ALL_VOCABULAY + f"{str(i).replace("<ZERO-ARR>", self._getZeroArr(_zeroCounter))}\n"
 
+        zeroArr = ""
+        for i in _ZeroCounterArr:
+            zeroArr = zeroArr + f"{self._getZeroArr(i)} + "
+
+        zeroArr = zeroArr[:-3]
+        for i in VALUES:
+            ALL_VOCABULAY = ALL_VOCABULAY + f"{str(i).replace("<ZERO-ARR>", zeroArr)}\n"
 
         ALL_VOCABULAY = ALL_VOCABULAY[:-2]
         _template = _template.replace("<SEMANTIC_FIELDS_DOCUMENTATION>", doc)
