@@ -20,6 +20,8 @@ class Controller:
         self.semanticDimensionsArr = []
         self.finalPythonDataVocabularizer = ""
 
+        self.loadPreviousWork()
+
     def loadConfig(self):
         try:
             config = ""

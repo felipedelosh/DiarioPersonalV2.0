@@ -63,6 +63,7 @@ class Software:
         self.btnAddSemanticDimension.place(x=self._w * 0.17, y=self._h * 0.17)
         
         self.lblFooterProgram.place(x=self._w * 0.44, y=self._h * 0.96)
+        self.showSemanticDimensions()
         self.screem.mainloop()
 
     def saveWork(self):
