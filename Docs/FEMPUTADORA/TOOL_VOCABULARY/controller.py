@@ -117,6 +117,7 @@ class Controller:
         _template = _template.replace("<ALL_VOCABULAY>", ALL_VOCABULAY)
 
         self.finalPythonDataVocabularizer = _template
+        self.saveWorkJson(title)
         self._saveFiles()
 
     def _getZeroArr(self, qty):
@@ -139,18 +140,33 @@ class Controller:
             with open(_path,"w", encoding="UTF-8") as f:
                 f.write(self.finalPythonDataVocabularizer)
             print("SAVE PYTHON VOCABULARY")
-
-            _path = f"{self.path}/INPUT/temp.json"
-            data = []
-            for d in self.semanticDimensionsArr:
-                data.append({
-                    "id": d.id,
-                    "name": d.name,
-                    "contextualIteratorsArr": d.contextualIteratorsArr,
-                    "description": d.description
-                })
-            with open(_path, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-            print("Save WORK")
         except:
             pass
+
+    def saveWorkJson(self, title):
+        try:
+            _path = f"{self.path}/INPUT/temp.json"
+            data = [d.to_dict() for d in self.semanticDimensionsArr]
+            with open(_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            _path = f"{self.path}/INPUT/{title}.json"
+            with open(_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            print("Save WORK JSON")
+            return True
+        except Exception as e:
+            print(f"ERROR saveWorkJson: {e}")
+            return False
+
+    def loadPreviousWork(self):
+        try:
+            _path = f"{self.path}/INPUT/temp.json"
+            with open(_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            self.semanticDimensionsArr = [SemanticDimensión.from_dict(d) for d in data]
+            print("LOAD WORK JSON")
+            return True
+        except Exception as e:
+            print(f"ERROR loadPreviousWork: {e}")
+            return False
