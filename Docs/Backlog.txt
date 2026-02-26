@@ -31,3 +31,4 @@ H2|Acciones Debitos|Todos las acciones del abono de deudas deben habilitarse|�
 H3|Acciones Debitos|Paginar y aplicar paginación|🟡|NO
 H4|BUSCADOR ECONOMIA BONITO|Al momento de hacer una busqueda se debe de mostar la data de manera uniforme... texto de igual tamaño.|🟡|NO
 T1|Temporales|Cuando se inserta información se tiene que guardar en DATA/TEMP para posterior recuperación en caso de cerrar el programa por accidente|🟢|NO
+P1|Popup para ingreso de fechas|Se requiere una interfaz POPUP capaz de ser el inyector de fechas tipo YYYY/MM/DD para un input.|🟡|NO
