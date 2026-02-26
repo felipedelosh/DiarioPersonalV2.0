@@ -7,6 +7,7 @@ E2|Vista de Ahorros|Registrar metas y ahorro acumulado.|🟡|NO
 E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
 E4|Vista de Buscar|Búsqueda global en entradas, notas y finanzas.|🟢|NO
 E6|Actualizar vista cuando las deudas son pagadas|Cuando se registre el pago de una deuda se debe de refrescar la vista.|🟢|NO
+E11|Caso de uso para Categorias de Economia|Se necesita generar un caso de uso que lea todos los Movimientos economicos y Agrupe {"key": [str, str, ...str]} en conjuntos de datos similares.|🟢|NO
 G1|Vista de Gráficas|Se necesita una vista principal para vizualizador de gráficas (MAIN)|🟡|NO
 F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
 G1.1|Pie Ingresos/Egresos|Mostrar proporción total del período seleccionado.|🟡|NO
