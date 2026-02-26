@@ -35,6 +35,8 @@ class Software:
 
         self.btnSaveSemanticDimension = Button(self.canvas, text="GUARDAR", command=self.setSemanticDimsension)
 
+        self.lblTitleSemanticEditor = Label(self.canvas, text="Edit Semantic VEKTOR")
+
 
         self.btnSaveWork = Button(self.canvas, text="SAVE WORK", bg="green", command=self.saveWork)
 
@@ -64,6 +66,9 @@ class Software:
         
         self.lblFooterProgram.place(x=self._w * 0.44, y=self._h * 0.96)
         self.showSemanticDimensions()
+        if self.controller.semanticDimensionsArr:
+            self.showEditorSemanticVectorInterface()
+
         self.screem.mainloop()
 
     def saveWork(self):
@@ -158,6 +163,9 @@ class Software:
         self.txtTitleSemanticDimension.insert(0, semanticDimension.name)
         self.txtTitleIteratorsContextual.insert(0, _iterators)
         self.txtSemanticDimensionDescription.insert(0, semanticDimension.description)
+
+    def showEditorSemanticVectorInterface(self):
+        self.lblTitleSemanticEditor.place(x=self._w * 0.55, y=self._h * 0.16)
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""
