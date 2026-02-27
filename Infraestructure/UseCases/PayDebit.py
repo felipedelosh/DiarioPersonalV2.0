@@ -25,17 +25,24 @@ class PayDebit(IPayDebit):
 
             _balance = _total
             
-            # WIP: verify a pay to Debits with some pays
-            if len(_debitInfoArr) > 1:
-                for itterDebit in _debitInfoArr:
-                    _data = str(itterDebit).split("|")
-                    
-                    _balance = _data[1]
 
-            # its PAY?
-            if _balance <= 0:
-                return False
-            
+            print(len(_debitInfoArr))
+
+            if len(_debitInfoArr) > 1:
+                _total_balance_payments = 0
+
+                for itterDebit in _debitInfoArr[1::]:
+                    _data = str(itterDebit).split("|")
+                    _total_balance_payments = _total_balance_payments + float(_data[1])
+
+                _rest = _balance + _total_balance_payments
+                last_pay = f"{_UUID}|{_rest * -1}|{_interest}|{date}|{comment}|{state}"
+            else:
+                if _balance <= 0:
+                    return False
+                
+                last_pay = f"{_UUID}|{_balance * -1}|{_interest}|{date}|{comment}|{state}"
+                
             _newMainDebit = ""
             _mainDebit = str(_mainDebit).split("|")
             _mainDebit[-1] = state
@@ -43,8 +50,6 @@ class PayDebit(IPayDebit):
                 _newMainDebit = _newMainDebit + itterMainDebit + "|"
             _newMainDebit = _newMainDebit[:-1]
             _debitInfoArr[0] = _newMainDebit
-
-            last_pay = f"{_UUID}|{_balance * -1}|{_interest}|{date}|{comment}|{state}"
             _debitInfoArr.append(last_pay)
 
             _pay_report = ""
