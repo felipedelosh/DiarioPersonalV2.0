@@ -18,9 +18,12 @@ class Controller:
 
         # VARS
         self.semanticDimensionsArr = []
+        self.pythonizeSemanticDimensionsArr = []
         self.finalPythonDataVocabularizer = ""
         self.pos_x_dimension = 0
+        self.word_x_dimension = ""
         self.pos_y_dimension = 0
+        self.word_y_dimension = ""
 
         self.loadPreviousWork()
 
@@ -123,6 +126,8 @@ class Controller:
         self.finalPythonDataVocabularizer = _template
         self.saveWorkJson(title)
         self._saveFiles()
+        self.pythonizeSemanticDimensionsArr = self.build_vocabulary_from_string()
+        self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
 
     def _getZeroArr(self, qty):
         _zeroData = ", 0"*qty
@@ -174,3 +179,35 @@ class Controller:
         except Exception as e:
             print(f"ERROR loadPreviousWork: {e}")
             return False
+        
+    def build_vocabulary_from_string(self):
+        namespace = {}
+        exec(self.finalPythonDataVocabularizer, namespace)
+        return namespace.get("vocabulary")
+    
+    def mouveUP(self):
+        if self.pos_y_dimension - 1 >= 0: 
+            self.pos_y_dimension = self.pos_y_dimension - 1
+            self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
+    def mouveDOWN(self):
+        self.pos_y_dimension = self.pos_y_dimension + 1
+        self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
+    def mouveRIGHT(self):
+        self.pos_x_dimension = self.pos_x_dimension + 1
+        self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
+    def mouveLEFT(self):
+        if self.pos_x_dimension - 1 >= 0:
+            self.pos_x_dimension = self.pos_x_dimension - 1
+            self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
+
+    def update_dimensional_keys_by_xy(self, x, y):
+        try:
+            keys = list(self.pythonizeSemanticDimensionsArr.keys())
+
+            if len(keys) < x or len(keys) < y:
+                return
+
+            self.word_x_dimension = keys[x]
+            self.word_y_dimension = keys[y]
+        except:
+            pass

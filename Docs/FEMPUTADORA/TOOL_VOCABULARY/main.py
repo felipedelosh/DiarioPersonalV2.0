@@ -43,6 +43,7 @@ class Software:
         self.btnSemanticEditorDown = Button(self.canvas, text="DOWN", command=lambda: self.motionControl("DOWN"))
         self.btnSemanticEditorLeft = Button(self.canvas, text="LEFT", command=lambda: self.motionControl("LEFT"))
         self.btnSemanticEditorRight = Button(self.canvas, text="RIGHT", command=lambda: self.motionControl("RIGHT"))
+        self.btnSaveSemanticCorelationValue = Button(self.canvas, text="UPDATE VALUE")
 
         self.btnSaveWork = Button(self.canvas, text="SAVE WORK", bg="green", command=self.saveWork)
 
@@ -79,13 +80,15 @@ class Software:
 
     def motionControl(self, option):
         if option == "UP":
-            print("Moviendo arriba")
+            self.controller.mouveUP()
         elif option == "DOWN":
-            print("Moviendo abajo")
+            self.controller.mouveDOWN()
         elif option == "LEFT":
-            print("Moviendo izquierda")
+            self.controller.mouveLEFT()
         elif option == "RIGHT":
-            print("Moviendo derecha")
+            self.controller.mouveRIGHT()
+        
+        self.updateEditorSemanticVectorInterface()
 
     def saveWork(self):
         title = self.cmbxVocabularyFiles.get()
@@ -182,16 +185,21 @@ class Software:
 
     def showEditorSemanticVectorInterface(self):
         self.lblTitleSemanticEditor.place(x=self._w * 0.55, y=self._h * 0.16)
+        self.btnSemanticEditorUP.place(x=self._w * 0.61, y=self._h * 0.23)
         self.lblSemanticDimensionWordX.place(x=self._w * 0.4, y=self._h * 0.35)
         self.lblSemanticDimensionWordY.place(x=self._w * 0.55, y=self._h * 0.3)
         self.txtValueSemanticDimension.place(x=self._w * 0.6, y=self._h * 0.42)
-        self.btnSemanticEditorUP.place(x=self._w * 0.61, y=self._h * 0.23)
         self.btnSemanticEditorDown.place(x=self._w * 0.6, y=self._h * 0.62)
         self.btnSemanticEditorLeft.place(x=self._w * 0.3, y=self._h * 0.42)
         self.btnSemanticEditorRight.place(x=self._w * 0.9, y=self._h * 0.42)
+        self.btnSaveSemanticCorelationValue.place(x=self._w * 0.84, y=self._h * 0.62)
+        self.updateEditorSemanticVectorInterface()
+
+    def updateEditorSemanticVectorInterface(self):
+        self.lblSemanticDimensionWordX['text'] = f"X_WORD:{self.controller.pos_x_dimension}:{self.controller.word_x_dimension}"
+        self.lblSemanticDimensionWordY['text'] = f"Y_WORD:{self.controller.pos_y_dimension}:{self.controller.word_y_dimension}"
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""
-
 
 s = Software()
