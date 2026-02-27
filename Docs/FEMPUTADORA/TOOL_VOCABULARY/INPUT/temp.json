@@ -1,6 +1,6 @@
 [
   {
-    "id": "88f2baba-dab0-424f-ae92-14ff8662126d",
+    "id": "aca4014f-2dff-425a-a18c-bce2b97dcf64",
     "name": "SUBJECT",
     "contextualIteratorsArr": [
       "yo",
@@ -18,8 +18,69 @@
     "description": "Son los posibles sujetos de la oración"
   },
   {
-    "id": "62da447d-53bf-45a0-b979-0c03b196d541",
-    "name": "CATEGORY",
+    "id": "3154802a-8a30-4994-86a7-25db3830fee0",
+    "name": "VERB",
+    "contextualIteratorsArr": [
+      "ser",
+      "estar",
+      "tener",
+      "hacer",
+      "ir",
+      "poder",
+      "saber",
+      "poner",
+      "haber",
+      "querer",
+      "decir",
+      "hablar",
+      "dar",
+      "ver",
+      "comer",
+      "tomar",
+      "vivir",
+      "necesitar",
+      "quedar",
+      "venir"
+    ],
+    "description": "Son las posibles acciones de los SUJECT"
+  },
+  {
+    "id": "d3a3d620-9b81-461f-91f6-9c02a054ffd7",
+    "name": "TIME",
+    "contextualIteratorsArr": [
+      "pasado",
+      "presente",
+      "futuro"
+    ],
+    "description": "Es el tiempo el cual refleja la frase"
+  },
+  {
+    "id": "b8daefca-4126-4fd8-975c-705011203db3",
+    "name": "PLACE",
+    "contextualIteratorsArr": [
+      "casa",
+      "trabajo",
+      "oficina",
+      "escuela",
+      "universidad",
+      "supermercado",
+      "transporte público",
+      "parque",
+      "gimnasio",
+      "restaurante",
+      "hospital",
+      "centro comercial",
+      "cine",
+      "biblioteca",
+      "banco",
+      "cafetería",
+      "farmacia"
+    ],
+    "description": "Son los sitios fisicos en que pueden existir los SUBJECT"
+  },
+  {
+    "id": "6424d082-6a6f-4e73-8970-ff962ea7bb53",
+    "name": "THEME",
     "contextualIteratorsArr": [
       "diario",
       "sueño",
@@ -39,5 +100,37 @@
       "familia"
     ],
     "description": "clasifica en los aspectos más importantes del diario"
+  },
+  {
+    "id": "91e53020-17ab-4063-8476-70b7db13c2a0",
+    "name": "EMOTION",
+    "contextualIteratorsArr": [
+      "feliz",
+      "triste",
+      "ira",
+      "miedo",
+      "cansansio",
+      "amor",
+      "suicida"
+    ],
+    "description": "Es aquello que pueden sentir los SUBJECT"
+  },
+  {
+    "id": "bbf8d630-e830-4d4d-b16f-b69a5e61f7c3",
+    "name": "INTENSITY",
+    "contextualIteratorsArr": [
+      "mucho",
+      "poco",
+      "nada"
+    ],
+    "description": "Es la posible cuantia de SUBJECT o THEME"
+  },
+  {
+    "id": "f929d4d7-2aaa-4796-a9b3-4aaa52ae8c5e",
+    "name": "NEGATION",
+    "contextualIteratorsArr": [
+      "no"
+    ],
+    "description": "Invierte el sentido de la oración"
   }
 ]

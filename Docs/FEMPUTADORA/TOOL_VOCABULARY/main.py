@@ -36,7 +36,13 @@ class Software:
         self.btnSaveSemanticDimension = Button(self.canvas, text="GUARDAR", command=self.setSemanticDimsension)
 
         self.lblTitleSemanticEditor = Label(self.canvas, text="Edit Semantic VEKTOR")
-
+        self.lblSemanticDimensionWordX = Label(self.canvas, text="X_WORD: ")
+        self.lblSemanticDimensionWordY = Label(self.canvas, text="Y_WORD: ")
+        self.txtValueSemanticDimension = Entry(self.canvas, width=5)
+        self.btnSemanticEditorUP = Button(self.canvas, text="UP", command=lambda: self.motionControl("UP"))
+        self.btnSemanticEditorDown = Button(self.canvas, text="DOWN", command=lambda: self.motionControl("DOWN"))
+        self.btnSemanticEditorLeft = Button(self.canvas, text="LEFT", command=lambda: self.motionControl("LEFT"))
+        self.btnSemanticEditorRight = Button(self.canvas, text="RIGHT", command=lambda: self.motionControl("RIGHT"))
 
         self.btnSaveWork = Button(self.canvas, text="SAVE WORK", bg="green", command=self.saveWork)
 
@@ -70,6 +76,16 @@ class Software:
             self.showEditorSemanticVectorInterface()
 
         self.screem.mainloop()
+
+    def motionControl(self, option):
+        if option == "UP":
+            print("Moviendo arriba")
+        elif option == "DOWN":
+            print("Moviendo abajo")
+        elif option == "LEFT":
+            print("Moviendo izquierda")
+        elif option == "RIGHT":
+            print("Moviendo derecha")
 
     def saveWork(self):
         title = self.cmbxVocabularyFiles.get()
@@ -166,6 +182,13 @@ class Software:
 
     def showEditorSemanticVectorInterface(self):
         self.lblTitleSemanticEditor.place(x=self._w * 0.55, y=self._h * 0.16)
+        self.lblSemanticDimensionWordX.place(x=self._w * 0.4, y=self._h * 0.35)
+        self.lblSemanticDimensionWordY.place(x=self._w * 0.55, y=self._h * 0.3)
+        self.txtValueSemanticDimension.place(x=self._w * 0.6, y=self._h * 0.42)
+        self.btnSemanticEditorUP.place(x=self._w * 0.61, y=self._h * 0.23)
+        self.btnSemanticEditorDown.place(x=self._w * 0.6, y=self._h * 0.62)
+        self.btnSemanticEditorLeft.place(x=self._w * 0.3, y=self._h * 0.42)
+        self.btnSemanticEditorRight.place(x=self._w * 0.9, y=self._h * 0.42)
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""

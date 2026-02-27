@@ -37,7 +37,16 @@ Ahora bien la dimensión es dificil de comprender así... por ello vamos a verla
 "Ella no puede hacerlo": [0,0,1,0]
 "otro dia se hará": [0,1,1,0]
 
-...
+Dimensiones de las frases:
+
+- Sujeto: quién realiza la acción.
+- Verbo: la acción o estado. Pero los verbos son muchos; hay que agrupar o sacar los más comunes.
+- Tiempo: pasado, presente, futuro.
+- Lugar: dónde ocurre.
+- Tema: trabajo, finanzas, salud, sueños, relaciones, etc.
+- Emocion: alegría, tristeza, enojo, etc.
+- Intensidad: palabras como muy, poco...
+- Negación: palabras cono NO o NUNCA invierten el significado.
 
 
 ## :hammer:Funtions:

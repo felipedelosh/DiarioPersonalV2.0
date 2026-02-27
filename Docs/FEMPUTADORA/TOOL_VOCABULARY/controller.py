@@ -19,6 +19,8 @@ class Controller:
         # VARS
         self.semanticDimensionsArr = []
         self.finalPythonDataVocabularizer = ""
+        self.pos_x_dimension = 0
+        self.pos_y_dimension = 0
 
         self.loadPreviousWork()
 
