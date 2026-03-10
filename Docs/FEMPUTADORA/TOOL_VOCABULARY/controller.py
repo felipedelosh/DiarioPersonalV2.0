@@ -95,6 +95,7 @@ class Controller:
         doc = ""
         _zeroCounter = 0
         _ZeroCounterArr = []
+        _maxWorldLen = self.getMaxWordLen()
         ALL_VOCABULAY = ""
         VALUES = []
         for i in self.semanticDimensionsArr:
@@ -106,7 +107,9 @@ class Controller:
  
             itterCon = ""
             for itterContextual in i.contextualIteratorsArr:
-                itterCon = itterCon + f"\t\"{itterContextual}\": <ZERO-ARR>,\n"
+                key_text = f"\"{itterContextual}\":"
+                key_text = key_text.ljust(_maxWorldLen + 3)
+                itterCon += f"\t{key_text} <ZERO-ARR>,\n"
 
             _value_data = f"#{str(i.name).upper()}\n{itterCon}"
             VALUES.append(_value_data)
@@ -134,6 +137,15 @@ class Controller:
         _zeroData = _zeroData[2::]
 
         return "[" + _zeroData + "]"
+    
+    def getMaxWordLen(self):
+        _counter = 0
+        for itterDimension in self.semanticDimensionsArr:
+            for itterWord in itterDimension.contextualIteratorsArr:
+                if len(itterWord) > _counter:
+                    _counter = len(itterWord)
+
+        return _counter
 
     def getTextInFile(self, path):
         info = None
