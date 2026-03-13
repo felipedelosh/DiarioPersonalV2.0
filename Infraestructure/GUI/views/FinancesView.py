@@ -854,7 +854,7 @@ class FinancesView(Screen):
                         _totalCashIn = _totalCashIn + float(_dataSplitted[2])
 
                     prettyDate = f"{YYYY}/{_MM_NUMBER}/{DD}"
-                    prettyConcept = self.manager.controller.utils["string_procesor"].prettyText(40, _dataSplitted[1])
+                    prettyConcept = self.manager.controller.utils["string_procesor"].prettyText(36, _dataSplitted[1])
                     
                     _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|{_dataSplitted[2]}|{_dataSplitted[3]}|{_dataSplitted[4]}"
                     _counterInfo = _counterInfo + 1
@@ -869,7 +869,7 @@ class FinancesView(Screen):
                     if len(str(DD)) == 1:
                         DD = f"0{DD}"
                     prettyDate = f"{YYYY}/{MM}/{DD}"
-                    prettyConcept = self.manager.controller.utils["string_procesor"].prettyText(40, _dataSplitted[1])
+                    prettyConcept = self.manager.controller.utils["string_procesor"].prettyText(36, _dataSplitted[1])
                     _totalCashOut = _totalCashOut + float(_dataSplitted[2])
 
                     _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|{_dataSplitted[2]}|{_dataSplitted[3]}|{_dataSplitted[4]}"
