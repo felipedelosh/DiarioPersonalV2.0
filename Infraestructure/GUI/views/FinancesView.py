@@ -805,6 +805,8 @@ class FinancesView(Screen):
         keyword = ""
         initDate = ""
         finalDate = ""
+        _totalCashIn = 0
+        _totalCashOut = 0
         
         if self.stringProcesor.validateTXT(_concept) and _concept != self.lang.getText("search_economy_help_text_entry_concept"):
             keyword = _concept
@@ -844,8 +846,17 @@ class FinancesView(Screen):
                     _MM_NUMBER = _MM_NUMBER + 1
                     if len(str(_MM_NUMBER)) == 1:
                         _MM_NUMBER = f"0{_MM_NUMBER}"
-                        
-                    _data["data"][itterDataEconomy] = str(_data["data"][itterDataEconomy]).replace(_DATE_TACCOUNT, f"{YYYY}/{_MM_NUMBER}/{DD}")
+
+                    if _dataSplitted[4] == "DEBIT":
+                        _totalCashOut = _totalCashOut + float(_dataSplitted[2])
+
+                    if _dataSplitted[4] == "CREDIT":
+                        _totalCashIn = _totalCashIn + float(_dataSplitted[2])
+
+                    prettyDate = f"{YYYY}/{_MM_NUMBER}/{DD}"
+                    prettyConcept = self.manager.controller.utils["string_procesor"].prettyText(40, _dataSplitted[1])
+                    
+                    _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|{_dataSplitted[2]}|{_dataSplitted[3]}|{_dataSplitted[4]}"
 
                 elif _type == "DEBIT":
                     _date = _dataSplitted[0]
@@ -858,11 +869,17 @@ class FinancesView(Screen):
                     if len(str(DD)) == 1:
                         DD = f"0{DD}"
                     prettyDate = f"{YYYY}/{MM}/{DD}"
-                    
-                    _data["data"][itterDataEconomy] = f"{prettyDate}|{_dataSplitted[1]}|{_dataSplitted[2]}|{_dataSplitted[3]}|{_dataSplitted[4]}"
+                    prettyConcept = self.manager.controller.utils["string_procesor"].prettyText(40, _dataSplitted[1])
+                    _totalCashOut = _totalCashOut + float(_dataSplitted[2])
 
-                # Modify register before :)
+                    _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|{_dataSplitted[2]}|{_dataSplitted[3]}|{_dataSplitted[4]}"
+
+                # DISPLAY
                 txt = txt + _data["data"][itterDataEconomy] + "\n"
-            
+
+            print(f"Total datos: {len(_data["data"])}")
+            txt = txt + "*"*74 + "\n"
+            txt = txt + "TOTAL IN: " + f"{_totalCashIn}" + "\n"
+            txt = txt + "TOTAL OUT: " + f"{_totalCashOut}" + "\n"
             txtSearchResult.insert("1.0", txt)
     # Search
