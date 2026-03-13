@@ -14,8 +14,6 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
 
     def execute(self,  base_path: str, keyword: str, initDate: str, finalDate: str) -> Response:
         try:
-            # WIP
-            # WORK with response object
             _qty = 0
             _data = {}
             _economyFolders = self.folder_service.get_all_folders_in_path(base_path)
@@ -33,7 +31,7 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
                             continue
 
                         for itterEconomyData in _economyInfoPeerYear["data"]:
-                            process = self.processEconomyInformation(_base_path_economy, YYYY, _data, itterEconomyData, _economyInfoPeerYear["data"], keyword)
+                            process = self.processEconomyInformation(_base_path_economy, YYYY, _data, itterEconomyData, _economyInfoPeerYear["data"], keyword, _qty)
 
                             if process:
                                 _qty = _qty + 1
@@ -42,7 +40,7 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
         except:
             return Response.response(False, {}, -1)
         
-    def processEconomyInformation(self, path, YYYY, data, keyEconomyMovement, EconomyMovement, keyword):
+    def processEconomyInformation(self, path, YYYY, data, keyEconomyMovement, EconomyMovement, keyword, baseFolderCounter):
         try:
             # DATE|CONCEPT|CASH|TYPE|STATUS
             if "DEBITOS" in path:
@@ -75,9 +73,11 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
             
             # DATE|CONCEPT|CASH|TYPE|STATUS
             if "TACCOUNTS" in path:
-                _controlAdd = 0
-                keyWord = f"TACCOUNT-{keyEconomyMovement}"
+                _regCounter = 0
                 for itterTAcc in str(EconomyMovement[keyEconomyMovement]).split("\n"):
+                    if str(itterTAcc).strip() == "":
+                        continue
+                
                     _dataSplited = str(itterTAcc).split(";")
 
                     date = str(keyEconomyMovement).split(".")[0]
@@ -86,13 +86,10 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
 
                     concept = _dataSplited[0]
 
+                    # FILTER BY CONCEPT
                     if keyword != "":
                         if not str(keyword).lower() in str(concept).lower():
                             continue
-
-                    _max_length = 40
-                    if len(concept) > _max_length:
-                        concept = concept[:_max_length - 3] + "..."
 
                     cash = ""
                     status = ""
@@ -103,12 +100,15 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
                         status = "CREDIT"
                         cash = _dataSplited[1]
 
+                    keyWord = f"TACCOUNT-{baseFolderCounter}-{_regCounter}-{keyEconomyMovement}"
                     info = f"{date}|{concept}|{cash}|TACCOUNT|{status}"
                     data[keyWord] = info
-                    _controlAdd = 1
+                    _regCounter = _regCounter + 1
 
-                return _controlAdd != 0
+                # Add info?
+                return _regCounter != 0
 
             return False
-        except:
+        except Exception as e:
+            print(f"ERROR::USE_CASE::GET_ALL_INFORMATION_ECONOMY::{str(e)}")
             return False

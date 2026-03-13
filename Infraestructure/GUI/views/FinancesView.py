@@ -823,9 +823,9 @@ class FinancesView(Screen):
             txtSearchResult.delete("1.0", "end")
             
             txt = ""
+            _counterInfo = 0
             for itterDataEconomy in _data["data"]:
                 _dataSplitted = str(_data["data"][itterDataEconomy]).split("|")
-
                 _type = _dataSplitted[3]
 
                 if _type == "TACCOUNT":
@@ -857,7 +857,7 @@ class FinancesView(Screen):
                     prettyConcept = self.manager.controller.utils["string_procesor"].prettyText(40, _dataSplitted[1])
                     
                     _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|{_dataSplitted[2]}|{_dataSplitted[3]}|{_dataSplitted[4]}"
-
+                    _counterInfo = _counterInfo + 1
                 elif _type == "DEBIT":
                     _date = _dataSplitted[0]
                     _dateArr = str(_date).split("/")
@@ -873,13 +873,14 @@ class FinancesView(Screen):
                     _totalCashOut = _totalCashOut + float(_dataSplitted[2])
 
                     _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|{_dataSplitted[2]}|{_dataSplitted[3]}|{_dataSplitted[4]}"
-
+                    _counterInfo = _counterInfo + 1
                 # DISPLAY
                 txt = txt + _data["data"][itterDataEconomy] + "\n"
 
-            print(f"Total datos: {len(_data["data"])}")
             txt = txt + "*"*74 + "\n"
-            txt = txt + "TOTAL IN: " + f"{_totalCashIn}" + "\n"
+            txt = txt + "TOTAL IN:  " + f"{_totalCashIn}" + "\n"
             txt = txt + "TOTAL OUT: " + f"{_totalCashOut}" + "\n"
+            txt = txt + "."*74 + "\n"
+            txt = txt + "TOTAL DATA: " + f"{_counterInfo}. " + "Elements Detected.\n"
             txtSearchResult.insert("1.0", txt)
     # Search
