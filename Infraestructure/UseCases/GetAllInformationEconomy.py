@@ -65,9 +65,6 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
                     if not str(keyword).lower() in str(concept).lower():
                         return False
 
-                _max_length = 40
-                if len(concept) > _max_length:
-                    concept = concept[:_max_length - 3] + "..."
                 cash = _dataSplited[1]
                 status = _dataSplited[5]
 
