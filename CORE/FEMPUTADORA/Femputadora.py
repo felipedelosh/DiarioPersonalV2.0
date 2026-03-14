@@ -14,6 +14,9 @@ class Femputadora:
         self.Tokenizer = Tokenizer()
         self.Vectorizer = Vectorizer(self.vocabulary, self.synonyms)
 
+        # VARS
+        self._chatCounter = 0 # times to user INPUT txt
+
     def getResponse(self, text):
         # STEP 01: GET TOKENS
         tokens = self.Tokenizer.tokenize(text)
@@ -21,8 +24,13 @@ class Femputadora:
         # STEP 02: Vectorize
         vector = self.Vectorizer.vectorize(tokens)
 
+
+        # ...
+        self._chatCounter = self._chatCounter + 1
+
         return {
+            "chat_counter": self._chatCounter,
             "tokens": tokens,
-            "vector": vector
+            "vector": vector,
         }
     

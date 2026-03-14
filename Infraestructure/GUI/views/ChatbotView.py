@@ -23,7 +23,7 @@ class ChatbotView(Screen):
 
     def renderFemputadoraView(self):
         self.draw_femputadora_face()
-        _state = self.manager.controller.dependencies["config"].get("fempuadora_mode")
+        _state = self.manager.controller.dependencies["config"].get("femputadora_mode")
 
         if self._display_mode == _state[0]:
             self.deleteOption()
@@ -96,8 +96,6 @@ class ChatbotView(Screen):
         _femputadora_data = _data["data"]
         _new_chat = f"{'User'}:\n{text}\n\n"
 
-        
-
         if _mode == "DEV":
             _new_chat = _new_chat + f"{'Femputadora'}:\n"
 
@@ -105,9 +103,13 @@ class ChatbotView(Screen):
                 _new_chat = _new_chat + f"\n{i}:\n{_femputadora_data[i]}"
         else:
             pass
-
-        self._txt_chat = self._txt_chat + _new_chat
-        _state = self.manager.controller.dependencies["config"].get("fempuadora_mode")
+        
+        if _data["data"]["chat_counter"] == 1:
+            self._txt_chat = self._txt_chat + _new_chat
+        else:
+            self._txt_chat = self._txt_chat + "\n\n" + _new_chat
+        
+        _state = self.manager.controller.dependencies["config"].get("femputadora_mode")
         self._display_mode = _state[1]
         entry.delete(0, tk.END)
         self.renderFemputadoraView()

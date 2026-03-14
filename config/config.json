@@ -3,7 +3,7 @@
     "env": "DEV",
     "window_w":900,
     "window_h":600,
-    "fempuadora_mode": [
+    "femputadora_mode": [
         "question",
         "chat",
         "graphics"
