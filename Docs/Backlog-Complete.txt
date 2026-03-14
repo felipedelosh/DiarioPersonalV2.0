@@ -21,3 +21,4 @@ EB1|[BUG] - Buscador Economia|Cuando un registro contable es en el mes de enero 
 EB2|[BUG] - Al guardar el abono a la deuda no está pasando en negativo|En los registros no está descontando... el valor entra como positivo.|🔴|SI
 D1|Vista de Diario|Permitir escribir, editar y guardar páginas.|🟢|SI
 H1|Debitos|Todo debito al guardarse tiene que tener un identificador UUII|🔴|SI
+H4|BUSCADOR ECONOMIA BONITO|Al momento de hacer una busqueda se debe de mostar la data de manera uniforme... texto de igual tamaño.|🟡|SI
