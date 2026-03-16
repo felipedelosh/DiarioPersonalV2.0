@@ -53,6 +53,7 @@
   "text_init_date": "Fecha Inicio",
   "text_final_date": "Fecha Final",
   "text_format_date": "YYYY/MM/DD",
+  "text_insert_date": "Por Favor seleccione la fecha YYYY/MM/DD",
   "title_feelings": "Registro diario de sentimientos",
   "help_feelings": "Ingresa aquí como te sentiste hoy: ",
   "ok_feelings_not_feel": "Se ha guardado su sentimiento correctamente.",

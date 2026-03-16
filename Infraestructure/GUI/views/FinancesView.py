@@ -8,6 +8,7 @@ from Infraestructure.GUI.Screen import Screen
 from Infraestructure.GUI.views.PopupView import PopupView
 from Infraestructure.GUI.views.PopupConfirmView import PopupConfirmView
 from Infraestructure.GUI.views.PopupInputView import PopupInputView
+from Infraestructure.GUI.views.PopupDateInputView import PopupDateInputView
 
 class FinancesView(Screen):
     def render(self, x, y):
@@ -753,8 +754,7 @@ class FinancesView(Screen):
 
         txtDateInit = tk.Entry(self.canvas, width=14, fg="gray")
         txtDateInit.insert(0, self.lang.getText("text_format_date"))
-        txtDateInit.bind("<FocusIn>", lambda e, entry=txtDateInit: self._clear_placeholder_economy_search_moviments_date(entry))
-        txtDateInit.bind("<FocusOut>", lambda e, entry=txtDateInit: self._add_placeholder_economy_search_moviments_date(entry))
+        txtDateInit.bind("<FocusIn>", lambda e, entry=txtDateInit: self._open_date_popup(entry))
         self._tempCurrentElementsOptions.append(txtDateInit)
         txtDateInit.place(x=self._w*0.52, y=self._h*0.32)
 
@@ -764,8 +764,7 @@ class FinancesView(Screen):
 
         txtDateEnd = tk.Entry(self.canvas, width=14, fg="gray")
         txtDateEnd.insert(0, self.lang.getText("text_format_date"))
-        txtDateEnd.bind("<FocusIn>", lambda e, entry=txtDateEnd: self._clear_placeholder_economy_search_moviments_date(entry))
-        txtDateEnd.bind("<FocusOut>", lambda e, entry=txtDateEnd: self._add_placeholder_economy_search_moviments_date(entry))
+        txtDateEnd.bind("<FocusIn>", lambda e, entry=txtDateEnd: self._open_date_popup(entry))
         self._tempCurrentElementsOptions.append(txtDateEnd)
         txtDateEnd.place(x=self._w*0.78, y=self._h*0.32)
 
@@ -795,6 +794,19 @@ class FinancesView(Screen):
             entry.insert(0, self.lang.getText("text_format_date"))
             entry.config(fg="gray")
 
+    def _open_date_popup(self, entry):
+        current_value = entry.get().strip()
+
+        if current_value == "" or current_value == self.lang.getText("text_format_date"):
+            popup = PopupDateInputView(self.master, self.manager, self.lang.getText("text_insert_date"), self.lang.getText("text_date"))
+
+            selected_date = popup.render(420, 220)
+            if selected_date is not None and str(selected_date).strip() != "":
+                entry.delete(0, tk.END)
+                entry.insert(0, selected_date)
+                entry.config(fg="black")
+            else:
+                self._add_placeholder_economy_search_moviments_date(entry)
 
     def searchEconomyMoviments(self, itemsDiplayed, txtConcepToSearch, txtDateInit, txtDateEnd, txtSearchResult):
         _concept = txtConcepToSearch.get()
