@@ -14,10 +14,82 @@ class GraphRenderer(IGraphRenderer):
         pass
 
     def render(self, canvas: Canvas, data: Response, graphicsType: str, options):
-        print("Graphier By LOKO")
+        if graphicsType == str(GraphType.PIE_TACCOUNTS_ALL):
+            self._renderAllTAccountsInPIEGraphic(canvas, data)
 
         if graphicsType == str(GraphType.BAR_TACCOUNTS_ALL):
             self._renderAllTAccountsInBarGraphic(canvas, data)
+
+    def _renderAllTAccountsInPIEGraphic(self, canvas: Canvas, data: Response):
+        """
+        Enter All TAccounts information {'path': 'data'}
+
+        Divide Screm In TWO PARTS (Debit, Credit)... and PUT PIE
+        """
+        # VARS
+        w = float(canvas["width"])
+        h = float(canvas["height"])
+        initAnge = 0
+        endAngle = 0
+        _total_cash = 0
+        _total_debit = 0 # IN
+        _total_credit = 0 # OUT
+        _TOP_DEBIT = ['', 0]
+        _TOP_CREDIT = ['', 0]
+
+        for itterTAccountPath in data["data"]:
+            _data = data["data"][itterTAccountPath]
+            
+            # Calculate MAX & MIN & T
+            for itterTAccountData in str(_data).split("\n"):
+                if str(itterTAccountData).strip() == "":
+                    continue
+                
+                try:
+                    _splited_data = str(itterTAccountData).split(";")
+                    _concept = _splited_data[0]
+                    _debit = _splited_data[1]
+                    _debit = float(_debit)
+
+                    if _debit > _TOP_DEBIT[1]:
+                        _TOP_DEBIT = [_concept, _debit]
+
+                    _credit = _splited_data[2]
+                    _credit = float(_credit)
+
+                    if _credit > _TOP_CREDIT[1]:
+                        _TOP_CREDIT = [_concept, _credit]
+                    
+                    _total_debit = _total_debit + _debit
+                    _total_credit = _total_credit + _credit
+                except:
+                    continue
+
+        _total_cash = _total_debit + _total_credit
+        _margin = w * 0.04
+        _circleTOP = h * 0.9
+        _textMarginX = w * 0.72
+        _textMarginY = h * 0.2
+        canvas.create_oval(_margin, _margin, _circleTOP, _circleTOP, fill="azure", width=3)
+
+        # [COLOR, $$$]
+        dataToPaint = {
+            "IN": ["green", _total_debit],
+            "OUT": ["red", _total_credit]
+        }
+
+        if _total_cash != 0:
+            _counter = 0
+            for i in dataToPaint:
+                _name = i
+                _color = dataToPaint[i][0]
+                _value = dataToPaint[i][1]
+
+                endAngle = 360 * (_value/_total_cash)
+                canvas.create_arc(_margin, _margin, _circleTOP, _circleTOP, width=1, fill=_color, start=initAnge, extent=endAngle)
+                canvas.create_text(_textMarginX, _textMarginY + (20 * _counter), fill = _color, text=_name + " : " + f"{self.format_money(_value)}")
+                initAnge = initAnge + endAngle
+                _counter = _counter + 1
 
     def _renderAllTAccountsInBarGraphic(self, canvas: Canvas, data: Response):
         """

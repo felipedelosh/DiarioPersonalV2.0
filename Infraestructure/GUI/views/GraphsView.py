@@ -101,6 +101,14 @@ class GraphsView(Screen):
 
     def paintedCanvas(self, graphicsType: GraphType):
         _data = None
+        if graphicsType == str(GraphType.PIE_TACCOUNTS_ALL):
+            _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
+            _data = self.manager.controller.dependencies["economy_use_case_get_all_taccounts"].execute(_base_path)
+
+            if not _data["success"]:
+                PopupView(self.master, self.manager, self.lang.getText("text_find_error_taccounts_search"), "ERROR").render(500, 300)
+                return None
+
         if graphicsType == str(GraphType.BAR_TACCOUNTS_ALL):
             _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
             _data = self.manager.controller.dependencies["economy_use_case_get_all_taccounts"].execute(_base_path)
