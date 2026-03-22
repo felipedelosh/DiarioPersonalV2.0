@@ -10,7 +10,7 @@ from Domain.Entities.Response import Response
 
 class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
     def __init__(self, personal_diary_use_case: IGetAllPersonalDiaryInformation, backup_service: IBackupService):
-        self.personal_diary_get_all_use_case = personal_diary_use_case
+        self.diary_get_all_use_case = personal_diary_use_case
         self.backup_service = backup_service
 
     def execute(self, pathdict, path_backup_file, backup_file_header_template: str) -> Response:
@@ -21,7 +21,7 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
             qty = 0
 
             _path = pathdict[str(PathEnums.DIARY)]
-            _all_data = self.personal_diary_get_all_use_case.execute(_path)
+            _all_data = self.diary_get_all_use_case.execute(_path)
 
             if _all_data["success"] and _all_data["qty"] > 0:
                 _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.DIARY)) + "\n"
@@ -30,7 +30,20 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                     _title = str(i)
                     _content = _all_data["data"][_title]
                     _data_backup = _data_backup + f"Title: {_title}\n" + f"Text: {_content}\n" + "*"*40 + "\n"
-                    _final_data[str(PathEnums.DIARY)][i] = _content
+                    _final_data[str(PathEnums.DIARY)][_title] = _content
+                    qty = qty + 1
+
+            _path = pathdict[str(PathEnums.SCHELUDED_24_H)]
+            _all_data = self.diary_get_all_use_case.execute(_path)
+
+            if _all_data["success"] and _all_data["qty"] > 0:
+                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.SCHELUDED_24_H)) + "\n"
+                _final_data[str(PathEnums.SCHELUDED_24_H)] = {}
+                for i in _all_data["data"]:
+                    _date = str(i)
+                    _content = _all_data["data"][_date]
+                    _data_backup = _data_backup + f"Date: {_date}\n" + f"Text: {_content}\n" + "."*40 + "\n"
+                    _final_data[str(PathEnums.SCHELUDED_24_H)][_date] = _content
                     qty = qty + 1
 
             if qty > 0:
