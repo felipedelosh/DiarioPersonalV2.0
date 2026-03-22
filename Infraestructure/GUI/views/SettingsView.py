@@ -3,6 +3,7 @@ FelipedelosH
 2025
 """
 import tkinter as tk
+from Domain.Enums.PathEnums import PathEnums
 from Infraestructure.GUI.Screen import Screen
 
 class SettingsView(Screen):
@@ -69,13 +70,28 @@ class SettingsView(Screen):
 
     def showMainMenuFromBtn(self):
         self.btnMainMenu.destroy()
+        self.destroyOption()
         _options = self.lang.getText("settings_options")
         self.renderButons(_options, self._w, self._h)
 
+    # FILES - BACKUP
     def drawFilesSettings(self):
-        lblHelp = tk.Label(self.canvas, text="LOCO")
+        lblHelp = tk.Label(self.canvas, text=self.lang.getText("settings_option_files_help_generate_backup_file"))
         self._tempCurrentElementsOptions.append(lblHelp)
+        lblHelp.place(x=self._w * 0.3, y=self._h * 0.3)
+
+        btnCreateBackupAllTemp = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=self.generateBackupTempFile)
+        self._tempCurrentElementsOptions.append(btnCreateBackupAllTemp)
+        btnCreateBackupAllTemp.place(x=self._w * 0.45, y=self._h * 0.4)
+
+    def generateBackupTempFile(self):
+        _path_dic = self.manager.controller.pathController.getAllBasePathInDict()
+        _path_temp_file = self.manager.controller.pathController.getPathByCODE(str(PathEnums.TEMP))
+        _status = self.manager.controller.dependencies["diary_use_case_get_all_registred_information_with_temp_file"].execute(_path_dic, _path_temp_file)
         
+        print(_status)
+    # FILES - BACKUP
+
 
     def destroyOption(self):
         for widget in self._tempCurrentElementsOptions:

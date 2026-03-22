@@ -34,6 +34,8 @@ class PathController:
             return f"{self.path}\\DATA\\ECONOMIA\\DEBITOS\\"
         elif code == "SCHELUDED_24_H_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DISTRIBUCIONTIEMPO\\TIEMPODIARIO\\{self.timeUtil.getCurrentYYYY()}\\"
+        elif code == "TEMP":
+            return f"{self.path}\\DATA\\TEMP\\"
         elif code == "USAGES":
             return f"{self.path}\\DATA\\USOS\\"
         
@@ -47,3 +49,9 @@ class PathController:
             self.getPathByCODE(str(PathEnums.DIARY)),
             self.getPathByCODE(str(PathEnums.ECONOMY))
         ]
+    
+    def getAllBasePathInDict(self):
+        return {
+            str(PathEnums.DIARY): self.getPathByCODE(str(PathEnums.DIARY)),
+            str(PathEnums.ECONOMY): self.getPathByCODE(str(PathEnums.ECONOMY))
+        }

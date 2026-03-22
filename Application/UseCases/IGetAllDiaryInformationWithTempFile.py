@@ -11,5 +11,5 @@ from Domain.Entities.Response import Response
 
 class IGetAllDiaryInformationWithTempFile(ABC):
     @abstractmethod
-    def execute(self, pathArr: list) -> Response:
+    def execute(self, pathDic: dict, path_backup_file: str) -> Response:
         pass

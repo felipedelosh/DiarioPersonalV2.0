@@ -8,6 +8,7 @@ from enum import auto
 class PathEnums(Enum):
     DIARY = auto()
     ECONOMY = auto()
+    TEMP = auto()
 
     def __str__(self):
         return self.name
