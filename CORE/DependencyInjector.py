@@ -25,6 +25,7 @@ from Infraestructure.Services.DebitService import DebitService
 from Infraestructure.Services.FolderService import FolderService
 from Infraestructure.Services.ScheduleService import ScheduleService
 #Use Cases
+from Infraestructure.UseCases.GetAllPersonalDiaryInformation import GetAllPersonalDiaryInformation
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
 from Infraestructure.UseCases.loadDiaryPage import LoadDiaryPage
 from Infraestructure.UseCases.SaveFeeling import SaveFeeling
@@ -89,6 +90,7 @@ class DependencyInjector:
         # END SERVICES
 
         # USECASES
+        diary_use_case_get_all_info = GetAllPersonalDiaryInformation(folder_service, diary_service)
         folders_use_case_get_all = GetAllFoldersInPath(folder_service)
         diary_use_case_save_page = SaveDiaryPage(diary_service)
         diary_use_case_load_page = LoadDiaryPage(diary_service)
@@ -107,7 +109,7 @@ class DependencyInjector:
         debit_use_case_get_all_debits_registered = LoadAllDebitsYearsRegistered(folders_use_case_get_all, debit_use_case_load_all_debits_peer_year)
         debit_use_case_get_all_years_of_debits = GetAllYearsOfEconomyDebits(folder_service)
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
-        diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile()
+        diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile(diary_use_case_get_all_info)
         usage_use_case_save = SaveUsage(usage_servide)
         # END USECASES
 
