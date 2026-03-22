@@ -24,11 +24,14 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
             _all_data = self.personal_diary_get_all_use_case.execute(_path)
 
             if _all_data["success"] and _all_data["qty"] > 0:
-                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.DIARY))
+                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.DIARY)) + ""
                 _final_data[str(PathEnums.DIARY)] = {}
                 for i in _all_data["data"]:
                     _final_data[str(PathEnums.DIARY)][i] = _all_data["data"][i]
                     qty = qty + 1
+
+            if qty > 0:
+                _backup_file = self.backup_service.save(path_backup_file, _data_backup)
 
             return Response.response(True, _final_data, qty)
         except:
