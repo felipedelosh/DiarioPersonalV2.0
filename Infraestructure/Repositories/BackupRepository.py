@@ -13,4 +13,4 @@ class BackupRepository(IBackupRepository):
         self.file_reader = FileReader()
 
     def save(self, path: str, content: str) -> bool:
-        return self.file_writer.saveFile(path, content)
+        return self.file_writer.overWritefile(path, content)

@@ -236,7 +236,7 @@
   ],
   "settings_title": "Menú de configuración",
   "settings_option_files_help_generate_backup_file": "Crear un archivo temporal con todos los datos.",
-  "settings_option_files_header_backup_file_template": "====<TITLE>===\n",
+  "settings_option_files_header_backup_file_template": "====<TITLE>====\n",
   "settings_options": [
     "configuración de entrada",
     "configuración de femputadora",

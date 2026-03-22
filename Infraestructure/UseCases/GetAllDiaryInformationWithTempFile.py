@@ -24,10 +24,13 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
             _all_data = self.personal_diary_get_all_use_case.execute(_path)
 
             if _all_data["success"] and _all_data["qty"] > 0:
-                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.DIARY)) + ""
+                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.DIARY)) + "\n"
                 _final_data[str(PathEnums.DIARY)] = {}
                 for i in _all_data["data"]:
-                    _final_data[str(PathEnums.DIARY)][i] = _all_data["data"][i]
+                    _title = str(i)
+                    _content = _all_data["data"][_title]
+                    _data_backup = _data_backup + f"Title: {_title}\n" + f"Text: {_content}\n" + "*"*40 + "\n"
+                    _final_data[str(PathEnums.DIARY)][i] = _content
                     qty = qty + 1
 
             if qty > 0:
