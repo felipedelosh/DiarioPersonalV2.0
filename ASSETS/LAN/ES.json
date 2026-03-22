@@ -232,5 +232,16 @@
     "Periodo Ingresos/Egresos",
     "Comparativa Sueño vs Ingresos",
     "Filtrado Por categoria"
+  ],
+  "settings_title": "Menú de configuración",
+  "settings_options": [
+    "CONFIGURACIÓN DE ENTRADA",
+    "CONFIGURACIÓN DE FEMPUTADORA",
+    "CONFIGURACIÓN DE FEMPUTADORA",
+    "CONFIGURACIÓN EMOCIONAL",
+    "CONFIGURACIÓN DE VISUALIZACIÓN",
+    "CONFIGURACIÓN DEL DIARIO",
+    "CONFIGURACIÓN DEL DIARIO",
+    "CONFIGURACIÓN DE ARCHIVOS"
   ]
 }

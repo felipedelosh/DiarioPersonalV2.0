@@ -4,15 +4,19 @@ FelipedelosH
 
 Generate a Paths to Save&Read files
 """
+from Domain.Enums.PathEnums import PathEnums
+
 class PathController:
     def __init__(self, path, timeUtil):
         self.path = path
         self.timeUtil = timeUtil
 
     def getPathByCODE(self, code):
+        if code == "DIARY":
+            return f"{self.path}\\DATA\\DIARIO\\"
         if code == "DIARY_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DIARIO\\{self.timeUtil.getCurrentYYYY()}\\"
-        if code == "DREAM_CURRENT_YYYY":
+        elif code == "DREAM_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DREAMS\\{self.timeUtil.getCurrentYYYY()}\\"
         elif code == "FEELING_CURRENT_YYYY":
             return f"{self.path}\\DATA\\SENTIMIENTOS\\{self.timeUtil.getCurrentYYYY()}\\"
@@ -37,3 +41,9 @@ class PathController:
         if code == "ECONOMY_DEBIT":
             return f"{self.getPathByCODE(code)}{YYYY}\\"
         # ...
+
+    def getAllBasePathInArr(self):
+        return [
+            self.getPathByCODE(str(PathEnums.DIARY)),
+            self.getPathByCODE(str(PathEnums.ECONOMY))
+        ]
