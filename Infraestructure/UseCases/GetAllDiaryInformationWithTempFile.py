@@ -10,8 +10,20 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
     def __init__(self):
         pass
 
-    def execute(self, pathdict, path_backup_file) -> Response:
+    def execute(self, pathdict, path_backup_file, backup_file_header_template: str) -> Response:
+        _data_backup = ""
         print(pathdict)
         print(path_backup_file)
+        print(backup_file_header_template)
 
-        return Response.response(False, {}, 0)
+        try:
+            qty = 0
+
+            _path = pathdict[str(PathEnums.DIARY)]
+            
+            print("Entraa....")
+            print(_path)
+
+            return Response.response(True, {}, qty)
+        except:
+            return Response.response(False, {}, -1)

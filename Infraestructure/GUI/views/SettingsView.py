@@ -87,11 +87,11 @@ class SettingsView(Screen):
     def generateBackupTempFile(self):
         _path_dic = self.manager.controller.pathController.getAllBasePathInDict()
         _path_temp_file = self.manager.controller.pathController.getPathByCODE(str(PathEnums.TEMP))
-        _status = self.manager.controller.dependencies["diary_use_case_get_all_registred_information_with_temp_file"].execute(_path_dic, _path_temp_file)
+        backup_file_header_template = self.lang.getText("settings_option_files_header_backup_file_template")
+        _status = self.manager.controller.dependencies["diary_use_case_get_all_registred_information_with_temp_file"].execute(_path_dic, _path_temp_file, backup_file_header_template)
         
         print(_status)
     # FILES - BACKUP
-
 
     def destroyOption(self):
         for widget in self._tempCurrentElementsOptions:
