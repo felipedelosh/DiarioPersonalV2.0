@@ -14,6 +14,7 @@ from Infraestructure.Repositories.DrugRepository import DrugRepository
 from Infraestructure.Repositories.EconomyRepository import FileEconomyRepository
 from Infraestructure.Repositories.FileDebitRepository import FileDebitRepository
 from Infraestructure.Repositories.ScheduleRepository import ScheduleRepository
+from Infraestructure.Repositories.BackupRepository import BackupRepository
 #Services
 from Infraestructure.Services.DiaryService import DiaryService
 from Infraestructure.Services.UsageService import UsageService
@@ -24,6 +25,7 @@ from Infraestructure.Services.EconomyService import EconomyService
 from Infraestructure.Services.DebitService import DebitService
 from Infraestructure.Services.FolderService import FolderService
 from Infraestructure.Services.ScheduleService import ScheduleService
+from Infraestructure.Services.BackupService import BackupService
 #Use Cases
 from Infraestructure.UseCases.GetAllPersonalDiaryInformation import GetAllPersonalDiaryInformation
 from Infraestructure.UseCases.SaveDiaryPage import SaveDiaryPage
@@ -75,6 +77,7 @@ class DependencyInjector:
         economy_repo = FileEconomyRepository()
         debit_repo = FileDebitRepository()
         schedule_repo = ScheduleRepository()
+        backup_repo = BackupRepository()
         # END REPOSITORIES
 
         # SERVICES
@@ -87,6 +90,7 @@ class DependencyInjector:
         debit_service = DebitService(debit_repo)
         folder_service = FolderService()
         schedule_service = ScheduleService(schedule_repo)
+        backup_service = BackupService(backup_repo)
         # END SERVICES
 
         # USECASES
@@ -109,7 +113,7 @@ class DependencyInjector:
         debit_use_case_get_all_debits_registered = LoadAllDebitsYearsRegistered(folders_use_case_get_all, debit_use_case_load_all_debits_peer_year)
         debit_use_case_get_all_years_of_debits = GetAllYearsOfEconomyDebits(folder_service)
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
-        diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile(diary_use_case_get_all_info)
+        diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile(diary_use_case_get_all_info, backup_service)
         usage_use_case_save = SaveUsage(usage_servide)
         # END USECASES
 
