@@ -39,3 +39,12 @@ Graphs
     ├── Intensidad
     └── Tendencias
 
+Pendiente en femputadora:
+1. Falta capa de normalización lingüística fuerte
+
+Ya vas bien con sinónimos, pero te falta:
+
+conjugaciones (voy, fui, iba)
+plural/singular (casas)
+tildes (cafe vs café)
+lower/upper
