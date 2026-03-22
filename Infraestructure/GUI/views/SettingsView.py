@@ -16,10 +16,12 @@ class SettingsView(Screen):
         self.lang = self.manager.controller.dependencies["lang"]
         lblTitle = tk.Label(self.canvas, text=self.lang.getText("settings_title"))
         lblTitle.place(x=self._w*0.38, y=self._h*0.05)
+        self.btnMainMenu = None
         _options = self.lang.getText("settings_options")
         self.renderButons(_options, self._w, self._h)
 
     def renderButons(self, _options, _w, _h):
+        self.btnMainMenu = tk.Button(self.canvas, text=self.lang.getText("text_main_menu"), command=self.showMainMenuFromBtn)
         _total_butons = len(_options)
 
         if _total_butons == 0:
@@ -58,4 +60,28 @@ class SettingsView(Screen):
         elif opt == _options[6]:
             pass
         elif opt == _options[7]:
-            pass
+            self.destroyOption()
+            self.drawBtnBackToMainMenu()
+            self.drawFilesSettings()
+
+    def drawBtnBackToMainMenu(self):
+        self.btnMainMenu.place(x=self._w*0.4, y=self._h*0.1)
+
+    def showMainMenuFromBtn(self):
+        self.btnMainMenu.destroy()
+        _options = self.lang.getText("settings_options")
+        self.renderButons(_options, self._w, self._h)
+
+    def drawFilesSettings(self):
+        lblHelp = tk.Label(self.canvas, text="LOCO")
+        self._tempCurrentElementsOptions.append(lblHelp)
+        
+
+    def destroyOption(self):
+        for widget in self._tempCurrentElementsOptions:
+            widget.destroy()
+        self._tempCurrentElementsOptions.clear()
+
+        for btn in self.btns:
+            btn.destroy()
+        self.btns.clear()
