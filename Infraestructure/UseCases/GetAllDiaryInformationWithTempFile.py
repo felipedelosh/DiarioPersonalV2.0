@@ -5,12 +5,14 @@ FelipedelosH
 from Application.UseCases.IGetAllDiaryInformationWithTempFile import IGetAllDiaryInformationWithTempFile
 from Application.Services.IBackupService import IBackupService
 from Application.UseCases.IGetAllPersonalDiaryInformation import IGetAllPersonalDiaryInformation
+from Application.UseCases.IGetAllInformationEconomy import IGetAllInformationEconomy
 from Domain.Enums.PathEnums import PathEnums
 from Domain.Entities.Response import Response
 
 class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
-    def __init__(self, personal_diary_use_case: IGetAllPersonalDiaryInformation, backup_service: IBackupService):
+    def __init__(self, personal_diary_use_case: IGetAllPersonalDiaryInformation, economy_diary_use_case: IGetAllInformationEconomy, backup_service: IBackupService):
         self.diary_get_all_use_case = personal_diary_use_case
+        self.economy_diary_use_case = economy_diary_use_case
         self.backup_service = backup_service
 
     def execute(self, pathdict, path_backup_file, backup_file_header_template: str) -> Response:
@@ -33,6 +35,19 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                     _final_data[str(PathEnums.DIARY)][_title] = _content
                     qty = qty + 1
 
+            _path = pathdict[str(PathEnums.DREAMS)]
+            _all_data = self.diary_get_all_use_case.execute(_path)
+
+            if _all_data["success"] and _all_data["qty"] > 0:
+                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.DREAMS)) + "\n"
+                _final_data[str(PathEnums.DREAMS)] = {}
+                for i in _all_data["data"]:
+                    _title = str(i)
+                    _content = _all_data["data"][_title]
+                    _data_backup = _data_backup + f"Title Dream: {_title}\n" + f"Text: {_content}\n" + "*"*40 + "\n"
+                    _final_data[str(PathEnums.DREAMS)][_title] = _content
+                    qty = qty + 1
+
             _path = pathdict[str(PathEnums.SCHELUDED_24_H)]
             _all_data = self.diary_get_all_use_case.execute(_path)
 
@@ -49,9 +64,8 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
             _path = pathdict[str(PathEnums.DRUGS)]
             _all_data = self.diary_get_all_use_case.execute(_path)
 
-
             if _all_data["success"] and _all_data["qty"] > 0:
-                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.SCHELUDED_24_H)) + "\n"
+                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.DRUGS)) + "\n"
                 _final_data[str(PathEnums.DRUGS)] = {}
                 for i in _all_data["data"]:
                     _key = str(i)

@@ -113,7 +113,7 @@ class DependencyInjector:
         debit_use_case_get_all_debits_registered = LoadAllDebitsYearsRegistered(folders_use_case_get_all, debit_use_case_load_all_debits_peer_year)
         debit_use_case_get_all_years_of_debits = GetAllYearsOfEconomyDebits(folder_service)
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
-        diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile(diary_use_case_get_all_info, backup_service)
+        diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile(diary_use_case_get_all_info, economy_use_case_get_all_info, backup_service)
         usage_use_case_save = SaveUsage(usage_servide)
         # END USECASES
 

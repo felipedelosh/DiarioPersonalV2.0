@@ -16,7 +16,7 @@ class PathController:
             return f"{self.path}\\DATA\\DIARIO\\"
         elif code == "DIARY_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DIARIO\\{self.timeUtil.getCurrentYYYY()}\\"
-        elif code == "DREAM":
+        elif code == "DREAMS":
             return f"{self.path}\\DATA\\DREAMS\\"
         elif code == "DREAM_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DREAMS\\{self.timeUtil.getCurrentYYYY()}\\"
