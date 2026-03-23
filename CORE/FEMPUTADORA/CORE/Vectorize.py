@@ -3,6 +3,11 @@ FelipedelosH
 2026
 
 Enter arr of tokens and return [x,y,...z]
+
+if pivot == 1 position be 1
+else sum
+if sum > 1 position be 1
+else be sum
 """
 class Vectorizer:
     def __init__(self, vocabulary, synonyms):
@@ -26,7 +31,18 @@ class Vectorizer:
                             break
 
             if token_vec is not None:
-                vector = [max(a, b) for a, b in zip(vector, token_vec)]
+                new_vector = []
+
+                for current_value, found_value in zip(vector, token_vec):
+                    if found_value == 1:
+                        new_vector.append(1)
+                    else:
+                        summed_value = current_value + found_value
+                        if summed_value > 1:
+                            summed_value = 1
+                        new_vector.append(summed_value)
+
+                vector = new_vector
 
         return vector
  
