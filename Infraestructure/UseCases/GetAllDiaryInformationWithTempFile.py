@@ -80,6 +80,22 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                     _final_data[str(PathEnums.DRUGS)][_key] = _content
                     qty = qty + 1
 
+            _path = pathdict[str(PathEnums.ECONOMY)]
+            _all_data = self.economy_diary_use_case.execute(_path, "", "", "")
+
+            if _all_data["success"] and _all_data["qty"] > 0:
+                _cash_info = ""
+                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.ECONOMY)) + "\n"
+                _final_data[str(PathEnums.ECONOMY)] = {}
+                for i in _all_data["data"]:
+                    _key = str(i)
+                    _data = _all_data["data"][_key]
+                    _cash_info = _cash_info + f"{_data}" + "\n"
+                    _final_data[str(PathEnums.ECONOMY)][_key] = _data
+                    qty = qty + 1
+
+                _data_backup = _data_backup + _cash_info
+            
             if qty > 0:
                 _backup_file = self.backup_service.save(path_backup_file, _data_backup)
 
