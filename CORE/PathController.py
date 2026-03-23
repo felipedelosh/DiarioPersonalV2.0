@@ -20,6 +20,8 @@ class PathController:
             return f"{self.path}\\DATA\\DREAMS\\{self.timeUtil.getCurrentYYYY()}\\"
         elif code == "FEELING_CURRENT_YYYY":
             return f"{self.path}\\DATA\\SENTIMIENTOS\\{self.timeUtil.getCurrentYYYY()}\\"
+        elif code == "DRUGS":
+            return f"{self.path}\\DATA\\DRUGS\\"
         elif code == "DRUGS_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DRUGS\\{self.timeUtil.getCurrentYYYY()}\\"
         elif code == "ECONOMY":
@@ -56,5 +58,6 @@ class PathController:
         return {
             str(PathEnums.DIARY): self.getPathByCODE(str(PathEnums.DIARY)),
             str(PathEnums.SCHELUDED_24_H): self.getPathByCODE(str(PathEnums.SCHELUDED_24_H)),
+            str(PathEnums.DRUGS): self.getPathByCODE(str(PathEnums.DRUGS)),
             str(PathEnums.ECONOMY): self.getPathByCODE(str(PathEnums.ECONOMY))
         }

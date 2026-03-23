@@ -46,6 +46,26 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                     _final_data[str(PathEnums.SCHELUDED_24_H)][_date] = _content
                     qty = qty + 1
 
+            _path = pathdict[str(PathEnums.DRUGS)]
+            _all_data = self.diary_get_all_use_case.execute(_path)
+
+
+            if _all_data["success"] and _all_data["qty"] > 0:
+                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.SCHELUDED_24_H)) + "\n"
+                _final_data[str(PathEnums.DRUGS)] = {}
+                for i in _all_data["data"]:
+                    _key = str(i)
+                    _drug = _key.split(" - ")[0]
+                    _date = _key.split(" - ")[1]
+                    _date = str(_date).replace(".txt", "")
+                    _content = _all_data["data"][_key]
+
+                    _detonation = str(_content).split("\n\n\n")[0]
+                    _effect = str(_content).split("\n\n\n")[1]
+                    _data_backup = _data_backup + f"DRUG: {_drug}\n" + f"Date: {_date}\n" + f"Detonate: {_detonation}\n" + f"Effect: {_effect}\n" + "-"*40 + "\n"
+                    _final_data[str(PathEnums.DRUGS)][_key] = _content
+                    qty = qty + 1
+
             if qty > 0:
                 _backup_file = self.backup_service.save(path_backup_file, _data_backup)
 
