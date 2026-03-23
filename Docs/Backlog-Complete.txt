@@ -2,6 +2,7 @@ ID|Tarea|Descripción|Prioridad|COMPLETADA
 C2|Registrar Día de Hoy|Crear entrada rápida asociada al día actual.|🟢|SI
 C4|Limpiar la vista 24h|Cuando se guarde un reporte 24h se debe de limpiar en caso de que sea guardado con éxito.|🟢|SI
 D2|Vista de Sueños|Registrar sueños con fecha y etiquetas.|🟡|SI
+D5|Obtener toda la información del diario|Se necesita un caso de uso que obtenga toda la información diario, sueños, economia... y tiene que generar un archivo temporal.txt|🟢|SI
 D6|Vista de Drogas|Registrar consumo, tipo y cantidad.|🟡|SI
 I1|Sistema de Guardado de Páginas|Guardar páginas de diario en archivos con fecha/título.|🟢|SI
 I1.1|Editar el UseCase para guardar página EXECUTE|Actualmente el caso de uso dice: save_page cambiarlo por execute|🟢|SI
