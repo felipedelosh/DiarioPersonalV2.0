@@ -14,6 +14,7 @@ class ChatbotView(Screen):
         self.lang = self.manager.controller.dependencies["lang"]
         self.stringProcesor = self.manager.controller.utils["string_procesor"]
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
+        self._femputadoraFaceElements = []
         # VARS
         self._chat_history = [] 
         self._txt_chat = ""
@@ -22,7 +23,7 @@ class ChatbotView(Screen):
         self.renderFemputadoraView()
 
     def renderFemputadoraView(self):
-        self.draw_femputadora_face()
+        self.draw_femputadora_face("")
         _state = self.manager.controller.dependencies["config"].get("femputadora_mode")
 
         if self._display_mode == _state[0]:
@@ -42,8 +43,58 @@ class ChatbotView(Screen):
             widget.destroy()
         self._tempCurrentElementsOptions.clear()
 
-    def draw_femputadora_face(self):
-        pass
+    def draw_femputadora_face(self, data):
+        if data:
+            _vector = data['vector']
+            _middle = len(_vector) // 2
+            x_start = self._w * 0.95
+            y_start = self._h * 0.01
+            rect_size = 10
+            spacing = 1
+
+            _counter = 0
+            for _, itterVectorValue in enumerate(_vector[:_middle]):
+                x0 = x_start
+                y0 = y_start + (_counter * (rect_size + spacing))
+                x1 = x0 + rect_size
+                y1 = y0 + rect_size
+
+                if itterVectorValue == 1:
+                    rect = self.canvas.create_rectangle(
+                        x0, y0, x1, y1,
+                        fill="orange"
+                    )
+                else:
+                    rect = self.canvas.create_rectangle(
+                        x0, y0, x1, y1,
+                        fill="black"
+                    )
+
+                    self._femputadoraFaceElements.append(rect)
+
+                _counter = _counter + 1
+
+            _counter = 0
+            for _, itterVectorValue in enumerate(_vector[_middle:]):
+                x0 = x_start + rect_size + spacing
+                y0 = y_start + (_counter * (rect_size + spacing))
+                x1 = x0 + rect_size
+                y1 = y0 + rect_size
+
+                if itterVectorValue == 1:
+                    rect = self.canvas.create_rectangle(
+                        x0, y0, x1, y1,
+                        fill="red"
+                    )
+                else:
+                    rect = self.canvas.create_rectangle(
+                        x0, y0, x1, y1,
+                        fill="black"
+                    )
+
+                    self._femputadoraFaceElements.append(rect)
+
+                _counter = _counter + 1
 
     def draw_femputadora_question_mode(self):
         lblWelcomeMessage = tk.Label(self.canvas ,text = self.lang.getText("femputadora_help"), bg="black",fg="red")
@@ -104,6 +155,7 @@ class ChatbotView(Screen):
         else:
             pass
         
+        self.draw_femputadora_face(_femputadora_data)
         if _data["data"]["chat_counter"] == 1:
             self._txt_chat = self._txt_chat + _new_chat
         else:
