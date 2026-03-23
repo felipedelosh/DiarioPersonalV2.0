@@ -14,8 +14,10 @@ class PathController:
     def getPathByCODE(self, code):
         if code == "DIARY":
             return f"{self.path}\\DATA\\DIARIO\\"
-        if code == "DIARY_CURRENT_YYYY":
+        elif code == "DIARY_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DIARIO\\{self.timeUtil.getCurrentYYYY()}\\"
+        elif code == "DREAM":
+            return f"{self.path}\\DATA\\DREAMS\\"
         elif code == "DREAM_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DREAMS\\{self.timeUtil.getCurrentYYYY()}\\"
         elif code == "FEELING_CURRENT_YYYY":
@@ -55,8 +57,12 @@ class PathController:
         ]
     
     def getAllBasePathInDict(self):
+        """
+        Return a dic {'key': 'path'}
+        """
         return {
             str(PathEnums.DIARY): self.getPathByCODE(str(PathEnums.DIARY)),
+            str(PathEnums.DREAMS): self.getPathByCODE(str(PathEnums.DREAMS)),
             str(PathEnums.SCHELUDED_24_H): self.getPathByCODE(str(PathEnums.SCHELUDED_24_H)),
             str(PathEnums.DRUGS): self.getPathByCODE(str(PathEnums.DRUGS)),
             str(PathEnums.ECONOMY): self.getPathByCODE(str(PathEnums.ECONOMY))
