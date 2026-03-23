@@ -1,6 +1,6 @@
 [
   {
-    "id": "aca4014f-2dff-425a-a18c-bce2b97dcf64",
+    "id": "b61c4162-3600-43f8-836f-973f82fc4169",
     "name": "SUBJECT",
     "contextualIteratorsArr": [
       "yo",
@@ -18,7 +18,7 @@
     "description": "Son los posibles sujetos de la oración"
   },
   {
-    "id": "3154802a-8a30-4994-86a7-25db3830fee0",
+    "id": "56aafdc6-8cb9-4aa5-b006-62b1553b9e23",
     "name": "VERB",
     "contextualIteratorsArr": [
       "ser",
@@ -40,12 +40,75 @@
       "vivir",
       "necesitar",
       "quedar",
-      "venir"
+      "venir",
+      "trabajar",
+      "estudiar",
+      "dormir",
+      "despertarse",
+      "levantarse",
+      "bañarse",
+      "vestirse",
+      "correr",
+      "caminar",
+      "viajar",
+      "conducir",
+      "manejar",
+      "volar",
+      "nadar",
+      "saltar",
+      "conversar",
+      "escuchar",
+      "leer",
+      "escribir",
+      "preguntar",
+      "responder",
+      "llamar",
+      "comprar",
+      "vender",
+      "pagar",
+      "gastar",
+      "ahorrar",
+      "invertir",
+      "prestar",
+      "pedir",
+      "limpiar",
+      "cocinar",
+      "lavar",
+      "planchar",
+      "barrer",
+      "trapear",
+      "ordenar",
+      "jugar",
+      "bailar",
+      "cantar",
+      "dibujar",
+      "pintar",
+      "navegar",
+      "pensar",
+      "creer",
+      "sentir",
+      "desear",
+      "recordar",
+      "olvidar",
+      "imaginar",
+      "salir",
+      "encontrarse",
+      "visitar",
+      "ayudar",
+      "compartir",
+      "invitar",
+      "regalar",
+      "intentar",
+      "lograr",
+      "empezar",
+      "comenzar",
+      "terminar",
+      "acabar"
     ],
     "description": "Son las posibles acciones de los SUJECT"
   },
   {
-    "id": "d3a3d620-9b81-461f-91f6-9c02a054ffd7",
+    "id": "5c52b500-2a11-48be-9ad4-155b8654f317",
     "name": "TIME",
     "contextualIteratorsArr": [
       "pasado",
@@ -55,7 +118,7 @@
     "description": "Es el tiempo el cual refleja la frase"
   },
   {
-    "id": "b8daefca-4126-4fd8-975c-705011203db3",
+    "id": "fc434bc6-67ac-4e8f-b9df-22dbdd5e14b4",
     "name": "PLACE",
     "contextualIteratorsArr": [
       "casa",
@@ -79,7 +142,7 @@
     "description": "Son los sitios fisicos en que pueden existir los SUBJECT"
   },
   {
-    "id": "6424d082-6a6f-4e73-8970-ff962ea7bb53",
+    "id": "de81c99e-ce5c-456f-9552-773bbfcbf65f",
     "name": "THEME",
     "contextualIteratorsArr": [
       "diario",
@@ -102,7 +165,7 @@
     "description": "clasifica en los aspectos más importantes del diario"
   },
   {
-    "id": "91e53020-17ab-4063-8476-70b7db13c2a0",
+    "id": "d39f1aaa-c2cf-4cc9-803c-28ac8542ce8b",
     "name": "EMOTION",
     "contextualIteratorsArr": [
       "feliz",
@@ -116,7 +179,7 @@
     "description": "Es aquello que pueden sentir los SUBJECT"
   },
   {
-    "id": "bbf8d630-e830-4d4d-b16f-b69a5e61f7c3",
+    "id": "dbb59aed-acc6-420d-8c25-20b331bb62dd",
     "name": "INTENSITY",
     "contextualIteratorsArr": [
       "mucho",
@@ -126,7 +189,7 @@
     "description": "Es la posible cuantia de SUBJECT o THEME"
   },
   {
-    "id": "f929d4d7-2aaa-4796-a9b3-4aaa52ae8c5e",
+    "id": "3a678aea-da44-4a8e-b67b-b74eb40dfd78",
     "name": "NEGATION",
     "contextualIteratorsArr": [
       "no"
