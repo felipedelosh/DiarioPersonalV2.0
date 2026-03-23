@@ -6,6 +6,7 @@ ESP - CO
 """
 synonyms = {
 # VERB
+    "tú": ["tu"],
     "ser": ["soy", "eres", "fui", "existir", "representar", "resultar", "constituir", "permanecer"],
     "estar": ["permanecer", "ubicarse", "hallarse", "situarse", "quedarse"],
     "tener": ["poseer", "contar", "disponer", "mantener", "guardar"],
