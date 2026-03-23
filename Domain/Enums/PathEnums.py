@@ -11,6 +11,7 @@ class PathEnums(Enum):
     SCHELUDED_24_H = auto()
     DRUGS = auto()
     ECONOMY = auto()
+    FEELINGS = auto()
     TEMP = auto()
 
     def __str__(self):

@@ -22,6 +22,7 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
         try:
             qty = 0
 
+            # DATA/DIARIO
             _path = pathdict[str(PathEnums.DIARY)]
             _all_data = self.diary_get_all_use_case.execute(_path)
 
@@ -35,6 +36,7 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                     _final_data[str(PathEnums.DIARY)][_title] = _content
                     qty = qty + 1
 
+            # DATA/DREAMS
             _path = pathdict[str(PathEnums.DREAMS)]
             _all_data = self.diary_get_all_use_case.execute(_path)
 
@@ -48,6 +50,7 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                     _final_data[str(PathEnums.DREAMS)][_title] = _content
                     qty = qty + 1
 
+            # DATA/DISTRIBUCIONTIEMPO/TIEMPODIARIO
             _path = pathdict[str(PathEnums.SCHELUDED_24_H)]
             _all_data = self.diary_get_all_use_case.execute(_path)
 
@@ -61,6 +64,7 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                     _final_data[str(PathEnums.SCHELUDED_24_H)][_date] = _content
                     qty = qty + 1
 
+            # DATA/DRUGS
             _path = pathdict[str(PathEnums.DRUGS)]
             _all_data = self.diary_get_all_use_case.execute(_path)
 
@@ -80,6 +84,7 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                     _final_data[str(PathEnums.DRUGS)][_key] = _content
                     qty = qty + 1
 
+            # DATA/ECONOMIA
             _path = pathdict[str(PathEnums.ECONOMY)]
             _all_data = self.economy_diary_use_case.execute(_path, "", "", "")
 
@@ -94,8 +99,28 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                     _final_data[str(PathEnums.ECONOMY)][_key] = _data
                     qty = qty + 1
 
-                _data_backup = _data_backup + _cash_info
+                _data_backup = _data_backup + _cash_info + "$"*40 + "\n"
             
+            # DATA/SENTIMIENTOS
+            _path = pathdict[str(PathEnums.FEELINGS)]
+            _all_data = self.diary_get_all_use_case.execute(_path)
+
+
+            if _all_data["success"] and _all_data["qty"] > 0:
+                _feels_data_nk = ""
+                _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.FEELINGS)) + "\n"
+                _final_data[str(PathEnums.FEELINGS)] = {}
+                for i in _all_data["data"]:
+                    _key = str(i)
+                    _date = _date.split(".txt")[0]
+                    _feel = _all_data["data"][_key]
+                    _feels_data_nk = _feels_data_nk + f"DATE: {_date}" + f" FEEL: {_feel}" + "\n"
+                    _final_data[str(PathEnums.FEELINGS)][_key] = _feel
+                    qty = qty + 1
+
+                _data_backup = _data_backup + _feels_data_nk + "*"*40 + "\n"
+
+
             if qty > 0:
                 _backup_file = self.backup_service.save(path_backup_file, _data_backup)
 

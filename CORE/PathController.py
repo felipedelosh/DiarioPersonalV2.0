@@ -20,6 +20,8 @@ class PathController:
             return f"{self.path}\\DATA\\DREAMS\\"
         elif code == "DREAM_CURRENT_YYYY":
             return f"{self.path}\\DATA\\DREAMS\\{self.timeUtil.getCurrentYYYY()}\\"
+        elif code == "FEELINGS":
+            return f"{self.path}\\DATA\\SENTIMIENTOS\\"
         elif code == "FEELING_CURRENT_YYYY":
             return f"{self.path}\\DATA\\SENTIMIENTOS\\{self.timeUtil.getCurrentYYYY()}\\"
         elif code == "DRUGS":
@@ -65,5 +67,6 @@ class PathController:
             str(PathEnums.DREAMS): self.getPathByCODE(str(PathEnums.DREAMS)),
             str(PathEnums.SCHELUDED_24_H): self.getPathByCODE(str(PathEnums.SCHELUDED_24_H)),
             str(PathEnums.DRUGS): self.getPathByCODE(str(PathEnums.DRUGS)),
-            str(PathEnums.ECONOMY): self.getPathByCODE(str(PathEnums.ECONOMY))
+            str(PathEnums.ECONOMY): self.getPathByCODE(str(PathEnums.ECONOMY)),
+            str(PathEnums.FEELINGS): self.getPathByCODE(str(PathEnums.FEELINGS))
         }

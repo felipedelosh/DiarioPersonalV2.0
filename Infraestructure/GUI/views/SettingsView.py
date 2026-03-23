@@ -93,6 +93,8 @@ class SettingsView(Screen):
         
         if _status["success"]:
             print("OK...")
+            print(_status["data"].keys())
+            print(_status["qty"])
     # FILES - BACKUP
 
     def destroyOption(self):
