@@ -45,4 +45,6 @@ synonyms = {
     "banco": [],
     "cafetería": ["cafe"],
     "farmacia": ["drogueria"],
+#NEGATION
+    "no": ["nunca", "jamás", "never"]
 }
