@@ -22,7 +22,7 @@ class Software:
         self.cmbxVocabularyFiles = ttk.Combobox(self.canvas)
         self.cmbxVocabularyFiles["values"] = ["NEW"]
         self.btnSaveWork = Button(self.canvas, text="SAVE WORK", bg="green", command=self.saveWork)
-        self.btnAddNewSemanticDimension = Button(self.canvas, text="ADD Semantic Dimension")
+        self.btnAddNewSemanticDimension = Button(self.canvas, text="ADD Semantic Dimension", command=self.open_add_semantic_dimension_window)
         self.lblFooterProgram = Label(self.canvas, text="FelipedelosH")
         self.vizualizedAndRun()
 
@@ -51,6 +51,32 @@ class Software:
 
     def saveWork(self):
         pass
+
+    def open_add_semantic_dimension_window(self):
+        top = Toplevel(self.screem)
+        top.title("ADD New Semantic Dimension")
+        top.geometry("800x200")
+        top.resizable(False, False)
+
+        main_frame = Frame(top)
+        main_frame.pack(padx=20, pady=20, fill=BOTH, expand=True)
+        main_frame.grid_columnconfigure(0, weight=1)
+        main_frame.grid_columnconfigure(1, weight=1)
+
+        Label(main_frame, text="Nombre de dimensión semántica:").grid(row=0, column=0, sticky="e", pady=5)
+        txtTitleSemanticDimension = Entry(main_frame, width=80)
+        txtTitleSemanticDimension.grid(row=0, column=1, pady=5)
+
+        Label(main_frame, text="Iteradores contextuales (separados por comas):").grid(row=1, column=0, sticky="ne", pady=5)
+        txtTitleIteratorsContextual = Entry(main_frame, width=80)
+        txtTitleIteratorsContextual.grid(row=1, column=1, pady=5)
+
+        Label(main_frame, text="Descripción:").grid(row=2, column=0, sticky="ne", pady=5)
+        txtSemanticDimensionDescription = Entry(main_frame, width=80)
+        txtSemanticDimensionDescription.grid(row=2, column=1, pady=5)
+
+        btnGuardar = Button(main_frame, text="Guardar")
+        btnGuardar.grid(row=3, column=0, columnspan=2, pady=20)
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""
