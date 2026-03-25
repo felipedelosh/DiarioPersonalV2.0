@@ -18,13 +18,33 @@ class Controller:
         self.pythonizeSemanticDimensionsArr = []
         self.finalPythonDataVocabularizer = [] # Save LINE TO LINE final code arr(str)
 
-        if self.loadVocabularyFile():
-            print("INFO::LOAD_VOCABULARY::OK")
-            self.extractSemanticDimensionsFromPythonClassDoc()
-    
-    def loadVocabularyFile(self):
+    def loadPreviosWorksNameSpaces(self):
+        works = ["NEW"]
+
         try:
-            with open(f"{self.path}/vocabulary_tokenizer_ids.py", "r", encoding="UTF-8") as f:
+            output_dir = os.path.join(self.path, "OUTPUT")
+            for file in os.listdir(output_dir):
+                if file.endswith(".py"):
+                    name = os.path.splitext(file)[0]
+                    works.append(name)
+        except:
+            return works
+
+        return works
+    
+    def loadPreviousWork(self, name):
+        _status = self.loadVocabularyFromFile(name)
+        if _status:
+            self.semanticDimensionsArr = []
+            self.pythonizeSemanticDimensionsArr = []
+            self.finalPythonDataVocabularizer = []
+            self.extractSemanticDimensionsFromPythonClassDoc()
+
+        return _status
+    
+    def loadVocabularyFromFile(self, name):
+        try:
+            with open(f"{self.path}/OUTPUT/{name}.py", "r", encoding="UTF-8") as f:
                 self._DATA_ = f.read()
 
             return True
@@ -73,7 +93,7 @@ class Controller:
         Entrer a PYTHON CODE in TEXT
         Analized the previouly doc to extract all semeactic dimensions
         """
-        _semanticDimensionCounter = 1
+        _semanticDimensionCounter = 0
 
         for i in self._DATA_.split("\n"):
             itterLine = str(i).strip()

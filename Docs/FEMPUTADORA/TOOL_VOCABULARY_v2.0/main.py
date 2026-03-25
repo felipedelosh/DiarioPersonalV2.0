@@ -20,7 +20,8 @@ class Software:
         self.lblVocabularyVr = Label(self.canvas, text="Versión: ")
         self.lblOption = Label(self.canvas, text="Options")
         self.cmbxVocabularyFiles = ttk.Combobox(self.canvas)
-        self.cmbxVocabularyFiles["values"] = ["NEW"]
+        self.cmbxVocabularyFiles["values"] = self.controller.loadPreviosWorksNameSpaces()
+        self.btnLoadWork = Button(self.canvas, text="LOAD WORK", bg="orange", command=self.loadWork)
         self.btnSaveWork = Button(self.canvas, text="SAVE WORK", bg="green", command=self.saveWork)
         self.btnAddNewSemanticDimension = Button(self.canvas, text="ADD Semantic Dimension", command=self.open_add_semantic_dimension_window)
         # Semantic Dimensio Statitics
@@ -38,6 +39,7 @@ class Software:
         self.lblBannerProgram.place(x=self._w * 0.01, y=self._h * 0.01)
         self.lblVocabularyVr.place(x=self._w * 0.3, y=self._h * 0.08)
         self.cmbxVocabularyFiles.place(x=self._w * 0.37, y=self._h * 0.08)
+        self.btnLoadWork.place(x=self._w * 0.7, y=self._h * 0.05)
 
         self.lblOption.place(x=self._w * 0.1, y=self._h * 0.2)
         self.btnAddNewSemanticDimension.place(x=self._w * 0.05, y=self._h * 0.26)
@@ -55,6 +57,18 @@ class Software:
         title = self.cmbxVocabularyFiles.get()
         if not self._isEmptyText(title):
             self.controller.savePythonSemanticDimension(title)
+
+    def loadWork(self):
+        title = self.cmbxVocabularyFiles.get()
+        if not self._isEmptyText(title):
+            _status = self.controller.loadPreviousWork(title)
+
+            if _status:
+                print(f"OK:LOAD:{title}")
+                self.showBtnSaveWork()
+                self.showSemanticDimensionStatitics()
+            else:
+                print(f"ERR:LOAD:{title}")
 
     def open_add_semantic_dimension_window(self):
         top = Toplevel(self.screem)
