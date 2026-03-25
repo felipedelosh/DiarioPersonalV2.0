@@ -2,6 +2,7 @@
 FelipedelosH
 2026
 """
+import re
 import json
 import os
 from os import scandir
@@ -14,6 +15,8 @@ class Controller:
 
         # VARS
         self.semanticDimensionsArr = []
+        self.pythonizeSemanticDimensionsArr = []
+        self.finalPythonDataVocabularizer = [] # Save LINE TO LINE final code arr(str)
 
         if self.loadVocabularyFile():
             print("INFO::LOAD_VOCABULARY::OK")
@@ -27,6 +30,14 @@ class Controller:
             return True
         except:
             return False
+        
+    def getTextInFile(self, path):
+        info = None
+        try:
+            f = open(path, 'r', encoding="utf-8")
+            return f.read()
+        except:
+            return info
         
     def setNewSemanticDimension(self, title, contexIterators, textSDimenDescript):
         _id = len(self.semanticDimensionsArr) + 1
@@ -99,4 +110,106 @@ class Controller:
                 if itterLine == "vocabulary = {":
                     break
 
+    def savePythonSemanticDimension(self, title):
+        _pathTemplate = f"{self.path}/resources/template_vocabulary_tokenize_ids.txt"
+        _template = self.getTextInFile(_pathTemplate)
+        
+        doc = ""
+        _zeroCounter = 0
+        _ZeroCounterArr = []
+        _maxWorldLen = self.getMaxWordLen()
+        ALL_VOCABULAY = ""
+        VALUES = []
+        for i in self.semanticDimensionsArr:
+            # Documentation
+            iters_str = ", ".join(i.contextualIteratorsArr)
+            doc = doc + f"# {str(i.name).upper()} >> [{iters_str}]\n# {i.description}\n"
+            _zeroCounter = _zeroCounter + len(i.contextualIteratorsArr)
+            _ZeroCounterArr.append(len(i.contextualIteratorsArr))
+ 
+            itterCon = ""
+            for itterContextual in i.contextualIteratorsArr:
+                key_text = f"\"{itterContextual}\":"
+                key_text = key_text.ljust(_maxWorldLen + 3)
+                itterCon += f"\t{key_text} <ZERO-ARR>,\n"
+
+            _value_data = f"#{str(i.name).upper()}\n{itterCon}"
+            VALUES.append(_value_data)
+
+        zeroArr = ""
+        for i in _ZeroCounterArr:
+            zeroArr = zeroArr + f"{self._getZeroArr(i)} + "
+
+        zeroArr = zeroArr[:-3]
+        for i in VALUES:
+            ALL_VOCABULAY = ALL_VOCABULAY + f"{str(i).replace("<ZERO-ARR>", zeroArr)}\n"
+
+        ALL_VOCABULAY = ALL_VOCABULAY[:-2]
+        _template = _template.replace("<SEMANTIC_FIELDS_DOCUMENTATION>", doc)
+        _template = _template.replace("<ALL_VOCABULAY>", ALL_VOCABULAY)
+
+        self.finalPythonDataVocabularizer = _template.split("\n")
+        self.setDiagonalOnesMatrix()
+
+        print("Matrix")
+        print(self.finalPythonDataVocabularizer)
+
+    def _getZeroArr(self, qty):
+        _zeroData = ", 0"*qty
+        _zeroData = _zeroData[2::]
+
+        return "[" + _zeroData + "]"
+
+    def getMaxWordLen(self):
+        _counter = 0
+        for itterDimension in self.semanticDimensionsArr:
+            for itterWord in itterDimension.contextualIteratorsArr:
+                if len(itterWord) > _counter:
+                    _counter = len(itterWord)
+
+        return _counter
     
+    def _isDetectedArrContextualIteratorsInLine(self, line):
+        patron = r'^\s*"([^"]+)"\s*:\s*((?:\[[^\]]+\](?:\s*\+\s*\[[^\]]+\])*))\s*,\s*$'
+        return re.match(patron, line)
+    
+    def setDiagonalOnesMatrix(self):
+        _oneCounter = 0
+        for idx, line in enumerate(self.finalPythonDataVocabularizer):
+            match = self._isDetectedArrContextualIteratorsInLine(line)
+            if match:
+                new_line = self._setOneInArray(line, _oneCounter, match)
+                self.finalPythonDataVocabularizer[idx] = new_line
+                _oneCounter += 1
+
+    def _setOneInArray(self, original_line, position, match):
+        key = match.group(1)
+        list_strings = match.group(2)
+        start = match.start(2)
+        end = match.end(2)
+        prefix = original_line[:start]
+        suffix = original_line[end:]
+
+        blocks = list_strings.split(" + ")
+        block_lengths = []
+        all_numbers = []
+
+        for block in blocks:
+            nums = re.findall(r'[-+]?\d*\.?\d+', block)
+            nums = [int(n) if '.' not in n else float(n) for n in nums]
+            block_lengths.append(len(nums))
+            all_numbers.extend(nums)
+
+        if 0 <= position < len(all_numbers):
+            all_numbers[position] = 1
+
+        new_blocks = []
+        idx = 0
+        for length in block_lengths:
+            block_nums = all_numbers[idx:idx+length]
+            block_str = "[" + ", ".join(str(int(n) if isinstance(n, float) and n.is_integer() else n) for n in block_nums) + "]"
+            new_blocks.append(block_str)
+            idx += length
+
+        new_list_strings = " + ".join(new_blocks)
+        return prefix + new_list_strings + suffix

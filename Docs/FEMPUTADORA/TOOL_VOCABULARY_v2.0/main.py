@@ -52,7 +52,9 @@ class Software:
         self.screem.mainloop()
 
     def saveWork(self):
-        pass
+        title = self.cmbxVocabularyFiles.get()
+        if not self._isEmptyText(title):
+            self.controller.savePythonSemanticDimension(title)
 
     def open_add_semantic_dimension_window(self):
         top = Toplevel(self.screem)
