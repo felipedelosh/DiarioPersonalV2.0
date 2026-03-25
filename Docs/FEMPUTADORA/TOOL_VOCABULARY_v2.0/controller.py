@@ -150,9 +150,7 @@ class Controller:
 
         self.finalPythonDataVocabularizer = _template.split("\n")
         self.setDiagonalOnesMatrix()
-
-        print("Matrix")
-        print(self.finalPythonDataVocabularizer)
+        self._savePythonFile(title)
 
     def _getZeroArr(self, qty):
         _zeroData = ", 0"*qty
@@ -213,3 +211,17 @@ class Controller:
 
         new_list_strings = " + ".join(new_blocks)
         return prefix + new_list_strings + suffix
+
+    def _savePythonFile(self, name):
+        try:
+            _path = f"{self.path}/OUTPUT/{name}.py"
+            _data = ""
+
+            for i in self.finalPythonDataVocabularizer:
+                _data = _data + i + "\n"
+
+            with open(_path,"w", encoding="UTF-8") as f:
+                f.write(_data)
+            print("SAVE PYTHON VOCABULARY")
+        except:
+            pass
