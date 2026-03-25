@@ -23,6 +23,9 @@ class Software:
         self.cmbxVocabularyFiles["values"] = ["NEW"]
         self.btnSaveWork = Button(self.canvas, text="SAVE WORK", bg="green", command=self.saveWork)
         self.btnAddNewSemanticDimension = Button(self.canvas, text="ADD Semantic Dimension", command=self.open_add_semantic_dimension_window)
+        # Semantic Dimensio Statitics
+        self.lblSemanticDimenionCounter = Label(self.canvas, text="Semantic Dimensions: 0")
+        
         self.lblFooterProgram = Label(self.canvas, text="FelipedelosH")
         self.vizualizedAndRun()
 
@@ -43,8 +46,7 @@ class Software:
         self.canvas.create_line(self._w * 0.28, self._h * 0.15, self._w * 0.28, self._h * 0.7)
         self.canvas.create_line(0, self._h * 0.7, self._w, self._h * 0.7)
 
-        if self.controller._DATA_ and self.controller.semanticDimensionsArr:
-            self.btnSaveWork.place(x=self._w * 0.9, y=self._h * 0.06)
+        self.showBtnSaveWork()
         
         self.lblFooterProgram.place(x=self._w * 0.44, y=self._h * 0.96)
         self.screem.mainloop()
@@ -75,8 +77,45 @@ class Software:
         txtSemanticDimensionDescription = Entry(main_frame, width=80)
         txtSemanticDimensionDescription.grid(row=2, column=1, pady=5)
 
-        btnGuardar = Button(main_frame, text="Guardar")
+        btnGuardar = Button(main_frame, text="Guardar", command= lambda : self.saveSemanticDimension(txtTitleSemanticDimension, txtTitleIteratorsContextual, txtSemanticDimensionDescription, top))
         btnGuardar.grid(row=3, column=0, columnspan=2, pady=20)
+
+    def saveSemanticDimension(self, txtTitleSemanticDimension, txtTitleIteratorsContextual, txtSemanticDimensionDescription, top):
+        _title = txtTitleSemanticDimension.get()
+        _contexIterators = txtTitleIteratorsContextual.get()
+        _textSDimenDescript = txtSemanticDimensionDescription.get()
+
+        if self._isEmptyText(_title):
+            txtTitleSemanticDimension["bg"] = "red"
+            return
+        else:
+            txtTitleSemanticDimension["bg"] = "white"
+
+        if self._isEmptyText(_contexIterators):
+            txtTitleIteratorsContextual["bg"] = "red"
+            return
+        else:
+            txtTitleIteratorsContextual["bg"] = "white"
+
+        if self._isEmptyText(_textSDimenDescript):
+            txtSemanticDimensionDescription["bg"] = "red"
+            return
+        else:
+            txtSemanticDimensionDescription["bg"] = "white"
+
+        self.controller.setNewSemanticDimension(_title, _contexIterators, _textSDimenDescript)
+        self.showBtnSaveWork()
+        self.showSemanticDimensionStatitics()
+        top.destroy()
+
+    def showBtnSaveWork(self):
+        if len(self.controller.semanticDimensionsArr) > 0:
+            self.btnSaveWork.place(x=self._w * 0.9, y=self._h * 0.05)
+
+    def showSemanticDimensionStatitics(self):
+        _data = self.controller.getSemanticDimesionStatitics()
+        self.lblSemanticDimenionCounter["text"] = f"Semantic Dimensions: {_data['total']}"
+        self.lblSemanticDimenionCounter.place(x=self._w * 0.01, y=self._h * 0.75)
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""

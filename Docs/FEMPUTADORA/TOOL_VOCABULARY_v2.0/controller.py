@@ -27,14 +27,42 @@ class Controller:
             return True
         except:
             return False
+        
+    def setNewSemanticDimension(self, title, contexIterators, textSDimenDescript):
+        _id = len(self.semanticDimensionsArr) + 1
+        iterators_arr = [str(x).strip().lower() for x in contexIterators.split(",") if x.strip()]
 
+        if not self.exitsSemanticDimension(title):
+            self.semanticDimensionsArr.append(
+                SemanticDimension(
+                    _id,
+                    str(title).upper(),
+                    iterators_arr,
+                    textSDimenDescript
+                )
+            )
+
+    def exitsSemanticDimension(self, title):
+        if not self.semanticDimensionsArr:
+            return False
+
+        for i in self.semanticDimensionsArr:
+            if str(i.name) == title:
+                return True
+
+        return False
+    
+    def getSemanticDimesionStatitics(self):
+        return {
+            "total": len(self.semanticDimensionsArr)
+        }
 
     def extractSemanticDimensionsFromPythonClassDoc(self):
         """
         Entrer a PYTHON CODE in TEXT
         Analized the previouly doc to extract all semeactic dimensions
         """
-        _semanticDimensionCounter = 0
+        _semanticDimensionCounter = 1
 
         for i in self._DATA_.split("\n"):
             itterLine = str(i).strip()

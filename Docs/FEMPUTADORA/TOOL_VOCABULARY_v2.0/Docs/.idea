@@ -1,0 +1,16 @@
+# SUBJECT >> [yo, tú, él, ella, eso, nosotros, ustedes, ellos, alguien, nadie, todos]
+# Son los posibles sujetos de la oración
+# VERB >> [ser, estar, tener, hacer, ir, poder, saber, poner, haber, querer, decir, hablar, dar, ver, comer, tomar, vivir, necesitar, quedar, venir, trabajar, estudiar, dormir, despertarse, levantarse, bañarse, vestirse, correr, caminar, viajar, conducir, manejar, volar, nadar, saltar, conversar, escuchar, leer, escribir, preguntar, responder, llamar, comprar, vender, pagar, gastar, ahorrar, invertir, prestar, pedir, limpiar, cocinar, lavar, planchar, barrer, trapear, ordenar, jugar, bailar, cantar, dibujar, pintar, navegar, pensar, creer, sentir, desear, recordar, olvidar, imaginar, salir, encontrarse, visitar, ayudar, compartir, invitar, regalar, intentar, lograr, empezar, comenzar, terminar, acabar]
+# Son las posibles acciones de los SUJECT
+# TIME >> [pasado, presente, futuro]
+# Es el tiempo el cual refleja la frase
+# PLACE >> [casa, trabajo, oficina, escuela, universidad, supermercado, terminal, parque, gimnasio, restaurante, hospital, mall, cine, biblioteca, banco, cafetería, farmacia]
+# Son los sitios fisicos en que pueden existir los SUBJECT
+# THEME >> [diario, sueño, nota, droga, amigo, sentimiento, tiempo, calendario, horiario, finanza, ahorro, deuda, salud, trabajo, estudio, familia]
+# clasifica en los aspectos más importantes del diario
+# EMOTION >> [feliz, triste, ira, miedo, cansansio, amor, suicida]
+# Es aquello que pueden sentir los SUBJECT
+# INTENSITY >> [mucho, poco, nada]
+# Es la posible cuantia de SUBJECT o THEME
+# NEGATION >> [no]
+# Invierte el sentido de la oración
