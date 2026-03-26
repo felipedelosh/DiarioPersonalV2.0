@@ -170,8 +170,8 @@ class Software:
         self.updateEditorSemanticVectorInterface()
 
     def updateEditorSemanticVectorInterface(self):
-        self.lblSemanticDimensionWordX['text'] = f"X_WORD:{self.controller.pos_x_dimension}:{self.controller.word_x_dimension}"
-        self.lblSemanticDimensionWordY['text'] = f"Y_WORD:{self.controller.pos_y_dimension}:{self.controller.word_y_dimension}"
+        self.lblSemanticDimensionWordX['text'] = f"X_WORD:{self.controller.pos_x_dimension} >> {self.controller.word_x_dimension}"
+        self.lblSemanticDimensionWordY['text'] = f"Y_WORD:{self.controller.pos_y_dimension} >> {self.controller.word_y_dimension}"
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""

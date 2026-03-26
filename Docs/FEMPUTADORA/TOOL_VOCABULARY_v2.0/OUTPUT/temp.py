@@ -4,7 +4,7 @@
 # Son las posibles acciones de los SUJECT
 # TIME >> [pasado, presente, futuro]
 # Es el tiempo el cual refleja la frase
-# PLACE >> [casa, trabajo, oficina, escuela, universidad, supermercado, terminal, parque, gimnasio, restaurante, hospital, mall, cine, biblioteca, banco, cafetería, farmacia]
+# PLACE >> [casa, oficina, escuela, universidad, supermercado, terminal, parque, gimnasio, restaurante, hospital, mall, cine, biblioteca, banco, cafetería, farmacia]
 # Son los sitios fisicos en que pueden existir los SUBJECT
 # THEME >> [diario, sueño, nota, droga, amigo, sentimiento, tiempo, calendario, horiario, finanza, ahorro, deuda, salud, trabajo, estudio, familia]
 # clasifica en los aspectos más importantes del diario

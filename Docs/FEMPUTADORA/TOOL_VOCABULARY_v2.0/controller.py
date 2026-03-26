@@ -7,6 +7,7 @@ import json
 import os
 from os import scandir
 from src.models.SemanticDimension import SemanticDimension
+from src.models.Graph import Graph
 
 class Controller:
     def __init__(self):
@@ -17,6 +18,7 @@ class Controller:
         self.semanticDimensionsArr = []
         self.finalPythonDataVocabularizer = [] # Save LINE TO LINE final code arr(str)
         self.keysContextualIterators = [] # str: storages all words
+        self.sinapsis = Graph()
         self.pos_x_dimension = 0
         self.word_x_dimension = ""
         self.pos_y_dimension = 0
@@ -42,6 +44,7 @@ class Controller:
             self.semanticDimensionsArr = []
             self.finalPythonDataVocabularizer = []
             self.extractSemanticDimensionsFromPythonClassDoc()
+            self.extractSemanticConectionsFromPythonClass()
 
         return _status
     
@@ -157,6 +160,107 @@ class Controller:
                 # Is Semantic info area?
                 if itterLine == "vocabulary = {":
                     break
+
+    def extractSemanticConectionsFromPythonClass(self):
+        """
+        Entrer a PYTHON CODE in TEXT
+        Analized the weight conections to construct Sinaptic Graph
+        """
+        # STEP 0: READ ALL
+        _isSemanticConectionsWeigthArea = False
+        for i in self._DATA_.split("\n"):
+            itterLine = str(i).strip()
+            if  itterLine != "":
+                # Is Semantic info area?
+                if itterLine == "vocabulary = {":
+                    _isSemanticConectionsWeigthArea = True
+                    continue
+
+                if itterLine == "}":
+                    break
+                
+                if _isSemanticConectionsWeigthArea:
+                    if itterLine[0] == "#":
+                        #print(f"Doc: {itterLine}")
+                        pass
+
+                    if itterLine[0] != "#":
+                        _data = str(itterLine).replace(" ", "")
+                        _data = str(_data).split("\":[")
+                        
+                        _keyword = str(_data[0]).replace("\"", "")
+                        self.sinapsis.addNode(_keyword)
+
+        print(f"Total elementos registrados en el grafo: {len(self.sinapsis.nodes)}")
+
+        print(self.sinapsis.nodes)
+
+        # STEP 0: FILL CONECTIONS DATA
+        _isSemanticConectionsWeigthArea = False
+        for i in self._DATA_.split("\n"):
+            itterLine = str(i).strip()
+            if  itterLine != "":
+                # Is Semantic info area?
+                if itterLine == "vocabulary = {":
+                    _isSemanticConectionsWeigthArea = True
+                    continue
+
+                if itterLine == "}":
+                    break
+                
+                if _isSemanticConectionsWeigthArea:
+                    if itterLine[0] == "#":
+                        #print(f"Doc: {itterLine}")
+                        pass
+
+                    if itterLine[0] != "#":
+                        _data = str(itterLine).replace(" ", "")
+                        _data = str(_data).split("\":[")
+                        
+                        _keyword = str(_data[0]).replace("\"", "")
+                        print(f"En la posición: {_keyword}")
+
+                        _conectionValues = str(_data[1]).replace("\n", "")
+                        print("=================================================")
+                        print(_conectionValues)
+                        _conectionValues = _conectionValues.replace("[", "")
+                        print("=================================================")
+                        print(_conectionValues)
+                        _conectionValues = _conectionValues.replace("]", "")
+                        print("=================================================")
+                        print(_conectionValues)
+                        _conectionValues = _conectionValues.replace("+", ",")
+                        print("=================================================")
+                        print(_conectionValues)
+                        _conectionValues = _conectionValues[:-1]
+                        print("=================================================")
+                        print(_conectionValues)
+
+                        print(f"Total elementos: {len(str(_conectionValues).split(","))}")
+                        """
+                        If conection = 0 DONT Create.
+                        """
+                        _conter = 0
+                        
+                        for itterConxtextualValue in str(_conectionValues).split(","):
+                            print(f"En la pos: {_conter} >> VALOR: {itterConxtextualValue}")
+                            #_targetValue = self.sinapsis.nodes[_conter]
+
+                            #print(f"Para: {_keyword} en la pos: {_conter}:{_targetValue} el  valor es: {itterConxtextualValue}")
+
+                            _conter = _conter + 1
+
+                        break
+                        
+
+
+        # print("Terminamos de construir el grafo")
+        # print(self.sinapsis)
+        # print(f"Total NODOS: {len(self.sinapsis.nodes)}")
+        # print(self.sinapsis.nodes)
+        # print("================")
+        # print(self.sinapsis.edges)
+
 
     def savePythonSemanticDimension(self, title):
         _pathTemplate = f"{self.path}/resources/template_vocabulary_tokenize_ids.txt"
