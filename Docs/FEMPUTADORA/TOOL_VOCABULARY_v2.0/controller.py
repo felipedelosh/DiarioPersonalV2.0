@@ -233,13 +233,6 @@ class Controller:
 
                             _conter = _conter + 1
 
-        print("Terminamos de construir el grafo")
-        print(self.sinapsis)
-        print(f"Total NODOS: {len(self.sinapsis.nodes)}")
-        print(self.sinapsis.nodes)
-        print("================")
-        print(self.sinapsis.edges)
-
     def savePythonSemanticDimension(self, title):
         _pathTemplate = f"{self.path}/resources/template_vocabulary_tokenize_ids.txt"
         _template = self.getTextInFile(_pathTemplate)
