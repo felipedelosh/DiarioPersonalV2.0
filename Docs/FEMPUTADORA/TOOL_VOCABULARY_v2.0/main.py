@@ -24,6 +24,15 @@ class Software:
         self.btnLoadWork = Button(self.canvas, text="LOAD WORK", bg="orange", command=self.loadWork)
         self.btnSaveWork = Button(self.canvas, text="SAVE WORK", bg="green", command=self.saveWork)
         self.btnAddNewSemanticDimension = Button(self.canvas, text="ADD Semantic Dimension", command=self.open_add_semantic_dimension_window)
+        self.lblTitleSemanticEditor = Label(self.canvas, text="Edit Semantic VEKTOR")
+        self.lblSemanticDimensionWordX = Label(self.canvas, text="X_WORD: ")
+        self.lblSemanticDimensionWordY = Label(self.canvas, text="Y_WORD: ")
+        self.txtValueSemanticDimension = Entry(self.canvas, width=5)
+        self.btnSemanticEditorUP = Button(self.canvas, text="UP", command=lambda: self.motionControl("UP"))
+        self.btnSemanticEditorDown = Button(self.canvas, text="DOWN", command=lambda: self.motionControl("DOWN"))
+        self.btnSemanticEditorLeft = Button(self.canvas, text="LEFT", command=lambda: self.motionControl("LEFT"))
+        self.btnSemanticEditorRight = Button(self.canvas, text="RIGHT", command=lambda: self.motionControl("RIGHT"))
+        self.btnSaveSemanticCorelationValue = Button(self.canvas, text="UPDATE VALUE")
         # Semantic Dimensio Statitics
         self.lblSemanticDimenionCounter = Label(self.canvas, text="Semantic Dimensions: 0")
         
@@ -122,16 +131,52 @@ class Software:
         self.controller.setNewSemanticDimension(_title, _contexIterators, _textSDimenDescript)
         self.showBtnSaveWork()
         self.showSemanticDimensionStatitics()
+        self.showEditorSemanticVectorInterface()
         top.destroy()
 
     def showBtnSaveWork(self):
         if len(self.controller.semanticDimensionsArr) > 0:
             self.btnSaveWork.place(x=self._w * 0.9, y=self._h * 0.05)
+            self.showEditorSemanticVectorInterface()
 
     def showSemanticDimensionStatitics(self):
         _data = self.controller.getSemanticDimesionStatitics()
         self.lblSemanticDimenionCounter["text"] = f"Semantic Dimensions: {_data['total']}"
         self.lblSemanticDimenionCounter.place(x=self._w * 0.01, y=self._h * 0.75)
+
+
+    def motionControl(self, option):
+        if option == "UP":
+            #self.controller.mouveUP()
+            pass
+        elif option == "DOWN":
+            #self.controller.mouveDOWN()
+            pass
+        elif option == "LEFT":
+            #self.controller.mouveLEFT()
+            pass
+        elif option == "RIGHT":
+            #self.controller.mouveRIGHT()
+            pass
+        
+        self.updateEditorSemanticVectorInterface()
+
+    def showEditorSemanticVectorInterface(self):
+        self.lblTitleSemanticEditor.place(x=self._w * 0.55, y=self._h * 0.16)
+        self.btnSemanticEditorUP.place(x=self._w * 0.61, y=self._h * 0.23)
+        self.lblSemanticDimensionWordX.place(x=self._w * 0.4, y=self._h * 0.35)
+        self.lblSemanticDimensionWordY.place(x=self._w * 0.55, y=self._h * 0.3)
+        self.txtValueSemanticDimension.place(x=self._w * 0.6, y=self._h * 0.42)
+        self.btnSemanticEditorDown.place(x=self._w * 0.6, y=self._h * 0.62)
+        self.btnSemanticEditorLeft.place(x=self._w * 0.3, y=self._h * 0.42)
+        self.btnSemanticEditorRight.place(x=self._w * 0.9, y=self._h * 0.42)
+        self.btnSaveSemanticCorelationValue.place(x=self._w * 0.84, y=self._h * 0.62)
+        self.updateEditorSemanticVectorInterface()
+
+    def updateEditorSemanticVectorInterface(self):
+        pass
+        #self.lblSemanticDimensionWordX['text'] = f"X_WORD:{self.controller.pos_x_dimension}:{self.controller.word_x_dimension}"
+        #self.lblSemanticDimensionWordY['text'] = f"Y_WORD:{self.controller.pos_y_dimension}:{self.controller.word_y_dimension}"
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""
