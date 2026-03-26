@@ -15,8 +15,8 @@ class Controller:
 
         # VARS
         self.semanticDimensionsArr = []
-        self.pythonizeSemanticDimensionsArr = []
         self.finalPythonDataVocabularizer = [] # Save LINE TO LINE final code arr(str)
+        self.keysContextualIterators = [] # str: storages all words
         self.pos_x_dimension = 0
         self.word_x_dimension = ""
         self.pos_y_dimension = 0
@@ -78,13 +78,11 @@ class Controller:
             self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
     def update_dimensional_keys_by_xy(self, x, y):
         try:
-            keys = []
-
-            if len(keys) < x or len(keys) < y:
+            if len(self.keysContextualIterators) < x or len(self.keysContextualIterators) < y:
                 return
 
-            self.word_x_dimension = keys[x]
-            self.word_y_dimension = keys[y]
+            self.word_x_dimension = self.keysContextualIterators[x]
+            self.word_y_dimension = self.keysContextualIterators[y]
         except:
             pass
         
@@ -146,6 +144,7 @@ class Controller:
                             itterContextual = str(i).strip()
                             if itterContextual != "":
                                 _semanticDimensionContextualIteratorsArr.append(itterContextual)
+                                self.keysContextualIterators.append(itterContextual)
                         self.semanticDimensionsArr[_semanticDimensionCounter].contextualIteratorsArr = _semanticDimensionContextualIteratorsArr
 
                     if " >> " not in itterLine:
@@ -200,7 +199,6 @@ class Controller:
         self.finalPythonDataVocabularizer = _template.split("\n")
         self.setDiagonalOnesMatrix()
         self._savePythonFile(title)
-        self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
 
     def _getZeroArr(self, qty):
         _zeroData = ", 0"*qty
