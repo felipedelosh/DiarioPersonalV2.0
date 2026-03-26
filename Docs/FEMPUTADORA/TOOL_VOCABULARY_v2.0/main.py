@@ -147,17 +147,13 @@ class Software:
 
     def motionControl(self, option):
         if option == "UP":
-            #self.controller.mouveUP()
-            pass
+            self.controller.mouveUP()
         elif option == "DOWN":
-            #self.controller.mouveDOWN()
-            pass
+            self.controller.mouveDOWN()
         elif option == "LEFT":
-            #self.controller.mouveLEFT()
-            pass
+            self.controller.mouveLEFT()
         elif option == "RIGHT":
-            #self.controller.mouveRIGHT()
-            pass
+            self.controller.mouveRIGHT()
         
         self.updateEditorSemanticVectorInterface()
 
@@ -174,9 +170,8 @@ class Software:
         self.updateEditorSemanticVectorInterface()
 
     def updateEditorSemanticVectorInterface(self):
-        pass
-        #self.lblSemanticDimensionWordX['text'] = f"X_WORD:{self.controller.pos_x_dimension}:{self.controller.word_x_dimension}"
-        #self.lblSemanticDimensionWordY['text'] = f"Y_WORD:{self.controller.pos_y_dimension}:{self.controller.word_y_dimension}"
+        self.lblSemanticDimensionWordX['text'] = f"X_WORD:{self.controller.pos_x_dimension}:{self.controller.word_x_dimension}"
+        self.lblSemanticDimensionWordY['text'] = f"Y_WORD:{self.controller.pos_y_dimension}:{self.controller.word_y_dimension}"
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""

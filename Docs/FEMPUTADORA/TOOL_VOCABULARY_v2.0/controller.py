@@ -17,6 +17,10 @@ class Controller:
         self.semanticDimensionsArr = []
         self.pythonizeSemanticDimensionsArr = []
         self.finalPythonDataVocabularizer = [] # Save LINE TO LINE final code arr(str)
+        self.pos_x_dimension = 0
+        self.word_x_dimension = ""
+        self.pos_y_dimension = 0
+        self.word_y_dimension = ""
 
     def loadPreviosWorksNameSpaces(self):
         works = ["NEW"]
@@ -36,7 +40,6 @@ class Controller:
         _status = self.loadVocabularyFromFile(name)
         if _status:
             self.semanticDimensionsArr = []
-            self.pythonizeSemanticDimensionsArr = []
             self.finalPythonDataVocabularizer = []
             self.extractSemanticDimensionsFromPythonClassDoc()
 
@@ -58,6 +61,32 @@ class Controller:
             return f.read()
         except:
             return info
+        
+    def mouveUP(self):
+        if self.pos_y_dimension - 1 >= 0:
+            self.pos_y_dimension = self.pos_y_dimension - 1
+            self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
+    def mouveDOWN(self):
+        self.pos_y_dimension = self.pos_y_dimension + 1
+        self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
+    def mouveRIGHT(self):
+        self.pos_x_dimension = self.pos_x_dimension + 1
+        self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
+    def mouveLEFT(self):
+        if self.pos_x_dimension - 1 >= 0:
+            self.pos_x_dimension = self.pos_x_dimension - 1
+            self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
+    def update_dimensional_keys_by_xy(self, x, y):
+        try:
+            keys = []
+
+            if len(keys) < x or len(keys) < y:
+                return
+
+            self.word_x_dimension = keys[x]
+            self.word_y_dimension = keys[y]
+        except:
+            pass
         
     def setNewSemanticDimension(self, title, contexIterators, textSDimenDescript):
         _id = len(self.semanticDimensionsArr) + 1
@@ -171,6 +200,7 @@ class Controller:
         self.finalPythonDataVocabularizer = _template.split("\n")
         self.setDiagonalOnesMatrix()
         self._savePythonFile(title)
+        self.update_dimensional_keys_by_xy(self.pos_x_dimension, self.pos_y_dimension)
 
     def _getZeroArr(self, qty):
         _zeroData = ", 0"*qty
