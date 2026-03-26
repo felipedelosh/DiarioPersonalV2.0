@@ -7,7 +7,7 @@
 # PLACE >> [casa, oficina, escuela, universidad, supermercado, terminal, parque, gimnasio, restaurante, hospital, mall, cine, biblioteca, banco, cafetería, farmacia]
 # Son los sitios fisicos en que pueden existir los SUBJECT
 # THEME >> [diario, sueño, nota, droga, amigo, sentimiento, tiempo, calendario, horario, finanza, ahorro, deuda, salud, trabajo, estudio, familia]
-# clasifica en los aspectos más importantes del diario
+# Clasifica en los aspectos más importantes del diario
 # EMOTION >> [feliz, triste, ira, miedo, cansancio, amor, suicida]
 # Es aquello que pueden sentir los SUBJECT
 # INTENSITY >> [mucho, poco, nada]

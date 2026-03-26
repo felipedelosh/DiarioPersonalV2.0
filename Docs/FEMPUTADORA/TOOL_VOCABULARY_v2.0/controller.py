@@ -191,10 +191,6 @@ class Controller:
                         _keyword = str(_data[0]).replace("\"", "")
                         self.sinapsis.addNode(_keyword)
 
-        print(f"Total elementos registrados en el grafo: {len(self.sinapsis.nodes)}")
-
-        print(self.sinapsis.nodes)
-
         # STEP 0: FILL CONECTIONS DATA
         _isSemanticConectionsWeigthArea = False
         for i in self._DATA_.split("\n"):
@@ -218,49 +214,31 @@ class Controller:
                         _data = str(_data).split("\":[")
                         
                         _keyword = str(_data[0]).replace("\"", "")
-                        print(f"En la posición: {_keyword}")
 
                         _conectionValues = str(_data[1]).replace("\n", "")
-                        print("=================================================")
-                        print(_conectionValues)
                         _conectionValues = _conectionValues.replace("[", "")
-                        print("=================================================")
-                        print(_conectionValues)
                         _conectionValues = _conectionValues.replace("]", "")
-                        print("=================================================")
-                        print(_conectionValues)
                         _conectionValues = _conectionValues.replace("+", ",")
-                        print("=================================================")
-                        print(_conectionValues)
                         _conectionValues = _conectionValues[:-1]
-                        print("=================================================")
-                        print(_conectionValues)
 
-                        print(f"Total elementos: {len(str(_conectionValues).split(","))}")
                         """
                         If conection = 0 DONT Create.
                         """
                         _conter = 0
-                        
                         for itterConxtextualValue in str(_conectionValues).split(","):
-                            print(f"En la pos: {_conter} >> VALOR: {itterConxtextualValue}")
-                            #_targetValue = self.sinapsis.nodes[_conter]
-
-                            #print(f"Para: {_keyword} en la pos: {_conter}:{_targetValue} el  valor es: {itterConxtextualValue}")
+                            if itterConxtextualValue != "0":
+                                _targetValue = self.sinapsis.nodes[_conter]
+                                #print(f"Para: {_keyword} en la pos: {_conter}:{_targetValue} el  valor es: {itterConxtextualValue}")
+                                self.sinapsis.addEdge(_keyword, _targetValue, float(itterConxtextualValue))
 
                             _conter = _conter + 1
 
-                        break
-                        
-
-
-        # print("Terminamos de construir el grafo")
-        # print(self.sinapsis)
-        # print(f"Total NODOS: {len(self.sinapsis.nodes)}")
-        # print(self.sinapsis.nodes)
-        # print("================")
-        # print(self.sinapsis.edges)
-
+        print("Terminamos de construir el grafo")
+        print(self.sinapsis)
+        print(f"Total NODOS: {len(self.sinapsis.nodes)}")
+        print(self.sinapsis.nodes)
+        print("================")
+        print(self.sinapsis.edges)
 
     def savePythonSemanticDimension(self, title):
         _pathTemplate = f"{self.path}/resources/template_vocabulary_tokenize_ids.txt"
