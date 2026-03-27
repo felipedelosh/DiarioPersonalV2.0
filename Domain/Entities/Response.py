@@ -9,10 +9,11 @@ data = data
 qty = len of data
 """
 class Response:
-    def __init__(self, success: bool, data: dict | None = None, qty = 0):
+    def __init__(self, success: bool, data: dict | None = None, qty = 0, pagination: dict | None = None):
         self.success = success
         self.data = data
         self.qty = qty
+        self.pagination = pagination
 
     @staticmethod
     def response(success: bool, data: dict | None = None, qty = 0):
@@ -20,4 +21,13 @@ class Response:
             "success": success,
             "qty": qty,
             "data": data
+        }
+    
+    @staticmethod
+    def responsePaginated(success: bool, data: dict | None = None, qty = 0, pagination: dict | None = None):
+        return {
+            "success": success,
+            "qty": qty,
+            "data": data,
+            "pagination": pagination
         }

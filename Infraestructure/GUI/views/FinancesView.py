@@ -22,6 +22,7 @@ class FinancesView(Screen):
         self.lang = self.manager.controller.dependencies["lang"]
         self.stringProcesor = self.manager.controller.utils["string_procesor"]
         lblTitle = tk.Label(self.canvas, text=self.lang.getText("economy_title"))
+        self.current_page_debit_history = 0
         lblTitle.place(x=self._w*0.38, y=self._h*0.05)
         _options = self.lang.getText("economy_options")
         self.renderButons(_options, self._w, self._h)
@@ -464,6 +465,7 @@ class FinancesView(Screen):
 
         _path = self.manager.controller.pathController.getPathByCODE("ECONOMY_DEBIT")
         _data = self.manager.controller.dependencies["debit_use_case_get_all_debits_registered"].execute(_path)
+        _data = self.manager.controller.dependencies["paginator_use_case"].execute(_data, self.current_page_debit_history, 8)
 
         if _data["success"] and _data["data"]:
             _counter = 1

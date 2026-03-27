@@ -49,6 +49,7 @@ from Infraestructure.UseCases.ChatWithFemputadora import ChatWithFemputadora
 from Infraestructure.UseCases.GetAllYearsOfEconomyDebits import GetAllYearsOfEconomyDebits
 from Infraestructure.UseCases.GetAllTAccountInformation import GetAllTAccountInformation
 from Infraestructure.UseCases.GetAllDiaryInformationWithTempFile import GetAllDiaryInformationWithTempFile
+from Infraestructure.UseCases.GetPaginatedFromData import GetPaginatedFromData
 # Femputadora
 from CORE.FEMPUTADORA.Femputadora import Femputadora
 # Graphics
@@ -114,6 +115,7 @@ class DependencyInjector:
         debit_use_case_get_all_years_of_debits = GetAllYearsOfEconomyDebits(folder_service)
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
         diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile(diary_use_case_get_all_info, economy_use_case_get_all_info, backup_service)
+        paginator_use_case = GetPaginatedFromData()
         usage_use_case_save = SaveUsage(usage_servide)
         # END USECASES
 
@@ -140,6 +142,7 @@ class DependencyInjector:
             "debit_use_case_get_all_years_of_debits": debit_use_case_get_all_years_of_debits,
             "schedule_use_case_save_24h_report": schedule_use_case_save_24h_report,
             "diary_use_case_get_all_registred_information_with_temp_file": diary_use_case_get_all_registred_information_with_temp_file,
+            "paginator_use_case": paginator_use_case,
             "usage_use_case_save": usage_use_case_save,
             "chat_femputadora_use_case": chat_femputadora_use_case,
             "config": configManager,
