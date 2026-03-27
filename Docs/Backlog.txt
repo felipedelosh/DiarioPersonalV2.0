@@ -29,6 +29,5 @@ G4.4|Gráfica Tiempo de Vida|Mostrar visualización de edad/vida.|🔴|NO
 S1|Vista de Perfil|Configuración de usuario (nombre, foto, preferencias).|🟢|NO
 S2|Vista de Ayuda|Mostrar guía rápida del sistema.|🟡|NO
 H2|Acciones Debitos|Todos las acciones del abono de deudas deben habilitarse|🔴|NO
-H3|Acciones Debitos|Paginar y aplicar paginación|🟡|NO
 T1|Temporales|Cuando se inserta información se tiene que guardar en DATA/TEMP para posterior recuperación en caso de cerrar el programa por accidente|🟢|NO
 P1|Popup para ingreso de fechas|Se requiere una interfaz POPUP capaz de ser el inyector de fechas tipo YYYY/MM/DD para un input.|🟡|NO
