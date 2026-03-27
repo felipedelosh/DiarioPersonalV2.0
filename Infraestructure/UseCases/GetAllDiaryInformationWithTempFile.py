@@ -32,7 +32,7 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
                 for i in _all_data["data"]:
                     _title = str(i)
                     _content = _all_data["data"][_title]
-                    _data_backup = _data_backup + f"Title: {_title}\n" + f"Text: {_content}\n" + "*"*40 + "\n"
+                    _data_backup = _data_backup + f"Title: {_title}\n" + f"Text:\n{_content}\n" + "*"*40 + "\n"
                     _final_data[str(PathEnums.DIARY)][_title] = _content
                     qty = qty + 1
 
