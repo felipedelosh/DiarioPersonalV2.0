@@ -58,7 +58,7 @@ class FinancesView(Screen):
             self.drawDebitsOption()
         if opt == _options[4]:
             self.deleteOption()
-            print("Resumenes")
+            self.drawSummaryOption()
         if opt == _options[5]:
             self.deleteOption()
             self.deleteOption()
@@ -735,6 +735,14 @@ class FinancesView(Screen):
             return False
         
     # DEBITS
+
+    # SUMMARY
+    def drawSummaryOption(self):
+        _options = self.lang.getText("economy_options_summary")
+
+        for itterSummaryOptionText in _options:
+            print(itterSummaryOptionText)
+    # SUMMARY
 
     # Search
     def drawSearchOption(self):

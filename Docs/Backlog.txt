@@ -8,6 +8,12 @@ E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
 E4|Vista de Buscar|Búsqueda global en entradas, notas y finanzas.|🟢|NO
 E6|Actualizar vista cuando las deudas son pagadas|Cuando se registre el pago de una deuda se debe de refrescar la vista.|🟢|NO
 E11|Caso de uso para Categorias de Economia|Se necesita generar un caso de uso que lea todos los Movimientos economicos y Agrupe {"key": [str, str, ...str]} en conjuntos de datos similares.|🟢|NO
+E12|Resumen economico de Balance mensual neto|Suma todo del mes en curso debitos y creditos y te muestra si avanzas o retrocedes.|🟢|NO
+E13|Resumen economico de Evolución de deudas|Muestra si las deudas crecen o decrecen con forme van pasando el tiempo.|🟢|NO
+E14|Resumen economico de Gastos por categorías|Muestra según las categorias en que el dinero entra o sale.|🟢|NO
+E15|Resumen economico de Ahorro acumulado|Muestra según entrada/salida economica por mes cuanta cantidad de dinero debe de ahorrarse y cuanto se está ahorrando.|🟢|NO
+E16|Resumen economico de Comparativa año a año|Muestra Año a Año mes a mes como es el progreso/retroceso de tu estatus economico.|🟢|NO
+E17|Resumen economico de HOY|Te dice cuanto te puedes gastar hoy o cuanto es recomendable prestar.|🟢|NO
 G1|Vista de Gráficas|Se necesita una vista principal para vizualizador de gráficas (MAIN)|🟡|NO
 F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
 G1.1|Pie Ingresos/Egresos|Mostrar proporción total del período seleccionado.|🟡|NO

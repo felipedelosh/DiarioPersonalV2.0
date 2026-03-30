@@ -136,6 +136,14 @@
     "Resumenes",
     "Buscar"
   ],
+  "economy_options_summary": [
+    "Balance mensual neto",
+    "Evolución de deudas",
+    "Gastos por categorías",
+    "Ahorro acumulado",
+    "Comparativa año a año",
+    "HOY"
+  ],
   "debit_main_title":"Registar una nueva deuda: ",
   "debit_btn_new_debit": "Nueva Deuda",
   "debit_btn_debit_payment": "Abono a la deuda",
