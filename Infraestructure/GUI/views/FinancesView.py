@@ -17,6 +17,7 @@ class FinancesView(Screen):
         self._w = float(self.canvas["width"])
         self._h =float(self.canvas["height"])
         self.btns = []
+        self.btnMainMenu = None
         self._tempCurrentElementsOptions = [] # TO DELETE AFTER USE OR CHANGE VIEW
         self._tempDebitArrayItems = []
         self.lang = self.manager.controller.dependencies["lang"]
@@ -59,6 +60,7 @@ class FinancesView(Screen):
         if opt == _options[4]:
             self.deleteOption()
             self.drawSummaryOption()
+            self.drawBtnBackToMainMenu()
         if opt == _options[5]:
             self.deleteOption()
             self.deleteOption()
@@ -738,10 +740,61 @@ class FinancesView(Screen):
 
     # SUMMARY
     def drawSummaryOption(self):
+        self.btnMainMenu = tk.Button(self.canvas, text=self.lang.getText("text_main_menu"), command=self.showMainMenuFromBtn)
+        self.destroyOption()
         _options = self.lang.getText("economy_options_summary")
 
+        _total_butons = len(_options)
+
+        if _total_butons == 0:
+            return
+
         for itterSummaryOptionText in _options:
-            print(itterSummaryOptionText)
+            btn = tk.Button(self.canvas, text=itterSummaryOptionText, command=lambda opt=itterSummaryOptionText: self.drawSummaryInternalInterfaceOption(_options, opt))
+            self.btns.append(btn)
+
+        btn_height = self.btns[0].winfo_reqheight()
+        spacing = btn_height * 0.5
+        total_height = _total_butons * btn_height + (_total_butons - 1) * spacing
+        start_y = (self._h - total_height) / 2
+
+        for idx, btn in enumerate(self.btns):
+            btn_width = btn.winfo_reqwidth()
+            x_pos = (self._w - btn_width) / 12
+            y_pos = start_y + idx * (btn_height + spacing)
+            btn.place(x=x_pos, y=y_pos)
+
+
+
+    def drawSummaryInternalInterfaceOption(self, options, opt):
+        print(options)
+        print(opt)
+        if opt == options[0]:
+            pass
+        elif opt == options[0]:
+            pass
+        elif opt == options[0]:
+            pass
+        elif opt == options[0]:
+            pass
+
+    def drawBtnBackToMainMenu(self):
+        self.btnMainMenu.place(x=self._w*0.4, y=self._h*0.2)
+
+    def showMainMenuFromBtn(self):
+        self.btnMainMenu.destroy()
+        self.destroyOption()
+        _options = self.lang.getText("economy_options")
+        self.renderButons(_options, self._w, self._h)
+
+    def destroyOption(self):
+        for widget in self._tempCurrentElementsOptions:
+            widget.destroy()
+        self._tempCurrentElementsOptions.clear()
+
+        for btn in self.btns:
+            btn.destroy()
+        self.btns.clear()
     # SUMMARY
 
     # Search
