@@ -1,0 +1,24 @@
+6am:dormir
+7am:dormir
+8am:programar
+9am:programar
+10am:reunión
+11am:construir
+12am:construir
+1pm:construir
+2pm:construir
+3pm:construir
+4pm:construir
+5pm:construir
+6pm:construir
+7pm:construir
+8pm:construir
+9pm:construir
+10pm:televisión
+11pm:televisión
+12pm:televisión
+1am:redes sociales
+2am:dormir
+3am:dormir
+4am:dormir
+5am:dormir
