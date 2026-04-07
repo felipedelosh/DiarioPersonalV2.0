@@ -68,3 +68,6 @@ class TimeUtils:
     
     def getRangeOfAllMMOfYearInNumber(self):
         return range(1, 13)
+    
+    def getRangeOfAllDDOfXMM(self, MM):
+        return range(1, self.durationMMinDays[MM]+1)

@@ -870,6 +870,7 @@ class FinancesView(Screen):
                 entry.config(fg="black")
             else:
                 self._add_placeholder_economy_search_moviments_date(entry)
+                self.master.focus_set()
 
     def searchEconomyMoviments(self, itemsDiplayed, txtConcepToSearch, txtDateInit, txtDateEnd, txtSearchResult):
         _concept = txtConcepToSearch.get()
