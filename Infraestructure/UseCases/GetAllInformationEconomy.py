@@ -31,7 +31,7 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
                             continue
 
                         for itterEconomyData in _economyInfoPeerYear["data"]:
-                            process = self.processEconomyInformation(_base_path_economy, YYYY, _data, itterEconomyData, _economyInfoPeerYear["data"], keyword, _qty)
+                            process = self.processEconomyInformation(_base_path_economy, YYYY, _data, itterEconomyData, _economyInfoPeerYear["data"], keyword, initDate, finalDate, _qty)
 
                             if process:
                                 _qty = _qty + 1
@@ -40,7 +40,7 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
         except:
             return Response.response(False, {}, -1)
         
-    def processEconomyInformation(self, path, YYYY, data, keyEconomyMovement, EconomyMovement, keyword, baseFolderCounter):
+    def processEconomyInformation(self, path, YYYY, data, keyEconomyMovement, EconomyMovement, keyword, initDate, finalDate, baseFolderCounter):
         try:
             # DATE|CONCEPT|CASH|TYPE|STATUS
             if "DEBITOS" in path:
@@ -59,9 +59,10 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
                 date = f"{YYYY}/{MM}/{DD}"
                 concept = _dataSplited[4]
 
-                if keyword != "":
-                    if not str(keyword).lower() in str(concept).lower():
-                        return False
+                # FILTERS
+                if self.filter(concept, date, keyword, initDate, finalDate):
+                    return False
+                # FILTERS
 
                 cash = _dataSplited[1]
                 status = _dataSplited[5]
@@ -86,10 +87,10 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
 
                     concept = _dataSplited[0]
 
-                    # FILTER BY CONCEPT
-                    if keyword != "":
-                        if not str(keyword).lower() in str(concept).lower():
-                            continue
+                    # FILTERS
+                    if self.filter(concept, date, keyword, initDate, finalDate):
+                        continue
+                    # FILTERS
 
                     cash = ""
                     status = ""
@@ -112,3 +113,16 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
         except Exception as e:
             print(f"ERROR::USE_CASE::GET_ALL_INFORMATION_ECONOMY::{str(e)}")
             return False
+        
+    def filter(self, InputConcetp, InputDate, FilterKeyword, FilterInitDate, FilterFinalDate):
+        """
+        Return True if Match With Filters
+
+        InputConcetp: TEXT
+        InputDate: YYYY/MM/DD
+        """
+        if FilterKeyword != "":
+            if not str(FilterKeyword).lower() in str(InputConcetp).lower():
+                return True
+
+        return False
