@@ -124,5 +124,25 @@ class GetAllInformationEconomy(IGetAllInformationEconomy):
         if FilterKeyword != "":
             if not str(FilterKeyword).lower() in str(InputConcetp).lower():
                 return True
+            
+        if InputDate != "" and FilterInitDate != "":
+            _dataTimeInput = str(InputDate).split("/")
+            _dataTimeInputYYYY = int(_dataTimeInput[0])
+
+            _dataTimeFilter = str(FilterInitDate).split("/")
+            _dataTimeFilterYYYY = int(_dataTimeFilter[0])
+
+            if _dataTimeInputYYYY < _dataTimeFilterYYYY:
+                return True
+            
+        if InputDate != "" and FilterFinalDate != "":
+            _dataTimeInput = str(InputDate).split("/")
+            _dataTimeInputYYYY = int(_dataTimeInput[0])
+
+            _dataTimeFilter = str(FilterFinalDate).split("/")
+            _dataTimeFilterYYYY = int(_dataTimeFilter[0])
+
+            if _dataTimeInputYYYY > _dataTimeFilterYYYY:
+                return True
 
         return False
