@@ -861,7 +861,7 @@ class FinancesView(Screen):
         current_value = entry.get().strip()
 
         if current_value == "" or current_value == self.lang.getText("text_format_date"):
-            popup = PopupDateInputView(self.master, self.manager, self.lang.getText("text_insert_date"), self.lang.getText("text_date"))
+            popup = PopupDateInputView(self.master, self.manager.controller.utils["time_util"], self.manager, self.lang.getText("text_insert_date"), self.lang.getText("text_date"))
 
             selected_date = popup.render(420, 220)
             if selected_date is not None and str(selected_date).strip() != "":

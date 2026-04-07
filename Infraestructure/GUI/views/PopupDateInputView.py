@@ -4,8 +4,9 @@ from Infraestructure.GUI.Screen import Screen
 
 
 class PopupDateInputView(Screen):
-    def __init__(self, master, manager, message, title="Seleccionar fecha"):
+    def __init__(self, master, timeController, manager, message, title="Seleccionar fecha"):
         self.master = master
+        self.timeController = timeController
         self.manager = manager
         self.message = message
         self.title = title
@@ -31,8 +32,8 @@ class PopupDateInputView(Screen):
         )
         lblMsg.place(x=20, y=30)
 
-        years = [str(year) for year in range(2020, 2036)]
-        months = [f"{month:02d}" for month in range(1, 13)]
+        years = [str(year) for year in self.timeController.getRangeOfYYYYFromXXToCurrentYYYY()]
+        months = [f"{month:02d}" for month in self.timeController.getRangeOfAllMMOfYearInNumber()]
         days = [f"{day:02d}" for day in range(1, 32)]
 
         self.year_var = tk.StringVar(value="2025")

@@ -62,4 +62,9 @@ class TimeUtils:
 
 
         return hour_str
-
+    
+    def getRangeOfYYYYFromXXToCurrentYYYY(self):
+        return range(2020, self.getCurrentYYYY()+1)
+    
+    def getRangeOfAllMMOfYearInNumber(self):
+        return range(1, 13)
