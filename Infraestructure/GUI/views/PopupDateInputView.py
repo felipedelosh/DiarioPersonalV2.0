@@ -18,6 +18,9 @@ class PopupDateInputView(Screen):
         self.month_var = None
         self.day_var = None
 
+        self.cmbDay = None
+        self.cmbMonth = None
+
     def render(self, width, height):
         self.window = tk.Toplevel(self.master)
         self.window.title(self.title)
@@ -49,23 +52,24 @@ class PopupDateInputView(Screen):
         )
         cmbYear.place(x=width / 2 - 140, y=height / 2 - 10)
 
-        cmbMonth = ttk.Combobox(
+        self.cmbMonth = ttk.Combobox(
             self.window,
             textvariable=self.month_var,
             values=months,
             state="readonly",
             width=5
         )
-        cmbMonth.place(x=width / 2 - 20, y=height / 2 - 10)
+        self.cmbMonth.place(x=width / 2 - 20, y=height / 2 - 10)
+        self.cmbMonth.bind("<<ComboboxSelected>>", self._on_month_change)
 
-        cmbDay = ttk.Combobox(
+        self.cmbDay = ttk.Combobox(
             self.window,
             textvariable=self.day_var,
             values=days,
             state="readonly",
             width=5
         )
-        cmbDay.place(x=width / 2 + 70, y=height / 2 - 10)
+        self.cmbDay.place(x=width / 2 + 70, y=height / 2 - 10)
 
         btnCancel = tk.Button(
             self.window,
@@ -87,6 +91,16 @@ class PopupDateInputView(Screen):
         self.window.wait_window()
 
         return self.result
+    
+    def _on_month_change(self, event=None):
+        month = int(self.month_var.get()) - 1
+        new_days = [f"{day:02d}" for day in self.timeController.getRangeOfAllDDOfXMM(month)]
+
+        self.cmbDay["values"] = new_days
+
+        current_day = self.day_var.get().strip()
+        if current_day not in new_days:
+            self.day_var.set(new_days[0])
 
     def _on_ok(self):
         year = self.year_var.get().strip()
