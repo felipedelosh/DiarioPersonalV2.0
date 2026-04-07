@@ -34,9 +34,9 @@ class PopupDateInputView(Screen):
 
         years = [str(year) for year in self.timeController.getRangeOfYYYYFromXXToCurrentYYYY()]
         months = [f"{month:02d}" for month in self.timeController.getRangeOfAllMMOfYearInNumber()]
-        days = [f"{day:02d}" for day in range(1, 32)]
+        days = [f"{day:02d}" for day in self.timeController.getRangeOfAllDDOfXMM(0)]
 
-        self.year_var = tk.StringVar(value="2025")
+        self.year_var = tk.StringVar(value=f"{self.timeController.getCurrentYYYY()}")
         self.month_var = tk.StringVar(value="01")
         self.day_var = tk.StringVar(value="01")
 
