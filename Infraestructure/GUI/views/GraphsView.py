@@ -132,8 +132,14 @@ class GraphsView(Screen):
 
         self.auxiliarCanvas.delete("all")
         graphier = self.manager.controller.utils["graphics_renderder"]
+        _MMNames = self.lang.getText("month_names")
         self.auxiliarCanvas.place(x=self._w * 0.05, y=self._h * 0.40)
-        graphier.render(self.auxiliarCanvas, _data, graphicsType, None)
+
+        options = {
+            'MMNames' : _MMNames
+        }
+
+        graphier.render(self.auxiliarCanvas, _data, graphicsType, options)
 
     def deleteOption(self):
         for widget in self._tempCurrentElementsOptions:
