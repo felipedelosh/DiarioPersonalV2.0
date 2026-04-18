@@ -72,15 +72,20 @@ class GraphsView(Screen):
         btnPaint.place(x=self._w * 0.45, y=self._h * 0.32)
 
     def paintEconomy(self, option):
+        # Total PASTEL Ingresos/Egresos
         if option == self.lang.getText("graphics_economy_categories")[0]:
             self.paintedCanvas(f"{GraphType.PIE_TACCOUNTS_ALL}")
+        # Total BARRAS Ingresos/Egresos
         if option == self.lang.getText("graphics_economy_categories")[1]:
             self.paintedCanvas(f"{GraphType.BAR_TACCOUNTS_ALL}")
+        # Total LINEAL Ingresos/Egresos
         if option == self.lang.getText("graphics_economy_categories")[2]:
-            self.paintedCanvas(f"{GraphType.BAR_TACCOUNTS_FILTERED_BY_TIME}")
+            self.paintedCanvas(f"{GraphType.CARTESIAN_TACCOUNTS_LINES_PLOTTER}")
         if option == self.lang.getText("graphics_economy_categories")[3]:
-            self.paintedCanvas(f"{GraphType.CARTESIAN_ZZZ_VS_MONEY}")
+            self.paintedCanvas(f"{GraphType.BAR_TACCOUNTS_FILTERED_BY_TIME}")
         if option == self.lang.getText("graphics_economy_categories")[4]:
+            self.paintedCanvas(f"{GraphType.CARTESIAN_ZZZ_VS_MONEY}")
+        if option == self.lang.getText("graphics_economy_categories")[5]:
             self.paintedCanvas(f"{GraphType.BAR_TACCOUNTS_FILTERED_BY_CATEGORY}")
     # Economy
 
@@ -112,6 +117,14 @@ class GraphsView(Screen):
         if graphicsType == str(GraphType.BAR_TACCOUNTS_ALL):
             _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
             _data = self.manager.controller.dependencies["economy_use_case_get_all_taccounts"].execute(_base_path)
+
+            if not _data["success"]:
+                PopupView(self.master, self.manager, self.lang.getText("text_find_error_taccounts_search"), "ERROR").render(500, 300)
+                return None
+            
+        if graphicsType == str(GraphType.CARTESIAN_TACCOUNTS_LINES_PLOTTER):
+            _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
+            _data = self.manager.controller.dependencies["economy_use_case_get_all_taccounts_segmented_by_year"].execute(_base_path)
 
             if not _data["success"]:
                 PopupView(self.master, self.manager, self.lang.getText("text_find_error_taccounts_search"), "ERROR").render(500, 300)

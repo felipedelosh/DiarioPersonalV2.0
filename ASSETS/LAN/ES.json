@@ -238,6 +238,7 @@
   "graphics_economy_categories": [
     "Total PASTEL Ingresos/Egresos",
     "Total BARRAS Ingresos/Egresos",
+    "Total LINEAL Ingresos/Egresos",
     "Periodo Ingresos/Egresos",
     "Comparativa Sueño vs Ingresos",
     "Filtrado Por categoria"

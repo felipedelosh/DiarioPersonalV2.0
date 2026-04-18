@@ -20,6 +20,9 @@ class GraphRenderer(IGraphRenderer):
         if graphicsType == str(GraphType.BAR_TACCOUNTS_ALL):
             self._renderAllTAccountsInBarGraphic(canvas, data)
 
+        if graphicsType == str(GraphType.CARTESIAN_TACCOUNTS_LINES_PLOTTER):
+            self._renderAllTAccountsInLinePLotterGraphic(canvas, data, options)
+
     def _renderAllTAccountsInPIEGraphic(self, canvas: Canvas, data: Response):
         """
         Enter All TAccounts information {'path': 'data'}
@@ -173,4 +176,91 @@ class GraphRenderer(IGraphRenderer):
         decimal_str = f"{decimal:.2f}".split(".")[1]
 
         return f"$ {entero_str}.{decimal_str}"
+
+    def _renderAllTAccountsInLinePLotterGraphic(self, canvas: Canvas, data: Response, options):
+        """
+        Enter All TAccounts information: {YYYY: {'FILE_PATH': 'DATA'} }
+
+            * Paint Aixis XY
+            * Divide X in YYYY areas.
+            * Search MAX TAACOUNT DEBIT & CREDIT and relationate with Y.
+            * Paint Plots
+        """
+        print(options)
+        # VARS
+        w = float(canvas["width"])
+        h = float(canvas["height"])
+        _w_left_margin = w * 0.05
+        _w_right_margin = w * 0.95
+        _h_bottom_margin = h * 0.9
+        _h_top_margin = h * 0.1
+
+        # Paint Aixis
+        x0 = _w_left_margin
+        y0 = _h_bottom_margin
+
+        # X
+        x1 = _w_right_margin
+        canvas.create_line(x0, y0, x1, y0, width=2, arrow="last")
+
+        # Y
+        y1 = _h_top_margin
+        canvas.create_line(x0, y0, x0, y1, width=2, arrow="last")
+
+        # VARS: Util Painted AREA
+        lineW = x1 - x0
+        print(f"Total area util X: {lineW}")
+        lineH = y0 - y1
+        print(f"Total area util Y: {lineH}")
+
+        _totalYears = len(data["data"])
+        print(f"Total de años: {_totalYears}")
+        if _totalYears > 0:
+            dLineW = lineW / _totalYears
+            # Divide Aixis X in areas peer YYYY
+            for i in range(_totalYears):
+                # WIP: Paint year label
+                if i == 0:
+                    continue
+
+                divider_x = _w_left_margin + (i * dLineW)
+                divider_y0 = _h_bottom_margin - 5
+                divider_y1 = _h_bottom_margin + 5
+
+                canvas.create_line(divider_x, divider_y0, divider_x, divider_y1, width=2)
+
+            # Search MAX TACOUNT VALUES
+            _maxTAccountDebitValue = 0 # IN
+            _maxTAccountCreditValue = 0 # OUT
+            for itterYYYY in data["data"]:
+                for itterTAccountFile in data["data"][itterYYYY]:
+                    for i in str(data["data"][itterYYYY][itterTAccountFile]).split("\n"):
+                        if str(i).strip() != "":
+                            _TAccountData = str(i).split(";")
+                            _debit = float(_TAccountData[1])
+                            _credit = float(_TAccountData[2])
+
+                            if _maxTAccountDebitValue < _debit:
+                                _maxTAccountDebitValue = _debit
+
+                            if _maxTAccountCreditValue < _credit:
+                                _maxTAccountCreditValue = _credit
+
+            print(f"MAx Debit Value: {_maxTAccountDebitValue}")
+            print(f"MAX Credit Value: {_maxTAccountCreditValue}")
+
+            # Paint PLOTS
+            for itterYYYY in data["data"]:
+                for itterTAccountFile in data["data"][itterYYYY]:
+                    _dateExtract = str(itterTAccountFile).split("TACCOUNTS")[1]
+                    _dateExtract = str(_dateExtract).replace(".csv", "")
+                    _dateExtract = str(_dateExtract).replace("/", " ")
+                    _dateExtract = str(_dateExtract).replace("\\", "")
+                    _dateExtract = str(_dateExtract).split(" ")  # [YYYY, MMName, DD]
+
+                    print(_dateExtract)
+
+                    # for i in str(data["data"][itterYYYY][itterTAccountFile]).split("\n"):
+                    #     if str(i).strip() != "":
+                    #         pass
 

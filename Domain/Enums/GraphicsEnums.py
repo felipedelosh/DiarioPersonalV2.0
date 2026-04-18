@@ -14,6 +14,7 @@ class GraphType(Enum):
     BAR_TACCOUNTS_FILTERED_BY_CATEGORY = auto()
     BAR_DEBITS_ALL = auto()
     CARTESIAN_ZZZ_VS_MONEY = auto()
+    CARTESIAN_TACCOUNTS_LINES_PLOTTER = auto()
     # ...
 
     def __str__(self):
