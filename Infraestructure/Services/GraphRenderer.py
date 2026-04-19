@@ -252,6 +252,7 @@ class GraphRenderer(IGraphRenderer):
             #print(f"MAX Credit Value: {_maxTAccountCreditValue}")
 
             # Paint PLOTS
+            _prevDebitPoint = (_w_left_margin, _h_bottom_margin)
             for itterYYYY in data["data"]:
                 for itterTAccountFile in data["data"][itterYYYY]:
                     _dateExtract = str(itterTAccountFile).split("TACCOUNTS")[1]
@@ -285,8 +286,15 @@ class GraphRenderer(IGraphRenderer):
                     ratio = _debit / _maxTAccountDebitValue
                     if ratio > 0.1:
                         y0 = _h_bottom_margin - ((_debit / _maxTAccountDebitValue) * lineH)
-                        canvas.create_oval(x0 - 2, y0 - 2, x0 + 2, y0 + 2, fill="green")
 
+                        canvas.create_line(
+                            _prevDebitPoint[0], _prevDebitPoint[1],
+                            x0, y0,
+                            fill="green",
+                            width=2
+                        )
+                        canvas.create_oval(x0 - 2, y0 - 2, x0 + 2, y0 + 2, fill="green")
+                        _prevDebitPoint = (x0, y0)
                     #print(f"Para el registro: {_YYYY, _MM, _DD} IN: {_debit} <> OUT: {_credit}")
 
 
