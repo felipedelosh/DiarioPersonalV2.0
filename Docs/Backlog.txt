@@ -32,7 +32,6 @@ G4.1|Radar Radial 24H|Visualización anual de distribución de actividades.|🟡
 G4.2|Balance Productivo vs No Productivo|Mostrar proporción anual de actividades clasificadas.|🟡|NO
 G4.3|Comparativa YYYY vs YYYY Tiempo|Comparar distribución de tiempo entre años.|🟡|NO
 G4.4|Gráfica Tiempo de Vida|Mostrar visualización de edad/vida.|🔴|NO
-G12.1|Las graficas de Lineas y puntos para todas las TAccounts no se pintan en orden|El método _renderAllTAccountsInLinePLotterGraphic no pinta en orden las cuentas.|🔴|NO
 S1|Vista de Perfil|Configuración de usuario (nombre, foto, preferencias).|🟢|NO
 S2|Vista de Ayuda|Mostrar guía rápida del sistema.|🟡|NO
 H2|Acciones Debitos|Todos las acciones del abono de deudas deben habilitarse|🔴|NO
