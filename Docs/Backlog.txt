@@ -19,7 +19,6 @@ F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
 G1.1|Pie Ingresos/Egresos|Mostrar proporción total del período seleccionado.|🟡|NO
 G1.2|Barras Evolución Financiera|Mostrar ingresos y egresos por mes o día.|🟡|NO
 G1.3|Gasto por Categoría|Mostrar distribución de egresos por categoría.|🟡|NO
-G1.4|Comparativa YYYY vs YYYY Finanzas|Comparar evolución financiera entre años.|🟡|NO
 G1.5|Sueño vs Ingreso|Correlacionar horas de sueño con ingresos económicos.|🟡|NO
 G2.1|Frecuencia de Emociones|Barras por emoción en período seleccionado.|🟡|NO
 G2.2|Intensidad Promedio|Promedio mensual de intensidad emocional.|🟡|NO
