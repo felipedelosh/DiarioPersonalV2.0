@@ -205,29 +205,23 @@ class GraphRenderer(IGraphRenderer):
             dLineW = lineW / _totalYears
             self._renderAllTAccountsInLinePLotterGraphicDrawYYYYDividers(canvas, _totalYears, arrYYYY, _w_left_margin, _h_bottom_margin, dLineW)
             _maxTAccountDebitValue, _maxTAccountCreditValue = self._renderAllTAccountsInLinePLotterGraphicGetMaxDebitAndCredit(data)
+            dataToPaint = self._renderAllTAccountsInLinePLotterGraphicVectorizeAndOrderDateInformation(data, options)
 
-            # Paint PLOTS
             _prevDebitPoint = (_w_left_margin, _h_bottom_margin)
-            for itterYYYY in data["data"]:
-                for itterTAccountFile in data["data"][itterYYYY]:
-                    _dateExtract = str(itterTAccountFile).split("TACCOUNTS")[1]
-                    _dateExtract = str(_dateExtract).replace(".csv", "")
-                    _dateExtract = str(_dateExtract).replace("/", " ")
-                    _dateExtract = str(_dateExtract).replace("\\", "")
-                    _dateExtract = str(_dateExtract).split(" ")  # [YYYY, MMName, DD]
-
-                    _MMNames = options["MMNames"]
-                    _dateExtract[1] = _MMNames.index(_dateExtract[1]) + 1
+            for itterTAccountFile in dataToPaint:
+                for k, v in itterTAccountFile.items():
+                    _dateExtract = str(k).split("/")
 
                     _YYYY = int(_dateExtract[0])
                     _MM = int(_dateExtract[1])
                     _DD = int(_dateExtract[2])
 
+
                     x = self._renderAllTAccountsInLinePLotterGraphicGetPointXByDate(_YYYY, _MM, _DD, arrYYYY, dLineW)
 
                     _debit = 0
                     _credit = 0
-                    for i in str(data["data"][itterYYYY][itterTAccountFile]).split("\n"):
+                    for i in str(v).split("\n"):
                         if str(i).strip() != "":
                             _TAccountData = str(i).split(";")
 
@@ -251,6 +245,9 @@ class GraphRenderer(IGraphRenderer):
                         canvas.create_oval(x0 - 2, y0 - 2, x0 + 2, y0 + 2, fill="green")
                         _prevDebitPoint = (x0, y0)
                     #print(f"Para el registro: {_YYYY, _MM, _DD} IN: {_debit} <> OUT: {_credit}")
+
+                    # PAINT CREDIT
+
 
     def _renderAllTAccountsInLinePLotterGraphicGetPlotDimensions(self, canvas):
         w = float(canvas["width"])
@@ -293,6 +290,45 @@ class GraphRenderer(IGraphRenderer):
                             _maxTAccountCreditValue = _credit
 
         return _maxTAccountDebitValue, _maxTAccountCreditValue
+    def _renderAllTAccountsInLinePLotterGraphicVectorizeAndOrderDateInformation(self, data, options):
+        # Extract relevant info
+        information = []
+        for itterYYYY in data["data"]:
+            for itterTAccountFile in data["data"][itterYYYY]:
+                _dateExtract = str(itterTAccountFile).split("TACCOUNTS")[1]
+                _dateExtract = str(_dateExtract).replace(".csv", "")
+                _dateExtract = str(_dateExtract).replace("/", " ")
+                _dateExtract = str(_dateExtract).replace("\\", "")
+                _dateExtract = str(_dateExtract).split(" ")  # [YYYY, MMName, DD]
+
+                _MMNames = options["MMNames"]
+                _dateExtract[1] = _MMNames.index(_dateExtract[1]) + 1
+
+                _YYYY = int(_dateExtract[0])
+                _MM = int(_dateExtract[1])
+                _DD = int(_dateExtract[2])
+
+                information.append({f"{_YYYY}/{_MM}/{_DD}": data["data"][itterYYYY][itterTAccountFile]})
+
+        
+        # order BubbleShort
+        n = len(information)
+        for i in range(n - 1):
+            for j in range(0, n - i - 1):
+                key1 = list(information[j].keys())[0]
+                key2 = list(information[j + 1].keys())[0]
+                
+                def get_date_tuple(key):
+                    y, m, d = key.split('/')
+                    return (int(y), int(m), int(d))
+                
+                date1 = get_date_tuple(key1)
+                date2 = get_date_tuple(key2)
+                
+                if date1 > date2:
+                    information[j], information[j + 1] = information[j + 1], information[j]
+
+        return information
     def _renderAllTAccountsInLinePLotterGraphicGetPointXByDate(self, YYYY, MM, DD, arrYYYY, dw):
         """
         Enter a DATE and calculate position with YYYY spacing
