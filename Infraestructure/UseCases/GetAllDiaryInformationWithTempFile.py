@@ -107,19 +107,18 @@ class GetAllDiaryInformationWithTempFile(IGetAllDiaryInformationWithTempFile):
 
 
             if _all_data["success"] and _all_data["qty"] > 0:
-                _feels_data_nk = ""
+                _feels_data_bk = ""
                 _data_backup = _data_backup + str(backup_file_header_template).replace("<TITLE>", str(PathEnums.FEELINGS)) + "\n"
                 _final_data[str(PathEnums.FEELINGS)] = {}
                 for i in _all_data["data"]:
                     _key = str(i)
-                    _date = _date.split(".txt")[0]
+                    _date = _key.split(".txt")[0]
                     _feel = _all_data["data"][_key]
-                    _feels_data_nk = _feels_data_nk + f"DATE: {_date}" + f" FEEL: {_feel}" + "\n"
+                    _feels_data_bk = _feels_data_bk + f"DATE: {_date}" + f" FEEL: {_feel}" + "\n"
                     _final_data[str(PathEnums.FEELINGS)][_key] = _feel
                     qty = qty + 1
 
-                _data_backup = _data_backup + _feels_data_nk + "*"*40 + "\n"
-
+                _data_backup = _data_backup + _feels_data_bk + "*"*40 + "\n"
 
             if qty > 0:
                 _backup_file = self.backup_service.save(path_backup_file, _data_backup)
