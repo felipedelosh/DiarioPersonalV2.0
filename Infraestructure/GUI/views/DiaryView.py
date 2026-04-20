@@ -355,6 +355,8 @@ class DiaryView(Screen):
 
             if _status:
                 PopupView(self.master, self.manager, self.lang.getText("ok_drug_save"), "OK").render(500, 300)
+                txtDrugsUsetrigger.delete("1.0", tk.END)
+                txtDrugsUseFeel.delete("1.0", tk.END)
                 _path = self.manager.controller.pathController.getPathByCODE("USAGES")
                 YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
                 typeUsage = "drugs"
