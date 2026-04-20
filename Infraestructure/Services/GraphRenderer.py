@@ -180,33 +180,18 @@ class GraphRenderer(IGraphRenderer):
     def _renderAllTAccountsInLinePLotterGraphic(self, canvas: Canvas, data: Response, options):
         """
         Enter All TAccounts information: {YYYY: {'FILE_PATH': 'DATA'} }
-
-            * Paint Aixis XY
-            * Divide X in YYYY areas.
-            * Search MAX TAACOUNT DEBIT & CREDIT and relationate with Y.
-            * Paint Plots
-                - Calculate X point BY DATE
         """
-        # VARS
-        w = float(canvas["width"])
-        h = float(canvas["height"])
-        _w_left_margin = w * 0.05
-        _w_right_margin = w * 0.95
-        _h_bottom_margin = h * 0.9
-        _h_top_margin = h * 0.1
         arrYYYY = sorted([int(i) for i in data["data"].keys()])
 
+        # Calculate margins & paint AREAS.
+        _w_left_margin, _w_right_margin, _h_bottom_margin, _h_top_margin, w, h = self._renderAllTAccountsInLinePLotterGraphicGetPlotDimensions(canvas)
+        
         # Paint Aixis
         x0 = _w_left_margin
         y0 = _h_bottom_margin
-
-        # X
         x1 = _w_right_margin
-        canvas.create_line(x0, y0, x1, y0, width=2, arrow="last")
-
-        # Y
         y1 = _h_top_margin
-        canvas.create_line(x0, y0, x0, y1, width=2, arrow="last")
+        self._renderAllTAccountsInLinePLotterGraphicPaintAixis(canvas, x0, y0, x1, y1)
 
         # VARS: Util Painted AREA
         lineW = x1 - x0
@@ -218,38 +203,8 @@ class GraphRenderer(IGraphRenderer):
         #print(f"Total de años: {_totalYears}")
         if _totalYears > 0:
             dLineW = lineW / _totalYears
-            # Divide Aixis X in areas peer YYYY
-            for i in range(_totalYears):
-                divider_x = _w_left_margin + (i * dLineW)
-                divider_y0 = _h_bottom_margin - 5
-                divider_y1 = _h_bottom_margin + 5
-
-                text_x = divider_x + (dLineW / 3)
-                text_y = _h_bottom_margin + 15
-                canvas.create_text(text_x, text_y, text=str(arrYYYY[i]))
-
-                if i != 0:
-                    canvas.create_line(divider_x, divider_y0, divider_x, divider_y1, width=2)
-
-            # Search MAX TACOUNT VALUES
-            _maxTAccountDebitValue = 0 # IN
-            _maxTAccountCreditValue = 0 # OUT
-            for itterYYYY in data["data"]:
-                for itterTAccountFile in data["data"][itterYYYY]:
-                    for i in str(data["data"][itterYYYY][itterTAccountFile]).split("\n"):
-                        if str(i).strip() != "":
-                            _TAccountData = str(i).split(";")
-                            _debit = float(_TAccountData[1])
-                            _credit = float(_TAccountData[2])
-
-                            if _maxTAccountDebitValue < _debit:
-                                _maxTAccountDebitValue = _debit
-
-                            if _maxTAccountCreditValue < _credit:
-                                _maxTAccountCreditValue = _credit
-
-            #print(f"MAx Debit Value: {_maxTAccountDebitValue}")
-            #print(f"MAX Credit Value: {_maxTAccountCreditValue}")
+            self._renderAllTAccountsInLinePLotterGraphicDrawYYYYDividers(canvas, _totalYears, arrYYYY, _w_left_margin, _h_bottom_margin, dLineW)
+            _maxTAccountDebitValue, _maxTAccountCreditValue = self._renderAllTAccountsInLinePLotterGraphicGetMaxDebitAndCredit(data)
 
             # Paint PLOTS
             _prevDebitPoint = (_w_left_margin, _h_bottom_margin)
@@ -297,8 +252,47 @@ class GraphRenderer(IGraphRenderer):
                         _prevDebitPoint = (x0, y0)
                     #print(f"Para el registro: {_YYYY, _MM, _DD} IN: {_debit} <> OUT: {_credit}")
 
+    def _renderAllTAccountsInLinePLotterGraphicGetPlotDimensions(self, canvas):
+        w = float(canvas["width"])
+        h = float(canvas["height"])
+        left = w * 0.05
+        right = w * 0.95
+        bottom = h * 0.9
+        top = h * 0.1
+        return left, right, bottom, top, w, h
+    def _renderAllTAccountsInLinePLotterGraphicPaintAixis(self, canvas, x0, y0, x1, y1):
+        canvas.create_line(x0, y0, x1, y0, width=2, arrow="last")# X
+        canvas.create_line(x0, y0, x0, y1, width=2, arrow="last")# Y
+    def _renderAllTAccountsInLinePLotterGraphicDrawYYYYDividers(self, canvas, _totalYears, arrYYYY, _w_left_margin, _h_bottom_margin, dLineW):
+        for i in range(_totalYears):
+            divider_x = _w_left_margin + (i * dLineW)
+            divider_y0 = _h_bottom_margin - 5
+            divider_y1 = _h_bottom_margin + 5
 
+            text_x = divider_x + (dLineW / 3)
+            text_y = _h_bottom_margin + 15
+            canvas.create_text(text_x, text_y, text=str(arrYYYY[i]))
 
+            if i != 0:
+                canvas.create_line(divider_x, divider_y0, divider_x, divider_y1, width=2)
+    def _renderAllTAccountsInLinePLotterGraphicGetMaxDebitAndCredit(self, data):
+        _maxTAccountDebitValue = 0 # IN
+        _maxTAccountCreditValue = 0 # OUT
+        for itterYYYY in data["data"]:
+            for itterTAccountFile in data["data"][itterYYYY]:
+                for i in str(data["data"][itterYYYY][itterTAccountFile]).split("\n"):
+                    if str(i).strip() != "":
+                        _TAccountData = str(i).split(";")
+                        _debit = float(_TAccountData[1])
+                        _credit = float(_TAccountData[2])
+
+                        if _maxTAccountDebitValue < _debit:
+                            _maxTAccountDebitValue = _debit
+
+                        if _maxTAccountCreditValue < _credit:
+                            _maxTAccountCreditValue = _credit
+
+        return _maxTAccountDebitValue, _maxTAccountCreditValue
     def _renderAllTAccountsInLinePLotterGraphicGetPointXByDate(self, YYYY, MM, DD, arrYYYY, dw):
         """
         Enter a DATE and calculate position with YYYY spacing
