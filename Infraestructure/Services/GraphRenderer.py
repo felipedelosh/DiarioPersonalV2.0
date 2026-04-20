@@ -216,7 +216,6 @@ class GraphRenderer(IGraphRenderer):
                     _MM = int(_dateExtract[1])
                     _DD = int(_dateExtract[2])
 
-
                     x = self._renderAllTAccountsInLinePLotterGraphicGetPointXByDate(_YYYY, _MM, _DD, arrYYYY, dLineW)
 
                     _debit = 0
@@ -230,25 +229,22 @@ class GraphRenderer(IGraphRenderer):
                             _tempCredit = float(_TAccountData[2])
                             _credit = _credit + _tempCredit
                     
+                    common_max = max(_maxTAccountDebitValue, _maxTAccountCreditValue)
+
                     # PAINT DEBIT
                     x0 = _w_left_margin + x
-                    ratio = _debit / _maxTAccountDebitValue
-                    if ratio > 0.1:
-                        y0 = _h_bottom_margin - ((_debit / _maxTAccountDebitValue) * lineH)
-
-                        canvas.create_line(
-                            _prevDebitPoint[0], _prevDebitPoint[1],
-                            x0, y0,
-                            fill="green",
-                            width=2
-                        )
+                    ratio_debit = _debit / common_max
+                    if ratio_debit > 0.1:
+                        y0 = _h_bottom_margin - (ratio_debit * lineH)
+                        canvas.create_line(_prevDebitPoint[0], _prevDebitPoint[1], x0, y0, fill="green", width=2)
                         canvas.create_oval(x0 - 2, y0 - 2, x0 + 2, y0 + 2, fill="green")
                         _prevDebitPoint = (x0, y0)
-                    #print(f"Para el registro: {_YYYY, _MM, _DD} IN: {_debit} <> OUT: {_credit}")
 
                     # PAINT CREDIT
-
-
+                    ratio_credit = _credit / common_max
+                    if ratio_credit > 0.05:
+                        y0_credit = _h_bottom_margin - (ratio_credit * lineH)
+                        canvas.create_oval(x0 - 2, y0_credit - 2, x0 + 2, y0_credit + 2, fill="red", outline="red")
     def _renderAllTAccountsInLinePLotterGraphicGetPlotDimensions(self, canvas):
         w = float(canvas["width"])
         h = float(canvas["height"])
