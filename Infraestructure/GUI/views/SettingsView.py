@@ -5,6 +5,7 @@ FelipedelosH
 import tkinter as tk
 from Domain.Enums.PathEnums import PathEnums
 from Infraestructure.GUI.Screen import Screen
+from Infraestructure.GUI.views.PopupView import PopupView
 
 class SettingsView(Screen):
     def render(self, x, y):
@@ -92,9 +93,7 @@ class SettingsView(Screen):
         _status = self.manager.controller.dependencies["diary_use_case_get_all_registred_information_with_temp_file"].execute(_path_dic, _path_temp_file, backup_file_header_template)
         
         if _status["success"]:
-            print("OK...")
-            print(_status["data"].keys())
-            print(_status["qty"])
+            PopupView(self.master, self.manager, self.lang.getText("text_ok_to_save"), "SAVE").render(500, 300)
     # FILES - BACKUP
 
     def destroyOption(self):
