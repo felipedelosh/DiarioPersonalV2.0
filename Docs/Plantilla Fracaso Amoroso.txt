@@ -1,3 +1,4 @@
+___________________________________________________________________________________
 Descripción del objetivo:
 
 ...
@@ -16,6 +17,7 @@ Nivel de dificultad estimado (1-10):
 
 ...
 
+Nivel de ansiedad antes de la interacción (1-10):
 Nivel de ansiedad después de la interacción (1-10):
 
 ¿Qué aprendí?
@@ -25,3 +27,4 @@ Nivel de ansiedad después de la interacción (1-10):
 Compromiso para la próxima semana:
 
 ...
+___________________________________________________________________________________
