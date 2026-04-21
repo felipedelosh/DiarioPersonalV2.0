@@ -59,7 +59,7 @@ class GraphsView(Screen):
             
     # Economy
     def drawEconomyGraphicsOptions(self):
-        lblHelpFilterByEconomyGraphics = tk.Label(self.canvas, text=self.lang.getText("graphics_economy_help_filter_by_category"))
+        lblHelpFilterByEconomyGraphics = tk.Label(self.canvas, text=self.lang.getText("text_graphic_type"))
         self._tempCurrentElementsOptions.append(lblHelpFilterByEconomyGraphics)
         lblHelpFilterByEconomyGraphics.place(x=self._w * 0.05, y=self._h * 0.2)
         cmbxEconomyOptionsGraphicsFilter = ttk.Combobox(self.canvas, state='readonly', width=30)
