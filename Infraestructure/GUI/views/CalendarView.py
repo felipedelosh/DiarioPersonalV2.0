@@ -148,7 +148,7 @@ class CalendarView(Screen):
         cmbxDaySelector = ttk.Combobox(self.canvas, state='readonly', width=18)
         self._tempCurrentElementsOptions.append(cmbxDaySelector)
         cmbxDaySelector['values'] = self.lang.getText("days_names")
-        cmbxDaySelector.place(x=self._w*0.5, y=self._h*0.36)
+        cmbxDaySelector.place(x=self._w*0.52, y=self._h*0.36)
         _24HrsRegisterArr = []
 
         # Display 24Hrs in 3 Groups of 8 Hours
