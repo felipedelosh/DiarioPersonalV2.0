@@ -216,7 +216,8 @@
   "schelude_options": [
     "Calendario",
     "Registro 24H",
-    "Horario Semanal"
+    "Horario Semanal",
+    "Predicción Semanal"
   ],
   "schelude_24h_options":[
     "alimentación",
