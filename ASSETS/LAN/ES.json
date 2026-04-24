@@ -211,7 +211,7 @@
   "schelude_title": "Bienvenido a tu calendario.",
   "title_schelude": "Registro de Actividades 24Hrs",
   "help_schelude": "Registra aquí que activida haces a cierta hora del día.",
-  "help_schelude_day": "Registra aquí las activides del día: ",
+  "help_schelude_day": "Registra aquí las planificación del día: ",
   "error_schelude_missing_fields": "No es posible guardar la información debido a que hay campos faltantes.",
   "error_schedule_save_error": "No fue posible guardar el reporte de tiempo 24H debido a un error.",
   "schelude_options": [
