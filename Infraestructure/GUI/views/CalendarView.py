@@ -46,11 +46,17 @@ class CalendarView(Screen):
             self.draw24HOption()
         if opt == _options[2]:
             self.deleteOption()
-            print("Horario")
+            self.drawScheduleOption()
+        if opt == _options[3]:
+            self.deleteOption()
+            print("L MODE")
     def deleteOption(self):
         for widget in self._tempCurrentElementsOptions:
             widget.destroy()
         self._tempCurrentElementsOptions.clear()
+
+    #CALENDAR
+    #CALENDAR
 
     #24H
     def draw24HOption(self):
@@ -130,3 +136,50 @@ class CalendarView(Screen):
         for itterHH in _24HrsRegisterArr:
             itterHH.set("")
     #24H
+
+    # SCHEDULE
+    def drawScheduleOption(self):
+        lblTitleSchelude = tk.Label(self.canvas, text=self.lang.getText("title_schelude"))
+        self._tempCurrentElementsOptions.append(lblTitleSchelude)
+        lblTitleSchelude.place(x=self._w*0.37, y=self._h*0.3)
+        lblHelpSchelude = tk.Label(self.canvas, text=self.lang.getText("help_schelude_day"))
+        self._tempCurrentElementsOptions.append(lblHelpSchelude)
+        lblHelpSchelude.place(x=self._w*0.2, y=self._h*0.36)
+        cmbxDaySelector = ttk.Combobox(self.canvas, state='readonly', width=18)
+        self._tempCurrentElementsOptions.append(cmbxDaySelector)
+        cmbxDaySelector['values'] = self.lang.getText("days_names")
+        cmbxDaySelector.place(x=self._w*0.5, y=self._h*0.36)
+        _24HrsRegisterArr = []
+
+        # Display 24Hrs in 3 Groups of 8 Hours
+        H = self._h * 0.44
+        X = self._w * 0.9
+        dh = (H / 7) * 0.8
+        dx = X / 3
+
+        _counterH = 0
+        _counterX = 0
+        for itterHH in range(24):
+            _HH_ = self.manager.controller.utils["time_util"].getStrHHByCounter(6, itterHH)
+            lblHour = tk.Label(self.canvas, text=_HH_)
+            self._tempCurrentElementsOptions.append(lblHour)
+            lblHour.place(x=self._w * 0.07 + (dx * _counterX), y=H + (dh * _counterH))
+
+            cmbxHHReg = ttk.Combobox(self.canvas, state='readonly', width=18)
+            self._tempCurrentElementsOptions.append(cmbxHHReg)
+            cmbxHHReg['values'] = self.lang.getText("schelude_24h_options")
+            _24HrsRegisterArr.append(cmbxHHReg)
+            _24HrsRegisterArr[itterHH].place(x=self._w * 0.15 + (dx * _counterX), y=H + (dh * _counterH))
+
+            _counterH = _counterH + 1
+            if _counterH == 8 or _counterH == 16:
+                _counterH = 0
+                _counterX = _counterX + 1
+
+        btnSave24Hrs = tk.Button(self.canvas, text=self.lang.getText("text_button_save"))
+        self._tempCurrentElementsOptions.append(btnSave24Hrs)
+        btnSave24Hrs.place(x=self._w * 0.44, y=self._h * 0.87)
+    # SCHEDULE
+
+    # SCHEDULE L MODE
+    # SCHEDULE L MODE
