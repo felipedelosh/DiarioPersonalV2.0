@@ -176,9 +176,50 @@ class CalendarView(Screen):
                 _counterH = 0
                 _counterX = _counterX + 1
 
-        btnSave24Hrs = tk.Button(self.canvas, text=self.lang.getText("text_button_save"))
+        btnSave24Hrs = tk.Button(self.canvas, text=self.lang.getText("text_button_save"), command=lambda :self._saveSchedulePeerDay(cmbxDaySelector, _24HrsRegisterArr))
         self._tempCurrentElementsOptions.append(btnSave24Hrs)
         btnSave24Hrs.place(x=self._w * 0.44, y=self._h * 0.87)
+
+    def _saveSchedulePeerDay(self, cmbxDaySelector, _24HrsRegisterArr):
+        _day = cmbxDaySelector.get()
+
+        if self.manager.controller.utils["string_procesor"].validateTXT(_day):
+            isValidData = True
+
+            _data = ""
+            for i in _24HrsRegisterArr:
+                _hh = str(i.get())
+
+                if _hh.strip() == "":
+                    isValidData = False
+                    break
+
+                _data = _data + _hh + "\n"
+
+            if not isValidData:
+                PopupView(self.master, self.manager, self.lang.getText("error_schelude_missing_fields"), "ERROR").render(500, 300)
+                return
+
+            _timeStamp = self.manager.controller.utils["time_util"].getTimeStamp()
+            base_path = self.manager.controller.pathController.getPathByCODE("SCHELUDED")
+            base_path = f"{base_path}{_day}.txt"
+            specify_path = self.manager.controller.pathController.getPathByCODE("SCHELUDED_CURRENT_YYYY")
+            _dayNumber = self.lang.getText("days_names").index(_day)
+            specify_path = f"{specify_path}{_timeStamp} - {_dayNumber}.txt"
+
+            _status = self.manager.controller.dependencies["schedule_use_case_save_day_24"].execute(base_path, specify_path, _data)
+
+            if _status:
+                PopupView(self.master, self.manager, self.lang.getText("ok_schedule_save"), "INFO").render(500, 300)
+
+                _path = self.manager.controller.pathController.getPathByCODE("USAGES")
+                YYYY = self.manager.controller.utils["time_util"].getCurrentYYYY()
+                typeUsage = "schedule"
+                timeStamp = f"{self.manager.controller.utils["time_util"].getTimeStamp()} {self.manager.controller.utils["time_util"].getCurrentHHMMSS()}"
+                
+                self.manager.controller.dependencies["usage_use_case_save"].execute(_path, YYYY, typeUsage, timeStamp)
+            else:
+                PopupView(self.master, self.manager, self.lang.getText("error_schedule_save_error"), "ERROR").render(500, 300)
     # SCHEDULE
 
     # SCHEDULE L MODE

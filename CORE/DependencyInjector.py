@@ -51,6 +51,7 @@ from Infraestructure.UseCases.GetAllTAccountInformation import GetAllTAccountInf
 from Infraestructure.UseCases.GetAllTAccountInformationSegmentedByYear import GetAllTAccountInformationSegmentedByYear
 from Infraestructure.UseCases.GetAllDiaryInformationWithTempFile import GetAllDiaryInformationWithTempFile
 from Infraestructure.UseCases.GetPaginatedFromData import GetPaginatedFromData
+from Infraestructure.UseCases.SaveScheduleDay24 import SaveScheduleDay24
 # Femputadora
 from CORE.FEMPUTADORA.Femputadora import Femputadora
 # Graphics
@@ -116,6 +117,7 @@ class DependencyInjector:
         debit_use_case_get_all_debits_registered = LoadAllDebitsYearsRegistered(folders_use_case_get_all, debit_use_case_load_all_debits_peer_year)
         debit_use_case_get_all_years_of_debits = GetAllYearsOfEconomyDebits(folder_service)
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
+        schedule_use_case_save_day_24 = SaveScheduleDay24(schedule_service)
         diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile(diary_use_case_get_all_info, economy_use_case_get_all_info, backup_service)
         paginator_use_case = GetPaginatedFromData()
         usage_use_case_save = SaveUsage(usage_servide)
@@ -144,6 +146,7 @@ class DependencyInjector:
             "debit_use_case_get_all_debits_registered": debit_use_case_get_all_debits_registered,
             "debit_use_case_get_all_years_of_debits": debit_use_case_get_all_years_of_debits,
             "schedule_use_case_save_24h_report": schedule_use_case_save_24h_report,
+            "schedule_use_case_save_day_24": schedule_use_case_save_day_24,
             "diary_use_case_get_all_registred_information_with_temp_file": diary_use_case_get_all_registred_information_with_temp_file,
             "paginator_use_case": paginator_use_case,
             "usage_use_case_save": usage_use_case_save,
