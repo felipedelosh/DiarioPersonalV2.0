@@ -40,6 +40,7 @@ from Infraestructure.UseCases.loadAllDebitsPeerYear import LoadAllDebitsPeerYear
 from Infraestructure.UseCases.PayDebit import PayDebit
 from Infraestructure.UseCases.MakeDebtPayment import MakeDebtPayment
 from Infraestructure.UseCases.GetAllFoldersInPath import GetAllFoldersInPath
+from Infraestructure.UseCases.GetAllFilesInPath import GetAllFilesInPath
 from Infraestructure.UseCases.LoadAllDebitsYearsRegistered import LoadAllDebitsYearsRegistered
 from Infraestructure.UseCases.GetEconoyTAccountReport import GetEconoyTAccountReport
 from Infraestructure.UseCases.GetAllInformationEconomy import GetAllInformationEconomy
@@ -52,6 +53,7 @@ from Infraestructure.UseCases.GetAllTAccountInformationSegmentedByYear import Ge
 from Infraestructure.UseCases.GetAllDiaryInformationWithTempFile import GetAllDiaryInformationWithTempFile
 from Infraestructure.UseCases.GetPaginatedFromData import GetPaginatedFromData
 from Infraestructure.UseCases.SaveScheduleDay24 import SaveScheduleDay24
+from Infraestructure.UseCases.GetSchedulePredictionByDay import GetSchedulePredictionByDay
 # Femputadora
 from CORE.FEMPUTADORA.Femputadora import Femputadora
 # Graphics
@@ -99,6 +101,7 @@ class DependencyInjector:
         # USECASES
         diary_use_case_get_all_info = GetAllPersonalDiaryInformation(folder_service, diary_service)
         folders_use_case_get_all = GetAllFoldersInPath(folder_service)
+        files_use_case_get_all = GetAllFilesInPath(folder_service)
         diary_use_case_save_page = SaveDiaryPage(diary_service)
         diary_use_case_load_page = LoadDiaryPage(diary_service)
         feeling_use_case_save = SaveFeeling(feeling_service)
@@ -118,6 +121,7 @@ class DependencyInjector:
         debit_use_case_get_all_years_of_debits = GetAllYearsOfEconomyDebits(folder_service)
         schedule_use_case_save_24h_report = SaveSchedule24HReport(schedule_service)
         schedule_use_case_save_day_24 = SaveScheduleDay24(schedule_service)
+        schedule_use_case_get_prediction_by_day = GetSchedulePredictionByDay(folders_use_case_get_all, files_use_case_get_all, schedule_service)
         diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile(diary_use_case_get_all_info, economy_use_case_get_all_info, backup_service)
         paginator_use_case = GetPaginatedFromData()
         usage_use_case_save = SaveUsage(usage_servide)
@@ -147,6 +151,7 @@ class DependencyInjector:
             "debit_use_case_get_all_years_of_debits": debit_use_case_get_all_years_of_debits,
             "schedule_use_case_save_24h_report": schedule_use_case_save_24h_report,
             "schedule_use_case_save_day_24": schedule_use_case_save_day_24,
+            "schedule_use_case_get_prediction_by_day": schedule_use_case_get_prediction_by_day,
             "diary_use_case_get_all_registred_information_with_temp_file": diary_use_case_get_all_registred_information_with_temp_file,
             "paginator_use_case": paginator_use_case,
             "usage_use_case_save": usage_use_case_save,

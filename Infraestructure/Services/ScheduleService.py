@@ -12,3 +12,6 @@ class ScheduleService(IScheduleService):
 
     def save_24h_report(self, path: str, content: str) -> bool:
         return self.schedule_repo.save_24h_report(path, content)
+    
+    def get_24h_report(self, path: str) -> Response:
+        return self.schedule_repo.get_24h_report(path)

@@ -49,7 +49,7 @@ class CalendarView(Screen):
             self.drawScheduleOption()
         if opt == _options[3]:
             self.deleteOption()
-            print("L MODE")
+            self.drawScheduleProjectionOption()
     def deleteOption(self):
         for widget in self._tempCurrentElementsOptions:
             widget.destroy()
@@ -223,4 +223,61 @@ class CalendarView(Screen):
     # SCHEDULE
 
     # SCHEDULE L MODE
+    def drawScheduleProjectionOption(self):
+        lblTitleSchelude = tk.Label(self.canvas, text=self.lang.getText("title_schelude_projection"))
+        self._tempCurrentElementsOptions.append(lblTitleSchelude)
+        lblTitleSchelude.place(x=self._w*0.37, y=self._h*0.3)
+        lblHelpSchelude = tk.Label(self.canvas, text=self.lang.getText("help_schelude_projection"))
+        self._tempCurrentElementsOptions.append(lblHelpSchelude)
+        lblHelpSchelude.place(x=self._w*0.2, y=self._h*0.36)
+        cmbxDaySelector = ttk.Combobox(self.canvas, state='readonly', width=18)
+        self._tempCurrentElementsOptions.append(cmbxDaySelector)
+        cmbxDaySelector['values'] = self.lang.getText("days_names")
+        cmbxDaySelector.place(x=self._w*0.52, y=self._h*0.36)
+        _24HrsRegisterArr = []
+
+        # Display 24Hrs in 3 Groups of 8 Hours
+        H = self._h * 0.44
+        X = self._w * 0.9
+        dh = (H / 7) * 0.8
+        dx = X / 3
+
+        _counterH = 0
+        _counterX = 0
+        for itterHH in range(24):
+            _HH_ = self.manager.controller.utils["time_util"].getStrHHByCounter(6, itterHH)
+            lblHour = tk.Label(self.canvas, text=_HH_)
+            self._tempCurrentElementsOptions.append(lblHour)
+            lblHour.place(x=self._w * 0.07 + (dx * _counterX), y=H + (dh * _counterH))
+
+            cmbxHHReg = ttk.Combobox(self.canvas, state='readonly', width=18)
+            self._tempCurrentElementsOptions.append(cmbxHHReg)
+            _24HrsRegisterArr.append(cmbxHHReg)
+            _24HrsRegisterArr[itterHH].place(x=self._w * 0.15 + (dx * _counterX), y=H + (dh * _counterH))
+
+            _counterH = _counterH + 1
+            if _counterH == 8 or _counterH == 16:
+                _counterH = 0
+                _counterX = _counterX + 1
+
+        btnSave24Hrs = tk.Button(self.canvas, text=self.lang.getText("text_button_predict"), command=lambda :self.predictDay(cmbxDaySelector, _24HrsRegisterArr))
+        self._tempCurrentElementsOptions.append(btnSave24Hrs)
+        btnSave24Hrs.place(x=self._w * 0.44, y=self._h * 0.87)
+
+    def predictDay(self, cmbxDaySelector, _24HrsRegisterArr):
+        _day = cmbxDaySelector.get()
+
+        if self.manager.controller.utils["string_procesor"].validateTXT(_day):
+            _path = self.manager.controller.pathController.getPathByCODE("SCHELUDED_24_H")
+            _dayNumber = self.lang.getText("days_names").index(_day)
+            
+            _data = self.manager.controller.dependencies["schedule_use_case_get_prediction_by_day"].execute(_path, _dayNumber)
+
+            if _data["success"] and _data["qty"] > 0:
+
+                for itterHH in range(24):
+                    _HH_ = self.manager.controller.utils["time_util"].getStrHHByCounter(6, itterHH)
+                    _data_to_predict = _data["data"][_HH_]
+                    mostFrequentActivity = max(_data_to_predict, key=_data_to_predict.get)
+                    _24HrsRegisterArr[itterHH].set(mostFrequentActivity)
     # SCHEDULE L MODE

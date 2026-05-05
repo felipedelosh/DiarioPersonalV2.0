@@ -9,3 +9,7 @@ class IScheduleService(ABC):
     @abstractmethod
     def save_24h_report(self, path: str, content: str) -> bool:
         pass
+
+    @abstractmethod
+    def get_24h_report(self, path: str) -> Response:
+        pass
