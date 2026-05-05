@@ -27,3 +27,4 @@ H4|BUSCADOR ECONOMIA BONITO|Al momento de hacer una busqueda se debe de mostar l
 P1|Popup para ingreso de fechas|Se requiere una interfaz POPUP capaz de ser el inyector de fechas tipo YYYY/MM/DD para un input.|🟡|SI
 G12.1|Las graficas de Lineas y puntos para todas las TAccounts no se pintan en orden|El método _renderAllTAccountsInLinePLotterGraphic no pinta en orden las cuentas.|🔴|SI
 G1.4|Comparativa YYYY vs YYYY Finanzas|Comparar evolución financiera entre años.|🟡|SI
+C5|Vista de Horario Proyeción semanal|Crear un horario que usando la ley de los grandres números pueda predecir que voy a hacer en los proximos días.|🟡|SI
