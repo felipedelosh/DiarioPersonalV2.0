@@ -32,7 +32,9 @@ Adicciones:
 
 Economia:
 
-Ingreso mensual, tengo deudas, Puedo Ahorrar.
+Ingreso mensual:
+tengo deudas:
+Puedo Ahorrar:
 
 Metas:
 
