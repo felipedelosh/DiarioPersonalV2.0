@@ -32,6 +32,8 @@ G4.1|Radar Radial 24H|Visualización anual de distribución de actividades.|🟡
 G4.2|Balance Productivo vs No Productivo|Mostrar proporción anual de actividades clasificadas.|🟡|NO
 G4.3|Comparativa YYYY vs YYYY Tiempo|Comparar distribución de tiempo entre años.|🟡|NO
 G4.4|Gráfica Tiempo de Vida|Mostrar visualización de edad/vida.|🔴|NO
+L0|Sistema de LOGs|Construir un sistema de LOGs robusto y profesional sin usar librerias... en python puro|🔴|NO
+L1|Implementar el sistema de LOGs en todo el proyecto|Implementar el sistema de LOGs para todo el proyecto y además que se muestre por consola y se guarde en log<ID>.log|🟡|NO
 S1|Vista de Perfil|Configuración de usuario (nombre, foto, preferencias).|🟢|NO
 S2|Vista de Ayuda|Mostrar guía rápida del sistema.|🟡|NO
 H2|Acciones Debitos|Todos las acciones del abono de deudas deben habilitarse|🔴|NO
