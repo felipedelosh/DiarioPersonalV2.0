@@ -469,101 +469,141 @@ class FinancesView(Screen):
         _data = self.manager.controller.dependencies["paginator_use_case"].execute(_data, self.current_page_debit_history, 8)
 
         if _data["success"] and _data["data"]:
-            _counter = 1
-            H = self._h * 0.43
-            dh = (H / 7) * 0.8
-
-            lblDebitHistBanner = tk.Label(self.canvas, text=self.lang.getText("debit_history_main_banner"))
-            self._tempDebitArrayItems.append(lblDebitHistBanner)
-            lblDebitHistBanner.place(x=self._w * 0.41, y=self._h * 0.38)
-
-
-            lblDebitHistNr = tk.Label(self.canvas, text=self.lang.getText("text_number"))
-            self._tempDebitArrayItems.append(lblDebitHistNr)
-            lblDebitHistNr.place(x=self._w * 0.03, y=H)
-
-            lblDebitAmount = tk.Label(self.canvas, text=self.lang.getText("text_amount"))
-            self._tempDebitArrayItems.append(lblDebitAmount)
-            lblDebitAmount.place(x=self._w * 0.07, y=H)
-
-            lblDebitInterest = tk.Label(self.canvas, text=self.lang.getText("text_interest"))
-            self._tempDebitArrayItems.append(lblDebitInterest)
-            lblDebitInterest.place(x=self._w * 0.18, y=H)
-
-            lblDebitHistoryDate = tk.Label(self.canvas, text=self.lang.getText("text_date"))
-            self._tempDebitArrayItems.append(lblDebitHistoryDate)
-            lblDebitHistoryDate.place(x=self._w * 0.28, y=H)
-
-            lblDebitDeadLine = tk.Label(self.canvas, text=self.lang.getText("text_date_limit"))
-            self._tempDebitArrayItems.append(lblDebitDeadLine)
-            lblDebitDeadLine.place(x=self._w * 0.38, y=H)
-
-            lblDebitDescription = tk.Label(self.canvas, text=self.lang.getText("text_description"))
-            self._tempDebitArrayItems.append(lblDebitDescription)
-            lblDebitDescription.place(x=self._w * 0.5, y=H)
-
-            lblDebitStatus = tk.Label(self.canvas, text=self.lang.getText("text_status"))
-            self._tempDebitArrayItems.append(lblDebitStatus)
-            lblDebitStatus.place(x=self._w * 0.87, y=H)
-
-            for itterDebit in _data["data"]:
-                itterLblDebitHistNr = tk.Label(self.canvas, text=str(_counter))
-                self._tempDebitArrayItems.append(itterLblDebitHistNr)
-                itterLblDebitHistNr.place(x=self._w * 0.03, y=H + (dh * _counter))
-
-                _tempMainData = str(_data["data"][itterDebit]).split("\n")
-                _tempData = str(_tempMainData[0]).split("|")
-                _interest = _tempData[2]
-                _date = str(itterDebit).split(" ")
-                _date = f"{_date[0]}/{_date[1]}/{_date[2]}"
-                _deadDate = _tempData[3]
-                _description = _tempData[4]
-                _max_length = 42
-                if len(_description) > _max_length:
-                    _description = _description[:_max_length - 3] + "..."
-                _status = _tempData[5]
-                _amount = float(_tempData[1])
-                                
-                if len(_tempMainData) > 1:
-                    for itterValueCash in _tempMainData[1::]:
-                        _tempCash = str(itterValueCash).split("|")[1]
-                        try:
-                            _tempCash = float(_tempCash)
-                            _amount = _amount + _tempCash
-                        except:
-                            continue
-
-                if _amount <= 0:
-                    _amount = 0
-
-                _amount = round(float(_amount), 2)
-                itterLblDebitAmount = tk.Label(self.canvas, text=f"$ {_amount}")
-                self._tempDebitArrayItems.append(itterLblDebitAmount)
-                itterLblDebitAmount.place(x=self._w * 0.07, y=H + (dh * _counter))
-
-                itterLblDebitInterest = tk.Label(self.canvas, text=f"{_interest}%")
-                self._tempDebitArrayItems.append(itterLblDebitInterest)
-                itterLblDebitInterest.place(x=self._w * 0.18, y=H + (dh * _counter))
-
-                itterLblDebitHistoryDate = tk.Label(self.canvas, text=_date)
-                self._tempDebitArrayItems.append(itterLblDebitHistoryDate)
-                itterLblDebitHistoryDate.place(x=self._w * 0.28, y=H + (dh * _counter))
-
-                itterLblDebitDeadLine = tk.Label(self.canvas, text=_deadDate)
-                self._tempDebitArrayItems.append(itterLblDebitDeadLine)
-                itterLblDebitDeadLine.place(x=self._w * 0.38, y=H + (dh * _counter))
-
-                itterLblDebitDescription = tk.Label(self.canvas, text=_description)
-                self._tempDebitArrayItems.append(itterLblDebitDescription)
-                itterLblDebitDescription.place(x=self._w * 0.5, y=H + (dh * _counter))
-
-                itterLblDebitStatus = tk.Label(self.canvas, text=_status)
-                self._tempDebitArrayItems.append(itterLblDebitStatus)
-                itterLblDebitStatus.place(x=self._w * 0.87, y=H + (dh * _counter))
-
-                _counter = _counter + 1   
+            self._drawPageOfDebitHistory(_data)
         else:
             PopupView(self.master, self.manager, self.lang.getText("text_not_find"), "WARNING").render(500, 300)
+
+    def _goToDebitHistoryPage(self, page):
+        self.current_page_debit_history = page
+        self.drawDebitHistory()
+
+    def _drawPageOfDebitHistory(self, data):
+        self.deleteDisplayedDrawOption()
+        _data = data
+        _counter = 1
+        H = self._h * 0.43
+        dh = (H / 7) * 0.8
+
+        lblDebitHistBanner = tk.Label(self.canvas, text=self.lang.getText("debit_history_main_banner"))
+        self._tempDebitArrayItems.append(lblDebitHistBanner)
+        lblDebitHistBanner.place(x=self._w * 0.41, y=self._h * 0.38)
+
+        lblDebitHistNr = tk.Label(self.canvas, text=self.lang.getText("text_number"))
+        self._tempDebitArrayItems.append(lblDebitHistNr)
+        lblDebitHistNr.place(x=self._w * 0.03, y=H)
+
+        lblDebitAmount = tk.Label(self.canvas, text=self.lang.getText("text_amount"))
+        self._tempDebitArrayItems.append(lblDebitAmount)
+        lblDebitAmount.place(x=self._w * 0.07, y=H)
+
+        lblDebitInterest = tk.Label(self.canvas, text=self.lang.getText("text_interest"))
+        self._tempDebitArrayItems.append(lblDebitInterest)
+        lblDebitInterest.place(x=self._w * 0.18, y=H)
+
+        lblDebitHistoryDate = tk.Label(self.canvas, text=self.lang.getText("text_date"))
+        self._tempDebitArrayItems.append(lblDebitHistoryDate)
+        lblDebitHistoryDate.place(x=self._w * 0.28, y=H)
+
+        lblDebitDeadLine = tk.Label(self.canvas, text=self.lang.getText("text_date_limit"))
+        self._tempDebitArrayItems.append(lblDebitDeadLine)
+        lblDebitDeadLine.place(x=self._w * 0.38, y=H)
+
+        lblDebitDescription = tk.Label(self.canvas, text=self.lang.getText("text_description"))
+        self._tempDebitArrayItems.append(lblDebitDescription)
+        lblDebitDescription.place(x=self._w * 0.5, y=H)
+
+        lblDebitStatus = tk.Label(self.canvas, text=self.lang.getText("text_status"))
+        self._tempDebitArrayItems.append(lblDebitStatus)
+        lblDebitStatus.place(x=self._w * 0.87, y=H)
+
+        for itterDebit in _data["data"]:
+            itterLblDebitHistNr = tk.Label(self.canvas, text=str(_counter))
+            self._tempDebitArrayItems.append(itterLblDebitHistNr)
+            itterLblDebitHistNr.place(x=self._w * 0.03, y=H + (dh * _counter))
+
+            _tempMainData = str(_data["data"][itterDebit]).split("\n")
+            _tempData = str(_tempMainData[0]).split("|")
+            _interest = _tempData[2]
+            _date = str(itterDebit).split(" ")
+            _date = f"{_date[0]}/{_date[1]}/{_date[2]}"
+            _deadDate = _tempData[3]
+            _description = _tempData[4]
+            _max_length = 42
+            if len(_description) > _max_length:
+                _description = _description[:_max_length - 3] + "..."
+            _status = _tempData[5]
+            _amount = float(_tempData[1])
+                            
+            if len(_tempMainData) > 1:
+                for itterValueCash in _tempMainData[1::]:
+                    _tempCash = str(itterValueCash).split("|")[1]
+                    try:
+                        _tempCash = float(_tempCash)
+                        _amount = _amount + _tempCash
+                    except:
+                        continue
+
+            if _amount <= 0:
+                _amount = 0
+
+            _amount = round(float(_amount), 2)
+            itterLblDebitAmount = tk.Label(self.canvas, text=f"$ {_amount}")
+            self._tempDebitArrayItems.append(itterLblDebitAmount)
+            itterLblDebitAmount.place(x=self._w * 0.07, y=H + (dh * _counter))
+
+            itterLblDebitInterest = tk.Label(self.canvas, text=f"{_interest}%")
+            self._tempDebitArrayItems.append(itterLblDebitInterest)
+            itterLblDebitInterest.place(x=self._w * 0.18, y=H + (dh * _counter))
+
+            itterLblDebitHistoryDate = tk.Label(self.canvas, text=_date)
+            self._tempDebitArrayItems.append(itterLblDebitHistoryDate)
+            itterLblDebitHistoryDate.place(x=self._w * 0.28, y=H + (dh * _counter))
+
+            itterLblDebitDeadLine = tk.Label(self.canvas, text=_deadDate)
+            self._tempDebitArrayItems.append(itterLblDebitDeadLine)
+            itterLblDebitDeadLine.place(x=self._w * 0.38, y=H + (dh * _counter))
+
+            itterLblDebitDescription = tk.Label(self.canvas, text=_description)
+            self._tempDebitArrayItems.append(itterLblDebitDescription)
+            itterLblDebitDescription.place(x=self._w * 0.5, y=H + (dh * _counter))
+
+            itterLblDebitStatus = tk.Label(self.canvas, text=_status)
+            self._tempDebitArrayItems.append(itterLblDebitStatus)
+            itterLblDebitStatus.place(x=self._w * 0.87, y=H + (dh * _counter))
+
+            _counter = _counter + 1
+
+        # Paginator Control
+        _pagination = _data["pagination"]
+        _current_page = _pagination["page"]
+        _total_pages = _pagination["total_pages"]
+        btnPreviousPage = tk.Button(self.canvas, text="<<", command=lambda: self._drawPageOfDebitHistoryPreviousPage(_data))
+        self._tempDebitArrayItems.append(btnPreviousPage)
+        btnPreviousPage.place(x=self._w * 0.3, y=self._h * 0.9)
+        _text_paginator = self.lang.getText("text_paginator")
+        _text_paginator = str(_text_paginator).replace("<INDEX>", str(_current_page))
+        _text_paginator = str(_text_paginator).replace("<TOTAL>", str(_total_pages))
+        lblTotalIndexPages = tk.Label(self.canvas, text=_text_paginator)
+        self._tempDebitArrayItems.append(lblTotalIndexPages)
+        lblTotalIndexPages.place(x=self._w * 0.425, y=self._h * 0.9)
+        btnNextPage = tk.Button(self.canvas, text=">>", command=lambda: self._drawPageOfDebitHistoryNextPage(_data))
+        self._tempDebitArrayItems.append(btnNextPage)
+        btnNextPage.place(x=self._w * 0.6, y=self._h * 0.9)
+        # Paginator Control
+
+    def _drawPageOfDebitHistoryPreviousPage(self, data):
+        pagination = data["pagination"]
+
+        if pagination["has_prev"]:
+            previous_page = pagination["page"] - 1
+            self._goToDebitHistoryPage(previous_page)
+
+    def _drawPageOfDebitHistoryNextPage(self, data):
+        pagination = data["pagination"]
+
+        if pagination["has_next"]:
+            next_page = pagination["page"] + 1
+            self._goToDebitHistoryPage(next_page)
     # DEBITS HISTORY
 
     def deleteDisplayedDrawOption(self):
