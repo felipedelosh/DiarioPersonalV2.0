@@ -15,7 +15,6 @@ E14|Resumen economico de Gastos por categorías|Muestra según las categorias en
 E15|Resumen economico de Ahorro acumulado|Muestra según entrada/salida economica por mes cuanta cantidad de dinero debe de ahorrarse y cuanto se está ahorrando.|🟢|NO
 E16|Resumen economico de Comparativa año a año|Muestra Año a Año mes a mes como es el progreso/retroceso de tu estatus economico.|🟢|NO
 E17|Resumen economico de HOY|Te dice cuanto te puedes gastar hoy o cuanto es recomendable prestar.|🟢|NO
-E18|Caso de uso para cargar los años de deudas|En el menú de abono a las deudas se están cargando dos años estaticos hay que crear un caso de uso que retorne los años correspondientes a las deudas activas.|🟢|NO
 G1|Vista de Gráficas|Se necesita una vista principal para vizualizador de gráficas (MAIN)|🟡|NO
 F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
 G1.1|Pie Ingresos/Egresos|Mostrar proporción total del período seleccionado.|🟡|NO
