@@ -63,7 +63,6 @@ class FinancesView(Screen):
             self.drawBtnBackToMainMenu()
         if opt == _options[5]:
             self.deleteOption()
-            self.deleteOption()
             self.drawSearchOption()
 
     def deleteOption(self):
@@ -923,17 +922,20 @@ class FinancesView(Screen):
                     if len(str(_MM_NUMBER)) == 1:
                         _MM_NUMBER = f"0{_MM_NUMBER}"
 
+                    _SIGN = ""
                     if _dataSplitted[4] == "DEBIT":
                         _totalCashOut = _totalCashOut + float(_dataSplitted[2])
+                        _SIGN = "-"
 
                     if _dataSplitted[4] == "CREDIT":
                         _totalCashIn = _totalCashIn + float(_dataSplitted[2])
+                        _SIGN = "+"
 
                     prettyDate = f"{YYYY}/{_MM_NUMBER}/{DD}"
                     prettyConcept = self.manager.controller.utils["string_procesor"].prettyText(34, _dataSplitted[1])
                     prettyMoney = self.manager.controller.utils["string_procesor"].prettyCurrency(_dataSplitted[2])
                     
-                    _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|{prettyMoney}|{_dataSplitted[3]}|{_dataSplitted[4]}"
+                    _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|{_SIGN}{prettyMoney}|{_dataSplitted[3]}|{_dataSplitted[4]}"
                     _counterInfo = _counterInfo + 1
                 elif _type == "DEBIT":
                     _date = _dataSplitted[0]
@@ -950,7 +952,7 @@ class FinancesView(Screen):
                     prettyMoney = self.manager.controller.utils["string_procesor"].prettyCurrency(_dataSplitted[2])
                     _totalCashOut = _totalCashOut + float(_dataSplitted[2])
 
-                    _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|{prettyMoney}|{_dataSplitted[3]}|{_dataSplitted[4]}"
+                    _data["data"][itterDataEconomy] = f"{prettyDate}|{prettyConcept}|-{prettyMoney}|{_dataSplitted[3]}|{_dataSplitted[4]}"
                     _counterInfo = _counterInfo + 1
                 # DISPLAY
                 txt = txt + _data["data"][itterDataEconomy] + "\n"
