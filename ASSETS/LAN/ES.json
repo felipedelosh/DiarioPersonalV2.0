@@ -88,7 +88,8 @@
   "text_final_date": "Fecha Final",
   "text_format_date": "YYYY/MM/DD",
   "text_insert_date": "Por Favor seleccione la fecha YYYY/MM/DD",
-  "text_graphic_type": "Que tipo de gráfico deberia mostrar: ",
+  "text_graphic_type": "Tipo de gráfico: ",
+  "text_graphic_type_of_filter": "Tipo de filtro: ",
   "text_paginator": "Página <INDEX> de <TOTAL>",
   "title_feelings": "Registro diario de sentimientos",
   "help_feelings": "Ingresa aquí como te sentiste hoy: ",
@@ -279,6 +280,12 @@
     "Pastel",
     "Barras",
     "Lineal"
+  ],
+  "graphics_economy_categories_filters": [
+    "Total Ingresos/Egresos",
+    "Periodo de tiempo Ingresos/Egresos",
+    "Comparativa Sueño vs Ingresos",
+    "Filtrado Por categoria"
   ],
   "settings_title": "Menú de configuración",
   "settings_option_files_help_generate_backup_file": "Crear un archivo temporal con todos los datos.",
