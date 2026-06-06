@@ -16,6 +16,11 @@ Ideas de Graficas:
 
 Nota: Intentar realizar comparación de tendencias... YYYY vs YYYY por actividad.
 
+Nota: para la economia solo existen 3 tipos de graficas (LINEAL, BARRAS, PASTEL) el resto son filtros...
+Pero existen otras especiales:
+* Comparativa Sueño vs Ingresos
+* Filtrado Por categoria
+
 Graphs
 │
 ├── Economía
