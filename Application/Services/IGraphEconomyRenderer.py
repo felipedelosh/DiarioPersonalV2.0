@@ -9,7 +9,7 @@ Example: Draw BarChart...
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 
-class IGraphRenderer(ABC):
+class IGraphEconomyRenderer(ABC):
     @abstractmethod
     def render(self, canvas, data: Response, graphicsType: str, options):
         pass

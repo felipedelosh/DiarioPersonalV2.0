@@ -6,10 +6,10 @@ Implementation of Graphier
 """
 from tkinter import Canvas
 from Domain.Enums.GraphicsEnums import GraphType
-from Application.Services.IGraphRenderer import IGraphRenderer
+from Application.Services.IGraphEconomyRenderer import IGraphEconomyRenderer
 from Domain.Entities.Response import Response
 
-class GraphRenderer(IGraphRenderer):
+class GraphEconomyRenderer(IGraphEconomyRenderer):
     def __init__(self):
         pass
 

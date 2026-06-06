@@ -57,7 +57,7 @@ from Infraestructure.UseCases.GetSchedulePredictionByDay import GetSchedulePredi
 # Femputadora
 from CORE.FEMPUTADORA.Femputadora import Femputadora
 # Graphics
-from Infraestructure.Services.GraphRenderer import GraphRenderer
+from Infraestructure.Services.GraphEconomyRenderer import GraphEconomyRenderer
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -167,7 +167,7 @@ class DependencyInjector:
         time_util = TimeUtils()
         enigma = Enigma()
         string_procesor = StringProcesor()
-        graphics_renderder = GraphRenderer()
+        graphics_renderder = GraphEconomyRenderer()
 
         return {
             "time_util": time_util,
