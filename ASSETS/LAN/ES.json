@@ -276,12 +276,9 @@
   ],
   "graphics_economy_help_filter_by_category": "Que tipo de grafico desea mostrar:",
   "graphics_economy_categories": [
-    "Total PASTEL Ingresos/Egresos",
-    "Total BARRAS Ingresos/Egresos",
-    "Total LINEAL Ingresos/Egresos",
-    "Periodo Ingresos/Egresos",
-    "Comparativa Sueño vs Ingresos",
-    "Filtrado Por categoria"
+    "Pastel",
+    "Barras",
+    "Lineal"
   ],
   "settings_title": "Menú de configuración",
   "settings_option_files_help_generate_backup_file": "Crear un archivo temporal con todos los datos.",

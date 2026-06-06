@@ -14,14 +14,14 @@ class GraphEconomyRenderer(IGraphEconomyRenderer):
         pass
 
     def render(self, canvas: Canvas, data: Response, graphicsType: str, options):
-        if graphicsType == str(GraphType.PIE_TACCOUNTS_ALL):
+        if graphicsType == GraphType.PIE:
             self._renderAllTAccountsInPIEGraphic(canvas, data)
-
-        if graphicsType == str(GraphType.BAR_TACCOUNTS_ALL):
+        elif graphicsType == GraphType.BAR:
             self._renderAllTAccountsInBarGraphic(canvas, data)
-
-        if graphicsType == str(GraphType.CARTESIAN_TACCOUNTS_LINES_PLOTTER):
+        elif graphicsType == GraphType.LINE:
             self._renderAllTAccountsInLinePLotterGraphic(canvas, data, options)
+        else:
+            return None
 
     def _renderAllTAccountsInPIEGraphic(self, canvas: Canvas, data: Response):
         """
