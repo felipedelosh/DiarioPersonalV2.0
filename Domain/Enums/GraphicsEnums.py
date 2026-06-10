@@ -14,3 +14,13 @@ class GraphType(Enum):
 
     def __str__(self):
         return self.name
+
+class GraphEconomyFilters(Enum):
+    # Economy Filters
+    TIME_FILTER = auto()
+    SLEEP_VS_MONEY = auto()
+    CATEGORIES_FILTER = auto()
+    # ...
+
+    def __str__(self):
+        return self.name

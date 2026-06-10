@@ -7,6 +7,7 @@ from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
 from Infraestructure.GUI.views.PopupView import PopupView
 from Domain.Enums.GraphicsEnums import GraphType
+from Domain.Enums.GraphicsEnums import GraphEconomyFilters
 
 
 class GraphsView(Screen):
@@ -71,26 +72,50 @@ class GraphsView(Screen):
         self._tempCurrentElementsOptions.append(lblHelpTypeOfFilter)
         lblHelpTypeOfFilter.place(x=self._w * 0.45, y=self._h * 0.2)
         cmbxEconomyOptionsGraphicsFilters = ttk.Combobox(self.canvas, state='readonly', width=36)
+        cmbxEconomyOptionsGraphicsFilters.bind("<<ComboboxSelected>>", self.onEconomyFilterChanged)
         cmbxEconomyOptionsGraphicsFilters["values"] = self.lang.getText("graphics_economy_categories_filters")
         cmbxEconomyOptionsGraphicsFilters.current(0)
         self._tempCurrentElementsOptions.append(cmbxEconomyOptionsGraphicsFilters)
         cmbxEconomyOptionsGraphicsFilters.place(x=self._w * 0.58, y=self._h * 0.2)
 
-        btnPaint = tk.Button(self.canvas, bg="green", text=self.lang.getText("text_button_graphic"), command=lambda: self.paintEconomy(cmbxEconomyOptionsGraphicsTypes.get()))
+        btnPaint = tk.Button(self.canvas, bg="green", text=self.lang.getText("text_button_graphic"), command=lambda: self.paintEconomy(cmbxEconomyOptionsGraphicsTypes.get(), cmbxEconomyOptionsGraphicsFilters.get()))
         self._tempCurrentElementsOptions.append(btnPaint)
         btnPaint.place(x=self._w * 0.45, y=self._h * 0.34)
 
-    def paintEconomy(self, option):
+    def onEconomyFilterChanged(self, event):
+        combo = event.widget
+        selected_value = combo.get()
+
+        # No filter
+        if selected_value == self.lang.getText("graphics_economy_categories_filters")[0]:
+            print("mostrar todo")
+
+        # Date
+        elif selected_value == self.lang.getText("graphics_economy_categories_filters")[1]:
+            print("filtrado por fecha")
+
+        # Dreams VS Sleep
+        elif selected_value == self.lang.getText("graphics_economy_categories_filters")[2]:
+            print("ZZZ vs $$$")
+
+        # Categories
+        elif selected_value == self.lang.getText("graphics_economy_categories_filters")[3]:
+            print("filtrado por categorias")
+
+        else:
+            return
+
+    def paintEconomy(self, option, filter):
         # Type of Graph
         # PIE
         if option == self.lang.getText("graphics_economy_categories")[0]:
-            self.paintedCanvas(GraphType.PIE)
+            self.paintedCanvas(GraphType.PIE, filter)
         # BAR
         if option == self.lang.getText("graphics_economy_categories")[1]:
-            self.paintedCanvas(GraphType.BAR)
+            self.paintedCanvas(GraphType.BAR, filter)
         # LINE
         if option == self.lang.getText("graphics_economy_categories")[2]:
-            self.paintedCanvas(GraphType.LINE)
+            self.paintedCanvas(GraphType.LINE, filter)
     # Economy
 
     # Feelings
@@ -108,12 +133,14 @@ class GraphsView(Screen):
         print("Tiempo")
     # Time
 
-    def paintedCanvas(self, graphicsType: GraphType):
+    def paintedCanvas(self, graphicsType: GraphType, filter: str):
         _data = None
+        print(filter)
 
         if graphicsType == GraphType.PIE:
             _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
             _data = self.manager.controller.dependencies["economy_use_case_get_all_taccounts"].execute(_base_path)
+            _data = self.applyFilterToData(filter, _data)
 
             if not _data["success"]:
                 PopupView(self.master, self.manager, self.lang.getText("text_find_error_taccounts_search"), "ERROR").render(500, 300)
@@ -121,6 +148,7 @@ class GraphsView(Screen):
         elif graphicsType == GraphType.BAR:
             _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
             _data = self.manager.controller.dependencies["economy_use_case_get_all_taccounts"].execute(_base_path)
+            _data = self.applyFilterToData(filter, _data)
 
             if not _data["success"]:
                 PopupView(self.master, self.manager, self.lang.getText("text_find_error_taccounts_search"), "ERROR").render(500, 300)
@@ -128,6 +156,7 @@ class GraphsView(Screen):
         elif graphicsType == GraphType.LINE:
             _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
             _data = self.manager.controller.dependencies["economy_use_case_get_all_taccounts_segmented_by_year"].execute(_base_path)
+            _data = self.applyFilterToData(filter, _data)
 
             if not _data["success"]:
                 PopupView(self.master, self.manager, self.lang.getText("text_find_error_taccounts_search"), "ERROR").render(500, 300)
@@ -145,6 +174,13 @@ class GraphsView(Screen):
         }
 
         graphier.render(self.auxiliarCanvas, _data, graphicsType, options)
+
+    def applyFilterToData(self, filter, data):
+        _data = None
+        print(filter)
+        print(data)
+
+        return data
 
     def deleteOption(self):
         for widget in self._tempCurrentElementsOptions:
