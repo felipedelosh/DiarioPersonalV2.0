@@ -54,6 +54,7 @@ from Infraestructure.UseCases.GetAllDiaryInformationWithTempFile import GetAllDi
 from Infraestructure.UseCases.GetPaginatedFromData import GetPaginatedFromData
 from Infraestructure.UseCases.SaveScheduleDay24 import SaveScheduleDay24
 from Infraestructure.UseCases.GetSchedulePredictionByDay import GetSchedulePredictionByDay
+from Infraestructure.UseCases.FilterAllEconomyDataByDateAB import FilterAllEconomyDataByDateAB
 # Femputadora
 from CORE.FEMPUTADORA.Femputadora import Femputadora
 # Graphics
@@ -123,6 +124,7 @@ class DependencyInjector:
         schedule_use_case_save_day_24 = SaveScheduleDay24(schedule_service)
         schedule_use_case_get_prediction_by_day = GetSchedulePredictionByDay(folders_use_case_get_all, files_use_case_get_all, schedule_service)
         diary_use_case_get_all_registred_information_with_temp_file = GetAllDiaryInformationWithTempFile(diary_use_case_get_all_info, economy_use_case_get_all_info, backup_service)
+        filter_economy_data_by_dateAB = FilterAllEconomyDataByDateAB()
         paginator_use_case = GetPaginatedFromData()
         usage_use_case_save = SaveUsage(usage_servide)
         # END USECASES
@@ -153,6 +155,7 @@ class DependencyInjector:
             "schedule_use_case_save_day_24": schedule_use_case_save_day_24,
             "schedule_use_case_get_prediction_by_day": schedule_use_case_get_prediction_by_day,
             "diary_use_case_get_all_registred_information_with_temp_file": diary_use_case_get_all_registred_information_with_temp_file,
+            "filter_economy_data_by_dateAB": filter_economy_data_by_dateAB,
             "paginator_use_case": paginator_use_case,
             "usage_use_case_save": usage_use_case_save,
             "chat_femputadora_use_case": chat_femputadora_use_case,

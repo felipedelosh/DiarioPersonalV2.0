@@ -237,9 +237,11 @@ class GraphsView(Screen):
         if filter == self.lang.getText("graphics_economy_categories_filters")[1]:
             _dateA = self.txtDateInit.get()
             _dateB = self.txtDateEnd.get()
-            print("filtrar por fecha")
-            print(_dateA)
-            print(_dateB)
+            _mm_names = self.lang.getText("month_names")
+            _data = self.manager.controller.dependencies["filter_economy_data_by_dateAB"].execute(_data, _dateA, _dateB, _mm_names)
+
+            print("termina...")
+            return _data
 
         # Dreams VS Sleep
         if filter == self.lang.getText("graphics_economy_categories_filters")[2]:
