@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import ttk as ttk
 from Infraestructure.GUI.Screen import Screen
 from Infraestructure.GUI.views.PopupView import PopupView
+from Infraestructure.GUI.views.PopupDateInputView import PopupDateInputView
 from Domain.Enums.GraphicsEnums import GraphType
 from Domain.Enums.GraphicsEnums import GraphEconomyFilters
 
@@ -27,6 +28,11 @@ class GraphsView(Screen):
         _options = self.lang.getText("graphics_options")
         lblTitle = tk.Label(self.canvas, text=self.lang.getText("graphics_title_message"))
         lblTitle.place(x=self._w*0.4, y=self._h*0.05)
+        # VARS
+        self.txtDateInit = None
+        self.txtDateEnd = None
+        self._tempFilterElementsOptions = {}
+        # VARS
         self.renderButons(_options, self._w, self._h)
 
     def renderButons(self, _options, _w, _h):
@@ -82,7 +88,9 @@ class GraphsView(Screen):
         self._tempCurrentElementsOptions.append(btnPaint)
         btnPaint.place(x=self._w * 0.45, y=self._h * 0.34)
 
+    # Draw Filter Elements
     def onEconomyFilterChanged(self, event):
+        self.deleteFilterOptions()
         combo = event.widget
         selected_value = combo.get()
 
@@ -92,7 +100,27 @@ class GraphsView(Screen):
 
         # Date
         elif selected_value == self.lang.getText("graphics_economy_categories_filters")[1]:
-            print("filtrado por fecha")
+            self._tempFilterElementsOptions[selected_value] = []
+            lblHelpDateInit = tk.Label(self.canvas, text=self.lang.getText("text_init_date"))
+            self._tempCurrentElementsOptions.append(lblHelpDateInit)
+            self._tempFilterElementsOptions[selected_value].append(lblHelpDateInit)
+            lblHelpDateInit.place(x=self._w * 0.1, y=self._h * 0.26)
+            self.txtDateInit = tk.Entry(self.canvas, width=14, fg="gray")
+            self.txtDateInit.insert(0, self.lang.getText("text_format_date"))
+            self.txtDateInit.bind("<FocusIn>", lambda event, txt=self.txtDateInit: self._open_date_popup(txt))
+            self._tempCurrentElementsOptions.append(self.txtDateInit)
+            self._tempFilterElementsOptions[selected_value].append(self.txtDateInit)
+            self.txtDateInit.place(x=self._w*0.22, y=self._h*0.26)
+            lblHelpDateEnd = tk.Label(self.canvas, text=self.lang.getText("text_final_date"))
+            self._tempCurrentElementsOptions.append(lblHelpDateEnd)
+            self._tempFilterElementsOptions[selected_value].append(lblHelpDateEnd)
+            lblHelpDateEnd.place(x=self._w * 0.5, y=self._h * 0.26)
+            self.txtDateEnd = tk.Entry(self.canvas, width=14, fg="gray")
+            self.txtDateEnd.insert(0, self.lang.getText("text_format_date"))
+            self.txtDateEnd.bind("<FocusIn>", lambda event, txt=self.txtDateEnd: self._open_date_popup(txt))
+            self._tempCurrentElementsOptions.append(self.txtDateEnd)
+            self._tempFilterElementsOptions[selected_value].append(self.txtDateEnd)
+            self.txtDateEnd.place(x=self._w * 0.61, y=self._h * 0.26)
 
         # Dreams VS Sleep
         elif selected_value == self.lang.getText("graphics_economy_categories_filters")[2]:
@@ -104,6 +132,31 @@ class GraphsView(Screen):
 
         else:
             return
+        
+    def _open_date_popup(self, entry):
+        current_value = entry.get().strip()
+
+        if current_value == "" or current_value == self.lang.getText("text_format_date"):
+            popup = PopupDateInputView(self.master, self.manager.controller.utils["time_util"], self.manager, self.lang.getText("text_insert_date"), self.lang.getText("text_date"))
+
+            selected_date = popup.render(420, 220)
+            if selected_date is not None and str(selected_date).strip() != "":
+                entry.delete(0, tk.END)
+                entry.insert(0, selected_date)
+                entry.config(fg="black")
+            else:
+                self._add_placeholder_date(entry)
+                self.master.focus_set()
+
+    def _add_placeholder_date(self, entry):
+        if not entry.get():
+            entry.insert(0, self.lang.getText("text_format_date"))
+            entry.config(fg="gray")
+
+    def _clear_placeholder_date(self, entry):
+        if entry.get() == self.lang.getText("text_format_date"):
+            entry.delete(0, tk.END)
+            entry.config(fg="black")
 
     def paintEconomy(self, option, filter):
         # Type of Graph
@@ -135,7 +188,6 @@ class GraphsView(Screen):
 
     def paintedCanvas(self, graphicsType: GraphType, filter: str):
         _data = None
-        print(filter)
 
         if graphicsType == GraphType.PIE:
             _base_path = self.manager.controller.pathController.getPathByCODE("ECONOMY_TACCOUNTS")
@@ -176,11 +228,28 @@ class GraphsView(Screen):
         graphier.render(self.auxiliarCanvas, _data, graphicsType, options)
 
     def applyFilterToData(self, filter, data):
-        _data = None
-        print(filter)
-        print(data)
+        _data = data
+        # No filter
+        if filter == self.lang.getText("graphics_economy_categories_filters")[0]:
+            return _data
 
-        return data
+        # Date
+        if filter == self.lang.getText("graphics_economy_categories_filters")[1]:
+            _dateA = self.txtDateInit.get()
+            _dateB = self.txtDateEnd.get()
+            print("filtrar por fecha")
+            print(_dateA)
+            print(_dateB)
+
+        # Dreams VS Sleep
+        if filter == self.lang.getText("graphics_economy_categories_filters")[2]:
+            print("ZZZ vs $$$")
+
+        # Categories
+        if filter == self.lang.getText("graphics_economy_categories_filters")[3]:
+            print("Filtrar por categorias")
+
+        return _data
 
     def deleteOption(self):
         for widget in self._tempCurrentElementsOptions:
@@ -190,3 +259,12 @@ class GraphsView(Screen):
         if hasattr(self, "auxiliarCanvas") and self.auxiliarCanvas:
             self.auxiliarCanvas.delete("all")
             self.auxiliarCanvas.place_forget()
+
+    def deleteFilterOptions(self):
+        for widgets in self._tempFilterElementsOptions.values():
+            for widget in widgets:
+                widget.destroy()
+
+        self._tempFilterElementsOptions.clear()
+        self.txtDateInit = None
+        self.txtDateEnd = None
