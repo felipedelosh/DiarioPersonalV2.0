@@ -2,7 +2,6 @@ ID|Tarea|Descripción|Prioridad|COMPLETADA
 D3|Vista de Amigos|Lista de amigos, registrar notas relacionadas.|🟡|NO
 D4|Vista de Notas|Crear notas rápidas no relacionadas con el diario.|🟢|NO
 C1|Vista de Calendario|Mostrar calendario con días destacados.|🟢|NO
-C3|Vista de Horario|Crear un horario con actividades recurrentes.|🟡|NO
 C6|Vista de horario 24h colores según cumplimiento|Dado que existe información de un horario pactado comparar la entrada actual con lo pactado y poner en rojo claro si no cumple y verde claro si cumple.|🟡|NO
 E2|Vista de Ahorros|Registrar metas y ahorro acumulado.|🟡|NO
 E3|Vista de Trabajo|Registrar ingresos por trabajo.|🟡|NO
