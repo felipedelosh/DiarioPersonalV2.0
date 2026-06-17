@@ -1,0 +1,13 @@
+Datos Personales:
+Nombre:XYZ Apellido:XYZ
+Fecha de nacimiento: YYYY-MM-DD
+Residencia: LUGAR 123
+
+Perfil profesional:
+...
+
+Experiencia laboral:
+...
+
+Educación:
+...
