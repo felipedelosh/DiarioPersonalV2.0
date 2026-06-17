@@ -17,7 +17,6 @@ E16|Resumen economico de Comparativa año a año|Muestra Año a Año mes a mes c
 E17|Resumen economico de HOY|Te dice cuanto te puedes gastar hoy o cuanto es recomendable prestar.|🟢|NO
 G1|Vista de Gráficas|Se necesita una vista principal para vizualizador de gráficas (MAIN)|🟡|NO
 F1|Vista de Chatbot|Asistente interactivo para conversar.|🟡|NO
-G1.1|Pie Ingresos/Egresos|Mostrar proporción total del período seleccionado.|🟡|NO
 G1.2|Barras Evolución Financiera|Mostrar ingresos y egresos por mes o día.|🟡|NO
 G1.3|Gasto por Categoría|Mostrar distribución de egresos por categoría.|🟡|NO
 G1.5|Sueño vs Ingreso|Correlacionar horas de sueño con ingresos económicos.|🟡|NO
