@@ -91,6 +91,8 @@
   "text_graphic_type": "Tipo de gráfico: ",
   "text_graphic_type_of_filter": "Tipo de filtro: ",
   "text_paginator": "Página <INDEX> de <TOTAL>",
+  "text_year": "Año: ",
+  "text_month": "Mes: ",
   "title_feelings": "Registro diario de sentimientos",
   "help_feelings": "Ingresa aquí como te sentiste hoy: ",
   "ok_feelings_not_feel": "Se ha guardado su sentimiento correctamente.",
@@ -298,5 +300,19 @@
     "configuración del diario",
     "configuración del diario",
     "configuración de archivos"
+  ],
+  "title_calendar": "Resumen General de tu vida",
+  "calendar_filter_options": [
+    "TODO",
+    "Diario",
+    "Economía",
+    "Ingresos",
+    "Egresos",
+    "Deudas",
+    "Ahorros",
+    "Sueños",
+    "Emociones",
+    "Drogas",
+    "Uso del sistema"
   ]
 }
