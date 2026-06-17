@@ -40,7 +40,7 @@ class CalendarView(Screen):
     def drawBtnInterface(self, _options, opt):
         if opt == _options[0]:
             self.deleteOption()
-            print("Calendario")
+            self.drawCalendar()
         if opt == _options[1]:
             self.deleteOption()
             self.draw24HOption()
@@ -56,6 +56,39 @@ class CalendarView(Screen):
         self._tempCurrentElementsOptions.clear()
 
     #CALENDAR
+    def drawCalendar(self):
+        lblTitleCalendar = tk.Label(self.canvas, text=self.lang.getText("title_calendar"))
+        self._tempCurrentElementsOptions.append(lblTitleCalendar)
+        lblTitleCalendar.place(x=self._w*0.37, y=self._h*0.3)
+        lblInsertYear = tk.Label(self.canvas, text=self.lang.getText("text_year"))
+        self._tempCurrentElementsOptions.append(lblInsertYear)
+        lblInsertYear.place(x=self._w*0.07, y=self._h*0.36)
+        cmbxInserYear = ttk.Combobox(self.canvas, state='readonly', width=7)
+        cmbxInserYear['values'] = [str(i) for i in range(2020, 2027)]
+        cmbxInserYear.current(0)
+        self._tempCurrentElementsOptions.append(cmbxInserYear)
+        cmbxInserYear.place(x=self._w*0.135, y=self._h*0.36)
+        lblInsertMonth = tk.Label(self.canvas, text=self.lang.getText("text_month"))
+        self._tempCurrentElementsOptions.append(lblInsertMonth)
+        lblInsertMonth.place(x=self._w*0.25, y=self._h*0.36)
+        cmbxInserMonth = ttk.Combobox(self.canvas, state='readonly', width=13)
+        cmbxInserMonth['values'] = self.lang.getText("month_names")
+        cmbxInserMonth.current(0)
+        self._tempCurrentElementsOptions.append(cmbxInserMonth)
+        cmbxInserMonth.place(x=self._w*0.31, y=self._h*0.36)
+        lblSetCalendarFilter = tk.Label(self.canvas, text=self.lang.getText("text_graphic_type_of_filter"))
+        self._tempCurrentElementsOptions.append(lblSetCalendarFilter)
+        lblSetCalendarFilter.place(x=self._w*0.58, y=self._h*0.36)
+        cmbxCalendarFilters = ttk.Combobox(self.canvas, state='readonly', width=20)
+        cmbxCalendarFilters['values'] = self.lang.getText("calendar_filter_options")
+        cmbxCalendarFilters.current(0)
+        self._tempCurrentElementsOptions.append(cmbxCalendarFilters)
+        cmbxCalendarFilters.place(x=self._w*0.71, y=self._h*0.36)
+
+
+        btnGetCalendarInfo = tk.Button(self.canvas, text="Consultar")
+        self._tempCurrentElementsOptions.append(btnGetCalendarInfo)
+        btnGetCalendarInfo.place(x=self._w * 0.44, y=self._h * 0.87)
     #CALENDAR
 
     #24H
