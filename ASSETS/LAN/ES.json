@@ -99,6 +99,7 @@
   "error_feelings_not_feel": "Para poder registrar un sentimiento tiene que seleccionarlo.",
   "error_feelings_fatal": "Hubo un error fatal al tratar de guardar el sentimiento.",
   "list_feelings":[
+    "ansioso",
     "alcoholizado",
     "tristeza",
     "tranquilidad",
