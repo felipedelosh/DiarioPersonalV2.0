@@ -1,5 +1,5 @@
 """
-https://github.com/felipedelosh/PythonDataStructures
+FelipedelosH
 """
 class Graph:
     def __init__(self):
@@ -17,11 +17,7 @@ class Graph:
             if A not in self.edges:
                 self.edges[A] = []
 
-            if B not in self.edges:
-                self.edges[B] = []
-
             self.edges[A].append((B, W))
-            self.edges[B].append((A, W))
 
 
     def deleteNode(self, x):
@@ -265,4 +261,3 @@ class Graph:
                 akumulated_distance = dijkstra_definitive_candidates[best_candidate][0]
 
         return [dijkstra, dijkstra_definitive_candidates] 
-    

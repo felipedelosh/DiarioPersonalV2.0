@@ -77,7 +77,8 @@ class Controller:
             return False
 
         self.sinapsis.addEdge(A, B, value)
-        print(f"Guadando Sinapsis: {A} >> {B} : {value}")
+        self.sinapsis.addEdge(B, A, value)
+        print(f"Guadando {self.sinapsis.edges[A]}")
         
     def mouveUP(self):
         if self.pos_y_dimension - 1 >= 0:
@@ -287,6 +288,7 @@ class Controller:
 
         self.finalPythonDataVocabularizer = _template.split("\n")
         self.setDiagonalOnesMatrix()
+        self._saveSinapsisValues()
         self._savePythonFile(title)
 
     def _getZeroArr(self, qty):
@@ -348,6 +350,14 @@ class Controller:
 
         new_list_strings = " + ".join(new_blocks)
         return prefix + new_list_strings + suffix
+
+    def _saveSinapsisValues(self):
+        """
+        
+        """
+        print(f"Nodes: {self.sinapsis.nodes}")
+        print("="*20)
+        print(self.sinapsis.edges)
 
     def _savePythonFile(self, name):
         try:
