@@ -78,7 +78,7 @@ class Controller:
 
         self.sinapsis.addEdge(A, B, value)
         self.sinapsis.addEdge(B, A, value)
-        print(f"Guadando {self.sinapsis.edges[A]}")
+        print(f"Save in {self.sinapsis.edges[A]} && {self.sinapsis.edges[B]}")
         
     def mouveUP(self):
         if self.pos_y_dimension - 1 >= 0:
