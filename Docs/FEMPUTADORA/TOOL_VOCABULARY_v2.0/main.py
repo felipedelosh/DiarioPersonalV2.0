@@ -32,7 +32,7 @@ class Software:
         self.btnSemanticEditorDown = Button(self.canvas, text="DOWN", command=lambda: self.motionControl("DOWN"))
         self.btnSemanticEditorLeft = Button(self.canvas, text="LEFT", command=lambda: self.motionControl("LEFT"))
         self.btnSemanticEditorRight = Button(self.canvas, text="RIGHT", command=lambda: self.motionControl("RIGHT"))
-        self.btnSaveSemanticCorelationValue = Button(self.canvas, text="UPDATE VALUE")
+        self.btnSaveSemanticCorelationValue = Button(self.canvas, text="UPDATE VALUE", command=self.saveSemanticCorelationValue)
         # Semantic Dimensio Statitics
         self.lblSemanticDimenionCounter = Label(self.canvas, text="Semantic Dimensions: 0")
         
@@ -169,11 +169,26 @@ class Software:
         self.btnSaveSemanticCorelationValue.place(x=self._w * 0.84, y=self._h * 0.62)
         self.updateEditorSemanticVectorInterface()
 
+    def saveSemanticCorelationValue(self):
+        v = self.txtValueSemanticDimension.get()
+
+        if not self._isEmptyText(v) and self._isValidFloatNumber(v):
+            v = float(v)
+            self.controller.saveSinapsisSemanticCorelationValue(v)
+
     def updateEditorSemanticVectorInterface(self):
         self.lblSemanticDimensionWordX['text'] = f"X_WORD:{self.controller.pos_x_dimension} >> {self.controller.word_x_dimension}"
         self.lblSemanticDimensionWordY['text'] = f"Y_WORD:{self.controller.pos_y_dimension} >> {self.controller.word_y_dimension}"
 
     def _isEmptyText(self, txt):
         return str(txt).strip() == ""
+    
+    def _isValidFloatNumber(self, v):
+        try:
+            v = float(v)
+            return True
+        except:
+            return False
 
 s = Software()
+

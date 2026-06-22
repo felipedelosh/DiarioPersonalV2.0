@@ -3,7 +3,6 @@ FelipedelosH
 2026
 """
 import re
-import json
 import os
 from os import scandir
 from src.models.SemanticDimension import SemanticDimension
@@ -64,6 +63,21 @@ class Controller:
             return f.read()
         except:
             return info
+        
+    def saveSinapsisSemanticCorelationValue(self, value):
+        A = self.word_x_dimension
+        B = self.word_y_dimension
+
+        if value < 0 or value > 1:
+            print(f"Error: Values of corelation [0, 1]")
+            return False
+
+        if A == B:
+            print(f"Error: Corelation of same words is 1.")
+            return False
+
+        self.sinapsis.addEdge(A, B, value)
+        print(f"Guadando Sinapsis: {A} >> {B} : {value}")
         
     def mouveUP(self):
         if self.pos_y_dimension - 1 >= 0:
