@@ -55,6 +55,7 @@ from Infraestructure.UseCases.GetPaginatedFromData import GetPaginatedFromData
 from Infraestructure.UseCases.SaveScheduleDay24 import SaveScheduleDay24
 from Infraestructure.UseCases.GetSchedulePredictionByDay import GetSchedulePredictionByDay
 from Infraestructure.UseCases.FilterAllEconomyDataByDateAB import FilterAllEconomyDataByDateAB
+from Infraestructure.UseCases.GetAllYearsOfDiaryUsage import GetAllYearsOfDiaryUsage
 # Femputadora
 from CORE.FEMPUTADORA.Femputadora import Femputadora
 # Graphics
@@ -105,6 +106,7 @@ class DependencyInjector:
         files_use_case_get_all = GetAllFilesInPath(folder_service)
         diary_use_case_save_page = SaveDiaryPage(diary_service)
         diary_use_case_load_page = LoadDiaryPage(diary_service)
+        diary_use_case_get_all_years_of_usages = GetAllYearsOfDiaryUsage(folder_service)
         feeling_use_case_save = SaveFeeling(feeling_service)
         dream_use_case_save_dream = SaveDreamPage(dream_service)
         dream_use_case_load_dream = LoadDreamPage(dream_service)
@@ -136,6 +138,7 @@ class DependencyInjector:
             "folders_use_case_get_all": folders_use_case_get_all,
             "diary_use_case_save_page": diary_use_case_save_page,
             "diary_use_case_load_page": diary_use_case_load_page,
+            "diary_use_case_get_all_years_of_usages": diary_use_case_get_all_years_of_usages,
             "dream_use_case_save_dream": dream_use_case_save_dream,
             "dream_use_case_load_dream": dream_use_case_load_dream,
             "feeling_use_case_save": feeling_use_case_save,

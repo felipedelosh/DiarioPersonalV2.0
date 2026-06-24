@@ -64,7 +64,13 @@ class CalendarView(Screen):
         self._tempCurrentElementsOptions.append(lblInsertYear)
         lblInsertYear.place(x=self._w*0.07, y=self._h*0.36)
         cmbxInserYear = ttk.Combobox(self.canvas, state='readonly', width=7)
-        cmbxInserYear['values'] = [str(i) for i in range(2020, 2027)]
+        _path_dic = self.manager.controller.pathController.getAllBasePathInDict()
+        _data = self.manager.controller.dependencies["diary_use_case_get_all_years_of_usages"].execute(_path_dic)
+        _YYYY = []
+        if _data["success"] and _data["qty"] > 0:
+            _YYYY = list(_data["data"].values())
+
+        cmbxInserYear['values'] = _YYYY
         cmbxInserYear.current(0)
         self._tempCurrentElementsOptions.append(cmbxInserYear)
         cmbxInserYear.place(x=self._w*0.135, y=self._h*0.36)
