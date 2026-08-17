@@ -1,4 +1,4 @@
-Sobre mi estado emicional:
+Sobre mi estado emocional:
 
 En estos momentos escribe un hombre de mediana edad... un hombre que fue aplastado por su trabajo al punto de llevar 1 semana durmiendo menos de 5 horas al día...
 Yo trabajo en RAPPI... resulta que por motivos de falta de interés del equipo la base de datos creció tanto que por más de 15 días la aplicación LOYALTY dejo de funcionar.
