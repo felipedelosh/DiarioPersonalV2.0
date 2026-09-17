@@ -1,0 +1,24 @@
+6am:dormir
+7am:dormir
+8am:dormir
+9am:programar
+10am:programar
+11am:reunión
+12am:programar
+1pm:alimentación
+2pm:vida social
+3pm:dormir
+4pm:programar
+5pm:FAPTIME
+6pm:redes sociales
+7pm:alimentación
+8pm:FAPTIME
+9pm:internet
+10pm:FAPTIME
+11pm:redes sociales
+12pm:dormir
+1am:dormir
+2am:dormir
+3am:dormir
+4am:dormir
+5am:dormir
