@@ -178,7 +178,34 @@ class GraphsView(Screen):
 
     # Drugs
     def drawDrugsGraphicsOptions(self):
-        print("Drogas")
+        lblHelpFilterByYearDrugs = tk.Label(self.canvas, text=self.lang.getText("graphics_drugs_year_select"))
+        self._tempCurrentElementsOptions.append(lblHelpFilterByYearDrugs)
+        lblHelpFilterByYearDrugs.place(x=self._w * 0.2, y=self._h * 0.22)
+        cmbxDrugsYearFilter = ttk.Combobox(self.canvas, state='readonly', width=6)
+        _path = self.manager.controller.pathController.getPathByCODE("DRUGS")
+        _data = self.manager.controller.dependencies["drugs_use_case_get_all_years"].execute(_path)
+        cmbxDrugsYearFilter["values"] = []
+        if _data["success"] and _data["qty"] > 0:
+            cmbxDrugsYearFilter["values"] = list(_data["data"].values())
+            cmbxDrugsYearFilter.current(0)
+        self._tempCurrentElementsOptions.append(cmbxDrugsYearFilter)
+        cmbxDrugsYearFilter.place(x=self._w * 0.36, y=self._h * 0.22)
+
+        btnPaint = tk.Button(self.canvas, bg="green", text=self.lang.getText("text_button_graphic"), command=lambda: self.paintDrugs(cmbxDrugsYearFilter.get(), None))
+        btnPaint.place(x=self._w * 0.5, y=self._h * 0.215)
+
+    def paintDrugs(self, yyyy, option):
+        _base_path = self.manager.controller.pathController.getPathByCODE("DRUGS")
+        _data = self.manager.controller.dependencies["drugs_use_case_get_all_information_filter_by_year"].execute(_base_path, yyyy)
+
+        if not _data["success"]:
+            PopupView(self.master, self.manager, self.lang.getText("text_find_error_drugs"), "ERROR").render(500, 300)
+            return None
+
+        self.auxiliarCanvas.delete("all")
+        graphier_drugs = self.manager.controller.utils["graphics_drugs_renderder"]
+        self.auxiliarCanvas.place(x=self._w * 0.05, y=self._h * 0.40)
+        graphier_drugs.render(self.auxiliarCanvas, _data, {})
     # Drugs
 
     # Time
