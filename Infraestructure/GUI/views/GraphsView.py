@@ -173,7 +173,34 @@ class GraphsView(Screen):
 
     # Feelings
     def drawFeelsGraphicsOptions(self):
-        print("Sentimientos")
+        lblHelpFilterByYearDrugs = tk.Label(self.canvas, text=self.lang.getText("graphics_feels_year_select"))
+        self._tempCurrentElementsOptions.append(lblHelpFilterByYearDrugs)
+        lblHelpFilterByYearDrugs.place(x=self._w * 0.3, y=self._h * 0.27)
+        cmbxFeelYearFilter = ttk.Combobox(self.canvas, state='readonly', width=6)
+        _path = self.manager.controller.pathController.getPathByCODE("FEELINGS")
+        _data = self.manager.controller.dependencies["feels_use_case_get_all_years"].execute(_path)
+        cmbxFeelYearFilter["values"] = []
+        if _data["success"] and _data["qty"] > 0:
+            cmbxFeelYearFilter["values"] = list(_data["data"].values())
+            cmbxFeelYearFilter.current(0)
+        self._tempCurrentElementsOptions.append(cmbxFeelYearFilter)
+        cmbxFeelYearFilter.place(x=self._w * 0.46, y=self._h * 0.27)
+
+        btnPaint = tk.Button(self.canvas, bg="green", text=self.lang.getText("text_button_graphic"), command=lambda: self.paintFeels(cmbxFeelYearFilter.get(), None))
+        self._tempCurrentElementsOptions.append(btnPaint)
+        btnPaint.place(x=self._w * 0.6, y=self._h * 0.265)
+
+    def paintFeels(self, yyyy, option):
+        _base_path = self.manager.controller.pathController.getPathByCODE("FEELINGS")
+        _data = self.manager.controller.dependencies["feels_use_case_get_all_information_filter_by_year"].execute(_base_path, yyyy)
+        if not _data["success"]:
+            PopupView(self.master, self.manager, self.lang.getText("text_find_error_feels"), "ERROR").render(500, 300)
+            return None
+
+        self.auxiliarCanvas.delete("all")
+        graphier_feels = self.manager.controller.utils["graphics_feels_renderder"]
+        self.auxiliarCanvas.place(x=self._w * 0.05, y=self._h * 0.40)
+        graphier_feels.render(self.auxiliarCanvas, _data, {})
     # Feelings
 
     # Drugs

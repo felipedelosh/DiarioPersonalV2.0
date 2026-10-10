@@ -11,6 +11,7 @@ All Code stay in dictionary:
 
 The order of instantiation mirrors the dependency graph: (Application) = (Infraestructure)
 """
+# CORE\DependencyInjector.py
 
 #Repositories
 from Infraestructure.Repositories.FileDiaryRepository import FileDiaryRepository
@@ -65,11 +66,14 @@ from Infraestructure.UseCases.FilterAllEconomyDataByDateAB import FilterAllEcono
 from Infraestructure.UseCases.GetAllYearsOfDiaryUsage import GetAllYearsOfDiaryUsage
 from Infraestructure.UseCases.GetAllYearsOfDrugsUsage import GetAllYearsOfDrugsUsage
 from Infraestructure.UseCases.GetAllDrugsInformationFilterByYear import GetAllDrugsInformationFilterByYear
+from Infraestructure.UseCases.GetAllFeelsInformationFilterByYear import GetAllFeelsInformationFilterByYear
+from Infraestructure.UseCases.GetAllYearsOfFeelsUsage import GetAllYearsOfFeelsUsage
 # Femputadora
 from CORE.FEMPUTADORA.Femputadora import Femputadora
 # Graphics
 from Infraestructure.Services.GraphEconomyRenderer import GraphEconomyRenderer
 from Infraestructure.Services.GraphDrugsRenderer import GraphDrugsRenderer
+from Infraestructure.Services.GraphFeelsRenderer import GraphFeelsRenderer
 # Utils
 from Infraestructure.config.ConfigManager import ConfigManager
 from Infraestructure.config.LanguageManager import LanguageManager
@@ -139,6 +143,8 @@ class DependencyInjector:
         filter_economy_data_by_dateAB = FilterAllEconomyDataByDateAB()
         drugs_use_case_get_all_years = GetAllYearsOfDrugsUsage(folder_service)
         drugs_use_case_get_all_information_filter_by_year = GetAllDrugsInformationFilterByYear(folder_service, drug_service)
+        feels_use_case_get_all_information_filter_by_year = GetAllFeelsInformationFilterByYear(folder_service, feeling_service)
+        feels_use_case_get_all_years = GetAllYearsOfFeelsUsage(folder_service)
         paginator_use_case = GetPaginatedFromData()
         usage_use_case_save = SaveUsage(usage_servide)
         # END USECASES
@@ -173,6 +179,8 @@ class DependencyInjector:
             "filter_economy_data_by_dateAB": filter_economy_data_by_dateAB,
             "drugs_use_case_get_all_years": drugs_use_case_get_all_years,
             "drugs_use_case_get_all_information_filter_by_year": drugs_use_case_get_all_information_filter_by_year,
+            "feels_use_case_get_all_information_filter_by_year": feels_use_case_get_all_information_filter_by_year,
+            "feels_use_case_get_all_years": feels_use_case_get_all_years,
             "paginator_use_case": paginator_use_case,
             "usage_use_case_save": usage_use_case_save,
             "chat_femputadora_use_case": chat_femputadora_use_case,
@@ -189,11 +197,13 @@ class DependencyInjector:
         string_procesor = StringProcesor()
         graphics_renderder = GraphEconomyRenderer()
         graphics_drugs_renderder = GraphDrugsRenderer()
+        graphics_feels_renderder = GraphFeelsRenderer()
 
         return {
             "time_util": time_util,
             "enigma": enigma,
             "string_procesor": string_procesor,
             "graphics_renderder": graphics_renderder,
-            "graphics_drugs_renderder": graphics_drugs_renderder
+            "graphics_drugs_renderder": graphics_drugs_renderder,
+            "graphics_feels_renderder": graphics_feels_renderder
         }
