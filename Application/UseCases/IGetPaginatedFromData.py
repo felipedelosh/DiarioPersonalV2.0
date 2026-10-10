@@ -2,6 +2,7 @@
 FelipedelosH
 2026
 """
+# Application\UseCases\IGetPaginatedFromData.py
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 

@@ -4,6 +4,7 @@ FelipedelosH
 
 Returns all TACCOUNTS information in RESPONSE
 """
+# Application\UseCases\IGetAllTAccountInformation.py
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 

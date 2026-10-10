@@ -2,10 +2,10 @@
 FelipedelosH
 2026
 
-
 Generates a Response with all INFORMATION
 Generate a file DATA/TEMP/all.txt 
 """
+# Application\UseCases\IGetAllDiaryInformationWithTempFile.py
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 

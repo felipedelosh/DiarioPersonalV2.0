@@ -5,6 +5,7 @@ FelipedelosH
 Get ALL write in personal diary in Response:
 data = {"key": "text"}
 """
+# Application\UseCases\IGetAllPersonalDiaryInformation.py
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 

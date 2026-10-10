@@ -4,6 +4,7 @@ FelipedelosH
 
 Returns all TACCOUNTS segmente by years information in RESPONSE
 """
+# Application\UseCases\IGetAllTAccountInformationSegmentedByYear.py
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 

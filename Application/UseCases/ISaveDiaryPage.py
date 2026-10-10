@@ -2,6 +2,7 @@
 FelipedelosH
 2025
 """
+# Application\UseCases\ISaveDiaryPage.py
 from abc import ABC, abstractmethod
 
 class ISaveDiaryPage(ABC):
