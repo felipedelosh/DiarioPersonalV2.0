@@ -61,6 +61,7 @@ DATA/TEMP/
 .DS_Store
 Thumbs.db
 desktop.ini
+all_code.txt
 
 # TEST
 .coverage
