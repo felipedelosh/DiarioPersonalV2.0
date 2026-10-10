@@ -2,6 +2,7 @@
 FelipedelosH
 2025
 """
+# Application\Repositories\IEconomyRepository.py
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 

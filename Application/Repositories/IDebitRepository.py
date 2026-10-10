@@ -2,6 +2,7 @@
 FelipedelosH
 2025
 """
+# Application\Repositories\IDebitRepository.py
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 

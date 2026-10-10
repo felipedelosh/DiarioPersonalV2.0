@@ -2,6 +2,7 @@
 FelipedelosH
 2025
 """
+# Application\Repositories\IScheduleRepository.py
 from abc import ABC, abstractmethod
 
 class IScheduleRepository(ABC):
