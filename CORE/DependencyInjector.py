@@ -2,7 +2,14 @@
 FelipedelosH
 2025
 
-Dependency Injector
+Centralized Dependency Injector.
+
+This is the only place thats concrete intance of implementations to use in all project.
+All Code stay in dictionary:
+* build_dependencies() >> Repositories, Servives & Use Cases.
+* build_utils() >> Stateless helpers.
+
+The order of instantiation mirrors the dependency graph: (Application) = (Infraestructure)
 """
 
 #Repositories
