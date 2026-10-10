@@ -192,6 +192,7 @@ class GraphsView(Screen):
         cmbxDrugsYearFilter.place(x=self._w * 0.36, y=self._h * 0.22)
 
         btnPaint = tk.Button(self.canvas, bg="green", text=self.lang.getText("text_button_graphic"), command=lambda: self.paintDrugs(cmbxDrugsYearFilter.get(), None))
+        self._tempCurrentElementsOptions.append(btnPaint)
         btnPaint.place(x=self._w * 0.5, y=self._h * 0.215)
 
     def paintDrugs(self, yyyy, option):
