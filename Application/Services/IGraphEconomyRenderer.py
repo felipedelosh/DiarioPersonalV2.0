@@ -6,6 +6,7 @@ This is the main contract to DRAW info
 
 Example: Draw BarChart... 
 """
+# Application\Services\IGraphEconomyRenderer.py
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 

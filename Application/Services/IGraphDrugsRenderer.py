@@ -4,6 +4,7 @@ FelipedelosH
 
 This is the main contract to DRAW info of DRUGS in BAR Graph
 """
+# Application\Services\IGraphDrugsRenderer.py
 from abc import ABC, abstractmethod
 from Domain.Entities.Response import Response
 
