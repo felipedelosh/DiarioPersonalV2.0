@@ -180,7 +180,7 @@ class GraphsView(Screen):
     def drawDrugsGraphicsOptions(self):
         lblHelpFilterByYearDrugs = tk.Label(self.canvas, text=self.lang.getText("graphics_drugs_year_select"))
         self._tempCurrentElementsOptions.append(lblHelpFilterByYearDrugs)
-        lblHelpFilterByYearDrugs.place(x=self._w * 0.2, y=self._h * 0.22)
+        lblHelpFilterByYearDrugs.place(x=self._w * 0.3, y=self._h * 0.27)
         cmbxDrugsYearFilter = ttk.Combobox(self.canvas, state='readonly', width=6)
         _path = self.manager.controller.pathController.getPathByCODE("DRUGS")
         _data = self.manager.controller.dependencies["drugs_use_case_get_all_years"].execute(_path)
@@ -189,11 +189,11 @@ class GraphsView(Screen):
             cmbxDrugsYearFilter["values"] = list(_data["data"].values())
             cmbxDrugsYearFilter.current(0)
         self._tempCurrentElementsOptions.append(cmbxDrugsYearFilter)
-        cmbxDrugsYearFilter.place(x=self._w * 0.36, y=self._h * 0.22)
+        cmbxDrugsYearFilter.place(x=self._w * 0.46, y=self._h * 0.27)
 
         btnPaint = tk.Button(self.canvas, bg="green", text=self.lang.getText("text_button_graphic"), command=lambda: self.paintDrugs(cmbxDrugsYearFilter.get(), None))
         self._tempCurrentElementsOptions.append(btnPaint)
-        btnPaint.place(x=self._w * 0.5, y=self._h * 0.215)
+        btnPaint.place(x=self._w * 0.6, y=self._h * 0.265)
 
     def paintDrugs(self, yyyy, option):
         _base_path = self.manager.controller.pathController.getPathByCODE("DRUGS")
