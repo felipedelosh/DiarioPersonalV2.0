@@ -26,7 +26,11 @@ Ya no me molesta que una fracasada me rechace... me alegra que la última que me
 
 Mi vida empieza a dar los primeros frutos... y si sigo como voy tendré una casa bien bonita.
 
-POST: "La semillita del trabajo germinó... tal vez muera... pero me queda en la concencia que intentó dar futos."
+POST: "La semillita del trabajo germinó... tal vez muera... pero me queda en la concencia que intentó dar futos".
+POST de la POST: "Volví a estudiar".
+POST de la POST de la POST: "Volví a montar bici".
+POST de la POST de la POST de la POST: "Me estoy dando picos casi todos los días con una amiga".
+POST de la POST de la POST de la POST de la POST: "Volví a trabajar en proyectos diferentes a los proyectos laborales".
 
 
 Fri Oct  9 22:37:16 2026
