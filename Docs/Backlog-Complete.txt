@@ -31,3 +31,4 @@ C5|Vista de Horario Proyeción semanal|Crear un horario que usando la ley de los
 G1.1|Pie Ingresos/Egresos|Mostrar proporción total del período seleccionado.|🟡|SI
 C3|Vista de Horario|Crear un horario con actividades recurrentes.|🟡|SI}
 G1|Vista de Gráficas|Se necesita una vista principal para vizualizador de gráficas (MAIN)|🟡|SI
+D7|Caso de uso retornar la lista de años de DROGAS|Crear un caso de uso que retorne los años de consumo.|🟡|SI
