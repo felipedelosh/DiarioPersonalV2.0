@@ -22,7 +22,6 @@ G2.1|Frecuencia de Emociones|Barras por emoción en período seleccionado.|🟡|
 G2.2|Intensidad Promedio|Promedio mensual de intensidad emocional.|🟡|NO
 G2.3|Tendencia Emocional|Evolución temporal de estados emocionales.|🟡|NO
 G2.4|Comparativa YYYY vs YYYY Emoción|Comparación anual de estabilidad emocional.|🟡|NO
-G3.1|Frecuencia Consumo|Barras por tipo de sustancia.|🔴|NO
 G3.2|Consumo vs Sueño|Correlación consumo y horas dormidas.|🔴|NO
 G3.3|Comparativa YYYY vs YYYY Consumo|Comparación anual de consumo.|🔴|NO
 G4.1|Radar Radial 24H|Visualización anual de distribución de actividades.|🟡|NO

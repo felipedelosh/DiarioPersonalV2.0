@@ -33,3 +33,4 @@ C3|Vista de Horario|Crear un horario con actividades recurrentes.|🟡|SI}
 G1|Vista de Gráficas|Se necesita una vista principal para vizualizador de gráficas (MAIN)|🟡|SI
 D7|Caso de uso retornar la lista de años de DROGAS|Crear un caso de uso que retorne los años de consumo.|🟡|SI
 D8|Datos de Consumo filtrado por años|Crear un caso de uso que retorne toda la información de drogas en un año correspondiete.|🟡|SI
+G3.1|Frecuencia Consumo|Barras por tipo de sustancia.|🔴|SI
