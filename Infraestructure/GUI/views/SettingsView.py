@@ -58,8 +58,6 @@ class SettingsView(Screen):
         elif opt == _options[4]:
             pass
         elif opt == _options[5]:
-            pass
-        elif opt == _options[6]:
             self.destroyOption()
             self.drawBtnBackToMainMenu()
             self.drawFilesSettings()
